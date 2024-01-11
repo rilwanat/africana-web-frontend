@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import LandingPage from "./components/pages/LandingPage";
+import HomePage from "./components/pages/HomePage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/*" element={<div>NOT FOUND</div>} />
             <Route path='/' element={<LandingPage />}/>    
+            <Route path='/home' element={<HomePage />}/>    
             {/* <Route path='/login' element={<LoginPage />}/> */}
             
           </Routes>
