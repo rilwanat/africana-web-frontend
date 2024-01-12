@@ -7,6 +7,7 @@ export default function LandingPage() {
   const [transitionComplete, setTransitionComplete] = useState(false);
 
   useEffect(() => {
+
     // Phase 1: Fade in
     const fadeInTimeout = setTimeout(() => {
       setIsVisible(true);
@@ -28,12 +29,13 @@ export default function LandingPage() {
       clearTimeout(fadeOutTimeout);
       clearTimeout(transitionCompleteTimeout);
     };
+
   }, []);
 
   return (
     <div>
       {transitionComplete ? (
-        <div> # </div>
+        <div className='flex flex-col items-center justify-center h-screen'> .. </div>
       ) : (
         <div className='flex flex-col items-center justify-center h-screen'>
           <img
