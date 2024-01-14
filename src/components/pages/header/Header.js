@@ -6,6 +6,7 @@ import HeaderLeft from './HeaderLeft';
 import Navbar from './Navbar';
 
 import logo from '../../../assets/logos/Logo Wordmark.png';
+import logo2 from '../../../assets/logos/Circle Icon_1.png';
 
 /**
  * demo data
@@ -37,11 +38,13 @@ function Header({ options }) {
                 <nav className="navigation navbar navbar-default">
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <button type="button" className="open-btn" onClick={options.onMobileNavClick}>
+                            <button type="button" className="open-btn"// flex items-center justify-center" 
+                            onClick={options.onMobileNavClick}>
                                 <span className="sr-only">Toggle navigation</span>
                                 <span className="icon-bar"/>
                                 <span className="icon-bar"/>
                                 <span className="icon-bar"/>
+                                {/* <img src={logo2} className='w-6 h-6'/> */}
                             </button>
                             <Link className="mobile-only navbar-brand" to="/">
                                 <img src={logo} alt=""/>
