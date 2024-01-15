@@ -21,6 +21,7 @@ function Navbar({options}) {
                     <li className=""><NavLink to="/about">About</NavLink></li>
                     {/* <Logo onClick={() =>{}}/> */}
                     <li className=""><NavLink to="/shop">Shop</NavLink></li>
+                    <li className=""><NavLink to="/sizes">Sizes</NavLink></li>
                 </ul>
             </div>
             {/* end of nav-collapse */}

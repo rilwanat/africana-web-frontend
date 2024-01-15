@@ -521,7 +521,7 @@ function RecentProducts({onQuickViewClick}) {
                                                                 %</div> : ''
                                                         }
 
-                                                        <Link to="/single-slider-images">
+                                                        <Link to="/product-details">
                                                             <img loading="lazy" src={item.mainImg} alt=""/>
                                                         </Link>
 

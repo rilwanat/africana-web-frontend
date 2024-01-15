@@ -7,8 +7,11 @@ import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/about/About";
 import ShopPage from "./components/pages/ShopPage";
 import ProductPage from "./components/pages/ProductPage";
+import SizesPage from "./components/pages/SizesPage";
 
 import QuickView from './components/pages/QuickView';
+
+// import ScrollToTop from "./ScrollToTop";
 
 function App() {
 
@@ -124,15 +127,26 @@ const options = {
                 />
                 : ''
             }
+            
+            {/* <ScrollToTop/> */}
+            <Routes>
+              <Route path="/*" element={<div>NOT FOUND</div>} />
+              <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData}/>}/>    
+              <Route path='/home' element={<HomePage />}/>    
+              <Route path='/about' element={<AboutPage options={options} />}/>    
+              {/* <Route path='/login' element={<LoginPage />}/> */}
+              <Route path='/shop' element={<ShopPage options={options} />}/>
+              <Route path='/product-details' element={<ProductPage options={options} />}/>
+              <Route path='/sizes' element={<SizesPage options={options} />}/>
 
-<Routes>
-            <Route path="/*" element={<div>NOT FOUND</div>} />
-            <Route path='/' element={<LandingPage options={options} handleQataViewData={HandelQuickViewData}/>}/>    
-            <Route path='/home' element={<HomePage />}/>    
-            <Route path='/about' element={<AboutPage options={options} />}/>    
-            {/* <Route path='/login' element={<LoginPage />}/> */}
-            <Route path='/shop' element={<ShopPage options={options} />}/>
-            <Route path='/product-details' element={<ProductPage />}/>
+              {/* 
+              <Route path='/privacy' element={<PrivacyPage />}/>
+              <Route path='/terms' element={<TermsPage />}/>
+              <Route path='/promo' element={<PromoPage />}/>
+              <Route path='/wishlist' element={<WishlistPage />}/>
+              <Route path='/cart' element={<CartPage />}/>
+              <Route path='/checkout' element={<CheckoutPage />}/>
+              */}
             
           </Routes>
 

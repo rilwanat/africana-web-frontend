@@ -20,7 +20,7 @@ function ClientReviewItem({img, time, text}) {
                     <div className="name-rating-time">
                         <div className="name-rating">
                             <div>
-                                <h4>Hone</h4>
+                                <h4>Rbapps</h4>
                             </div>
                             <div className="rating">
                                 <i className="fi flaticon-star"/>

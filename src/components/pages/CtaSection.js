@@ -1,8 +1,7 @@
 import React, {Fragment} from 'react';
 import {Link} from "react-router-dom";
 
-// import imgCta from '../../assets/images/cta.jpg';
-import imgCta from '../../assets/images/cta2.webp';
+import imgCta from '../../assets/images/cta.jpg';
 
 /**
  * CTA action display on default home page
@@ -22,7 +21,7 @@ function CtaSection() {
                                 {/* <span>ART OF LIFE</span> */}
                                 <h3>ART OF LIFE</h3>
                                 {/* <p></p> */}
-                                    <Link className="theme-btn-s2" to="/shop-full-width">
+                                    <Link className="theme-btn-s2" to="/shop">
                                         Shop the Collection
                                     </Link>
                             </div>

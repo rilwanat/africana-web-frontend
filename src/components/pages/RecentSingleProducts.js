@@ -10,6 +10,13 @@ import './products.css';
 // import productsData from '../../data/products.json';
 import {Link} from "react-router-dom";
 
+import imgx from '../../assets/images/shop/img-2.jpg';
+
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+
+
 /**
  * Recent Single Products component
  * @param onQuickViewClick
@@ -92,7 +99,7 @@ function RecentSingleProducts({onQuickViewClick}) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -120,12 +127,12 @@ function RecentSingleProducts({onQuickViewClick}) {
                     "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
                 }
             ],
-            "starts": 4.5,
+            "stats": 4.5,
             "title": "Fashion tops",
-            "price": "79.00",
-            "oldPrice": "129.00",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-1.jpg",
+            "price": "1,790,000.00",
+            "oldPrice": "1,290,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-1.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -161,7 +168,7 @@ function RecentSingleProducts({onQuickViewClick}) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -189,12 +196,12 @@ function RecentSingleProducts({onQuickViewClick}) {
                     "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
                 }
             ],
-            "starts": 4.5,
+            "stats": 4.5,
             "title": "Women's T-shirt",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-2.jpg",
+            "price": "1,290,000.00",
+            "oldPrice": "1,290,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-2.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -230,7 +237,7 @@ function RecentSingleProducts({onQuickViewClick}) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -258,12 +265,12 @@ function RecentSingleProducts({onQuickViewClick}) {
                     "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
                 }
             ],
-            "starts": 4.5,
+            "stats": 4.5,
             "title": "Short Sleeve",
-            "price": "147",
-            "oldPrice": "200",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-3.jpg",
+            "price": "770,000.00",
+            "oldPrice": "600,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-3.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -299,7 +306,7 @@ function RecentSingleProducts({onQuickViewClick}) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -327,12 +334,12 @@ function RecentSingleProducts({onQuickViewClick}) {
                     "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
                 }
             ],
-            "starts": 4.5,
+            "stats": 4.5,
             "title": "Stylish coat",
-            "price": "79",
-            "oldPrice": "79",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-4.jpg",
+            "price": "790,000.00",
+            "oldPrice": "790,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-4.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -368,7 +375,7 @@ function RecentSingleProducts({onQuickViewClick}) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -396,12 +403,12 @@ function RecentSingleProducts({onQuickViewClick}) {
                     "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
                 }
             ],
-            "starts": 4.5,
+            "stats": 4.5,
             "title": "Women Modern Shot Pant",
-            "price": "198",
-            "oldPrice": "198",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-5.jpg",
+            "price": "198,000.00",
+            "oldPrice": "198,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-5.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -415,144 +422,7 @@ function RecentSingleProducts({onQuickViewClick}) {
                 }
             ]
         },
-        {
-            "SKU": "71236-5",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-            {
-                "id": 2,
-                "name": "Tops",
-                "link": "#"
-            }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Tshirt",
-                "link": "#"
-            }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Blue Jeans Pant for Men",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-6.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-88",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-                {
-                    "id": 2,
-                    "name": "Tops",
-                    "link": "#"
-                }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-                {
-                    "id": 3,
-                    "name": "Tshirt",
-                    "link": "#"
-                }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Blue Jeans Pant for Men",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-1.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
+        
         {
             "SKU": "71236-54r",
             "Categories": [{
@@ -575,7 +445,7 @@ function RecentSingleProducts({onQuickViewClick}) {
                     "name": "Tshirt",
                     "link": "#"
                 }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -603,12 +473,12 @@ function RecentSingleProducts({onQuickViewClick}) {
                     "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
                 }
             ],
-            "starts": 4.5,
+            "stats": 4.5,
             "title": "Blue Jeans Pant for Men",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-3.jpg",
+            "price": "429,000.00",
+            "oldPrice": "429,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-3.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -641,21 +511,46 @@ function RecentSingleProducts({onQuickViewClick}) {
                                                 }
                                                 %</div> : ''
                                         }
-                                        <Link to="/single-slider-images">
+                                        <Link to="/product-details">
                                             <img loading="lazy" src={process.env.PUBLIC_URL + item.mainImg} alt=""/>
                                         </Link>
                                         <div className="shop-action-wrap">
                                             <ul className="shop-action">
-                                                <li><a href="#" title="Quick view!" data-tip="Quick view!"
-                                                       onClick={
-                                                           e => onQuickViewClick(e, item)
-                                                       }
-                                                ><i className="fi flaticon-view"/></a>
-                                                </li>
-                                                <li><a href="#" title="Add to Wishlist!" data-tip="Add to Wishlist!"><i
-                                                    className="fi icon-heart-shape-outline"/></a></li>
-                                                <li><a href="#" title="Add to cart!" data-tip="Add to cart!"><i
-                                                    className="fi flaticon-shopping-cart"/></a></li>
+                                            <li>
+                                                                    {/* <a href="#" title="Quick view!"
+                                                                       data-tip="Quick view!"
+                                                                       onClick={
+                                                                           e => onQuickViewClick(e, item)
+                                                                       }
+                                                                >
+                                                                    
+                                                                    <i className="fi flaticon-view"/>
+                                                                </a> */}
+                                                                <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <RemoveRedEyeOutlinedIcon 
+                                                                        onClick={
+                                                                            e => onQuickViewClick(e, item)
+                                                                        }
+                                                                        className='w-4 h-4 p-1' />
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    {/* <a href="#" title="Add to Wishlist!"
+                                                                       data-tip="Add to Wishlist!">
+                                                                        <i className="fi icon-heart-shape-outline"/>
+                                                                    </a> */}
+                                                                    <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <FavoriteIcon className='w-4 h-4 p-1' />
+                                                                    </div>
+                                                                    </li>
+                                                                <li>
+                                                                    {/* <a href="#" title="Add to cart!"
+                                                                       data-tip="Add to cart!">
+                                                                        <i className="fi flaticon-shopping-cart"/></a> */}
+                                                                        <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' />
+                                                                    </div>
+                                                                        </li>
                                             </ul>
                                         </div>
                                     </div>

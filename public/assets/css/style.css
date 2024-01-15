@@ -4523,7 +4523,7 @@ button:active {
 
 @media screen and (min-width: 1200px) {
     .site-footer .contact-widget {
-        padding: 0 65px 0 55px;
+        /* padding: 0 65px 0 55px; */
     }
 }
 
@@ -4634,7 +4634,7 @@ button:active {
 .site-footer .lower-footer .social ul a {
     font-size: 12px;
     font-size: 0.8rem;
-    color: #000;
+    color: #fff;
     text-transform: uppercase;
 }
 
@@ -5625,7 +5625,7 @@ button:active {
 }
 
 .home-pg-prodcut-section .product-holder .product-badge {
-    background-color: #c2572b;
+    background-color: #494949;
     font-size: 12px;
     font-size: 0.8rem;
     color: #fff;
@@ -7976,7 +7976,7 @@ button:active {
 }
 
 .shop-section .product-holder .product-badge {
-    background-color: #c2572b;
+    background-color: #494949;
     font-size: 12px;
     font-size: 0.8rem;
     color: #fff;
@@ -8802,7 +8802,7 @@ button:active {
 }
 
 .shop-single-section .product-holder .product-badge {
-    background-color: #c2572b;
+    background-color: #494949;
     font-size: 12px;
     font-size: 0.8rem;
     color: #fff;

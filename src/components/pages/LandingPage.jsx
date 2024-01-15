@@ -15,7 +15,7 @@ import CtaSection from './CtaSection';
 import Footer from './Footer';
 
 
-export default function LandingPage({ options, handleQataViewData }) {
+export default function LandingPage({ options, handleDataViewData }) {
   const [isVisible, setIsVisible] = useState(false);
   const [transitionComplete, setTransitionComplete] = useState(false);
 
@@ -72,7 +72,7 @@ export default function LandingPage({ options, handleQataViewData }) {
 
 
 <FeaturedProducts />
-<RecentProducts onQuickViewClick={handleQataViewData}/>
+<RecentProducts onQuickViewClick={handleDataViewData}/>
 <CtaSection />
 <Footer/>
 <NewsletterPopup/>

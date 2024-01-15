@@ -22,20 +22,24 @@ function Footer() {
                         {/* <div className="col-lg-4 col-xs-6  widget-col about-widget-col">
                             <NewsletterWidget/>
                         </div> */}
-                        <div className="col-lg-4 col-xs-6 widget-col">
+                        <div className="col-lg-3 col-xs-6 widget-col">
                             <ContactWidget/>
                         </div>
-                        <div className="col-lg-2 col-xs-6 widget-col">
+                        <div className="col-lg-3 col-xs-6 widget-col">
                             <ShopWidget/>
                         </div>
-                        <div className="col-lg-2 col-xs-6 widget-col">
+                        <div className="col-lg-3 col-xs-6 widget-col">
                             <HelpWidget/>
                         </div>
-                        <div className="col-lg-2 col-xs-6 widget-col">
+                        <div className="col-lg-3 col-xs-6 widget-col">
                             <CompanyWidget/>
                         </div>
-                        
                     </div>
+
+
+
+
+
                 </div>
                 {/* end container */}
                 <div className="lower-footer">
@@ -48,17 +52,17 @@ function Footer() {
                                     </div>
                                     <div className="social">
                                         <ul className="clearfix">
-                                            <li><a href="#" title="Facebook">fb</a></li>
-                                            <li><a href="#" title="Twitter">tw</a></li>
-                                            <li><a href="#" title="Instagram">ig</a></li>
-                                            <li><a href="#" title="Pinterest">pr</a></li>
+                                            <li style={{ cursor: 'pointer' }}><a  title="Facebook">fb</a></li>
+                                            <li style={{ cursor: 'pointer' }}><a  title="Twitter">tw</a></li>
+                                            <li style={{ cursor: 'pointer' }}><a  title="Instagram">ig</a></li>
+                                            
                                         </ul>
                                     </div>
                                     <div className="extra-link">
                                         <ul>
-                                            <li><a href="#">Privacy </a></li>
-                                            <li><a href="#">Terms</a></li>
-                                            <li><a href="#">Promo T&amp;Cs Apply</a></li>
+                                            <li><a href="/privacy">Privacy </a></li>
+                                            <li><a href="/terms">Terms</a></li>
+                                            <li><a href="/promo">Promo T&amp;Cs Apply</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -47,7 +47,7 @@ function Header({ options }) {
                                 {/* <img src={logo2} className='w-6 h-6'/> */}
                             </button>
                             <Link className="mobile-only navbar-brand" to="/">
-                                <img src={logo} alt=""/>
+                                <img src={logo} alt="" className="h-10 w-48 object-scale-down"/>
                             </Link>
 
                         </div>

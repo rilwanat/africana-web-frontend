@@ -57,7 +57,7 @@ function About({ options }) {
                                 <div className="info">
                                     {/* <span className=''>About us</span> */}
                                     {/* <h2>Clothes that will be your best friends</h2> */}
-                                    {/* <h2>About Us</h2> */}
+                                    <h2>Title</h2>
                                     <p>A story filled Urban clothing brand and a host of products from leather goods, female wears, sneakers and bags. And post-pandemic, we have seen growth in expansion into other west-African countries, including but not limited to Mali, Senegal, Ivory Coast, etc.</p>
                                     <img src={signature} className='mb-8'/>
                                     {/* <NavLink to="/contact" className="theme-btn-s3">Contact us</NavLink> */}

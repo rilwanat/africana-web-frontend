@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {useState, Fragment} from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 /**
@@ -9,6 +9,21 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
  * @constructor
  */
 function QuickView({data, onQuickViewCloseClick}) {
+
+    const [productCount, setProductCount] = useState(1);
+
+    const HandleProductCount = (e, data) => {
+        e.preventDefault();
+        if (data == 'plus') {
+            setProductCount(productCount + 1);
+        } else {
+            if (productCount > 1) {
+                setProductCount(productCount - 1);
+            } else {
+                setProductCount(1);
+            }
+        }
+    };
 
     return (
         <Fragment>
@@ -33,19 +48,39 @@ function QuickView({data, onQuickViewCloseClick}) {
                             <i className="fi flaticon-star"/>
                             <i className="fi flaticon-star"/>
                             <i className="fi flaticon-star-social-favorite-middle-full"/>
-                            <span>({data.reviewCounts} Customer review)</span>
+                            <span className='ml-2'>({data.reviewCounts} Customer review{data.reviewCounts > 1 ? 's' : ''})</span>
                         </div>
                         <p>{data.content}</p>
                         <div className="product-option">
-                            <form className="form">
+                        <form className="form">
                                 <div className="product-row flex items-center">
-                                    <div className='mr-4'>
+
+                                <div className="touchspin-wrap">
+                                                <button
+                                                    onClick={(e) => {
+                                                        HandleProductCount(e, 'plus')
+                                                    }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
+                                                    type="button"><i className="glyphicon glyphicon-chevron-up"></i>
+                                                </button>
+                                                <button
+                                                    onClick={(e) => {
+                                                        HandleProductCount(e, 'minus')
+                                                    }}
+                                                    id="slider-thumbnail-touchspin-down" className="btn btn-default "
+                                                    type="button"><i className="glyphicon glyphicon-chevron-down"></i>
+                                                </button>
+                                                <input readOnly className="product-count" type="text"
+                                                       value={productCount} name="product-count"/>
+                                            </div>
+
+
+                                    {/* <div className='mr-4'>
                                         <input 
                                         // className="product-count" 
                                         type="text" 
                                         defaultValue={1}
                                                name="product-count-3"/>
-                                    </div>
+                                    </div> */}
                                     <div>
                                         <button className='p-4' 
                                         // type="submit" 

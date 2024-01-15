@@ -15,6 +15,8 @@ import QuickView from './QuickView';
 
 import './shop/shop.css';
 
+import imgx from '../../assets/images/shop/img-2.jpg';
+
 /**
  * demo data
  */
@@ -97,7 +99,7 @@ function ShopPage({ options }) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -127,10 +129,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Fashion tops",
-            "price": "79.00",
-            "oldPrice": "129.00",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-1.jpg",
+            "price": "790,000.00",
+            "oldPrice": "690,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-1.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -166,7 +168,7 @@ function ShopPage({ options }) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -196,10 +198,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Women's T-shirt",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-2.jpg",
+            "price": "429,000.00",
+            "oldPrice": "429,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-2.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -235,7 +237,7 @@ function ShopPage({ options }) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -265,10 +267,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Short Sleeve",
-            "price": "147",
-            "oldPrice": "200",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-3.jpg",
+            "price": "147,000.00",
+            "oldPrice": "200,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-3.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -304,7 +306,7 @@ function ShopPage({ options }) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -334,10 +336,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Stylish coat",
-            "price": "79",
-            "oldPrice": "79",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-4.jpg",
+            "price": "500,000.00",
+            "oldPrice": "500,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-4.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -373,7 +375,7 @@ function ShopPage({ options }) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -403,10 +405,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Women Modern Shot Pant",
-            "price": "198",
-            "oldPrice": "198",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-5.jpg",
+            "price": "398,000.00",
+            "oldPrice": "398,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-5.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -442,7 +444,7 @@ function ShopPage({ options }) {
                 "name": "Tshirt",
                 "link": "#"
             }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -472,10 +474,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Blue Jeans Pant for Men",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-6.jpg",
+            "price": "329,000.00",
+            "oldPrice": "329,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-6.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -511,7 +513,7 @@ function ShopPage({ options }) {
                     "name": "Tshirt",
                     "link": "#"
                 }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -541,10 +543,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Blue Jeans Pant for Men",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-1.jpg",
+            "price": "290,000.00",
+            "oldPrice": "290,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-1.jpg",
             "gallery": [
                 {
                     "id": 1,
@@ -580,7 +582,7 @@ function ShopPage({ options }) {
                     "name": "Tshirt",
                     "link": "#"
                 }],
-            "content": "Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly",
+            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
             "reviewCounts": 2,
             "reviews": [
                 {
@@ -610,10 +612,10 @@ function ShopPage({ options }) {
             ],
             "starts": 4.5,
             "title": "Blue Jeans Pant for Men",
-            "price": "129",
-            "oldPrice": "129",
-            "Symbol" : "$",
-            "mainImg" : "/assets/images/shop/img-3.jpg",
+            "price": "259,000.00",
+            "oldPrice": "259,000.00",
+            "Symbol" : "N", //"$",
+            "mainImg" : imgx, //"/assets/images/shop/img-3.jpg",
             "gallery": [
                 {
                     "id": 1,
