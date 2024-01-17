@@ -19,7 +19,14 @@ export default function LandingPage({ options, handleDataViewData }) {
   const [isVisible, setIsVisible] = useState(false);
   const [transitionComplete, setTransitionComplete] = useState(false);
 
+  const [isMainVisible, setIsMainVisible] = useState(false);
+  //const [startMainTransition, setStartMainTransition] = useState(false);
+
   
+  const fadeInMainTimeout = () => {
+    setIsMainVisible(true);
+  };
+
   useEffect(() => {
     // Phase 1: Fade in for the first animation
     const fadeInTimeout = setTimeout(() => {
@@ -34,10 +41,12 @@ export default function LandingPage({ options, handleDataViewData }) {
     // Set transitionComplete to true after the entire transition of the first animation is completed
     const transitionCompleteTimeout = setTimeout(() => {
       setTransitionComplete(true);
-      //setMainTransitionComplete(false);
+      // fadeInMainTimeout();
+      fadeInMainTimeout();
     }, 5000);
   
-  
+
+      
     // Cleanup the timeouts and remove the event listener when the component unmounts
     return () => {
       clearTimeout(fadeInTimeout);
@@ -53,22 +62,19 @@ export default function LandingPage({ options, handleDataViewData }) {
 
 
   return (
-    <div>
+    <div>{transitionComplete ? 'true' : 'false'}
       {
       transitionComplete ? 
       (
-        <div >
-
+        
 <Fragment>
-            {/* {showQuickView
-                ? <QuickView
-                    data={quickViewData}
-                    onQuickViewCloseClick={HandelQuickViewClose}
-                />
-                : ''
-            } */}
 
-<Header options={options} />
+           <div 
+          //  style={{ opacity: startMainTransition ? 1 : 1 }}>
+            // className={isMainVisible ? 'fade-in-main' : 'fade-out-main'}>
+            className={`fade-in-main ${!isMainVisible ? 'fade-in' : 'fade-out'}`}>
+
+           <Header options={options} />
 
 
 <FeaturedProducts />
@@ -76,13 +82,13 @@ export default function LandingPage({ options, handleDataViewData }) {
 <CtaSection />
 <Footer/>
 <NewsletterPopup/>
+            </div> 
+
 
 
             </Fragment>
         
           
-
-         </div>
       ) 
       : (
         <div className='flex flex-col items-center justify-center h-screen'>

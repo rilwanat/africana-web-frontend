@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {useState, Fragment} from 'react';
 import Slider from "react-slick";
 // import ReactTooltip from 'react-tooltip';
 
@@ -12,6 +12,8 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 /**
  * Recent Products component
@@ -20,6 +22,59 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
  * @constructor
  */
 function RecentProducts({onQuickViewClick}) {
+
+    const [isPrevHovered, setPrevHovered] = useState(false);
+    const [isNextHovered, setNextHovered] = useState(false);
+
+    const [isViewHovered, setViewHovered] = useState(false);
+    const [isFavHovered, setFavHovered] = useState(false);
+    const [isBagHovered, setBagHovered] = useState(false);
+
+    
+    function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: isNextHovered ? 'black' : '',
+        zIndex: 1,
+      }}
+      onClick={onClick}
+      onMouseEnter={() => setNextHovered(true)}
+      onMouseLeave={() => setNextHovered(false)}
+    >
+      <ChevronRightIcon style={{ color: isNextHovered ? 'white' : '', }}/>
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: isPrevHovered ? 'black' : '',
+        zIndex: 1,
+      }}
+      onClick={onClick}
+      onMouseEnter={() => setPrevHovered(true)}
+      onMouseLeave={() => setPrevHovered(false)}
+    >
+      <ChevronLeftIcon style={{ color: isPrevHovered ? 'white' : '', }}/>
+    </div>
+  );
+}
+
 
     /**
      * slider settings
@@ -34,6 +89,8 @@ function RecentProducts({onQuickViewClick}) {
         swipeToSlide: true,
         autoplaySpeed: 2000,
         focusOnSelect: false,
+        prevArrow: <SamplePrevArrow />,
+        nextArrow: <SampleNextArrow />,
         responsive: [
             {
                 breakpoint: 1024,
@@ -499,7 +556,7 @@ function RecentProducts({onQuickViewClick}) {
                             <div className="section-title-s2">
                                 <h2>Recent products</h2>
                             </div>
-                            <Link className="more-products" to="/shop-full-width">
+                            <Link className="more-products" to="/shop">
                                 More products
                             </Link>
                         </div>
@@ -507,7 +564,7 @@ function RecentProducts({onQuickViewClick}) {
                     <div className="row">
                         <div className="col col-xs-12">
                             <div className="products-wrapper">
-                                <ul className="products product-row-slider">
+                                <ul className="products ">
                                     <Slider {...settings}>
                                         {
                                             productsData.map((item, index) => (
@@ -528,38 +585,55 @@ function RecentProducts({onQuickViewClick}) {
                                                         <div className="shop-action-wrap">
                                                             <ul className="shop-action">
                                                                 <li>
-                                                                    {/* <a href="#" title="Quick view!"
-                                                                       data-tip="Quick view!"
-                                                                       onClick={
-                                                                           e => onQuickViewClick(e, item)
-                                                                       }
-                                                                >
-                                                                    
-                                                                    <i className="fi flaticon-view"/>
-                                                                </a> */}
-                                                                <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                <div 
+                                                                style={{ backgroundColor: isViewHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <RemoveRedEyeOutlinedIcon 
                                                                         onClick={
                                                                             e => onQuickViewClick(e, item)
                                                                         }
-                                                                        className='w-4 h-4 p-1' />
+                                                                        onMouseEnter={()=>{
+                                                                            setViewHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setViewHovered(false)
+                                                                        }}
+                                                                        className='w-4 h-4 p-1' 
+                                                                        style={{ color: isViewHovered ? 'white' : 'black',  }}
+                                                                        />
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to Wishlist!"
-                                                                       data-tip="Add to Wishlist!">
-                                                                        <i className="fi icon-heart-shape-outline"/>
-                                                                    </a> */}
-                                                                    <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
-                                                                        <FavoriteIcon className='w-4 h-4 p-1' />
+                                                                    <div style={{ backgroundColor: isFavHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <FavoriteIcon className='w-4 h-4 p-1' 
+                                                                        onClick={
+                                                                            ()=>{}
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setFavHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setFavHovered(false)
+                                                                        }}
+                                                                        style={{ color: isFavHovered ? 'white' : 'black',  }}
+
+                                                                        />
                                                                     </div>
                                                                     </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to cart!"
-                                                                       data-tip="Add to cart!">
-                                                                        <i className="fi flaticon-shopping-cart"/></a> */}
-                                                                        <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
-                                                                        <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' />
+                                                                        <div style={{ backgroundColor: isBagHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
+                                                                        
+                                                                        onClick={
+                                                                            ()=>{}
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setBagHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setBagHovered(false)
+                                                                        }}
+                                                                        style={{ color: isBagHovered ? 'white' : 'black',  }}
+                                                                        />
                                                                     </div>
                                                                         </li>
                                                             </ul>
@@ -567,7 +641,7 @@ function RecentProducts({onQuickViewClick}) {
                                                     </div>
                                                     <div className="product-info">
                                                         <h4>
-                                                            <Link to="/single-slider-images">
+                                                            <Link to="/product-details">
                                                                 {item.title}
                                                             </Link>
                                                         </h4>

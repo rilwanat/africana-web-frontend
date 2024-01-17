@@ -13,3 +13,14 @@
     transition: opacity 2s ease-in-out;
 }
 /* intro logo fade */
+
+/* intro logo fade */
+.fade-in-main {
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+}
+.fade-out-main {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+/* intro logo fade */
