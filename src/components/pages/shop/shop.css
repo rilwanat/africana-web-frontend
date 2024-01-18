@@ -29,8 +29,9 @@
     left: 0;
     top: 0;
     max-height: 100%;
-    overflow: scroll;
-    overflow-x: hidden;
+    /* overflow: scroll; */
+    overflow: auto;
+    overflow-x: hidden;    
 }
 
 .shop-single-section.shop-single-vertical-thumb .slick-dots li {

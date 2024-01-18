@@ -16,6 +16,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import './shop/shop.css';
 
 import imgx from '../../assets/images/shop/img-2.jpg';
+import imgs from '../../assets/images/shop/img-2.jpg';
 /**
  * demo data
  */
@@ -74,7 +75,14 @@ function ProductPage({options}) {
      * slider settings
      */
     const settings = {
-        dots: false,
+         customPaging: function (i) {
+            return (
+                <a>
+                    <img src={imgs}/>
+                </a>
+            );
+        },
+        //dots: false,
         infinite: true,
         speed: 500,
         autoplaySpeed: 2000,
@@ -82,30 +90,26 @@ function ProductPage({options}) {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
+
+        dots: true,
+        dotsClass: "slick-dots slick-thumb slider-nav",
+        // infinite: true,
+        // speed: 500,
+        // arrows: false,
+        // slidesToShow: 1,
+        // slidesToScroll: 1
     };
 
     const data = {
         "id": "1",
         "name": "Ladies Elegant T-shirt",
         "images": [
-        //   {
-        //     "src": "assets/images/shop/img-1.jpg"
-        //   },
-        //   {
-        //     "src": "../assets/images/shop/img-2.jpg"
-        //   },
-        //   {
-        //     "src": "assets/images/shop/img-3.jpg"
-        //   },
-        //   {
-        //     "src": "assets/images/shop/img-4.jpg"
-        //   },
-        //   {
-        //     "src": "assets/images/shop/img-5.jpg"
-        //   },
-        //   {
-        //     "src": "assets/images/shop/img-12.jpg"
-        //   }
+        {
+            "src" : imgx,
+        },
+        {
+            "src" : imgx,
+        },
         {
             "src" : imgx,
         },
@@ -175,16 +179,19 @@ function ProductPage({options}) {
             {/* <PageTitle name="Shop single"/> */}
 
             {/* start shop-single-section */}
-            <section className="shop-single-section section-padding">
+            <section className="shop-single-section  shop-single-vertical-thumb section-padding">
                 <div className="container-1410">
                     <div className="row">
+                    
+
+
                         <div className="col col-md-6">
-                            <div className="shop-single-slider slider-thumbnail">
+                            <div className="shop-single-slider vertical-thumbnail">
                                 <Slider {...settings}>
                                     {
                                         data.images.map((item, index) => (
                                             <div key={index}>
-                                                <img src={process.env.PUBLIC_URL + item.src}/>
+                                                <img src={item.src}/>
                                             </div>
                                         ))
                                     }
@@ -209,32 +216,7 @@ function ProductPage({options}) {
                                     <span className='ml-2'>({data.reviewCount} Customer review{data.reviewCount > 1 ? 's' : ''})</span>
                                 </div>
                                 <p>{data.shortDescription}</p>
-                                {/* <div className="product-option">
-                                    <form className="form">
-                                        <div className="product-row">
-                                            <div className="touchspin-wrap">
-                                                <button
-                                                    onClick={(e) => {
-                                                        HandleProductCount(e, 'plus')
-                                                    }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-up"></i>
-                                                </button>
-                                                <button
-                                                    onClick={(e) => {
-                                                        HandleProductCount(e, 'minus')
-                                                    }}
-                                                    id="slider-thumbnail-touchspin-down" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-down"></i>
-                                                </button>
-                                                <input readOnly className="product-count" type="text"
-                                                       value={productCount} name="product-count"/>
-                                            </div>
-                                            <div>
-                                                <button type="submit">Add to cart</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div> */}
+                                
                                  <div className="product-option">
                             <form className="form">
                                 <div className="product-row flex items-center">
@@ -258,13 +240,7 @@ function ProductPage({options}) {
                                             </div>
 
 
-                                    {/* <div className='mr-4'>
-                                        <input 
-                                        // className="product-count" 
-                                        type="text" 
-                                        defaultValue={1}
-                                               name="product-count-3"/>
-                                    </div> */}
+                                    
                                     <div>
                                         <button className='p-4' 
                                         // type="submit" 

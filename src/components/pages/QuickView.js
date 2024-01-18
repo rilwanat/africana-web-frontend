@@ -74,19 +74,14 @@ function QuickView({data, onQuickViewCloseClick}) {
                                             </div>
 
 
-                                    {/* <div className='mr-4'>
-                                        <input 
-                                        // className="product-count" 
-                                        type="text" 
-                                        defaultValue={1}
-                                               name="product-count-3"/>
-                                    </div> */}
-                                    <div>
-                                        <button className='p-4' 
+                                    
+                                    {/* <div className='flex flex-grow'> */}
+                                        <button className='px-4 ml-2' 
+                                        style={{ height: '50px' }}
                                         // type="submit" 
                                         // onClick={onQuickViewCloseClick}
                                         >Add to cart</button>
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                             </form>
                         </div>

@@ -62,7 +62,7 @@ export default function LandingPage({ options, handleDataViewData }) {
 
 
   return (
-    <div>{transitionComplete ? 'true' : 'false'}
+    <div>
       {
       transitionComplete ? 
       (
