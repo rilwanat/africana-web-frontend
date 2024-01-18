@@ -29,6 +29,8 @@ function PriceFilterWidget() {
                 color: 'black',
                 '& .MuiSlider-thumb': {
                   backgroundColor: 'black',
+                  width: 12,
+      height: 12,
                 },
                 '& .MuiSlider-track': {
                   backgroundColor: 'black',
@@ -37,8 +39,8 @@ function PriceFilterWidget() {
             />
            
           </div>
-
-          <p style={{ marginBottom: '10px' }}>Price: {'N' + range[0] + ' - N' + range[1]}</p>
+          <div style={{ marginTop: '8px', marginBottom: '10px' }}>Price: {'N' + range[0] + ' - N' + range[1]}</div>
+          {/* <p style={{ marginBottom: '10px' }}>Price: {'N' + range[0] + ' - N' + range[1]}</p> */}
           <button style={{ marginTop: '30px' }} >Filter</button>
         </div>
       </div>

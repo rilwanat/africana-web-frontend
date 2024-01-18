@@ -7,6 +7,7 @@ import logo from '../../assets/logos/Logo Wordmark.png';
 //
 import NewsletterPopup from './NewsletterPopup';
 
+import Hero1 from './Hero/Hero1';
 import Header from './header/Header';
 import FeaturedProducts from './FeaturedProducts';
 import RecentProducts from './RecentProducts';
@@ -20,6 +21,7 @@ export default function LandingPage({ options, handleDataViewData }) {
   const [transitionComplete, setTransitionComplete] = useState(false);
 
   const [isMainVisible, setIsMainVisible] = useState(false);
+  
   //const [startMainTransition, setStartMainTransition] = useState(false);
 
   
@@ -27,8 +29,20 @@ export default function LandingPage({ options, handleDataViewData }) {
     setIsMainVisible(true);
   };
 
+  // const checkTransitionCompletion = () => {
+  //   const hasTransitionCompleted = localStorage.getItem('transitionCompleted');
+  //   return hasTransitionCompleted;
+  // };
+
   useEffect(() => {
-    // Phase 1: Fade in for the first animation
+
+    //alert(checkTransitionCompletion());
+    // if (checkTransitionCompletion() === 'true') {
+    //   // If the transition has already completed, skip the animation
+    //   setIsMainVisible(true);
+    // } else 
+    {
+      // Phase 1: Fade in for the first animation
     const fadeInTimeout = setTimeout(() => {
       setIsVisible(true);
     }, 500);
@@ -42,6 +56,7 @@ export default function LandingPage({ options, handleDataViewData }) {
     const transitionCompleteTimeout = setTimeout(() => {
       setTransitionComplete(true);
       // fadeInMainTimeout();
+      localStorage.setItem('transitionCompleted', 'true');
       fadeInMainTimeout();
     }, 5000);
   
@@ -54,6 +69,9 @@ export default function LandingPage({ options, handleDataViewData }) {
       clearTimeout(transitionCompleteTimeout);
   
     };
+    }
+
+    
   }, []);
 
 
@@ -75,6 +93,8 @@ export default function LandingPage({ options, handleDataViewData }) {
             className={`fade-in-main ${!isMainVisible ? 'fade-in' : 'fade-out'}`}>
 
            <Header options={options} />
+
+           <Hero1/>
 
 
 <FeaturedProducts />
