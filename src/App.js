@@ -5,7 +5,8 @@ import {Fragment} from 'react';
 import LandingPage from "./components/pages/LandingPage";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/about/About";
-import ShopPage from "./components/pages/ShopPage";
+// import ShopPage from "./components/pages/ShopPage";
+import ShopPage from "./components/pages/ShopLeftSidebarPage";
 import ProductPage from "./components/pages/ProductPage";
 import SizesPage from "./components/pages/SizesPage";
 
