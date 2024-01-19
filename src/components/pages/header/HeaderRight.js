@@ -49,7 +49,7 @@ function HeaderRight({options}) {
                         <i className="icon-user"/>
                         < AccountCircleIcon />
                     </Link> */}
-                    < AccountCircleIcon style={{ cursor: "pointer" }}/>
+                    <NavLink to="/my-account">< AccountCircleIcon style={{ cursor: "pointer" }}/></NavLink>
                 </div>
                 <div className="wishlist-box mr-2">
                     <a 

@@ -39,20 +39,20 @@ function Hero1() {
         {
             "id": 1,
             "img": imgx,//"../../../assets/images/slider/slide-1.jpg",
-            "title": "Great Lookbook 2021",
-            "text": "Stylish shop"
+            "title": "Great Phrase",
+            "text": "Africana shop"
         },
         {
             "id": 2,
             "img": imgx,//"../../../assets/images/slider/slide-2.jpg",
             "title": "Stylish Coat",
-            "text": "Stylish shop"
+            "text": "Africana shop"
         },
         {
             "id": 3,
             "img": imgx,//"../../../assets/images/slider/slide-3.jpg",
             "title": "Trendy Collection",
-            "text": "Stylish shop"
+            "text": "Africana shop"
         }
     ]
 

@@ -5,6 +5,7 @@ import {Fragment} from 'react';
 import LandingPage from "./components/pages/LandingPage";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/about/About";
+import AccountPage from "./components/pages/MyAccount";
 // import ShopPage from "./components/pages/ShopPage";
 import ShopPage from "./components/pages/ShopLeftSidebarPage";
 import ProductPage from "./components/pages/ProductPage";
@@ -135,6 +136,7 @@ const options = {
               <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData}/>}/>    
               <Route path='/home' element={<HomePage />}/>    
               <Route path='/about' element={<AboutPage options={options} />}/>    
+              <Route path='/my-account' element={<AccountPage options={options} />}/>    
               {/* <Route path='/login' element={<LoginPage />}/> */}
               <Route path='/shop' element={<ShopPage options={options} />}/>
               <Route path='/product-details' element={<ProductPage options={options} />}/>
