@@ -74,13 +74,15 @@ function MyAccount({ options }) {
     
             setIsSignupLoading(false);
     
-            const regData = response.data;
+            //const regData = response.data;
     
             if (response.data.status === 'success') {
                 setIsSignupLoading(false);
                 setErrorMessage(null);
                 setRegistrationStatus("Success");
                 setDefaultModalOpen(true);
+                
+                alert("Success");
             } else {
                 setIsSignupLoading(false);
                 setRegistrationStatus("Failed");
@@ -92,6 +94,7 @@ function MyAccount({ options }) {
                     setErrorMessage({ message: response.data.message, errors: response.data.message });
                 }
                 setDefaultModalOpen(true);
+                alert("Failed");
             }
         } catch (error) {
             setIsSignupLoading(false);
@@ -110,6 +113,7 @@ function MyAccount({ options }) {
                 setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
             }
             setDefaultModalOpen(true);
+            alert("Failed");
         }
     };
     
