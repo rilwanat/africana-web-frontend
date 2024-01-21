@@ -26,7 +26,7 @@ function ProductCategoriesWidget() {
                             </li>
                         </ul>
                     </li>
-                    <li className="cat-item">
+                    {/* <li className="cat-item">
                         <a href="#">Decor</a>
                     </li>
                     <li className="cat-item">
@@ -34,7 +34,7 @@ function ProductCategoriesWidget() {
                     </li>
                     <li className="cat-item">
                         <a href="#">Uncategorized</a>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </Fragment>
