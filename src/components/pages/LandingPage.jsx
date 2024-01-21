@@ -90,7 +90,9 @@ export default function LandingPage({ options, handleDataViewData }) {
            <div 
           //  style={{ opacity: startMainTransition ? 1 : 1 }}>
             // className={isMainVisible ? 'fade-in-main' : 'fade-out-main'}>
-            className={`fade-in-main ${!isMainVisible ? 'fade-in' : 'fade-out'}`}>
+            className={`fade-in-main ${!isMainVisible ? 'fade-in' : 'fade-out'}`}
+            style={{ backgroundColor: '#eeeeee' }}
+            >
 
            <Header options={options} />
 

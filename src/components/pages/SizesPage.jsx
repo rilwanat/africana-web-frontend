@@ -15,7 +15,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import './shop/shop.css';
 
-import imgx from '../../assets/images/shop/img-2.jpg';
+import imgx from '../../assets/images/size.png';
 /**
  * demo data
  */
@@ -99,7 +99,7 @@ function SizesPage({options}) {
             {/* <PageTitle name="Shop single"/> */}
 
             {/* start shop-single-section */}
-            <section className="shop-single-section section-padding">
+            <section className="shop-single-section section-padding" style={{ backgroundColor: '#eeeeee' }}>
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-md-6">
@@ -117,53 +117,22 @@ function SizesPage({options}) {
                                 <div className="slider-nav"></div>
                             </div>
                         </div>
+                        
                         <div className="col col-md-6">
                             <div className="product-details">
-                                <h2>Size Chart</h2>
-                                
+                                <h2>HOW TO MEASURE</h2>
                                 
                                 {/* <p>{data.shortDescription}</p> */}
-                                
-                                 <div className="product-option">
-                            <form className="form">
-                                <div className="product-row flex items-center">
-
-                                <div className="touchspin-wrap">
-                                                {/* <button
-                                                    onClick={(e) => {
-                                                        HandleProductCount(e, 'plus')
-                                                    }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-up"></i>
-                                                </button>
-                                                <button
-                                                    onClick={(e) => {
-                                                        HandleProductCount(e, 'minus')
-                                                    }}
-                                                    id="slider-thumbnail-touchspin-down" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-down"></i>
-                                                </button>
-                                                <input readOnly className="product-count" type="text"
-                                                       value={productCount} name="product-count"/> */}
-                                            </div>
-
-
-                                    {/* <div className='mr-4'>
-                                        <input 
-                                        // className="product-count" 
-                                        type="text" 
-                                        defaultValue={1}
-                                               name="product-count-3"/>
-                                    </div> */}
-                                    <div>
-                                        <button className='p-4' 
-                                        // type="submit" 
-                                        // onClick={onQuickViewCloseClick}
-                                        >Calculate my Size</button>
-                                    </div>
+                                <div className='flex flex-col ' >
+                                <p className='' style={{ fontSize: '14px' }}><strong>CHEST:</strong> Measure under your arms around the fullest part of your chest.</p>
+                                <p className='' style={{ fontSize: '14px' }}><strong>NECK:</strong> Measure around the middle of your neck (at the Adam's apple), keeping tape a bit loose.</p>
+                                <p className='' style={{ fontSize: '14px' }}><strong>WAIST:</strong> Measure around your natural waistline, keeping the tape a little bit loose.</p>
+                                <p className='' style={{ fontSize: '14px' }}><strong>SLEEVES:</strong> Measure from the edge of the shoulder along the edge to the end of the sleeve cuff.</p>
+                                <p className='' style={{ fontSize: '14px' }}><strong>LENGTH:</strong> Measure from the waist, straight down to the botom of the hem.</p>
+                                <p className='' style={{ fontSize: '14px' }}><strong>PLEASE NOTE:</strong> ALL MEASUREMENTS ARE IN INCHES.</p>
                                 </div>
-                            </form>
-                        </div>
-                        
+                                
+                                
                             </div>
                         </div>
                         {/* end col */}

@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import {Link} from "react-router-dom";
 
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
@@ -15,6 +15,11 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
  * @constructor
  */
 function Products({HandelQuickViewData, products, ordering}) {
+
+    const [isViewHovered, setViewHovered] = useState(false);
+    const [isFavHovered, setFavHovered] = useState(false);
+    const [isBagHovered, setBagHovered] = useState(false);
+
 
     return (
         <Fragment>
@@ -45,12 +50,19 @@ function Products({HandelQuickViewData, products, ordering}) {
                                                                     
                                                                     <i className="fi flaticon-view"/>
                                                                 </a> */}
-                                                                <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                <div style={{ backgroundColor: isViewHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <RemoveRedEyeOutlinedIcon 
                                                                         onClick={
                                                                             // e => onQuickViewClick(e, item)
                                                                             e => HandelQuickViewData(e, item)
                                                                         }
+                                                                        onMouseEnter={()=>{
+                                                                            setViewHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setViewHovered(false)
+                                                                        }}
+                                                                        style={{ color: isViewHovered ? 'white' : 'black',  }}
                                                                         className='w-4 h-4 p-1' />
                                                                     </div>
                                                                 </li>
@@ -59,16 +71,38 @@ function Products({HandelQuickViewData, products, ordering}) {
                                                                        data-tip="Add to Wishlist!">
                                                                         <i className="fi icon-heart-shape-outline"/>
                                                                     </a> */}
-                                                                    <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
-                                                                        <FavoriteIcon className='w-4 h-4 p-1' />
+                                                                    <div style={{ backgroundColor: isFavHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <FavoriteIcon className='w-4 h-4 p-1' 
+                                                                         onClick={
+                                                                            ()=>{}
+                                                                        }
+                                                                         onMouseEnter={()=>{
+                                                                            setFavHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setFavHovered(false)
+                                                                        }}
+                                                                        style={{ color: isFavHovered ? 'white' : 'black',  }}
+                                                                        />
                                                                     </div>
                                                                     </li>
                                                                 <li>
                                                                     {/* <a href="#" title="Add to cart!"
                                                                        data-tip="Add to cart!">
                                                                         <i className="fi flaticon-shopping-cart"/></a> */}
-                                                                        <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
-                                                                        <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' />
+                                                                        <div style={{ backgroundColor: isBagHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
+                                                                        onClick={
+                                                                            ()=>{}
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setBagHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setBagHovered(false)
+                                                                        }}
+                                                                        style={{ color: isBagHovered ? 'white' : 'black',  }}
+                                                                        />
                                                                     </div>
                                                                         </li>
                                     </ul>

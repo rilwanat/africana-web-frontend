@@ -662,7 +662,7 @@ function ShopLeftSidebarPage({ options }) {
 
 
             {/* start shop-section */}
-            <section className="shop-section section-padding">
+            <section className="shop-section section-padding" style={{ backgroundColor: '#eeeeee' }}>
                 <div className="container-fluid">
                     <div className="row" >
                         <div className="col col-xs-12" >

@@ -49,7 +49,7 @@ function About({ options }) {
             {/* <PageTitle name="About us"/> */}
 
             {/* start about-section */}
-            <section className="about-section section-padding">
+            <section className="about-section section-padding" style={{ backgroundColor: '#eeeeee' }}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col col-lg-8">
