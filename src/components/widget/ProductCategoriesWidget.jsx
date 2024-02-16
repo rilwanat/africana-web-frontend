@@ -16,13 +16,13 @@ function ProductCategoriesWidget() {
                         <a href="#">Clothing</a>
                         <ul className="children">
                             <li className="cat-item cat-item-213">
-                                <a href="#">Accessories</a>
+                                <a >Accessories</a>
                             </li>
                             <li className="cat-item cat-item-212">
-                                <a href="#">Hoodies</a>
+                                <a >Hoodies</a>
                             </li>
                             <li className="cat-item cat-item-211">
-                                <a href="#">Tshirts</a>
+                                <a >Tshirts</a>
                             </li>
                         </ul>
                     </li>

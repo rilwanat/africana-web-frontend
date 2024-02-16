@@ -13,11 +13,11 @@ function ColorFilterWidget() {
                 <h3>Filter by Color</h3>
                 <ul className="woocommerce-widget-layered-nav-list">
                     <li className="woocommerce-widget-layered-nav-list__item wc-layered-nav-term ">
-                        <a href="#">Blue</a>
+                        <a >Blue</a>
                         <span className="count"> (4)</span>
                     </li>
                     <li className="woocommerce-widget-layered-nav-list__item wc-layered-nav-term ">
-                        <a href="#">Gray</a>
+                        <a >Gray</a>
                         <span className="count"> (4)</span>
                     </li>
                 </ul>

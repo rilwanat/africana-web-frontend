@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Fragment} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logos/Logo Wordmark.png';
-
+import axios from 'axios';
 
 //
 import NewsletterPopup from './NewsletterPopup';
@@ -13,17 +13,21 @@ import FeaturedProducts from './FeaturedProducts';
 import RecentProducts from './RecentProducts';
 import QuickView from './QuickView';
 import CtaSection from './CtaSection';
+import Locations from './Locations';
 import Footer from './Footer';
 
 
 export default function LandingPage({ options, handleDataViewData }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [transitionComplete, setTransitionComplete] = useState(false);
+  //const [transitionComplete, setTransitionComplete] = useState(false);
+  let transitionComplete = localStorage.getItem('transitionCompleted');
 
   const [isMainVisible, setIsMainVisible] = useState(false);
   
   //const [startMainTransition, setStartMainTransition] = useState(false);
 
+  const [products, setProductsData] = useState([]);
+    const [isDataloading, setIsDataLoading] = useState(true);
   
   const fadeInMainTimeout = () => {
     setIsMainVisible(true);
@@ -35,6 +39,13 @@ export default function LandingPage({ options, handleDataViewData }) {
   // };
 
   useEffect(() => {
+
+    handleData();
+    
+    //setIsVisible(true);
+    //localStorage.removeItem('transitionCompleted');
+    // setIsMainVisible(false);
+    
 
     //alert(checkTransitionCompletion());
     // if (checkTransitionCompletion() === 'true') {
@@ -54,9 +65,9 @@ export default function LandingPage({ options, handleDataViewData }) {
   
     // Set transitionComplete to true after the entire transition of the first animation is completed
     const transitionCompleteTimeout = setTimeout(() => {
-      setTransitionComplete(true);
+      //setTransitionComplete(true);
       // fadeInMainTimeout();
-      localStorage.setItem('transitionCompleted', 'true');
+      localStorage.setItem('transitionCompleted', true);
       fadeInMainTimeout();
     }, 5000);
   
@@ -75,6 +86,39 @@ export default function LandingPage({ options, handleDataViewData }) {
   }, []);
 
 
+
+
+  const handleData = async () => {    
+    //alert("token: " + token + "\n\n" + "uid: " + uid);
+    setIsDataLoading(true);
+    try {
+
+      const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
+        //params: { uid: uid },
+        headers: {
+          "Content-Type": "application/json",
+          //Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setIsDataLoading(false);
+      //alert(JSON.stringify(response.data, null, 2));
+
+      if (response.data.success) {
+        //alert("dashboard-products " + JSON.stringify(response.data, null, 2));
+      
+        // Store the retrieved data in state variables
+
+        setProductsData(response.data.products);
+      } else {
+        alert("error: " + response.data.message);
+      }
+
+    } catch (error) {
+      setIsDataLoading(false);
+      alert("error: " + error);
+    }
+  };
 
 
 
@@ -100,8 +144,9 @@ export default function LandingPage({ options, handleDataViewData }) {
 
 
 <FeaturedProducts />
-<RecentProducts onQuickViewClick={handleDataViewData}/>
+<RecentProducts onQuickViewClick={handleDataViewData} products={products}/>
 <CtaSection />
+<Locations onQuickViewClick={handleDataViewData} products={products}/>
 <Footer/>
 <NewsletterPopup/>
             </div> 

@@ -63,7 +63,10 @@ function About({ options }) {
                                     {/* <NavLink to="/contact" className="theme-btn-s3">Contact us</NavLink> */}
                                 </div>
                                 <div className="img-holder">
-                                    <img loading="lazy" src={about} alt=""/>
+                                    <img loading="lazy" src=
+                                    {about}
+                                    // "https://shopafricana.co/wp-content/uploads/2023/12/Africana-Oversized-Tees-www.shopafricana.co_24-scaled-1.jpg" 
+                                    alt=""/>
                                 </div>
                             </div>
                         </div>

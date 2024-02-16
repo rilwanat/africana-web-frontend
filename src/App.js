@@ -139,7 +139,7 @@ const options = {
               <Route path='/my-account' element={<AccountPage options={options} />}/>    
               {/* <Route path='/login' element={<LoginPage />}/> */}
               <Route path='/shop' element={<ShopPage options={options} />}/>
-              <Route path='/product-details' element={<ProductPage options={options} />}/>
+              <Route path='/product-details/:product' element={<ProductPage options={options} />}/>
               <Route path='/sizes' element={<SizesPage options={options} />}/>
 
               {/* 

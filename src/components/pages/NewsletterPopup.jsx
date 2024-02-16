@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
 import {useState, useEffect} from 'react';
 
-import newsLetter from '../../assets/images/newsletter.jpg';
+import newsLetter1 from '../../assets/images/newsletter-1.png';
+import newsLetter2 from '../../assets/images/newsletter-2.png';
 // import FramerThing from './framer/FramerThing';
 
 /**
@@ -36,7 +37,7 @@ function NewsletterPopup() {
                         <button onClick={HandelNewsletterClose} className="btn newsletter-close-btn"><i
                             className="pe-7s-close-circle"/></button>
                         <div className="img-holder">
-                            <img src={newsLetter} loading="lazy" alt=""/>
+                            <img src={(Math.floor(Math.random() * 2)) % 2 === 0 ? newsLetter1 : newsLetter2} loading="lazy" alt=""/>
                             {/* <FramerThing /> */}
                         </div>
                         <div className="details">

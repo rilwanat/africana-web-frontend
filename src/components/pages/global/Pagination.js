@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState, useEffect } from 'react';
 
 /**
  * Pagination component
@@ -6,7 +6,35 @@ import React, {Fragment} from 'react';
  * @returns {*}
  * @constructor
  */
-function Pagination({extraClass}) {
+function Pagination({extraClass, handlePageClick, totalProducts}) {
+
+    const [activePage, setActivePage] = useState();
+    const [totalPages, setTotalPages] = useState(1);
+
+    useEffect(() => {
+        const pages = Math.ceil(totalProducts / 16); // 16 products per page
+        setTotalPages(pages);
+    }, [totalProducts]);
+
+    const handleClick = (pageNumber) => {
+        if (handlePageClick) {
+            setActivePage(pageNumber);
+            handlePageClick(pageNumber);
+        }
+    };
+
+    // Generate pagination dynamically based on total pages
+    const pagesArray = [];
+    for (let i = 1; i <= totalPages; i++) {
+        pagesArray.push(
+            <li key={i} className={activePage === i ? "active" : ""}>
+                <a 
+                style={{cursor: "pointer"}}
+                onClick={() => handleClick(i)}>{i}</a>
+            </li>
+        );
+    }
+
     return (
         <Fragment>
             <div className={"pagination-wrapper " + extraClass}>
@@ -16,9 +44,7 @@ function Pagination({extraClass}) {
                             <i className="fi flaticon-back"/>
                         </a>
                     </li>
-                    <li className="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
+                    {pagesArray}
                     <li>
                         <a href="#" aria-label="Next">
                             <i className="fi flaticon-next"/>

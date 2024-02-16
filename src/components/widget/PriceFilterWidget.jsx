@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Slider from "@mui/material/Slider";
 
 /**
@@ -6,13 +6,18 @@ import Slider from "@mui/material/Slider";
  * @returns {*}
  * @constructor
  */
-function PriceFilterWidget() {
-  const rangeMaxVal = 500;
-  const [range, setRange] = useState([205, 420]);
+function PriceFilterWidget({handleDataSort, maxMin, maxMax}) {
+  // const rangeMaxVal = 500;
+  const [range, setRange] = useState([0, maxMax]);
 
   function handleChanges(_, newValue) {
     setRange(newValue);
   }
+
+  useEffect(() => {
+    //handleChanges();
+}, []);
+
 
   return (
     <Fragment>
@@ -21,7 +26,7 @@ function PriceFilterWidget() {
         <div className="filter-price" style={{ backgroundColor: '' }}>
           <div style={{ width: "100%", padding: "0px" }} className=' mx-1'>
             <Slider
-            max={rangeMaxVal}
+            max={maxMax}
               value={range}
               onChange={handleChanges}
               valueLabelDisplay="auto"
@@ -41,7 +46,7 @@ function PriceFilterWidget() {
           </div>
           <div style={{ marginTop: '8px', marginBottom: '10px' }}>Price: {'N' + range[0] + ' - N' + range[1]}</div>
           {/* <p style={{ marginBottom: '10px' }}>Price: {'N' + range[0] + ' - N' + range[1]}</p> */}
-          <button style={{ marginTop: '30px' }} >Filter</button>
+          <button style={{ marginTop: '30px' }} onClick={()=> handleDataSort(range[0], range[1])}>Filter</button>
         </div>
       </div>
     </Fragment>

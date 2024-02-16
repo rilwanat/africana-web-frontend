@@ -38,22 +38,22 @@ function Hero1() {
     const heroData = [
         {
             "id": 1,
-            "img": imgx,//"../../../assets/images/slider/slide-1.jpg",
-            "title": "Great Phrase",
-            "text": "Africana shop"
+            "img": "http://shopafricana.co/wp-content/uploads/2024/01/2-slider-scaled.jpg", //imgx,//"../../../assets/images/slider/slide-1.jpg",
+            "title": "Art of Life",
+            "text": "Collection"
         },
         {
             "id": 2,
-            "img": imgx,//"../../../assets/images/slider/slide-2.jpg",
-            "title": "Stylish Coat",
-            "text": "Africana shop"
+            "img": "http://shopafricana.co/wp-content/uploads/2024/01/1-slider-scaled.jpg", //imgx,//"../../../assets/images/slider/slide-2.jpg",
+            "title": "Art of Life",
+            "text": "Collection"
         },
-        {
-            "id": 3,
-            "img": imgx,//"../../../assets/images/slider/slide-3.jpg",
-            "title": "Trendy Collection",
-            "text": "Africana shop"
-        }
+        // {
+        //     "id": 3,
+        //     "img": imgx,//"../../../assets/images/slider/slide-3.jpg",
+        //     "title": "Art of Life",
+        //     "text": "Collection"
+        // }
     ]
 
     return (

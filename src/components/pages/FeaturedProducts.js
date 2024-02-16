@@ -15,17 +15,17 @@ function FeaturedProducts() {
     const featuredProductsData = [
         {
             "id" : 1,
-            "img": img1, //"../../assets/images/feature-product/img-4.jpg",
+            "img": "https://shopafricana.co/wp-content/uploads/2024/01/Phtography-project-20200178-1-copy-scaled-1.jpg", //img1, //"../../assets/images/feature-product/img-4.jpg",
             "title": "Clothing Collection"
         },
         {
             "id" : 2,
-            "img": img2, //"../../assets/images/feature-product/img-11.jpg",
-            "title": "Shoes Collection"
+            "img": "https://shopafricana.co/wp-content/uploads/2024/01/0138-BRS-AFRICANA-1-copy.jpg", //img2, //"../../assets/images/feature-product/img-11.jpg",
+            "title": "Bags Collection"
         },
         {
             "id" : 3,
-            "img": img3, //"../../assets/images/feature-product/img-7.jpg",
+            "img": "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8382-1-copy_Bereal_Studios.png",// img3, //"../../assets/images/feature-product/img-7.jpg",
             "title": "Essentials Collection"
         }
     ];
@@ -42,7 +42,9 @@ function FeaturedProducts() {
                                     featuredProductsData.map((item, index) => (
                                         <div key={index} className="grid mb-6">
                                             <div className="img-holder">
-                                                <a href="/product-details">
+                                                <a 
+                                                // href="/product-details"
+                                                >
                                                     <img 
                                                 loading="lazy" 
                                                 

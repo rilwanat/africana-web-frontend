@@ -44,12 +44,12 @@ function HeaderLeft({options}) {
                         </ul>
                     </div>
                 </div>
-                <div className="search-area ">
+                {/* <div className="search-area ">
                     <form className=''>
                         <button type="submit"><i className="fi flaticon-search "/></button>
                         <input type="text" style={{ marginTop: '2px' }} placeholder="Search.."/>
                     </form>
-                </div>
+                </div> */}
             </div>
         </Fragment>
     );

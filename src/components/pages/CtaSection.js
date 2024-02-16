@@ -13,7 +13,9 @@ function CtaSection() {
     return (
         <Fragment>
             {/* start cta-section */}
-            <section className="cta-section" loading="lazy" style={{ background: `url(${imgCta})  center/cover no-repeat local` }}>
+            <section className="cta-section" loading="lazy" style={{ 
+                background: `url(${imgCta})  
+                center/cover no-repeat local` }}>
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-xs-12">

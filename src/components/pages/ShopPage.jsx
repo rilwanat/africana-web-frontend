@@ -1,4 +1,5 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
+import axios from 'axios';
 
 import Footer from './Footer';
 // import Instagram from '../../components/global/Instagram';
@@ -40,6 +41,9 @@ function ShopPage({ options }) {
     const [quickViewData, setQuickViewData] = useState({});
     const [ordering, setOrdering] = useState(1);
 
+    const [products, setProductsData] = useState([]);
+    const [isDataloading, setIsDataLoading] = useState(true);
+
     /**
      * Handle Ordering Status
      */
@@ -66,570 +70,81 @@ function ShopPage({ options }) {
         setQuickViewData({});
     };
 
-    const products = [
-        {
-            "SKU": "71236-1",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
+
+
+    //let token = localStorage.getItem('token');
+    useEffect(() => {
+        //if (!token) {
+          // Redirect to the home page if the token is null
+          //navigate('/');
+        //} else {
+          // If the user is authenticated, call the handleData function
+          alert("X");
+          handleData();
+        //}
+      }, []);
+
+      const handleData = async () => {    
+        //alert("token: " + token + "\n\n" + "uid: " + uid);
+        setIsDataLoading(true);
+        try {
+    
+          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
+            //params: { uid: uid },
+            headers: {
+              "Content-Type": "application/json",
+              //Authorization: `Bearer ${token}`,
             },
-            {
-                "id": 2,
-                "name": "Tops",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Women",
-                "link": "#"
-            }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-            {
-                "id": 2,
-                "name": "Red",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Tshirt",
-                "link": "#"
-            }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Fashion tops",
-            "price": "790,000.00",
-            "oldPrice": "690,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-1.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-2",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-            {
-                "id": 2,
-                "name": "Tops",
-                "link": "#"
-            }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Tshirt",
-                "link": "#"
-            }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Women's T-shirt",
-            "price": "429,000.00",
-            "oldPrice": "429,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-2.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-3",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-            {
-                "id": 2,
-                "name": "Tops",
-                "link": "#"
-            }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Tshirt",
-                "link": "#"
-            }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Short Sleeve",
-            "price": "147,000.00",
-            "oldPrice": "200,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-3.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-6",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-            {
-                "id": 2,
-                "name": "Tops",
-                "link": "#"
-            }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Tshirt",
-                "link": "#"
-            }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Stylish coat",
-            "price": "500,000.00",
-            "oldPrice": "500,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-4.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-4",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-            {
-                "id": 2,
-                "name": "Tops",
-                "link": "#"
-            }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Tshirt",
-                "link": "#"
-            }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Women Modern Shot Pant",
-            "price": "398,000.00",
-            "oldPrice": "398,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-5.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-5",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-            {
-                "id": 2,
-                "name": "Tops",
-                "link": "#"
-            }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-            {
-                "id": 3,
-                "name": "Tshirt",
-                "link": "#"
-            }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Blue Jeans Pant for Men",
-            "price": "329,000.00",
-            "oldPrice": "329,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-6.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-88",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-                {
-                    "id": 2,
-                    "name": "Tops",
-                    "link": "#"
-                }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-                {
-                    "id": 3,
-                    "name": "Tshirt",
-                    "link": "#"
-                }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Blue Jeans Pant for Men",
-            "price": "290,000.00",
-            "oldPrice": "290,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-1.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
-        },
-        {
-            "SKU": "71236-54r",
-            "Categories": [{
-                "id": 1,
-                "name": "Clothing",
-                "link": "#"
-            },
-                {
-                    "id": 2,
-                    "name": "Tops",
-                    "link": "#"
-                }],
-            "Tags": [{
-                "id": 1,
-                "name": "Button",
-                "link": "#"
-            },
-                {
-                    "id": 3,
-                    "name": "Tshirt",
-                    "link": "#"
-                }],
-            "content": "Crafted from a luxurious blend of wool and cashmere, the EleganceLux Trench Coat guarantees warmth and breathability.",
-            "reviewCounts": 2,
-            "reviews": [
-                {
-                    "id": 1,
-                    "name": "Mice",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "name": "Hone",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "1 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-2.jpg"
-                },
-                {
-                    "id": 3,
-                    "name": "Piloa",
-                    "stars": 5,
-                    "coment" : "Waved about helplessly as he looked What's happened to me he thought. It wasn't a dreamtrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather",
-                    "dateTime": "2 DAY AGO",
-                    "pic" : "/assets/images/shop/shop-single/review/img-3.jpg"
-                }
-            ],
-            "starts": 4.5,
-            "title": "Blue Jeans Pant for Men",
-            "price": "259,000.00",
-            "oldPrice": "259,000.00",
-            "Symbol" : "N", //"$",
-            "mainImg" : imgx, //"/assets/images/shop/img-3.jpg",
-            "gallery": [
-                {
-                    "id": 1,
-                    "img": "/assets/images/shop/shop-single/img-1.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-1.jpg"
-                },
-                {
-                    "id": 2,
-                    "img": "/assets/images/shop/shop-single/img-2.jpg",
-                    "thumb": "/assets/images/shop/shop-single/thumb/img-2.jpg"
-                }
-            ]
+          });
+    
+          setIsDataLoading(false);
+          alert("dashboard-stats: " + JSON.stringify(response.data, null, 2));
+          setProductsData(response.data);
+    
+          if (response.data.status === "success") {
+            //alert("handleData: " + JSON.stringify(response.data.message, null, 2));    
+            // Store the retrieved data in state variables
+            //setTransactions(response.data.payload.transactions);
+          } else {
+            alert("error: " + response.data.message);
+          }
+
+        } catch (error) {
+          setIsDataLoading(false);
+          alert("error: " + error);
         }
-    ];
+      };
+
+      const handleDataOnPage = async (pg) => {    
+        //alert("token: " + token + "\n\n" + "uid: " + uid);
+        setIsDataLoading(true);
+        try {
+    
+          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products?page=' + pg, {
+            //params: { uid: uid },
+            headers: {
+              "Content-Type": "application/json",
+              //Authorization: `Bearer ${token}`,
+            },
+          });
+    
+          setIsDataLoading(false);
+          alert("dashboard-stats: " + JSON.stringify(response.data, null, 2));
+          setProductsData(response.data);
+    
+          if (response.data.status === "success") {
+            //alert("handleData: " + JSON.stringify(response.data.message, null, 2));    
+            // Store the retrieved data in state variables
+            //setTransactions(response.data.payload.transactions);
+          } else {
+            alert("error: " + response.data.message);
+          }
+
+        } catch (error) {
+          setIsDataLoading(false);
+          alert("error: " + error);
+        }
+      };
 
     return (
         <Fragment>

@@ -1,5 +1,6 @@
 import React, {useState, Fragment} from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import {Link, useNavigate} from "react-router-dom";
 
 /**
  * product Quick View component
@@ -9,6 +10,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
  * @constructor
  */
 function QuickView({data, onQuickViewCloseClick}) {
+
+    const navigate = useNavigate();
 
     const [productCount, setProductCount] = useState(1);
 
@@ -25,6 +28,57 @@ function QuickView({data, onQuickViewCloseClick}) {
         }
     };
 
+
+        // Function to find the lowest price among product variants
+function findLowestPrice(product) {
+    let lowestPrice = Infinity;
+  
+    //products.forEach(product => {
+      product.productVariants.forEach(variant => {
+        if (variant.price < lowestPrice) {
+          lowestPrice = variant.price;
+        }
+      });
+    //});
+  
+    return lowestPrice;
+  }
+
+  function findHighestPrice(product) {
+    let highestPrice = 0;
+  
+    //products.forEach(product => {
+      product.productVariants.forEach(variant => {
+        if (variant.price > highestPrice) {
+            highestPrice = variant.price;
+        }
+      });
+    //});
+  
+    return highestPrice;
+  }
+
+  // Function to calculate the discount percentage
+function calculateDiscountPercentage(price, oldPrice) {
+    return parseInt(price) < parseInt(oldPrice) ?
+      Math.round(((parseInt(oldPrice) - parseInt(price)) / parseInt(oldPrice)) * 100)
+      : 0; // Return 0 if there's no discount
+  }
+
+  const handleProductClick = (product, e) => {
+
+    // if (!isDragging) 
+    {
+        const productString = JSON.stringify(product);
+        navigate(`/product-details/${encodeURIComponent(productString)}`);
+    }
+    
+
+  };
+
+
+
+
     return (
         <Fragment>
             <div className="quick-view-single-product activve-quick-view-single-product">
@@ -32,14 +86,22 @@ function QuickView({data, onQuickViewCloseClick}) {
                     <button className="btn quick-view-single-product-close-btn" onClick={onQuickViewCloseClick}><i
                         className="pe-7s-close-circle"/></button>
                     <div className="img-holder">
-                        <img loading="lazy" src={process.env.PUBLIC_URL + data.mainImg} alt=""/>
+                        <img loading="lazy" src=
+                        // {process.env.PUBLIC_URL + data.mainImg} 
+                        "https://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                        alt=""/>
                     </div>
                     <div className="product-details">
-                        <h4>Short Sleeve</h4>
+                        <h4>{data.name}</h4>
                         <div className="price">
-                            <span className="current">{data.Symbol}{data.price}</span>
-                            {parseInt(data.price) < parseInt(data.oldPrice) ?
-                                <span className="old">{data.Symbol}{data.oldPrice}</span> : ''
+                            <span className="current">{'N'}{findLowestPrice(data)}</span>
+                            {
+                            // parseInt(data.price) < parseInt(data.oldPrice)
+                            findLowestPrice(data) < findHighestPrice(data)
+                            ?
+                                <span className="old">
+                                    {'N'}{findHighestPrice(data)}
+                                    </span> : ''
                             }
                         </div>
                         <div className="rating">
@@ -97,21 +159,21 @@ function QuickView({data, onQuickViewCloseClick}) {
                                 <span className="sku_wrapper">SKU:<span className="sku">{' ' + data.SKU}</span></span>
                                 <span className="posted_in">
                                     Categories:
-                                    {
+                                    {/* {
                                         data.Categories.map((item, index) =>
                                             <a key={index}
                                                href={item.link}>{' ' + item.name}{data.Categories.length - 1 === index ? '' : ', '}</a>
                                         )
-                                    }
+                                    } */}
                                 </span>
                                 <span className="tagged_as">
                                     Tags:
-                                    {
+                                    {/* {
                                         data.Tags.map((item, index) =>
                                             <a key={index}
                                                href={item.link}>{' ' + item.name}{data.Tags.length - 1 === index ? '' : ', '}</a>
                                         )
-                                    }
+                                    } */}
                                 </span>
                             </div>
                         </div>

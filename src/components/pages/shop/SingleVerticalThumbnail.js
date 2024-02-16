@@ -170,24 +170,24 @@ function SingleVerticalThumbnail({options}) {
                                         <span className="sku_wrapper">SKU: <span
                                             className="sku">{data.sku}</span></span>
                                         <span className="posted_in">Categories:
-                                            {
+                                            {/* {
                                                 data.categories.map((item, index) =>
                                                     <a key={index}
                                                        href={item.link}>
                                                         {item.name} {data.categories.length - 1 === index ? '' : ','}
                                                     </a>
                                                 )
-                                            }
+                                            } */}
                                         </span>
                                         <span className="tagged_as">Tags:
-                                            {
+                                            {/* {
                                                 data.tags.map((item, index) =>
                                                     <a key={index}
                                                        href={item.link}>
                                                         {item.name} {data.tags.length - 1 === index ? '' : ','}
                                                     </a>
                                                 )
-                                            }
+                                            } */}
                                         </span>
                                     </div>
                                 </div>

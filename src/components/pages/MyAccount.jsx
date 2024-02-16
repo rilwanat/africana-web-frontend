@@ -25,11 +25,16 @@ function MyAccount({ options }) {
     const [address1, setAddress1] = useState('Enter Address Line 1');
     const [address2, setAddress2] = useState('Enter Address Line 2');
     const [towncity, setTowncity] = useState('Enter Town / City');
+
     
-    const [isSignupLoading, setIsSignupLoading] = useState(false);
-    const [isDefaultModalOpen, setDefaultModalOpen] = useState(false);
+    const [loginEmailAddress, setLoginEmailAddress] = useState('Enter your email');
+    const [loginPassword, setLoginPassword] = useState('Enter your password');
+
+    
+    const [isLoading, setIsLoading] = useState(false);
+    // const [isDefaultModalOpen, setDefaultModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [registrationStatus, setRegistrationStatus] = useState('');
+    // const [registrationStatus, setRegistrationStatus] = useState('');
 
 
     /**
@@ -39,7 +44,7 @@ function MyAccount({ options }) {
     const registerUser = async (e) => {
         e.preventDefault();
     
-        setIsSignupLoading(true);
+        setIsLoading(true);
         setErrorMessage({ message: '' });
     
         if (emailAddress === 'Enter your email' || emailAddress === '' 
@@ -47,8 +52,8 @@ function MyAccount({ options }) {
             //password === 'Enter your password' || password === ''
             ) {
             setErrorMessage({ message: 'Registration Failed: Please enter valid credentials' });
-            setRegistrationStatus("Failed");
-            setIsSignupLoading(false);
+            // setRegistrationStatus("Failed");
+            setIsLoading(false);
             return;
         }
     
@@ -72,20 +77,20 @@ function MyAccount({ options }) {
                 },
             });
     
-            setIsSignupLoading(false);
+            setIsLoading(false);
     
             //const regData = response.data;
     
             if (response.data.status === 'success') {
-                setIsSignupLoading(false);
+                //setIsLoading(false);
                 setErrorMessage(null);
-                setRegistrationStatus("Success");
-                setDefaultModalOpen(true);
+                // setRegistrationStatus("Success");
+                // setDefaultModalOpen(true);
                 
                 alert("Success");
             } else {
-                setIsSignupLoading(false);
-                setRegistrationStatus("Failed");
+                //setIsLoading(false);
+                // setRegistrationStatus("Failed");
     
                 if (response.data.errors) {
                     const errorMessages = Object.values(response.data.errors).flat();
@@ -93,12 +98,12 @@ function MyAccount({ options }) {
                 } else {
                     setErrorMessage({ message: response.data.message, errors: response.data.message });
                 }
-                setDefaultModalOpen(true);
+                // setDefaultModalOpen(true);
                 alert("Failed");
             }
         } catch (error) {
-            setIsSignupLoading(false);
-            setRegistrationStatus("Failed");
+            // setIsSignupLoading(false);
+            // setRegistrationStatus("Failed");
     
             if (error.response && error.response.data && error.response.data.errors) {
                 const { message, errors } = error.response.data;
@@ -112,16 +117,78 @@ function MyAccount({ options }) {
             } else {
                 setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
             }
-            setDefaultModalOpen(true);
+            // setDefaultModalOpen(true);
             alert("Failed");
         }
     };
     
 
-    const loginUser = (e) => {
+    const loginUser = async (e) => {
         e.preventDefault();
 
+        setIsLoading(true);
+        setErrorMessage({ message: '' });
+    
+        if (loginEmailAddress === 'Enter your email' || loginEmailAddress === '' 
+        || 
+        loginPassword === 'Enter your password' || loginPassword === ''
+            ) {
+            setErrorMessage({ message: 'Registration Failed: Please enter valid credentials' });
+            // setRegistrationStatus("Failed");
+            setIsLoading(false);
+            return;
+        }
+
         alert("login user");
+
+        try {
+            const formData = new FormData();
+            formData.append('email', loginEmailAddress);        
+            formData.append('password', loginPassword);
+    
+            const response = await axios.post('http://#/auth/login', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+    
+            setIsLoading(false);
+    
+            //const regData = response.data;
+    
+            if (response.data.status === 'success') {
+                setErrorMessage(null);
+                
+                alert("Success");
+            } else {
+              
+                if (response.data.errors) {
+                    const errorMessages = Object.values(response.data.errors).flat();
+                    setErrorMessage({ message: response.data.message, errors: errorMessages });
+                } else {
+                    setErrorMessage({ message: response.data.message, errors: response.data.message });
+                }
+                //setDefaultModalOpen(true);
+                alert("Failed");
+            }
+        } catch (error) {
+          setIsLoading(false);
+            
+            if (error.response && error.response.data && error.response.data.errors) {
+                const { message, errors } = error.response.data;
+    
+                if (errors && Object.keys(errors).length > 0) {
+                    const errorMessages = Object.values(errors).flat().join(', ');
+                    setErrorMessage({ message: `${message} (${errorMessages})`, errors });
+                } else {
+                    setErrorMessage({ message: message || 'Registration failed. Please check your credentials and try again.' });
+                }
+            } else {
+                setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
+            }
+            //setDefaultModalOpen(true);
+            alert("Failed");
+        }
     };
     
 

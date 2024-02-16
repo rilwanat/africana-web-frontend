@@ -22,7 +22,7 @@ import logo2 from '../../../assets/logos/Circle Icon_1.png';
 function Header({ options }) {
 
     const data = {
-        "content": "Join our showroom and get 1 % off ! Coupon code : rbapps007"
+        "content": "Join our showroom and get 1 % off ! Coupon code : AFR222"
     }
 
     return (
