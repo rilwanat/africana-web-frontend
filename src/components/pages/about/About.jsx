@@ -55,16 +55,16 @@ function About({ options }) {
                         <div className="col col-lg-8">
                             <div className="about-area">
                                 <div className="info">
-                                    {/* <span className=''>About us</span> */}
-                                    {/* <h2>Clothes that will be your best friends</h2> */}
-                                    <h2>Title</h2>
+                                    <span className=''>About us</span>
+                                    {/* <h2>Clothes crafted to fit</h2> */}
                                     <p>A story filled Urban clothing brand and a host of products from leather goods, female wears, sneakers and bags. And post-pandemic, we have seen growth in expansion into other west-African countries, including but not limited to Mali, Senegal, Ivory Coast, etc.</p>
                                     <img src={signature} className='mb-8'/>
-                                    {/* <NavLink to="/contact" className="theme-btn-s3">Contact us</NavLink> */}
+                                    <NavLink to="/contact" className="theme-btn-s3">Contact us</NavLink>
                                 </div>
                                 <div className="img-holder">
                                     <img loading="lazy" src=
-                                    {about}
+                                    // {about}
+                                    "https://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name22-scaled-1.jpg"
                                     // "https://shopafricana.co/wp-content/uploads/2023/12/Africana-Oversized-Tees-www.shopafricana.co_24-scaled-1.jpg" 
                                     alt=""/>
                                 </div>

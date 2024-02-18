@@ -12,8 +12,8 @@ function CompanyWidget() {
             <div className="widget company-widget">
                 <h3 className='text-white'>About</h3>
                 <ul>
-                    <li><a href="#">Discover us</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a >Discover us</a></li>
+                    <li><a href="/contact-us">Contact</a></li>
                 </ul>
             </div>
         </Fragment>

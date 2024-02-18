@@ -5,6 +5,9 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
+
 
 /**
  * Products
@@ -64,8 +67,16 @@ function calculateDiscountPercentage(price, oldPrice) {
 
     // if (!isDragging) 
     {
-        const productString = JSON.stringify(product);
-        navigate(`/product-details/${encodeURIComponent(productString)}`);
+        // const productString = JSON.stringify(product);
+        // navigate(`/product-details/${encodeURIComponent(productString)}`);
+
+
+        // Encrypt the product data
+        // Navigate to the route with the encrypted parameter
+        const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
+        // const encryptedData = AES.encrypt(JSON.stringify(product), process.env.REACT_APP_ENCRYPTION_KEY).toString();
+        navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
+        //
     }
     
 
@@ -89,7 +100,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                     //                 <img loading="lazy" src={process.env.PUBLIC_URL + item.mainImg} alt=""/>
                     //             </Link>
                     products.map((item, index) => (
-                        <li key={index} className="product">
+                        <li key={index} className="product" style={{ cursor: 'pointer' }}>
                           <div className="product-holder">
                             {
                             // parseInt(item.price) < parseInt(item.oldPrice)

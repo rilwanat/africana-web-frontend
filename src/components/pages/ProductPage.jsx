@@ -19,6 +19,9 @@ import './shop/shop.css';
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
+
 import imgx from '../../assets/images/shop/img-2.jpg';
 import imgs from '../../assets/images/shop/img-2.jpg';
 /**
@@ -35,9 +38,14 @@ import imgs from '../../assets/images/shop/img-2.jpg';
 function ProductPage({options}) {
 
     //let params = useParams();
-  const { product } = useParams();
-  const parsedProduct = JSON.parse(decodeURIComponent(product));
-  //alert("parsedInstitution: " + parsedInstitution.id);
+    //const { product } = useParams();
+    //const parsedProduct = JSON.parse(decodeURIComponent(product));
+    //alert("parsedInstitution: " + parsedInstitution.id);
+  
+    const { product } = useParams();
+    const decryptedData = AES.decrypt(decodeURIComponent(product), 'encryptionKey').toString(CryptoJS.enc.Utf8);
+    // const decryptedData = AES.decrypt(decodeURIComponent(product), process.env.REACT_APP_ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
+    const parsedProduct = JSON.parse(decryptedData);
 
 
   useEffect(() => {
@@ -168,6 +176,7 @@ function calculateDiscountPercentage(price, oldPrice) {
     setIsDataLoading(true);
     try {
 
+        //const response = await axios.get('http://localhost:3000/productssample.json');
       const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
         //params: { uid: uid },
         headers: {

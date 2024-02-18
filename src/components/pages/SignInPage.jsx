@@ -7,6 +7,7 @@ import Header from './header/Header';
 
 import axios from 'axios';
 
+import imgx from '../../assets/images/shop/img-2.jpg';
 
 /**
  * My Account Page
@@ -16,19 +17,9 @@ import axios from 'axios';
  */
 function SignInPage({ options }) {
 
-    const [firstname, setFirstname] = useState('Enter your firstname');
-    const [lastname, setLastname] = useState('Enter your Lastname');
-    const [companyname, setCompanyname] = useState('Enter your Company name');
-    const [emailAddress, setEmailAddress] = useState('Enter your email');//rilwan.at@gmail.com');//
-    const [phone, setPhonenumber] = useState('Enter your phone number');
-    const [country, setCountry] = useState('Enter your Country *dropdown');//12345678');//
-    const [address1, setAddress1] = useState('Enter Address Line 1');
-    const [address2, setAddress2] = useState('Enter Address Line 2');
-    const [towncity, setTowncity] = useState('Enter Town / City');
-
     
-    const [loginEmailAddress, setLoginEmailAddress] = useState('Enter your email');
-    const [loginPassword, setLoginPassword] = useState('Enter your password');
+    const [loginEmailAddress, setLoginEmailAddress] = useState('');//Enter your email');
+    const [loginPassword, setLoginPassword] = useState('');//Enter your password');
 
     
     const [isLoading, setIsLoading] = useState(false);
@@ -47,25 +38,29 @@ function SignInPage({ options }) {
 
         setIsLoading(true);
         setErrorMessage({ message: '' });
+
+        setLoginEmailAddress();
+        setLoginPassword();
     
         if (loginEmailAddress === 'Enter your email' || loginEmailAddress === '' 
         || 
         loginPassword === 'Enter your password' || loginPassword === ''
             ) {
-            setErrorMessage({ message: 'Registration Failed: Please enter valid credentials' });
+            setErrorMessage({ message: 'Login Failed: Please enter valid credentials' });
             // setRegistrationStatus("Failed");
             setIsLoading(false);
             return;
         }
 
-        alert("login user");
+
+        //alert("login user");
 
         try {
             const formData = new FormData();
             formData.append('email', loginEmailAddress);        
             formData.append('password', loginPassword);
     
-            const response = await axios.post('http://#/auth/login', formData, {
+            const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -73,40 +68,44 @@ function SignInPage({ options }) {
     
             setIsLoading(false);
     
-            //const regData = response.data;
+            alert("login: " + JSON.stringify(response.data.data, null, 2));
+
     
-            if (response.data.status === 'success') {
+            if (response.data.success) {
                 setErrorMessage(null);
                 
                 alert("Success");
             } else {
               
-                if (response.data.errors) {
-                    const errorMessages = Object.values(response.data.errors).flat();
-                    setErrorMessage({ message: response.data.message, errors: errorMessages });
-                } else {
-                    setErrorMessage({ message: response.data.message, errors: response.data.message });
-                }
+                setErrorMessage({ message: response.data.message });
+
+                // if (response.data.errors) {
+                //     const errorMessages = Object.values(response.data.errors).flat();
+                //     setErrorMessage({ message: response.data.message, errors: errorMessages });
+                // } else {
+                //     setErrorMessage({ message: response.data.message, errors: response.data.message });
+                // }
                 //setDefaultModalOpen(true);
-                alert("Failed");
+                alert("Failed1");
             }
         } catch (error) {
           setIsLoading(false);
             
-            if (error.response && error.response.data && error.response.data.errors) {
-                const { message, errors } = error.response.data;
+            // if (error.response && error.response.data && error.response.data.errors) {
+            //     const { message, errors } = error.response.data;
     
-                if (errors && Object.keys(errors).length > 0) {
-                    const errorMessages = Object.values(errors).flat().join(', ');
-                    setErrorMessage({ message: `${message} (${errorMessages})`, errors });
-                } else {
-                    setErrorMessage({ message: message || 'Registration failed. Please check your credentials and try again.' });
-                }
-            } else {
-                setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
-            }
+            //     if (errors && Object.keys(errors).length > 0) {
+            //         const errorMessages = Object.values(errors).flat().join(', ');
+            //         setErrorMessage({ message: `${message} (${errorMessages})`, errors });
+            //     } else {
+            //         setErrorMessage({ message: message || 'Registration failed. Please check your credentials and try again.' });
+            //     }
+            // } else {
+            //     setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
+            // }
+
             //setDefaultModalOpen(true);
-            alert("Failed");
+            alert("Failed2");
         }
     };
     
@@ -122,28 +121,41 @@ function SignInPage({ options }) {
             <section className="my-account-section">
                 <div className="container-1410">
                     <div className="row">
-                        <div className="col-xs-12">
-                            <div className="woocommerce">
-                                <div className="woocommerce-notices-wrapper"/>
-                                <div className="u-columns col2-set" id="customer_login">
-                                    <div className="u-column1 col-1">
+                        <div className="col-xs-12" >
+                            <div className="woocommerce ">
+                                <div className="woocommerce-notices-wrapper "/>
+                                <div className="u-columns col2-set bg-gray-100" id="customer_login">
+                                    <div className="u-column1 col-1 justify-center">
                                         <h2>Login</h2>
                                         <form className="woocommerce-form woocommerce-form-login login" method="post">
                                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                 <label htmlFor="username">Username or email address&nbsp;<span
                                                     className="required">*</span></label>
                                                 <input type="text"
+                                                value={loginEmailAddress}
+                                                placeholder="Enter your email"
+                                                onChange={(e) => setLoginEmailAddress(e.target.value)}
                                                        className="woocommerce-Input woocommerce-Input--text input-text"
-                                                       name="username" id="username" autoComplete="username"/>
+                                                       name="username" 
+                                                       id="username" 
+                                                       autoComplete="username"/>
                                             </p>
                                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                 <label htmlFor="password">Password&nbsp;<span
                                                     className="required">*</span></label>
                                                 <input className="woocommerce-Input woocommerce-Input--text input-text"
-                                                       type="password" name="password" id="password"
+                                                value={loginPassword}
+                                                placeholder="Enter your password"
+                                                onChange={(e) => setLoginPassword(e.target.value)}
+                                                       type="password" 
+                                                       name="password" 
+                                                       id="password"
                                                        autoComplete="current-password"/>
                                             </p>
                                             <p className="form-row">
+                                            <p className='mb-4 font-bold' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
+
+
                                                 <label
                                                     className="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
                                                     <input
@@ -165,6 +177,10 @@ function SignInPage({ options }) {
 
                                             <p className=""> <a href="/signup">Dont have an account? Sign Up</a> </p>
                                         </form>
+                                    </div>
+
+                                    <div className="u-column3 col-2">
+                                        <img src={imgx} />
                                     </div>
                                     
                                 </div>

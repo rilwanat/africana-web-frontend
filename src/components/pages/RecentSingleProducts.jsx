@@ -16,6 +16,9 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
+
 
 /**
  * Recent Single Products component
@@ -111,8 +114,15 @@ function calculateDiscountPercentage(price, oldPrice) {
 
     // if (!isDragging) 
     {
-        const productString = JSON.stringify(product);
-        navigate(`/product-details/${encodeURIComponent(productString)}`);
+        //const productString = JSON.stringify(product);
+        //navigate(`/product-details/${encodeURIComponent(productString)}`);
+
+        // Encrypt the product data
+        // Navigate to the route with the encrypted parameter
+        const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
+        // const encryptedData = AES.encrypt(JSON.stringify(product), process.env.REACT_APP_ENCRYPTION_KEY).toString();
+        navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
+        //
     }
     
 
@@ -127,7 +137,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                     <Slider {...settings}>
                         {
                             relatedProducts.map((item, index) => (
-                                <li key={index} className="product">
+                                <li key={index} className="product" >
                                     <div className="product-holder">
                                         {
                                         // parseInt(item.price) < parseInt(item.oldPrice) 

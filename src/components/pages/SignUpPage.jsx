@@ -8,6 +8,9 @@ import Header from './header/Header';
 import axios from 'axios';
 
 
+import imgx from '../../assets/images/shop/img-2.jpg';
+
+
 /**
  * My Account Page
  * @param options
@@ -71,7 +74,7 @@ function SignUpPage({ options }) {
             formData.append('address2', address2);
             formData.append('towncity', towncity);
     
-            const response = await axios.post('https://your-api-endpoint', formData, {
+            const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/register', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -136,9 +139,9 @@ function SignUpPage({ options }) {
                         <div className="col-xs-12">
                             <div className="woocommerce">
                                 <div className="woocommerce-notices-wrapper"/>
-                                <div className="u-columns col2-set" id="customer_login">
+                                <div className="u-columns col1-set bg-gray-100" id="customer_login">
                                     
-                                    <div className="u-column2 col-2">
+                                    <div className="u-column1 col-1">
                                         <h2>Register</h2>
                                         <form 
                                         //method="post" 
@@ -199,7 +202,7 @@ function SignUpPage({ options }) {
 
 
 
-    <p className='mb-4'>{errorMessage.message}</p>
+    <p className='mb-4 font-bold' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
 
 
                                             <p>A password will be sent to your email address.</p>
@@ -222,6 +225,11 @@ function SignUpPage({ options }) {
                                             </p>
                                         </form>
                                     </div>
+
+                                    <div className="u-column3 col-2">
+                                        <img src={imgx} />
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

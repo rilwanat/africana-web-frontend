@@ -23,6 +23,9 @@ import QuickView from './components/pages/QuickView';
 
 // import ScrollToTop from "./ScrollToTop";
 
+// import dotenv from 'dotenv';
+// dotenv.config();
+
 function App() {
 
   
@@ -149,6 +152,7 @@ const options = {
               <Route path='/shop' element={<ShopPage options={options} />}/>
               <Route path='/product-details/:product' element={<ProductPage options={options} />}/>
               <Route path='/sizes' element={<SizesPage options={options} />}/>
+              {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}
 
               <Route path='/signup' element={<SignUpPage options={options} />}/>
               <Route path='/signin' element={<SignInPage options={options} />}/>

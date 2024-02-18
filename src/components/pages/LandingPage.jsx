@@ -93,6 +93,7 @@ export default function LandingPage({ options, handleDataViewData }) {
     setIsDataLoading(true);
     try {
 
+      //const response = await axios.get('http://localhost:3000/productssample.json');
       const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
         //params: { uid: uid },
         headers: {
@@ -119,6 +120,9 @@ export default function LandingPage({ options, handleDataViewData }) {
       alert("error: " + error);
     }
   };
+
+  
+  
 
 
 

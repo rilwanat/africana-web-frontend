@@ -16,6 +16,13 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
+
+
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
+
+
+
 /**
  * Recent Products component
  * @param onQuickViewClick
@@ -94,8 +101,8 @@ function SamplePrevArrow(props) {
         swipeToSlide: true,
         autoplaySpeed: 4000,
         focusOnSelect: false,
-        prevArrow: <SamplePrevArrow />,
-        nextArrow: <SampleNextArrow />,
+        // prevArrow: <SamplePrevArrow />,
+        // nextArrow: <SampleNextArrow />,
         responsive: [
             {
                 breakpoint: 1024,
@@ -162,10 +169,19 @@ function calculateDiscountPercentage(price, oldPrice) {
   
   const handleProductClick = (product, e) => {
 
+    
+
     // if (!isDragging) 
     {
-        const productString = JSON.stringify(product);
-        navigate(`/product-details/${encodeURIComponent(productString)}`);
+        //const productString = JSON.stringify(product);
+        //navigate(`/product-details/${encodeURIComponent(productString)}`);
+
+        // Encrypt the product data
+        // Navigate to the route with the encrypted parameter
+        const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
+        // const encryptedData = AES.encrypt(JSON.stringify(product), process.env.REACT_APP_ENCRYPTION_KEY).toString();
+        navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
+        //
     }
     
 

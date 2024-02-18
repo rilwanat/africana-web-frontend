@@ -99,8 +99,8 @@ function SamplePrevArrow(props) {
         swipeToSlide: true,
         autoplaySpeed: 6000,
         focusOnSelect: false,
-        prevArrow: <SamplePrevArrow />,
-        nextArrow: <SampleNextArrow />,
+        // prevArrow: <SamplePrevArrow />,
+        // nextArrow: <SampleNextArrow />,
         responsive: [
             {
                 breakpoint: 1024,
@@ -165,13 +165,7 @@ function calculateDiscountPercentage(price, oldPrice) {
   }
 
   
-  const handleProductClick = (product, e) => {
-
-    // if (!isDragging) 
-    {
-        const productString = JSON.stringify(product);
-        navigate(`/product-details/${encodeURIComponent(productString)}`);
-    }
+  const handleLocartonClick = (product, e) => {
     
 
   };
@@ -180,23 +174,31 @@ function calculateDiscountPercentage(price, oldPrice) {
     "locations": [
       {
         "url": img1,// "https://shopafricana.co/wp-content/uploads/2023/12/africanacouture_80846503_2472020132847487_5391795363804777748_n-768x500.jpg",
-        "location": "AFRICANA X ABUJA",
-        "address": "Jabi Lake Mall, Bala Sokoto Way, Jabi, Abuja, Nigeria. Monday – Saturday: 9AM – 7PM Sunday: 11AM – 7PM"
+        "location": "AFRICANA X ABUJA ",
+        "street": "Jabi Lake Mall, Bala Sokoto Way, Jabi, ",
+        "state": "Abuja, Nigeria. ",
+        "time": "Mon – Sat: 9am – 7pm, Sun: 11am – 7pm"
       },
       {
         "url": img2,// "https://shopafricana.co/wp-content/uploads/2023/12/africanacouture_80846503_2472020132847487_5391795363804777748_n-768x500.jpg",
-        "location": "AFRICANA COUTURE ABUJA",
-        "address": "17, Monrovia Street,  Wuse 2, Abuja, Nigeria. Monday – Saturday: 9AM – 7PM Sunday: CLOSED"
+        "location": "AFRICANA COUTURE ABUJA ",
+        "street": "17, Monrovia Street, Wuse 2, ",
+        "state": "Abuja, Nigeria. ",
+        "time": "Mon – Sat: 9am – 7pm, Sun: CLOSED"
       },
       {
         "url": img3,// "https://shopafricana.co/wp-content/uploads/2023/12/Africana-Dakar-2-1024x563.jpg",
-        "location": "AFRICANA DAKAR",
-        "address": "En Face Huawei Technologies, Route de King Fahd Palace, Dakar, Senegal. Monday – Saturday: 9AM – 8PM Sunday: APPOINTMENTS ONLY"
+        "location": "AFRICANA DAKAR ",
+        "street": "En Face Huawei Technologies, Route de King Fahd Palace, ",
+        "state": "Dakar, Senegal. ",
+        "time": "Mon – Sat: 9am – 8pm, Sun: APPOINTMENTS"
       },
       {
         "url": img4,// "https://shopafricana.co/wp-content/uploads/2023/12/Abidjna-3-768x1024.jpg",
-        "location": "AFRICANA ABIDJAN",
-        "address": "1055, Marcroni, Abidjan, Côte d’Ivoire 36BP. Monday – Saturday: 9AM – 8PM Sunday: APPOINTMENTS ONLY"
+        "location": "AFRICANA ABIDJAN ",
+        "street": "1055, Marcroni, ",
+        "state": "Abidjan, Côte d’Ivoire 36BP. ",
+        "time": "Mon – Sat: 9am – 8pm, Sun: APPOINTMENTS"
       }
     ]
   }
@@ -219,12 +221,14 @@ function calculateDiscountPercentage(price, oldPrice) {
                     <div className="row">
                         <div className="col col-xs-12">
                             <div className="products-wrapper">
-                                <ul className="products ">
+                                <ul 
+                                // className="products "
+                                >
                                     <Slider {...settings}>
                                         {
                                             locations.locations.map((location, index) => (
                                                 <li key={index} className="product">
-                                                    <div className="product-holder">
+                                                    <div className="product-holder mx-2">
                                                     
                                                     
                             <div 
@@ -253,12 +257,11 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                         {/* <h4>
                                                         {location.address}
                                                         </h4> */}
-                                                        <span className=" mx-4">                                                              
-                                                                <span className="">                                                                  
-                                                                  <span className=""></span>
-                                                                    {location.address}                                                                    
-                                                                </span>                                                              
-                                                            </span>
+                                                        <div className=" mx-4">                                                              
+                                                                <span className="text-sm">{location.street}</span>                                                              
+                                                                <span className="text-sm">{location.state}</span>                                                              
+                                                                <span className="text-sm">{location.time}</span>                                                              
+                                                            </div>
                                                     </div>
                                                 </li>
                                             ))
