@@ -11,7 +11,15 @@ import ShopPage from "./components/pages/ShopLeftSidebarPage";
 import ProductPage from "./components/pages/ProductPage";
 import SizesPage from "./components/pages/SizesPage";
 
+import SignUpPage from './components/pages/SignUpPage';
+import SignInPage from './components/pages/SignInPage';
+import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage';
+
+
 import QuickView from './components/pages/QuickView';
+
+
+
 
 // import ScrollToTop from "./ScrollToTop";
 
@@ -141,6 +149,11 @@ const options = {
               <Route path='/shop' element={<ShopPage options={options} />}/>
               <Route path='/product-details/:product' element={<ProductPage options={options} />}/>
               <Route path='/sizes' element={<SizesPage options={options} />}/>
+
+              <Route path='/signup' element={<SignUpPage options={options} />}/>
+              <Route path='/signin' element={<SignInPage options={options} />}/>
+
+              <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} />}/>
 
               {/* 
               <Route path='/privacy' element={<PrivacyPage />}/>
