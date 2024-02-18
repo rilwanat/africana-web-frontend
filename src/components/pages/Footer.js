@@ -52,15 +52,15 @@ function Footer() {
                                     </div>
                                     <div className="social">
                                         <ul className="clearfix">
-                                            <li style={{ cursor: 'pointer' }}><a  title="Facebook">fb</a></li>
-                                            <li style={{ cursor: 'pointer' }}><a  title="Twitter">tw</a></li>
-                                            <li style={{ cursor: 'pointer' }}><a  title="Instagram">ig</a></li>
+                                            <li style={{ cursor: 'pointer' }}><a href='' target='_blank' title="Facebook">fb</a></li>
+                                            <li style={{ cursor: 'pointer' }}><a href='' target='_blank' title="Twitter">tw</a></li>
+                                            <li style={{ cursor: 'pointer' }}><a href='' target='_blank' title="Instagram">ig</a></li>
                                             
                                         </ul>
                                     </div>
                                     <div className="extra-link">
                                         <ul>
-                                            <li><a href="/privacy">Privacy </a></li>
+                                            <li><a href="/privacy-policy">Privacy </a></li>
                                             <li><a href="/terms">Terms</a></li>
                                             <li><a href="/promo">Promo T&amp;Cs Apply</a></li>
                                         </ul>

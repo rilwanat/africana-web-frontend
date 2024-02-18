@@ -253,15 +253,11 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                         {/* <h4>
                                                         {location.address}
                                                         </h4> */}
-                                                        <span className="woocommerce-Price-amount amount mx-4">
-                                                              
-                                                                <span className="woocommerce-Price-amount amount">
-                                                                  
-                                                                  <span className="woocommerce-Price-currencySymbol"></span>
-                                                                    {location.address}
-                                                                    
-                                                                </span>
-                                                              
+                                                        <span className=" mx-4">                                                              
+                                                                <span className="">                                                                  
+                                                                  <span className=""></span>
+                                                                    {location.address}                                                                    
+                                                                </span>                                                              
                                                             </span>
                                                     </div>
                                                 </li>

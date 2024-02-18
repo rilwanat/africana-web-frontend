@@ -134,6 +134,9 @@ function ShopLeftSidebarPage({ options }) {
       };
 
       const handleDataSort = async (min, max) => {    
+
+        setProductsTotal("-");
+
         setCurrentPage(1);
         //alert("token: " + token + "\n\n" + "uid: " + uid);
         setIsDataLoading(true);
@@ -206,7 +209,7 @@ function ShopLeftSidebarPage({ options }) {
 
 
       const startIndex = (currentPage - 1) * productsPerPage + 1;
-    const endIndex = Math.min(currentPage * productsPerPage, productsTotal);
+      const endIndex = Math.min(currentPage * productsPerPage, productsTotal);
 
 
     return (
