@@ -19,7 +19,7 @@ import imgx from '../../assets/images/shop/img-2.jpg';
  */
 function SignUpPage({ options }) {
 
-    const [firstname, setFirstname] = useState('Enter your firstname');
+    const [firstname, setFirstname] = useState('Enter your Firstname');
     const [lastname, setLastname] = useState('Enter your Lastname');
     const [companyname, setCompanyname] = useState('Enter your Company name');
     const [emailAddress, setEmailAddress] = useState('Enter your email');//rilwan.at@gmail.com');//
@@ -30,8 +30,6 @@ function SignUpPage({ options }) {
     const [towncity, setTowncity] = useState('Enter Town / City');
 
     
-    const [loginEmailAddress, setLoginEmailAddress] = useState('Enter your email');
-    const [loginPassword, setLoginPassword] = useState('Enter your password');
 
     
     const [isLoading, setIsLoading] = useState(false);
@@ -46,83 +44,85 @@ function SignUpPage({ options }) {
 
     const registerUser = async (e) => {
         e.preventDefault();
+        //alert("");
     
         setIsLoading(true);
         setErrorMessage({ message: '' });
     
         if (emailAddress === 'Enter your email' || emailAddress === '' 
-        //|| 
-            //password === 'Enter your password' || password === ''
+        || 
+            firstname === 'Enter your Firstname' || firstname === ''
+            || 
+            lastname === 'Enter your Lastname' || lastname === ''
             ) {
             setErrorMessage({ message: 'Registration Failed: Please enter valid credentials' });
             // setRegistrationStatus("Failed");
             setIsLoading(false);
+
+            //alert("");
             return;
         }
     
+        //alert("login user: " + emailAddress + " " + firstname + " " + lastname);
+
+
         try {
-            const formData = new FormData();
-            formData.append('email', emailAddress);
-            
+            const formData = new FormData();            
             formData.append('firstname', firstname);
             formData.append('lastname', lastname);
-            formData.append('companyname', companyname);
+            //formData.append('companyname', companyname);
             formData.append('emailAddress', emailAddress);
-            formData.append('phone', phone);
-            formData.append('country', country);
-            formData.append('address1', address1);
-            formData.append('address2', address2);
-            formData.append('towncity', towncity);
+            //formData.append('phone', phone);
+            //formData.append('country', country);
+            //formData.append('address1', address1);
+            //formData.append('address2', address2);
+            //formData.append('towncity', towncity);
     
             const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/register', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    // 'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'application/json',
                 },
             });
+
+            // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/register', {
+            //     emailAddress,
+            //     firstname,
+            //     lastname,
+            // });
+
+
     
             setIsLoading(false);
     
             //const regData = response.data;
     
-            if (response.data.status === 'success') {
-                //setIsLoading(false);
-                setErrorMessage(null);
-                // setRegistrationStatus("Success");
-                // setDefaultModalOpen(true);
-                
-                alert("Success");
+    
+            //alert("reg: " + JSON.stringify(response.data.data, null, 2));
+
+    
+            if (response.data.errors && response.data.errors.length > 0) {
+                const errors = response.data.errors.map(error => error.msg);
+                setErrorMessage({ message: response.data.message, errors });
+                alert("Failed1");
             } else {
-                //setIsLoading(false);
-                // setRegistrationStatus("Failed");
-    
-                if (response.data.errors) {
-                    const errorMessages = Object.values(response.data.errors).flat();
-                    setErrorMessage({ message: response.data.message, errors: errorMessages });
-                } else {
-                    setErrorMessage({ message: response.data.message, errors: response.data.message });
-                }
-                // setDefaultModalOpen(true);
-                alert("Failed");
+                setErrorMessage(null);
+                alert("Success");
             }
+            
         } catch (error) {
-            // setIsSignupLoading(false);
-            // setRegistrationStatus("Failed");
-    
+            setIsLoading(false);
+            
             if (error.response && error.response.data && error.response.data.errors) {
-                const { message, errors } = error.response.data;
-    
-                if (errors && Object.keys(errors).length > 0) {
-                    const errorMessages = Object.values(errors).flat().join(', ');
-                    setErrorMessage({ message: `${message} (${errorMessages})`, errors });
-                } else {
-                    setErrorMessage({ message: message || 'Registration failed. Please check your credentials and try again.' });
-                }
+                const { errors } = error.response.data;
+                const errorMessages = errors.map(error => error.msg);
+                const errorMessage = errorMessages.join(', '); // Join all error messages
+                setErrorMessage({ message: errorMessage });
             } else {
                 setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
             }
-            // setDefaultModalOpen(true);
-            alert("Failed");
         }
+        
     };
     
 
@@ -150,53 +150,65 @@ function SignUpPage({ options }) {
 
 <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_firstname">First name&nbsp;<span className="required">*</span></label>
-        <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="firstname" id="reg_firstname" autoComplete="given-name" />
+        <input 
+        value={firstname}
+        placeholder="Enter your Firstname"
+        onChange={(e) => setFirstname(e.target.value)}
+        type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="firstname" id="reg_firstname" autoComplete="given-name" />
     </p>
 
     <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_lastname">Last name&nbsp;<span className="required">*</span></label>
-        <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="lastname" id="reg_lastname" autoComplete="family-name" />
+        <input 
+        value={lastname}
+        placeholder="Enter your Lastname"
+        onChange={(e) => setLastname(e.target.value)}
+        type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="lastname" id="reg_lastname" autoComplete="family-name" />
     </p>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    {/* <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_company">Company name&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="company" id="reg_company" autoComplete="organization" />
-    </p>
+    </p> */}
 
     <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label>
-        <input type="email" className="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autoComplete="email" />
+        <input 
+        value={emailAddress}
+        placeholder="Enter your email"
+        onChange={(e) => setEmailAddress(e.target.value)}
+        type="email" className="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autoComplete="email" />
     </p>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-        <label htmlFor="reg_phone">Phone&nbsp;<span className="required">*</span></label>
+    {/* <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+        <label htmlFor="reg_phone">Phone&nbsp;<span className=""></span></label>
         <input type="tel" className="woocommerce-Input woocommerce-Input--text input-text" name="phone" id="reg_phone" autoComplete="tel" />
     </p>
 
     <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-        <label htmlFor="reg_country">Country&nbsp;<span className="required">*</span></label>
+        <label htmlFor="reg_country">Country&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="country" id="reg_country" autoComplete="country" />
     </p>
 
     <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-        <label htmlFor="reg_address1">Address 1&nbsp;<span className="required">*</span></label>
+        <label htmlFor="reg_address1">Address 1&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="address1" id="reg_address1" autoComplete="address-line1" />
     </p>
 
     <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-        <label htmlFor="reg_address2">Address 2&nbsp;<span className="required">*</span></label>
+        <label htmlFor="reg_address2">Address 2&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="address2" id="reg_address2" autoComplete="address-line2" />
     </p>
 
     <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-        <label htmlFor="reg_towncity">Town / City&nbsp;<span className="required">*</span></label>
+        <label htmlFor="reg_towncity">Town / City&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="towncity" id="reg_towncity" autoComplete="town-city" />
     </p>
 
     <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-        <label htmlFor="reg_postcodezip">Postcode / ZIP&nbsp;<span className="required">*</span></label>
+        <label htmlFor="reg_postcodezip">Postcode / ZIP&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="postcode-zip" id="reg_postcodezip" autoComplete="postcode-zip" />
-    </p>
+    </p> */}
 
 
 

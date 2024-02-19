@@ -39,8 +39,8 @@ function SignInPage({ options }) {
         setIsLoading(true);
         setErrorMessage({ message: '' });
 
-        setLoginEmailAddress();
-        setLoginPassword();
+        // setLoginEmailAddress();
+        // setLoginPassword();
     
         if (loginEmailAddress === 'Enter your email' || loginEmailAddress === '' 
         || 
@@ -53,7 +53,7 @@ function SignInPage({ options }) {
         }
 
 
-        //alert("login user");
+        //alert("login user: " + loginEmailAddress + " " + loginPassword);
 
         try {
             const formData = new FormData();
@@ -62,50 +62,44 @@ function SignInPage({ options }) {
     
             const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
+                    // 'Content-Type': 'multipart/form-data',
+                    'Content-Type': 'application/json',
                 },
             });
+
+            // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', {
+            //     loginEmailAddress,
+            //     loginPassword,
+            // });
+
+
     
             setIsLoading(false);
     
-            alert("login: " + JSON.stringify(response.data.data, null, 2));
+            //alert("login: " + JSON.stringify(response.data.data, null, 2));
 
     
             if (response.data.success) {
                 setErrorMessage(null);
                 
-                alert("Success");
+                //alert("Success");
             } else {
-              
-                setErrorMessage({ message: response.data.message });
-
-                // if (response.data.errors) {
-                //     const errorMessages = Object.values(response.data.errors).flat();
-                //     setErrorMessage({ message: response.data.message, errors: errorMessages });
-                // } else {
-                //     setErrorMessage({ message: response.data.message, errors: response.data.message });
-                // }
-                //setDefaultModalOpen(true);
-                alert("Failed1");
+                const errors = response.data.errors.map(error => error.msg);
+                setErrorMessage({ message: response.data.message, errors });
+                //alert("Failed1");
             }
         } catch (error) {
           setIsLoading(false);
             
-            // if (error.response && error.response.data && error.response.data.errors) {
-            //     const { message, errors } = error.response.data;
-    
-            //     if (errors && Object.keys(errors).length > 0) {
-            //         const errorMessages = Object.values(errors).flat().join(', ');
-            //         setErrorMessage({ message: `${message} (${errorMessages})`, errors });
-            //     } else {
-            //         setErrorMessage({ message: message || 'Registration failed. Please check your credentials and try again.' });
-            //     }
-            // } else {
-            //     setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
-            // }
+          if (error.response && error.response.data && error.response.data.errors) {
+            const { errors } = error.response.data;
+            const errorMessages = errors.map(error => error.msg);
+            setErrorMessage({ message: error.response.data.message, errors: errorMessages });
+        } else {
+            setErrorMessage({ message: 'Login failed. Please check your credentials and try again.' });
+        }
 
-            //setDefaultModalOpen(true);
-            alert("Failed2");
+            //alert("Failed2");
         }
     };
     
