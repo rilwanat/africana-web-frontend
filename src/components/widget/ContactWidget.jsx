@@ -13,7 +13,7 @@ function ContactWidget() {
                 <h3 className='text-white'>Contact</h3>
                 <ul>
                     <li>Phone: +234 909 207 5553</li>
-                    <li>Email: hello@shopafricana.co</li>
+                    <li href="mailto:hello@shopafricana.co">Email: hello@shopafricana.co</li>
                     <li>Address: 17 Monrovia street, Off Aminu Kano Crescent, Abuja </li>
                 </ul>
             </div>
