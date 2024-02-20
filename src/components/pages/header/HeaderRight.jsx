@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import './navbarRight.css'
 import {Link, NavLink} from "react-router-dom";
 
@@ -8,6 +8,8 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
 import imgx from "../../../assets/images/shop/mini-cart/img-1.jpg";
 
+import axios from 'axios';
+
 /**
  * right side of header include minicart, and buttons
  * @param options
@@ -15,6 +17,85 @@ import imgx from "../../../assets/images/shop/mini-cart/img-1.jpg";
  * @constructor
  */
 function HeaderRight({options}) {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+
+    useEffect(() => {
+        //if (!token) {
+          // Redirect to the home page if the token is null
+          //navigate('/');
+        //} else {
+          // If the user is authenticated, call the handleData function
+          //alert("X");
+          getCart();
+        //}
+    }, []);
+
+
+    
+    const getCart = async (e) => {
+        //e.preventDefault();
+
+        //alert("login user: " + loginEmailAddress + " " + loginPassword);
+
+        try {
+            // const formData = new FormData();
+            // formData.append('email', loginEmailAddress);        
+            // formData.append('password', loginPassword);
+    
+            // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/view-cart', formData, {
+            //     headers: {
+            //         // 'Content-Type': 'multipart/form-data',
+            //         'Content-Type': 'application/json',
+            //     },
+            // });
+
+            // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', {
+            //     loginEmailAddress,
+            //     loginPassword,
+            // });
+
+            const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/view-cart', {
+                // loginEmailAddress,
+                // loginPassword,
+            });
+
+
+    
+            setIsLoading(false);
+    
+            // alert("cart: " + JSON.stringify(response.data.data, null, 2));
+            alert("cart: " + JSON.stringify(response.data, null, 2) + "\n\nuserType: guest");
+
+    
+            if (response.data.success) {
+                setErrorMessage(null);
+                
+                //alert("Success");
+            } else {
+                const errors = response.data.errors.map(error => error.msg);
+                setErrorMessage({ message: response.data.message, errors });
+                //alert("Failed1");
+            }
+        } catch (error) {
+          setIsLoading(false);
+            
+          if (error.response && error.response.data && error.response.data.errors) {
+            const { errors } = error.response.data;
+            const errorMessages = errors.map(error => error.msg);
+            setErrorMessage({ message: error.response.data.message, errors: errorMessages });
+        } else {
+            setErrorMessage({ message: 'Get cart failed..' });
+        }
+
+            //alert("Failed2");
+        }
+    };
+
+
+
 
     const miniCartData = {
         product: [

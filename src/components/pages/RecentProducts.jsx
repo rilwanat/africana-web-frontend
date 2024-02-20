@@ -21,7 +21,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
-
+import axios from 'axios';
 
 /**
  * Recent Products component
@@ -32,6 +32,10 @@ import { AES } from 'crypto-js';
 function RecentProducts({onQuickViewClick, products}) {
 
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     // const [isDragging, setIsDragging] = useState(false);
 
@@ -45,6 +49,20 @@ function RecentProducts({onQuickViewClick, products}) {
     
     function SampleNextArrow(props) {
   const { className, style, onClick } = props;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div
       className={className}
@@ -66,6 +84,14 @@ function RecentProducts({onQuickViewClick, products}) {
 }
 
 function SamplePrevArrow(props) {
+
+
+
+    
+
+
+
+
   const { className, style, onClick } = props;
   return (
     <div
@@ -187,6 +213,87 @@ function calculateDiscountPercentage(price, oldPrice) {
 
   };
 
+
+  const addToCart = async (e, product, quantity) => {
+
+    let lowestPrice = Infinity;
+let lowestPriceVariantId = null;
+
+products.forEach(product => {
+    product.productVariants.forEach(variant => {
+        if (variant.price < lowestPrice) {
+            lowestPrice = variant.price;
+            lowestPriceVariantId = variant.id; // Assuming variant has an id property
+        }
+    });
+});
+
+
+// alert(lowestPriceVariantId);
+
+//     return;
+
+    //e.preventDefault();
+
+    //alert("login user: " + loginEmailAddress + " " + loginPassword);
+
+    try {
+        // const formData = new FormData();
+        // formData.append('email', loginEmailAddress);        
+        // formData.append('password', loginPassword);
+
+        // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/view-cart', formData, {
+        //     headers: {
+        //         // 'Content-Type': 'multipart/form-data',
+        //         'Content-Type': 'application/json',
+        //     },
+        // });
+
+        // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', {
+        //     loginEmailAddress,
+        //     loginPassword,
+        // });
+
+        const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/add-to-cart?productVariantId=' + lowestPriceVariantId + '&quantity=' + quantity);
+
+
+
+
+        setIsLoading(false);
+
+        // alert("cart: " + JSON.stringify(response.data.data, null, 2));
+        alert("addToCart: " + JSON.stringify(response.data, null, 2) + "\n\nuserType: guest");
+
+
+        // if (response.data.success) {
+        //     setErrorMessage(null);
+            
+        //     alert("Success");
+        // } else {
+        //     //const errors = response.data.errors.map(error => error.msg);
+        //     //setErrorMessage({ message: response.data.message, errors });
+        //     alert("Failed1");
+        // }
+    } catch (error) {
+      setIsLoading(false);
+        
+      if (error.response && error.response.data && error.response.data.errors) {
+        const { errors } = error.response.data;
+        const errorMessages = errors.map(error => error.msg);
+        setErrorMessage({ message: error.response.data.message, errors: errorMessages });
+
+        alert("Failed2");
+    } else {
+        setErrorMessage({ message: 'Add to cart failed..' });
+    }
+
+        alert("Failed3");
+    }
+};
+
+
+
+
     return (
         <Fragment>
             {/* start recent-product-section */}
@@ -283,7 +390,10 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                         <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
                                                                         
                                                                         onClick={
-                                                                            ()=>{}
+                                                                            //()=>{ addToCart()}
+                                                                            (e) => addToCart(e, item, 1)
+                                                                            // addToCart = async (e, productVariantId, quantity)
+                                                                            // () => {alert(item.productVariantId);}
                                                                         }
                                                                         onMouseEnter={()=>{
                                                                             setBagHovered(true)
