@@ -14,6 +14,8 @@ function Pagination({extraClass, handlePageClick, totalProducts}) {
     useEffect(() => {
         const pages = Math.ceil(totalProducts / 16); // 16 products per page
         setTotalPages(pages);
+
+        setActivePage(1);
     }, [totalProducts]);
 
     const handleClick = (pageNumber) => {
