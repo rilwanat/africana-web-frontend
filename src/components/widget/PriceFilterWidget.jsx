@@ -8,15 +8,18 @@ import Slider from "@mui/material/Slider";
  */
 function PriceFilterWidget({handleDataSort, maxMin, maxMax}) {
   // const rangeMaxVal = 500;
-  const [range, setRange] = useState([0, maxMax]);
+  const [pageMaxMax, setPageMaxMax] = useState(maxMax);
+  const [range, setRange] = useState([0, pageMaxMax]);
 
   function handleChanges(_, newValue) {
     setRange(newValue);
   }
 
+  
   useEffect(() => {
-    //handleChanges();
-}, []);
+    setPageMaxMax(maxMax);
+    setRange([0, maxMax]); // Set the initial range to start from 0 and go up to maxMax
+  }, [maxMax]);
 
 
   return (

@@ -22,6 +22,9 @@ function HeaderRight({options}) {
     const [errorMessage, setErrorMessage] = useState('');
 
 
+    const [miniCartData, setMiniCartData] = useState([]);
+
+
     useEffect(() => {
         //if (!token) {
           // Redirect to the home page if the token is null
@@ -72,6 +75,9 @@ function HeaderRight({options}) {
     
             if (response.data.success) {
                 setErrorMessage(null);
+
+
+                setMiniCartData(response.data);
                 
                 //alert("Success");
             } else {
@@ -97,28 +103,44 @@ function HeaderRight({options}) {
 
 
 
-    const miniCartData = {
-        product: [
-            {
-                id: "",
-                name: "Elegant skirt",
-                qty: 1,
-                price: "0.00",
-                img: imgx, //"/assets/images/shop/mini-cart/img-1.jpg",
-                link: "/single-slider-images"
-            },
-            {
-                id: "",
-                name: "Beautiful tops",
-                qty: 1,
-                price: "0.00",
-                img: imgx, //"/assets/images/shop/mini-cart/img-2.jpg",
-                link: "/single-slider-images"
-            }
-        ],
-        subtotal: "0.00",
-        symbol: "N"//$
-    };
+    // const miniCartData = {
+    //     product: [
+    //         {
+    //             id: "",
+    //             name: "Elegant skirt",
+    //             qty: 1,
+    //             price: "0.00",
+    //             img: imgx, //"/assets/images/shop/mini-cart/img-1.jpg",
+    //             link: "/single-slider-images"
+    //         },
+    //         {
+    //             id: "",
+    //             name: "Beautiful tops",
+    //             qty: 1,
+    //             price: "0.00",
+    //             img: imgx, //"/assets/images/shop/mini-cart/img-2.jpg",
+    //             link: "/single-slider-images"
+    //         },
+    //         {
+    //             id: "",
+    //             name: "Elegant skirt",
+    //             qty: 1,
+    //             price: "0.00",
+    //             img: imgx, //"/assets/images/shop/mini-cart/img-1.jpg",
+    //             link: "/single-slider-images"
+    //         },
+    //         {
+    //             id: "",
+    //             name: "Elegant skirt",
+    //             qty: 1,
+    //             price: "0.00",
+    //             img: imgx, //"/assets/images/shop/mini-cart/img-1.jpg",
+    //             link: "/single-slider-images"
+    //         },
+    //     ],
+    //     subtotal: "0.00",
+    //     symbol: "N"//$
+    // };
 
     return (
         <Fragment>
@@ -151,29 +173,29 @@ function HeaderRight({options}) {
                     <div className="relative mr-4" onClick={options.onMiniCartClick} style={{ cursor: "pointer" }}>
               <ShoppingBagOutlinedIcon className="mr-1 text-gray-500 cursor-pointer" />
               
-              {miniCartData.product.length > 0 && (
-                <div
-                className="absolute top-0 right-0 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center"
-                style={{ fontSize: '10px' }} // Adjust the font size as needed
-                >
-                  {miniCartData.product.length}
-                </div>
-                )}
+              {miniCartData.product && (
+                        <div
+                            className="absolute top-0 right-0 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center"
+                            style={{ fontSize: '10px' }}
+                        >
+                            {miniCartData.product.length}
+                        </div>
+                    )}
               </div>
                     <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')}>
                         <div className="mini-cart-items">
-                            {
+                            {miniCartData && miniCartData.product &&
                                 miniCartData.product.map((item, index) => (
                                     <div key={index} className="mini-cart-item clearfix">
                                         <div className="mini-cart-item-image">
                                             <NavLink to={item.link}>
-                                                <img src={item.img} alt=""/>
+                                                {/* <img src={item.img} alt=""/> */}
                                             </NavLink>
                                         </div>
                                         <div className="mini-cart-item-des">
                                             <NavLink to={item.link}>{item.name}</NavLink>
                                             <span className="mini-cart-item-quantity">Qty: {item.qty}</span>
-                                            <span className="mini-cart-item-price">{miniCartData.symbol}{item.price}</span>
+                                            {/* <span className="mini-cart-item-price">{miniCartData.symbol}{item.price}</span> */}
                                         </div>
                                     </div>
                                 ))
