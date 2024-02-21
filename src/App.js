@@ -7,6 +7,7 @@ import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/about/About";
 import AccountPage from "./components/pages/MyAccount";
 import CartPage from "./components/pages/cart/Cart";
+import CheckoutPage from "./components/pages/checkout/Checkout";
 import ShopPage from "./components/pages/ShopLeftSidebarPage";
 import ProductPage from "./components/pages/ProductPage";
 import SizesPage from "./components/pages/SizesPage";
@@ -154,7 +155,10 @@ const options = {
               <Route path='/my-account' element={<AccountPage options={options} />}/>    
               {/* <Route path='/login' element={<LoginPage />}/> */}
               <Route path='/shop' element={<ShopPage options={options} />}/>
+              
               <Route path='/cart' element={<CartPage options={options} />}/>
+              <Route path='/checkout/:cart' element={<CheckoutPage options={options} />}/>
+
               <Route path='/product-details/:product' element={<ProductPage options={options} />}/>
               <Route path='/sizes' element={<SizesPage options={options} />}/>
               {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}

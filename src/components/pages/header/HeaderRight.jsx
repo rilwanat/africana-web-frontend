@@ -1,13 +1,21 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import './navbarRight.css';
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import imgx from "../../../assets/images/shop/mini-cart/img-1.jpg";
 import axios from 'axios';
 
+
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
+
+
+
 function HeaderRight({ options }) {
+    const navigate = useNavigate();
+
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
@@ -17,6 +25,18 @@ function HeaderRight({ options }) {
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
         setCart(storedCart);
     }, []);
+
+
+    const navigateToCheckOut = () => {
+
+    
+        options.onMiniCartClick();
+const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+// const encryptedData = AES.encrypt(JSON.stringify(product), process.env.REACT_APP_ENCRYPTION_KEY).toString();
+navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
+    
+      };
+
 
     return (
         <Fragment>
@@ -59,7 +79,8 @@ function HeaderRight({ options }) {
                             {/* Subtotal logic here */}
                             <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
                             <Link className="view-cart-btn" to="/cart" onClick={options.onMiniCartClick}>View Cart</Link>
-                            <Link className="checkout-btn" to="/checkout" onClick={options.onMiniCartClick}>Checkout</Link>
+                            {/* <Link className="checkout-btn" to="/checkout" onClick={options.onMiniCartClick}>Checkout</Link> */}
+                            <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
                         </div>
                     </div>
                 </div>
@@ -69,3 +90,4 @@ function HeaderRight({ options }) {
 }
 
 export default HeaderRight;
+
