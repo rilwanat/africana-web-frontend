@@ -302,7 +302,7 @@ const addToCart = async (product) => {
                             }
 
                             {/* <Link to="/product-details"> */}
-                            <div 
+                            <div  className='mx-2'
                             // onClick={isDragging ? null : (e) => handleProductClick(item, e)} 
                             onClick={(e) => handleProductClick(item, e)} 
                             style={{cursor: 'pointer'}}>
@@ -311,7 +311,7 @@ const addToCart = async (product) => {
 
                                                             <img loading="lazy" 
                                                             src=
-                                                            "https://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                                                            "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
                                                             //{item.mainImg} 
                                                             alt=""/>
                                                         

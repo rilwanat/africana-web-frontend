@@ -55,7 +55,7 @@ function Instagram() {
                                 <div className="instagram-text">
                                     <h3>Follow our instagram</h3>
                                     
-                                    <p><a href="https://www.instagram.com/africanacouture" target='_blank' title="Instagram">@africana</a></p>
+                                    <p><a href="http://www.instagram.com/africanacouture" target='_blank' title="Instagram">@africana</a></p>
                                 </div>
                                 <div className="instagram-grids clearfix">
                                     {

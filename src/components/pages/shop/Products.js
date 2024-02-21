@@ -105,6 +105,9 @@ function calculateDiscountPercentage(price, oldPrice) {
 //   };
 
 const addToCart = async (product) => {
+    // alert(JSON.stringify(product, null, 2));
+    // return;
+
     const existingProduct = cart.find((item) => item.id === product.id);
     
     if (existingProduct) {
@@ -166,7 +169,7 @@ const addToCart = async (product) => {
                              {/* <Link to="/product-details"> */}
                               <img loading="lazy" 
                               src=
-                              "https://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                              "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
                             //   {process.env.PUBLIC_URL + item.mainImg}
                                alt=""/>
                             {/* </Link> */}

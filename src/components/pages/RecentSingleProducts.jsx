@@ -199,11 +199,11 @@ const addToCart = async (product) => {
                                                 </div> : ''
                                         }
                                         {/* <Link to="/product-details"> */}
-                                            <div
+                                            <div className='mx-2'
                                         onClick={(e) => handleProductClick(item, e)} >
                                             <img loading="lazy" 
                                             src=
-                                            "https://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                                            "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
                                             // {process.env.PUBLIC_URL + item.mainImg} 
                                             alt=""/>
                                         </div>

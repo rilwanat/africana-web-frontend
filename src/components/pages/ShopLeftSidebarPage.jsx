@@ -213,6 +213,11 @@ function ShopLeftSidebarPage({ options }) {
       const endIndex = Math.min(currentPage * productsPerPage, productsTotal);
 
 
+      const handleDataSearch = () => {
+        //alert("a");
+        //search all products
+      }
+
     return (
         <Fragment>
 
@@ -237,7 +242,7 @@ function ShopLeftSidebarPage({ options }) {
                             <div className="shop-area clearfix" >
                             <div className={'shop-sidebar'} >
                                     <SearchWidget 
-                                    // handleDataSort={handleDataSearch} 
+                                    handleDataSearch={handleDataSearch} 
                                     title="" />
                                     <PriceFilterWidget handleDataSort={handleDataSort} maxMin={maxMin} maxMax={maxMax}/>
                                     <ProductCategoriesWidget />

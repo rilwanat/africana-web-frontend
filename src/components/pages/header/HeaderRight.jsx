@@ -20,11 +20,11 @@ function HeaderRight({ options }) {
     const [errorMessage, setErrorMessage] = useState('');
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
-    useEffect(() => {
-        // Initialize cart state from local storage when component mounts
-        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCart(storedCart);
-    }, []);
+    // useEffect(() => {
+    //     // Initialize cart state from local storage when component mounts
+    //     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    //     setCart(storedCart);
+    // }, []);
 
 
     const navigateToCheckOut = () => {
