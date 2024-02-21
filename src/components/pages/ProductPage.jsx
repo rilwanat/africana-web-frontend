@@ -22,6 +22,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
+
 import imgx from '../../assets/images/shop/img-2.jpg';
 import imgs from '../../assets/images/shop/img-2.jpg';
 /**
@@ -48,7 +49,6 @@ function ProductPage({options}) {
   
     const { product } = useParams();
     const decryptedData = AES.decrypt(decodeURIComponent(product), 'encryptionKey').toString(CryptoJS.enc.Utf8);
-    // const decryptedData = AES.decrypt(decodeURIComponent(product), process.env.REACT_APP_ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
     const parsedProduct = JSON.parse(decryptedData);
 
 

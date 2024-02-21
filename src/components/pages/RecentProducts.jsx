@@ -21,6 +21,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
+
 import axios from 'axios';
 
 /**
@@ -205,7 +206,6 @@ function calculateDiscountPercentage(price, oldPrice) {
         // Encrypt the product data
         // Navigate to the route with the encrypted parameter
         const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
-        // const encryptedData = AES.encrypt(JSON.stringify(product), process.env.REACT_APP_ENCRYPTION_KEY).toString();
         navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
         //
     }

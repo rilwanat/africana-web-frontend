@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import categories from "../../data/categories.json";
 
 /**
  * Billing Fields section
@@ -19,13 +18,13 @@ function BillingFields() {
                             First Name <abbr className="required" title="required">*</abbr>
                         </label>
                         <input type="text" className="input-text " name="billing_first_name" id="billing_first_name"
-                               placeholder="" autoComplete="given-name" defaultValue />
+                               placeholder="" autoComplete="given-name"  />
                     </p>
                     <p className="form-row form-row form-row-last validate-required" id="billing_last_name_field">
                         <label htmlFor="billing_last_name">Last Name <abbr className="required"
                                                                            title="required">*</abbr></label>
                         <input type="text" className="input-text " name="billing_last_name" id="billing_last_name"
-                               placeholder="" autoComplete="family-name" defaultValue />
+                               placeholder="" autoComplete="family-name"  />
                     </p>
                     <div className="clear" />
                     {/* <p className="form-row form-row form-row-wide" id="billing_company_field">
@@ -36,12 +35,12 @@ function BillingFields() {
                     <p className="form-row form-row form-row-first validate-required validate-email" id="billing_email_field">
                         <label htmlFor="billing_email">Email Address <abbr className="required" title="required">*</abbr></label>
                         <input type="email" className="input-text " name="billing_email" id="billing_email"
-                               placeholder="" autoComplete="email" defaultValue />
+                               placeholder="" autoComplete="email"  />
                     </p>
                     <p className="form-row form-row form-row-last validate-required validate-phone" id="billing_phone_field">
                         <label htmlFor="billing_phone">Phone <abbr className="" title=""></abbr></label>
                         <input type="tel" className="input-text " name="billing_phone" id="billing_phone" placeholder=""
-                               autoComplete="tel" defaultValue />
+                               autoComplete="tel"  />
                     </p>
 
                     <div className="clear" />
@@ -49,10 +48,10 @@ function BillingFields() {
                        id="billing_country_field">
                         <label htmlFor="billing_country">Country <abbr className="" title=""></abbr></label>
                         <select name="billing_country" id="billing_country" autoComplete="country" className="country_to_state country_select ">
-                            <option>Select a country …</option>
-                            {categories.map((item, index) => (
+                            <option>Select country </option>
+                            {/* {categories.map((item, index) => (
                                 <option key={index} value={item.code}>{item.name}</option>
-                            ))}
+                            ))} */}
                         </select>
                         <noscript>
                             <input type="submit" name="woocommerce_checkout_update_totals" value="Update country" />
@@ -63,23 +62,23 @@ function BillingFields() {
                        id="billing_address_1_field">
                         <label htmlFor="billing_address_1">Address <abbr className="required" title="required">*</abbr></label>
                         <input type="text" className="input-text " name="billing_address_1" id="billing_address_1"
-                               placeholder="Street address" autoComplete="address-line1" defaultValue />
+                               placeholder="Street address" autoComplete="address-line1"  />
                     </p>
                     <p className="form-row form-row form-row-wide address-field" id="billing_address_2_field">
                         <input type="text" className="input-text " name="billing_address_2" id="billing_address_2"
-                               placeholder="Apartment, suite, unit etc. (optional)" autoComplete="address-line2" defaultValue />
+                               placeholder="Apartment, suite, unit etc. (optional)" autoComplete="address-line2"  />
                     </p>
                     <p className="form-row form-row address-field validate-postcode validate-required form-row-first  woocommerce-invalid-required-field"
                        id="billing_city_field">
                         <label htmlFor="billing_city">Town / City <abbr className="required" title="required">*</abbr></label>
                         <input type="text" className="input-text " name="billing_city" id="billing_city" placeholder=""
-                               autoComplete="address-level2" defaultValue />
+                               autoComplete="address-level2"  />
                     </p>
                     <p className="form-row form-row form-row-last address-field validate-required validate-postcode"
                        id="billing_postcode_field">
                         <label htmlFor="billing_postcode">Postcode / ZIP <abbr className="" title=""></abbr></label>
                         <input type="text" className="input-text " name="billing_postcode8" id="billing_postcode"
-                               placeholder="" autoComplete="postal-code" defaultValue />
+                               placeholder="" autoComplete="postal-code"  />
                     </p>
                     <div className="clear" />
                     {/* <p className="form-row form-row-wide create-account">

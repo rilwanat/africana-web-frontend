@@ -33,7 +33,6 @@ function Checkout({ options }) {
 
     const { cart } = useParams();
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
-    // const decryptedData = AES.decrypt(decodeURIComponent(product), process.env.REACT_APP_ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
     const parsedCart = JSON.parse(decryptedData);
 
     /**
@@ -102,6 +101,12 @@ function Checkout({ options }) {
     
         let countCartItem = 1;//indexOfFirstItem + 1;
 
+
+        const payNow = () => {
+            // options.onMiniCartClick();
+            // const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+            // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
+          };
 
 
     return (
@@ -204,7 +209,7 @@ function Checkout({ options }) {
                                                 parsedCart.map((item, index) => (
                                                     <tr key={index} className="cart_item">
                                                         <td className="product-name">
-                                                            {item.name} &nbsp; <strong className="product-quantity">×
+                                                            {item.name} &nbsp; <strong className="product-quantity">x
                                                             {item.quantity}</strong></td>
                                                         <td className="product-total">
                                                         <span className="woocommerce-Price-amount amount"><span
@@ -251,44 +256,24 @@ function Checkout({ options }) {
                                             </tr>
                                             </tfoot>
                                         </table>
-                                        <div id="payment" className="woocommerce-checkout-payment">
-                                            <ul className="wc_payment_methods payment_methods methods">
-                                                <li className="wc_payment_method payment_method_cheque">
-                                                    <input id="payment_method_cheque" type="radio"
-                                                           className="input-radio" name="payment_method"
-                                                           defaultValue="cheque" defaultChecked="checked"
-                                                           data-order_button_text/>
-                                                    {/*grop add span for radio button style*/}
-                                                    <span className="grop-woo-radio-style"/>
-                                                    {/*custom change*/}
-                                                    <label htmlFor="payment_method_cheque">
-                                                        Check Payments </label>
-                                                    <div className="payment_box payment_method_cheque">
-                                                        <p>Please send a check to Store Name, Store Street, Store Town,
-                                                            Store State / County, Store Postcode.</p>
-                                                    </div>
-                                                </li>
-                                                <li className="wc_payment_method payment_method_paypal">
-                                                    <input id="payment_method_paypal" type="radio"
-                                                           className="input-radio" name="payment_method"
-                                                           defaultValue="paypal"
-                                                           data-order_button_text="Proceed to PayPal"/>
-                                                    {/*grop add span for radio button style*/}
-                                                    <span className="grop-woo-radio-style"/>
-                                                    {/*custom change*/}
-                                                    <label htmlFor="payment_method_paypal">
-                                                        PayPal <img src={process.env.PUBLIC_URL + "/assets/images/paypal.png"}
-                                                                    alt="PayPal Acceptance Mark"/><a href="#"
-                                                                                                     className="about_paypal"
-                                                                                                     title="What is PayPal?">What
-                                                        is PayPal?</a> </label>
-                                                    <div className="payment_box payment_method_paypal"
-                                                         style={{display: 'none'}}>
-                                                        <p>Pay via PayPal; you can pay with your credit card if you
-                                                            don’t have a PayPal account.</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                        <div id="payment" className="woocommerce-checkout-payment flex flex-col items-start">
+                                               
+                                            <label style={{ flex: '1', textAlign: 'center' }}>
+              <input type="radio" name="option" value="fluterwave" className='mr-2' 
+            //   checked={genType === 'qrCodeOnly'} // Check if this option is selected
+            //   onChange={handleOptionChange}
+              />
+            Flutterwave
+            </label>
+
+            <label style={{ flex: '1', textAlign: 'center' }}>
+              <input type="radio" name="option" value="paystack" className='mr-2' 
+            //   checked={genType === 'qrCodeOnly'} // Check if this option is selected
+            //   onChange={handleOptionChange}
+              />
+              Paystack
+            </label>
+                                            
                                             <div className="form-row place-order">
 
                                                 {/* <NoscriptSnippet/> */}
@@ -300,6 +285,11 @@ function Checkout({ options }) {
                                                        defaultValue="783c1934b0"/>
                                                 <input type="hidden" name="_wp_http_referer"
                                                        defaultValue="/wp/?page_id=6"/> */}
+                                                       
+                                                       
+                                                       <div className="slide-btns mt-2" style={{ cursor: 'pointer' }} onClick={payNow}><div className="theme-btn-s5">Pay Now</div>
+                                                        </div>
+
                                                        
                                                        </div>
                                         </div>

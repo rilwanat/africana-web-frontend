@@ -28,13 +28,9 @@ function HeaderRight({ options }) {
 
 
     const navigateToCheckOut = () => {
-
-    
         options.onMiniCartClick();
-const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
-// const encryptedData = AES.encrypt(JSON.stringify(product), process.env.REACT_APP_ENCRYPTION_KEY).toString();
-navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
-    
+        const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+        navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
       };
 
 
