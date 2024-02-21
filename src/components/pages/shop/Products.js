@@ -82,6 +82,57 @@ function calculateDiscountPercentage(price, oldPrice) {
 
   };
 
+
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+//   const increaseItemToCart = (item) => {
+
+//     // alert(item);
+//     alert(JSON.stringify(item, null, 2));
+
+//     // Check if the product is already in the cart
+//     const existingProduct = cart.find((cartItem) => cartItem.id === item.id);
+  
+//     if (existingProduct) {
+//       // If the product is already in the cart, update its quantity
+//       const updatedCart = cart.map((cartItem) =>
+//         cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+//       );
+//       setCart(updatedCart);
+//     } else {
+//       // If the product is not in the cart, add it
+//       setCart([...cart, { ...item, quantity: 1 }]);
+//     }
+//     //alert("Ok");
+//   };
+
+const addToCart = async (product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    
+    if (existingProduct) {
+      // If the product is already in the cart, update its quantity
+      const updatedCart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
+      //alert("found added");
+    } else {
+      // If the product is not in the cart, add it
+      const updatedCart = [...cart, { ...product, quantity: 1 }];
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
+      //alert("not found added");
+    }
+  
+    // Optionally, you can show a confirmation message or trigger additional actions
+    //alert(`Item ${product?.name} added to cart!`);
+
+    //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
+  };
+
+
+
+
     return (
         <Fragment>
             <ul className={"products " + (ordering == 1 ? 'default-column' : ordering == 2 ? 'three-column' : ordering == 3 ? 'list-view' : '')}>
@@ -176,7 +227,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                         <div style={{ backgroundColor: isBagHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
                                                                         onClick={
-                                                                            ()=>{}
+                                                                            () => addToCart(item)
                                                                         }
                                                                         onMouseEnter={()=>{
                                                                             setBagHovered(true)

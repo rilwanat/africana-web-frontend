@@ -89,7 +89,7 @@ function ShopLeftSidebarPage({ options }) {
         setIsDataLoading(true);
         try {
     
-          //const response = await axios.get('http://localhost:3000/productssample.json');
+          // const response = await axios.get('http://localhost:3000/productssample.json');
           const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
             //params: { uid: uid },
             headers: {
@@ -236,7 +236,9 @@ function ShopLeftSidebarPage({ options }) {
                         <div className="col col-xs-12" >
                             <div className="shop-area clearfix" >
                             <div className={'shop-sidebar'} >
-                                    <SearchWidget title="" />
+                                    <SearchWidget 
+                                    // handleDataSort={handleDataSearch} 
+                                    title="" />
                                     <PriceFilterWidget handleDataSort={handleDataSort} maxMin={maxMin} maxMax={maxMax}/>
                                     <ProductCategoriesWidget />
                                     <ColorFilterWidget/>

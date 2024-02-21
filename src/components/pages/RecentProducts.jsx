@@ -214,83 +214,53 @@ function calculateDiscountPercentage(price, oldPrice) {
   };
 
 
-  const addToCart = async (e, product, quantity) => {
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+//   const increaseItemToCart = (item) => {
 
-    let lowestPrice = Infinity;
-let lowestPriceVariantId = null;
+//     // alert(item);
+//     alert(JSON.stringify(item, null, 2));
 
-products.forEach(product => {
-    product.productVariants.forEach(variant => {
-        if (variant.price < lowestPrice) {
-            lowestPrice = variant.price;
-            lowestPriceVariantId = variant.id; // Assuming variant has an id property
-        }
-    });
-});
-
-
-// alert(lowestPriceVariantId);
-
-//     return;
-
-    //e.preventDefault();
-
-    //alert("login user: " + loginEmailAddress + " " + loginPassword);
-
-    try {
-        // const formData = new FormData();
-        // formData.append('email', loginEmailAddress);        
-        // formData.append('password', loginPassword);
-
-        // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/view-cart', formData, {
-        //     headers: {
-        //         // 'Content-Type': 'multipart/form-data',
-        //         'Content-Type': 'application/json',
-        //     },
-        // });
-
-        // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', {
-        //     loginEmailAddress,
-        //     loginPassword,
-        // });
-
-        const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/add-to-cart?productVariantId=' + lowestPriceVariantId + '&quantity=' + quantity);
+//     // Check if the product is already in the cart
+//     const existingProduct = cart.find((cartItem) => cartItem.id === item.id);
+  
+//     if (existingProduct) {
+//       // If the product is already in the cart, update its quantity
+//       const updatedCart = cart.map((cartItem) =>
+//         cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+//       );
+//       setCart(updatedCart);
+//     } else {
+//       // If the product is not in the cart, add it
+//       setCart([...cart, { ...item, quantity: 1 }]);
+//     }
+//     //alert("Ok");
+//   };
 
 
-
-
-        setIsLoading(false);
-
-        // alert("cart: " + JSON.stringify(response.data.data, null, 2));
-        alert("addToCart: " + JSON.stringify(response.data, null, 2) + "\n\nuserType: guest");
-
-
-        // if (response.data.success) {
-        //     setErrorMessage(null);
-            
-        //     alert("Success");
-        // } else {
-        //     //const errors = response.data.errors.map(error => error.msg);
-        //     //setErrorMessage({ message: response.data.message, errors });
-        //     alert("Failed1");
-        // }
-    } catch (error) {
-      setIsLoading(false);
-        
-      if (error.response && error.response.data && error.response.data.errors) {
-        const { errors } = error.response.data;
-        const errorMessages = errors.map(error => error.msg);
-        setErrorMessage({ message: error.response.data.message, errors: errorMessages });
-
-        alert("Failed2");
+const addToCart = async (product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    
+    if (existingProduct) {
+      // If the product is already in the cart, update its quantity
+      const updatedCart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
+      //alert("found added");
     } else {
-        setErrorMessage({ message: 'Add to cart failed..' });
+      // If the product is not in the cart, add it
+      const updatedCart = [...cart, { ...product, quantity: 1 }];
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
+      //alert("not found added");
     }
+  
+    // Optionally, you can show a confirmation message or trigger additional actions
+    //alert(`Item ${product?.name} added to cart!`);
 
-        alert("Failed3");
-    }
-};
-
+    //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
+  };
 
 
 
@@ -390,8 +360,9 @@ products.forEach(product => {
                                                                         <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
                                                                         
                                                                         onClick={
-                                                                            //()=>{ addToCart()}
-                                                                            (e) => addToCart(e, item, 1)
+                                                                            // ()=>{ addToCart()}
+                                                                            //(e) => addToCart(e, item, 1)
+                                                                            () => addToCart(item)
                                                                             // addToCart = async (e, productVariantId, quantity)
                                                                             // () => {alert(item.productVariantId);}
                                                                         }

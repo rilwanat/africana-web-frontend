@@ -6,7 +6,7 @@ import LandingPage from "./components/pages/LandingPage";
 import HomePage from "./components/pages/HomePage";
 import AboutPage from "./components/pages/about/About";
 import AccountPage from "./components/pages/MyAccount";
-// import ShopPage from "./components/pages/ShopPage";
+import CartPage from "./components/pages/cart/Cart";
 import ShopPage from "./components/pages/ShopLeftSidebarPage";
 import ProductPage from "./components/pages/ProductPage";
 import SizesPage from "./components/pages/SizesPage";
@@ -18,7 +18,7 @@ import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage';
 
 import QuickView from './components/pages/QuickView';
 
-
+// import axios from 'axios';
 
 
 // import ScrollToTop from "./ScrollToTop";
@@ -28,7 +28,7 @@ import QuickView from './components/pages/QuickView';
 
 function App() {
 
-  
+  const [isDataloading, setIsDataLoading] = useState(true);
 
   
   const [showQuickView, setShowQuickView] = useState(false);
@@ -90,6 +90,9 @@ const HandelMobileNavStatus = () => {
  *  Effect Hook for remove loader after 400 milliseconds
  */
 useEffect(() => {
+  
+// initAuth();
+
     setTimeout(() => {
         setShowPreloader(false);
     }, 400)
@@ -104,6 +107,7 @@ const HandelOverlayStatus = () => {
     setShowSideInfo(false);
     setShowMobileNav(false);
 };
+
 
 /**
  * state and dandle function for change states
@@ -150,6 +154,7 @@ const options = {
               <Route path='/my-account' element={<AccountPage options={options} />}/>    
               {/* <Route path='/login' element={<LoginPage />}/> */}
               <Route path='/shop' element={<ShopPage options={options} />}/>
+              <Route path='/cart' element={<CartPage options={options} />}/>
               <Route path='/product-details/:product' element={<ProductPage options={options} />}/>
               <Route path='/sizes' element={<SizesPage options={options} />}/>
               {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}

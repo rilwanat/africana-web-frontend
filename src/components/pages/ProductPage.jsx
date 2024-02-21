@@ -37,6 +37,10 @@ import imgs from '../../assets/images/shop/img-2.jpg';
  */
 function ProductPage({options}) {
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+
     //let params = useParams();
     //const { product } = useParams();
     //const parsedProduct = JSON.parse(decodeURIComponent(product));
@@ -176,7 +180,7 @@ function calculateDiscountPercentage(price, oldPrice) {
     setIsDataLoading(true);
     try {
 
-        //const response = await axios.get('http://localhost:3000/productssample.json');
+        // const response = await axios.get('http://localhost:3000/productssample.json');
       const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
         //params: { uid: uid },
         headers: {
@@ -203,6 +207,55 @@ function calculateDiscountPercentage(price, oldPrice) {
       alert("error: " + error);
     }
   };
+
+   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+//   const increaseItemToCart = (item) => {
+
+//     // alert(item);
+//     alert(JSON.stringify(item, null, 2));
+
+//     // Check if the product is already in the cart
+//     const existingProduct = cart.find((cartItem) => cartItem.id === item.id);
+  
+//     if (existingProduct) {
+//       // If the product is already in the cart, update its quantity
+//       const updatedCart = cart.map((cartItem) =>
+//         cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+//       );
+//       setCart(updatedCart);
+//     } else {
+//       // If the product is not in the cart, add it
+//       setCart([...cart, { ...item, quantity: 1 }]);
+//     }
+//     //alert("Ok");
+//   };
+
+const addToCart = async (product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    
+    if (existingProduct) {
+      // If the product is already in the cart, update its quantity
+      const updatedCart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
+      //alert("found added");
+    } else {
+      // If the product is not in the cart, add it
+      const updatedCart = [...cart, { ...product, quantity: 1 }];
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
+      //alert("not found added");
+    }
+  
+    // Optionally, you can show a confirmation message or trigger additional actions
+    //alert(`Item ${product?.name} added to cart!`);
+
+    //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
+  };
+
+  
 
     return (
         <Fragment>
@@ -263,7 +316,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                 <p>{parsedProduct.description}</p>
                                 
                                  <div className="product-option">
-                            <form className="form">
+                            {/* <form className="form"> */}
                                 <div className="product-row flex items-center">
 
                                 <div className="touchspin-wrap">
@@ -290,10 +343,19 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         <button className='p-4' 
                                         // type="submit" 
                                         // onClick={onQuickViewCloseClick}
+                                        // onClick={addToCart(parsedProduct)}
+                                        onClick={
+                                            // (e) => addToCart(e, parsedProduct, 1)
+                                            // () => increaseItemToCart(parsedProduct)
+                                            () => addToCart(parsedProduct)
+                                            
+                                        }
+
+                                        
                                         >Add to cart</button>
                                     </div>
                                 </div>
-                            </form>
+                            {/* </form> */}
                         </div>
                                 <div className="thb-product-meta-before">
                                 <div className="add-to-wishlist">
