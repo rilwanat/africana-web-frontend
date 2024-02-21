@@ -200,7 +200,7 @@ function Checkout({ options }) {
                                             <thead>
                                             <tr>
                                                 <th className="product-name">Product</th>
-                                                <th className="product-total">Total</th>
+                                                <th className="product-total text-right">Total</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -211,7 +211,7 @@ function Checkout({ options }) {
                                                         <td className="product-name">
                                                             {item.name} &nbsp; <strong className="product-quantity">x
                                                             {item.quantity}</strong></td>
-                                                        <td className="product-total">
+                                                        <td className="product-total text-right">
                                                         <span className="woocommerce-Price-amount amount"><span
                                                             className="woocommerce-Price-currencySymbol">N</span>{findLowestPrice(item)}</span>
                                                         </td>
@@ -223,7 +223,7 @@ function Checkout({ options }) {
                                             <tfoot>
                                             <tr className="cart-subtotal">
                                                 <th>Subtotal</th>
-                                                <td><span className="woocommerce-Price-amount amount"><span
+                                                <td className="text-right"><span className="woocommerce-Price-amount amount"><span
                                                     className="woocommerce-Price-currencySymbol">N</span>{calculateCartSubTotal()}</span>
                                                 </td>
                                             </tr>
@@ -240,7 +240,7 @@ function Checkout({ options }) {
                     // style={{ textAlign: 'right' }}
                     >
                         <th>Tax</th>
-                        <td data-title="Subtotal">
+                        <td className="text-right" data-title="Subtotal">
                             <span className="woocommerce-Price-amount amount">
                                     <span className="woocommerce-Price-currencySymbol">
                                         N
@@ -250,7 +250,7 @@ function Checkout({ options }) {
                     </tr>
                                             <tr className="order-total">
                                                 <th>Total</th>
-                                                <td><strong><span className="woocommerce-Price-amount amount"><span
+                                                <td className="text-right"><strong><span className="woocommerce-Price-amount amount"><span
                                                     className="woocommerce-Price-currencySymbol">N</span>{calculateGrandTotal()}</span></strong>
                                                 </td>
                                             </tr>
@@ -277,15 +277,6 @@ function Checkout({ options }) {
                                             <div className="form-row place-order">
 
                                                 {/* <NoscriptSnippet/> */}
-{/* 
-                                                <input type="submit" className="button alt"
-                                                       name="woocommerce_checkout_place_order" id="place_order"
-                                                       defaultValue="Place order" data-value="Place order"/>
-                                                <input type="hidden" id="_wpnonce5" name="_wpnonce"
-                                                       defaultValue="783c1934b0"/>
-                                                <input type="hidden" name="_wp_http_referer"
-                                                       defaultValue="/wp/?page_id=6"/> */}
-                                                       
                                                        
                                                        <div className="slide-btns mt-2" style={{ cursor: 'pointer' }} onClick={payNow}><div className="theme-btn-s5">Pay Now</div>
                                                         </div>
