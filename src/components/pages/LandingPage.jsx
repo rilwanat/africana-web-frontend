@@ -17,7 +17,7 @@ import Locations from './Locations';
 import Footer from './Footer';
 
 
-export default function LandingPage({ options, handleDataViewData }) {
+export default function LandingPage({ options, handleDataViewData, addToCart, cart }) {
   const [isVisible, setIsVisible] = useState(false);
   //const [transitionComplete, setTransitionComplete] = useState(false);
   let transitionComplete = localStorage.getItem('transitionCompleted');
@@ -123,8 +123,7 @@ export default function LandingPage({ options, handleDataViewData }) {
 
   
   
-
-
+  
 
 
   return (
@@ -142,13 +141,13 @@ export default function LandingPage({ options, handleDataViewData }) {
             style={{ backgroundColor: '#eeeeee' }}
             >
 
-           <Header options={options} />
+           <Header options={options} cart={cart}/>
 
            <Hero1/>
 
 
 <FeaturedProducts />
-<RecentProducts onQuickViewClick={handleDataViewData} products={products}/>
+<RecentProducts onQuickViewClick={handleDataViewData} products={products} addToCart={addToCart} cart={cart}/>
 <CtaSection />
 <Locations onQuickViewClick={handleDataViewData} products={products}/>
 <Footer/>

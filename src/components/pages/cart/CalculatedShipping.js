@@ -1,10 +1,10 @@
 import React, {Fragment, useState} from 'react';
-
-/**
- * demo countries data
- */
 import countries from "../../data/countries";
-import {Link} from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
+
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
 
 /**
  * Shipping calculated component
@@ -13,7 +13,9 @@ import {Link} from "react-router-dom";
  * @returns {*}
  * @constructor
  */
-function CalculatedShipping({currencySymbol, price, tax}) {
+function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
+
+    const navigate = useNavigate();
 
     const onClickSubmit = (e) => {
         e.preventDefault();
@@ -36,7 +38,14 @@ function CalculatedShipping({currencySymbol, price, tax}) {
     
     const calculateGrandTotal = () => {
         return price + tax;
-    }
+    };
+
+    const navigateToCheckOut = () => {
+        options.onMiniCartClick();
+        const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+        // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
+        navigate('/checkout', { state: { encryptedData } });
+      };
 
     return (
         <Fragment>
@@ -82,10 +91,10 @@ function CalculatedShipping({currencySymbol, price, tax}) {
                     </tr>
                     </tbody>
                 </table>
-                <div className="wc-proceed-to-checkout">
-                    <Link className="checkout-button button alt wc-forward" to="/checkout">
-                        Proceed to Checkout
-                    </Link>
+                {/* <div className="wc-proceed-to-checkout"> */}
+                <div className="text-center">
+                    {/* <Link className="checkout-button button alt wc-forward" to="/checkout">Proceed to Checkout</Link> */}
+                    <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
                 </div>
             </div>
         </Fragment>

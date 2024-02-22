@@ -13,12 +13,12 @@ import { AES } from 'crypto-js';
 
 
 
-function HeaderRight({ options }) {
+function HeaderRight({ options, cart }) {
     const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+    // const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
     // useEffect(() => {
     //     // Initialize cart state from local storage when component mounts
@@ -30,7 +30,15 @@ function HeaderRight({ options }) {
     const navigateToCheckOut = () => {
         options.onMiniCartClick();
         const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
-        navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
+        // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
+        navigate('/checkout', { state: { encryptedData } });
+      };
+
+      const navigateToCart = () => {
+        options.onMiniCartClick();
+        const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+        // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
+        navigate('/cart', { state: { encryptedData } });
       };
 
 
@@ -46,7 +54,7 @@ function HeaderRight({ options }) {
                 <div className="mini-cart mr-2">
                     <div className="relative mr-4" onClick={options.onMiniCartClick} style={{ cursor: "pointer" }}>
                         <ShoppingBagOutlinedIcon className="mr-1 text-gray-500 cursor-pointer" />
-                        {cart.length > 0 && (
+                        {cart && cart.length > 0 && (
                             <div
                                 className="absolute top-0 right-0 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center"
                                 style={{ fontSize: '10px' }}
@@ -74,7 +82,8 @@ function HeaderRight({ options }) {
                         <div className="mini-cart-action clearfix">
                             {/* Subtotal logic here */}
                             <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
-                            <Link className="view-cart-btn" to="/cart" onClick={options.onMiniCartClick}>View Cart</Link>
+                            {/* <Link className="view-cart-btn" to="/cart" onClick={options.onMiniCartClick}>View Cart</Link> */}
+                            <div className="view-cart-btn"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
                             {/* <Link className="checkout-btn" to="/checkout" onClick={options.onMiniCartClick}>Checkout</Link> */}
                             <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
                         </div>

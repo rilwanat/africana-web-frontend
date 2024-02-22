@@ -33,7 +33,7 @@ import './shop/shop.css';
  * @returns {*}
  * @constructor
  */
-function ShopLeftSidebarPage({ options }) {
+function ShopLeftSidebarPage({ options, addToCart, cart }) {
 
     /**
      * states
@@ -229,7 +229,7 @@ function ShopLeftSidebarPage({ options }) {
                 : ''
             }
 
-            <Header options={options} />
+            <Header options={options}  cart={cart}/>
 
             {/* <PageTitle name="Shop Left Sidebar"/> */}
 
@@ -274,6 +274,8 @@ function ShopLeftSidebarPage({ options }) {
   HandelQuickViewData={HandelQuickViewData}
   products={products}
   ordering={ordering}
+  addToCart={addToCart}
+  cart={cart}
 />
 }
                                         

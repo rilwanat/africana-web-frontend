@@ -8,7 +8,7 @@ import AboutPage from "./components/pages/about/About";
 import AccountPage from "./components/pages/MyAccount";
 import CartPage from "./components/pages/cart/Cart";
 import CheckoutPage from "./components/pages/checkout/Checkout";
-import ShopPage from "./components/pages/ShopLeftSidebarPage";
+import ShopLeftSidebarPage from "./components/pages/ShopLeftSidebarPage";
 import ProductPage from "./components/pages/ProductPage";
 import SizesPage from "./components/pages/SizesPage";
 
@@ -39,12 +39,6 @@ function App() {
     setShowQuickView(!showQuickView);
     setQuickViewData(item);
   };
-
-/**
-     * Handle Quick View Close
-     * @param e
-     * @constructor
-     */
 const HandelQuickViewClose = (e) => {
   e.preventDefault();
   setShowQuickView(false);
@@ -132,6 +126,26 @@ const options = {
 };
 
 // const product = '';
+const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+
+  const addToCart = (product) => {
+    const existingProduct = cart.find((item) => item.id === product.id);
+    
+    if (existingProduct) {
+      const updatedCart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+    } else {
+      const updatedCart = [...cart, { ...product, quantity: 1 }];
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+    }
+
+    //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
+  };
+
 
   return (
     <Router>
@@ -147,24 +161,25 @@ const options = {
                 />
                 : ''
             }
-            
+
+
             {/* <ScrollToTop/> */}
             <Routes>
               <Route path="/*" element={<div>NOT FOUND</div>} />
-              <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData}/>}/>    
+              <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart}/>}/>    
               <Route path='/home' element={<HomePage />}/>    
-              <Route path='/about' element={<AboutPage options={options} />}/>    
+              <Route path='/about' element={<AboutPage options={options} cart={cart}/>}/>    
               <Route path='/my-account' element={<AccountPage options={options} />}/> 
-              <Route path='/shop' element={<ShopPage options={options} />}/>
+              <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart} />}/>
               
               <Route path='/cart' element={<CartPage options={options} />}/>
               {/* <Route path='/checkout/:cart' element={<CheckoutPage options={options} />}/> */}
-              <Route path='/checkout' element={<CheckoutPage options={options} />}/>
+              <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart} />}/>
 
               {/* <Route path='/product-details/:product' element={<ProductPage options={options} />}/> */}
-              <Route path="/product-details" element={<ProductPage options={options} />} />
+              <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart}/>} />
 
-              <Route path='/sizes' element={<SizesPage options={options} />}/>
+              <Route path='/sizes' element={<SizesPage options={options}  cart={cart}/>}/>
               {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}
 
               <Route path='/signup' element={<SignUpPage options={options} />}/>

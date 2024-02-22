@@ -8,9 +8,12 @@ import Header from '../header/Header';
 import Coupon from "./Coupon";
 import CalculatedShipping from "./CalculatedShipping";
 
-import {Link, NavLink} from "react-router-dom";
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import './cart.css';
+
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
 
 /**
  * Cart page
@@ -19,23 +22,13 @@ import './cart.css';
  * @constructor
  */
 function Cart({ options }) {
+    const location = useLocation();
+    const cart = location.state.encryptedData;
 
+    const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
+    const parsedCart = JSON.parse(decryptedData);
     
-    const [tax, setTax] = useState(0);
     
-    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
-    useEffect(() => {
-        // Initialize cart state from local storage when component mounts
-        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCart(storedCart);
-
-        // Update local storage whenever the cart state changes
-        //localStorage.setItem('cart', JSON.stringify(cart));
-
-        
-    // }, [cart]);
-}, []);
-
 // Function to find the lowest price among product variants
 function findLowestPrice(product) {
     let lowestPrice = Infinity;
@@ -63,7 +56,7 @@ const calculateTotal = (item) => {
 
 const calculateCartSubTotal = () => {
     let subTotal = 0;
-    cart.forEach((item) => {
+    parsedCart.forEach((item) => {
         subTotal += findLowestPrice(item) * item.quantity;
     });
 
@@ -76,7 +69,7 @@ const calculateCartSubTotal = () => {
 
 const calculateCartTax = () => {
     let subTotal = 0;
-    cart.forEach((item) => {
+    parsedCart.forEach((item) => {
         subTotal += findLowestPrice(item) * item.quantity;
     });
 
@@ -90,7 +83,7 @@ const calculateCartTax = () => {
 
     return (
         <Fragment>
-            <Header options={options} />
+            <Header options={options} cart={parsedCart}/>
 
             {/* <PageTitle name="Cart"/> */}
 
@@ -114,7 +107,7 @@ const calculateCartTax = () => {
                                         </thead>
                                         <tbody>
 
-                                        {cart.map((cartItem) => (
+                                        {parsedCart.map((cartItem) => (
                         <tr key={cartItem.id} 
                         // onClick={(e) => handleRowClick(cartItem, e)} 
                         style={{ cursor: "pointer" }}>
@@ -159,7 +152,7 @@ const calculateCartTax = () => {
                                     </table>
                                 </form>
                                 <div className="cart-collaterals">
-                                    <CalculatedShipping currencySymbol="N" price={calculateCartSubTotal()} tax={calculateCartTax()}/>
+                                    <CalculatedShipping currencySymbol="N" price={calculateCartSubTotal()} tax={calculateCartTax()} options={options} cart={parsedCart}/>
                                 </div>
                             </div>
                         </div>

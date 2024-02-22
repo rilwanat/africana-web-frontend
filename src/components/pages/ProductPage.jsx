@@ -36,7 +36,7 @@ import imgs from '../../assets/images/shop/img-2.jpg';
  * @returns {*}
  * @constructor
  */
-function ProductPage({options}) {
+function ProductPage({options, addToCart, cart}) {
 
     const location = useLocation();
     const product = location.state.encryptedData;
@@ -214,52 +214,6 @@ function calculateDiscountPercentage(price, oldPrice) {
     }
   };
 
-   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
-//   const increaseItemToCart = (item) => {
-
-//     // alert(item);
-//     alert(JSON.stringify(item, null, 2));
-
-//     // Check if the product is already in the cart
-//     const existingProduct = cart.find((cartItem) => cartItem.id === item.id);
-  
-//     if (existingProduct) {
-//       // If the product is already in the cart, update its quantity
-//       const updatedCart = cart.map((cartItem) =>
-//         cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
-//       );
-//       setCart(updatedCart);
-//     } else {
-//       // If the product is not in the cart, add it
-//       setCart([...cart, { ...item, quantity: 1 }]);
-//     }
-//     //alert("Ok");
-//   };
-
-const addToCart = async (product) => {
-    const existingProduct = cart.find((item) => item.id === product.id);
-    
-    if (existingProduct) {
-      // If the product is already in the cart, update its quantity
-      const updatedCart = cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-      //alert("found added");
-    } else {
-      // If the product is not in the cart, add it
-      const updatedCart = [...cart, { ...product, quantity: 1 }];
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-      //alert("not found added");
-    }
-  
-    // Optionally, you can show a confirmation message or trigger additional actions
-    //alert(`Item ${product?.name} added to cart!`);
-
-    //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
-  };
 
   
 
@@ -273,7 +227,7 @@ const addToCart = async (product) => {
                 : ''
             }
 
-            <Header options={options}/>
+            <Header options={options} cart={cart}/>
 
             {/* <PageTitle name="Shop single"/> */}
 
@@ -406,7 +360,7 @@ const addToCart = async (product) => {
                     {/* end row */}
                     <div className="row">
                         <div className="col col-xs-12">
-                            <RecentSingleProducts onQuickViewClick={HandelQuickViewData} relatedProducts={relatedProducts}/>
+                            <RecentSingleProducts onQuickViewClick={HandelQuickViewData} relatedProducts={relatedProducts} addToCart={addToCart} cart={cart}/>
                         </div>
                     </div>
                 </div>

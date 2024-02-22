@@ -19,7 +19,7 @@ import logo2 from '../../../assets/logos/Circle Icon_1.png';
  * @returns {*}
  * @constructor
  */
-function Header({ options }) {
+function Header({ options, cart }) {
 
     const data = {
         "content": "Join our showroom and get 1 % off ! Coupon code : AFR222"
@@ -56,7 +56,7 @@ function Header({ options }) {
 
                         <Navbar options={options}/>
 
-                        <HeaderRight options={options} />
+                        <HeaderRight options={options} cart={cart} />
 
                     </div>
                     {/* end of container */}
