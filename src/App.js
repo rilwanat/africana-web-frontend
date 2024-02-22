@@ -168,8 +168,8 @@ const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
               <Route path="/*" element={<div>NOT FOUND</div>} />
               <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart}/>}/>    
               <Route path='/home' element={<HomePage />}/>    
-              <Route path='/about' element={<AboutPage options={options} cart={cart}/>}/>    
-              <Route path='/my-account' element={<AccountPage options={options} />}/> 
+              <Route path='/about' element={<AboutPage options={options} addToCart={addToCart} cart={cart}/>}/>    
+              <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart}/>}/> 
               <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart} />}/>
               
               <Route path='/cart' element={<CartPage options={options} />}/>
@@ -179,13 +179,13 @@ const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
               {/* <Route path='/product-details/:product' element={<ProductPage options={options} />}/> */}
               <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart}/>} />
 
-              <Route path='/sizes' element={<SizesPage options={options}  cart={cart}/>}/>
+              <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart}/>}/>
               {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}
 
-              <Route path='/signup' element={<SignUpPage options={options} />}/>
-              <Route path='/signin' element={<SignInPage options={options} />}/>
+              <Route path='/signup' element={<SignUpPage options={options} addToCart={addToCart} cart={cart}/>}/>
+              <Route path='/signin' element={<SignInPage options={options} addToCart={addToCart} cart={cart}/>}/>
 
-              <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} />}/>
+              <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} addToCart={addToCart} cart={cart}/>}/>
 
             
           </Routes>

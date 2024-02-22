@@ -145,7 +145,8 @@ function Checkout({ options }) {
 
   const payNow = async () => {
 
-    if (paymentMethod == "paystack") {
+    alert(paymentMethod);
+    if (paymentMethod == "paystack" || paymentMethod == "") {
         alert("use flutterwave");
         return;
     }
@@ -522,7 +523,7 @@ function Checkout({ options }) {
         name="option"
         value="flutterwave"
         className='mr-2' 
-        // checked={genType === 'qrCodeOnly'} // Check if this option is selected
+        checked={paymentMethod === 'flutterwave'} // Check if this option is selected
        onChange={() => handlePaymentTypeChange("flutterwave")}
     />&nbsp;&nbsp;Flutterwave
 </label>
@@ -534,7 +535,7 @@ function Checkout({ options }) {
         name="option"
         value="paystack"
         className='mr-2' 
-        // checked={genType === 'qrCodeOnly'} // Check if this option is selected
+        checked={paymentMethod === 'paystack'} // Check if this option is selected
         onChange={() => handlePaymentTypeChange("paystack")}
     />&nbsp;&nbsp;Paystack
 </label>
