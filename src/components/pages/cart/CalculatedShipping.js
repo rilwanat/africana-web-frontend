@@ -41,7 +41,7 @@ function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
     };
 
     const navigateToCheckOut = () => {
-        options.onMiniCartClick();
+        //options.onMiniCartClick();
         const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
         // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
         navigate('/checkout', { state: { encryptedData } });
@@ -91,10 +91,9 @@ function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
                     </tr>
                     </tbody>
                 </table>
-                {/* <div className="wc-proceed-to-checkout"> */}
-                <div className="text-center">
-                    {/* <Link className="checkout-button button alt wc-forward" to="/checkout">Proceed to Checkout</Link> */}
-                    <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
+                <div className="wc-proceed-to-checkout">
+                    {/* <Link className="checkout-button button alt wc-forward" onClick={navigateToCheckOut}>Proceed to Checkout</Link> */}
+                    <div className="checkout-btn button"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Proceed to Checkout</div>
                 </div>
             </div>
         </Fragment>
