@@ -56,8 +56,8 @@ function HeaderRight({ options, cart }) {
                         <ShoppingBagOutlinedIcon className="mr-1 text-gray-500 cursor-pointer" />
                         {cart && cart.length > 0 && (
                             <div
-                                className="absolute top-0 right-0 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center"
-                                style={{ fontSize: '10px' }}
+                                className="absolute top-0 right-0 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center font-bold"
+                                style={{ fontSize: '9px', color: "#ffffff" }}
                             >
                                 {cart.length}
                             </div>
@@ -83,7 +83,7 @@ function HeaderRight({ options, cart }) {
                             {/* Subtotal logic here */}
                             <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
                             {/* <Link className="view-cart-btn" to="/cart" onClick={options.onMiniCartClick}>View Cart</Link> */}
-                            <div className="view-cart-btn"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
+                            <div className="view-cart-btn mb-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
                             {/* <Link className="checkout-btn" to="/checkout" onClick={options.onMiniCartClick}>Checkout</Link> */}
                             <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
                         </div>

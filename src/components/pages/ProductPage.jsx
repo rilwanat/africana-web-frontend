@@ -124,22 +124,15 @@ function ProductPage({options, addToCart, cart}) {
                 </a>
             );
         },
-        //dots: false,
         infinite: true,
         speed: 600,
         autoplaySpeed: 4000,
-        arrows: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-
         dots: true,
         dotsClass: "slick-dots slick-thumb slider-nav",
-        // infinite: true,
-        // speed: 500,
-        // arrows: false,
-        // slidesToShow: 1,
-        // slidesToScroll: 1
+        arrows: false,
     };
 
  
@@ -232,19 +225,26 @@ function calculateDiscountPercentage(price, oldPrice) {
             {/* <PageTitle name="Shop single"/> */}
 
             {/* start shop-single-section */}
-            <section className="shop-single-section  shop-single-vertical-thumb section-padding">
+            <section className="shop-single-section  shop-single-vertical-thumb section-padding-medium">
                 <div className="container-1410">
                     <div className="row">
                     
 
 
                         <div className="col col-md-6">
-                            <div className="shop-single-slider vertical-thumbnail">
+                            <div className="shop-single-slider vertical-thumbnail" 
+                            // style={{ background: '#FF0000' }}
+                            >
                                 <Slider {...settings}>
                                     {
                                         parsedProduct && parsedProduct.productImages.map((item, index) => (
-                                            <div key={index}>
+                                            <div key={index} 
+                                            // style={{ background: '#000000' }}
+                                            >
                                                 <img 
+                                                className='px-1 mx-1 mt-2'
+                                                // style={{ maxHeight: '100%', width: 'auto' }}
+                                                // style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                                                 src=
                                                 // {item.src}
                                                 "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
@@ -254,7 +254,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         ))
                                     }
                                 </Slider>
-                                <div className="slider-nav"></div>
+                                {/* <div className="slider-nav"></div> */}
                             </div>
                         </div>
                         <div className="col col-md-6">
@@ -273,9 +273,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                     {/* <span>{data.reviewCount}</span> */}
                                     <span className='ml-2'>({parsedProduct && parsedProduct.rating} Customer review{parsedProduct && parsedProduct.rating > 1 ? 's' : ''})</span>
                                 </div>
-                                <p>{parsedProduct.description}</p>
-                                
-                                 <div className="product-option">
+                                <div className="product-option">
                             {/* <form className="form"> */}
                                 <div className="product-row flex items-center">
 
@@ -317,6 +315,9 @@ function calculateDiscountPercentage(price, oldPrice) {
                                 </div>
                             {/* </form> */}
                         </div>
+                                <p>{parsedProduct.description}</p>
+                                
+                                 
                                 <div className="thb-product-meta-before">
                                 <div className="add-to-wishlist">
                                 <a href="#" className="add_to_wishlist">
