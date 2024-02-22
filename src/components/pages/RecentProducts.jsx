@@ -200,7 +200,6 @@ function calculateDiscountPercentage(price, oldPrice) {
 
     // if (!isDragging) 
     {
-        //plain
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
 
@@ -244,25 +243,18 @@ const addToCart = async (product) => {
     if (existingProduct) {
       // If the product is already in the cart, update its quantity
       const updatedCart = cart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
       setCart(updatedCart);
       localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-  } else {
+      //alert("found added");
+    } else {
       // If the product is not in the cart, add it
-      const leastPriceProductVariant = product.productVariants.reduce((prev, current) => {
-          return (prev.price < current.price) ? prev : current;
-      });
-      const productToAdd = {
-          id: product.id,
-          name: product.name,
-          productVariant: leastPriceProductVariant,
-          quantity: 1
-      };
-      const updatedCart = [...cart, productToAdd];
+      const updatedCart = [...cart, { ...product, quantity: 1 }];
       setCart(updatedCart);
       localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-  }
+      //alert("not found added");
+    }
   
     // Optionally, you can show a confirmation message or trigger additional actions
     //alert(`Item ${product?.name} added to cart!`);
