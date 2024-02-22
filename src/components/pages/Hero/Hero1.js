@@ -58,7 +58,7 @@ function Hero1() {
 
     return (
         <Fragment>
-            <section className="hero-1">
+            <section className="hero-2">
                 <Slider {...settings}>
                     {
                         heroData.map((item, index) => (

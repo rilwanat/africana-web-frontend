@@ -14,7 +14,7 @@ import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
 
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 /**
  * Checkout page
@@ -24,6 +24,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
  */
 function Checkout({ options }) {
 
+    const location = useLocation();
+    const cart = location.state.encryptedData;
+
     /**
      * states
      */
@@ -31,7 +34,7 @@ function Checkout({ options }) {
     const [showShowCoupon, setShowShowCoupon] = useState(false);
 
 
-    const { cart } = useParams();
+    // const { cart } = useParams();
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
     const parsedCart = JSON.parse(decryptedData);
 

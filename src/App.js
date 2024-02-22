@@ -131,6 +131,8 @@ const options = {
   onMiniCartClick: HandelMiniCartStatus
 };
 
+// const product = '';
+
   return (
     <Router>
       {/* <Navbar /> */}
@@ -152,14 +154,16 @@ const options = {
               <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData}/>}/>    
               <Route path='/home' element={<HomePage />}/>    
               <Route path='/about' element={<AboutPage options={options} />}/>    
-              <Route path='/my-account' element={<AccountPage options={options} />}/>    
-              {/* <Route path='/login' element={<LoginPage />}/> */}
+              <Route path='/my-account' element={<AccountPage options={options} />}/> 
               <Route path='/shop' element={<ShopPage options={options} />}/>
               
               <Route path='/cart' element={<CartPage options={options} />}/>
-              <Route path='/checkout/:cart' element={<CheckoutPage options={options} />}/>
+              {/* <Route path='/checkout/:cart' element={<CheckoutPage options={options} />}/> */}
+              <Route path='/checkout' element={<CheckoutPage options={options} />}/>
 
-              <Route path='/product-details/:product' element={<ProductPage options={options} />}/>
+              {/* <Route path='/product-details/:product' element={<ProductPage options={options} />}/> */}
+              <Route path="/product-details" element={<ProductPage options={options} />} />
+
               <Route path='/sizes' element={<SizesPage options={options} />}/>
               {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}
 
@@ -168,14 +172,6 @@ const options = {
 
               <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} />}/>
 
-              {/* 
-              <Route path='/privacy' element={<PrivacyPage />}/>
-              <Route path='/terms' element={<TermsPage />}/>
-              <Route path='/promo' element={<PromoPage />}/>
-              <Route path='/wishlist' element={<WishlistPage />}/>
-              <Route path='/cart' element={<CartPage />}/>
-              <Route path='/checkout' element={<CheckoutPage />}/>
-              */}
             
           </Routes>
 

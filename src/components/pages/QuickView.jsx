@@ -65,16 +65,17 @@ function calculateDiscountPercentage(price, oldPrice) {
       : 0; // Return 0 if there's no discount
   }
 
-  const handleProductClick = (product, e) => {
+//   const handleProductClick = (product, e) => {
 
-    // if (!isDragging) 
-    {
-        const productString = JSON.stringify(product);
-        navigate(`/product-details/${encodeURIComponent(productString)}`);
-    }
+//     // if (!isDragging) 
+//     {
+//         //const productString = JSON.stringify(product);
+//         // navigate(`/product-details/${encodeURIComponent(productString)}`);
+//         //navigate('/product-details', { state: { encryptedData } });
+//     }
     
 
-  };
+//   };
 
 
 

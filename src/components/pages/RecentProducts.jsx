@@ -206,7 +206,8 @@ function calculateDiscountPercentage(price, oldPrice) {
         // Encrypt the product data
         // Navigate to the route with the encrypted parameter
         const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
-        navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
+        // navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
+        navigate('/product-details', { state: { encryptedData } });
         //
     }
     

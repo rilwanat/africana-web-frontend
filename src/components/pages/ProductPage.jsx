@@ -17,7 +17,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import './shop/shop.css';
 
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
@@ -38,6 +38,10 @@ import imgs from '../../assets/images/shop/img-2.jpg';
  */
 function ProductPage({options}) {
 
+    const location = useLocation();
+    const product = location.state.encryptedData;
+
+    
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -47,7 +51,9 @@ function ProductPage({options}) {
     //const parsedProduct = JSON.parse(decodeURIComponent(product));
     //alert("parsedInstitution: " + parsedInstitution.id);
   
-    const { product } = useParams();
+    
+
+    //const { product } = useParams();
     const decryptedData = AES.decrypt(decodeURIComponent(product), 'encryptionKey').toString(CryptoJS.enc.Utf8);
     const parsedProduct = JSON.parse(decryptedData);
 
