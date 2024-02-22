@@ -16,6 +16,9 @@ import { AES } from 'crypto-js';
 
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
+import axios from 'axios';
+
+
 /**
  * Checkout page
  * @param options
@@ -26,6 +29,30 @@ function Checkout({ options }) {
 
     const location = useLocation();
     const cart = location.state.encryptedData;
+
+
+
+    
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    
+    const [address1, setAddress1] = useState("");
+    const [address2, setAddress2] = useState("");
+
+    
+    const [postalCode, setPostalCode] = useState("");
+    
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+
+    const [country, setCountry] = useState("");
+    const [orderNotes, setOrderNotes] = useState("");
+    
+    const [paymentMethod, setPaymentMethod] = useState('');
+
+
 
     /**
      * states
@@ -102,15 +129,77 @@ function Checkout({ options }) {
         return calculateCartSubTotal() + calculateCartTax();
     }
     
-        let countCartItem = 1;//indexOfFirstItem + 1;
 
 
-        const payNow = () => {
-            // options.onMiniCartClick();
-            // const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
-            // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
-          };
+        const handlePaymentTypeChange = (p) => {
+            setPaymentMethod(p);
+        }
 
+
+          // Function to validate email format
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+
+  const payNow = async () => {
+
+     // Validate email before proceeding
+     if (!isValidEmail(email)) {
+        alert('Invalid email address');
+        //setRegistrationStatus("Invalid email address");
+        //setIsModalOpen(true);
+        return;
+      }
+
+
+    // Create an array to hold the names of required fields
+    const requiredFields = ['firstname', 'lastname', 'email', 'phoneNumber', 'address1', 'postalCode', 'city', 'paymentMethod']; //'state', 'country', 
+
+    // Check if any of the required fields are empty
+    const emptyFields = requiredFields.filter(field => !eval(field));
+
+    if (emptyFields.length > 0) {
+        // Show an alert indicating the empty required fields
+        alert(`Please fill in the following required fields: ${emptyFields.join(', ')}`);
+        return;
+    }
+
+    try {
+        const formData = new FormData();
+
+        formData.append('firstname', firstname);
+        formData.append('lastname', lastname);
+        formData.append('email', email);
+        formData.append('address1', address1);
+        formData.append('address2', address2);
+        formData.append('postalCode', postalCode);
+        formData.append('city', city);
+        formData.append('state', "state");
+        formData.append('country', "country");
+        formData.append('taxId', 1);
+        formData.append('paymentMethod', paymentMethod);
+
+        const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/checkout", formData, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.data.success) {
+            alert("Success");
+            // Clear fields if needed
+            // clearFields();
+        } else {
+            alert("Registration Failed");
+        }
+    } catch (error) {
+        alert("Error: " + error);
+    }
+};
+
+          
 
     return (
         <Fragment>
@@ -124,9 +213,9 @@ function Checkout({ options }) {
                     <div className="row">
                         <div className="col col-xs-12">
                             <div className="woocommerce">
-                                <div className="woocommerce-info">
+                                {/* <div className="woocommerce-info">
                                     Returning customer?
-                                    <a onClick={HandleShowLoginStatus} href="#" className="showlogin">Click
+                                    <a onClick={HandleShowLoginStatus}  className="showlogin ml-1" style={{ cursor: 'pointer' }}>Click
                                         here to login
                                     </a>
                                 </div>
@@ -169,10 +258,10 @@ function Checkout({ options }) {
                                             <div className="clear"/>
                                         </form>
                                         : ''
-                                }
+                                } */}
 
-                                <div className="woocommerce-info">Have a coupon? 
-                                <a onClick={HandelShowCouponStatus} href="#" className="showcoupon">Click here to enter your code</a>
+                                {/* <div className="woocommerce-info">Have a coupon? 
+                                <a onClick={HandelShowCouponStatus} className="showcoupon ml-1" style={{ cursor: 'pointer' }}>Click here to enter your code</a>
                                 </div>
                                 {
                                     showShowCoupon
@@ -189,12 +278,146 @@ function Checkout({ options }) {
                                             <div className="clear"/>
                                         </form>
                                         : ''
-                                }
+                                } */}
 
                                 <form name="checkout" method="post" className="checkout woocommerce-checkout"
                                       action="/?page_id=6" encType="multipart/form-data">
                                     <div className="col2-set" id="customer_details">
-                                        <BillingFields/>
+                                    <div className="col-1">
+                <div className="woocommerce-billing-fields">
+                    <h3>Billing Details</h3>
+
+                    <p className="form-row form-row form-row-first validate-required" id="billing_first_name_field">
+                        <label htmlFor="billing_first_name">
+                            First Name <abbr className="required" title="required">*</abbr>
+                        </label>
+                        <input
+                            type="text"
+                            className="input-text"
+                            name="billing_first_name"
+                            id="billing_first_name"
+                            placeholder="Enter firstname"
+                            autoComplete="given-name"
+                            onChange={(e) => setFirstname(e.target.value)}
+                        />
+                    </p>
+                    <p className="form-row form-row form-row-last validate-required" id="billing_last_name_field">
+                        <label htmlFor="billing_last_name">
+                            Last Name <abbr className="required" title="required">*</abbr>
+                        </label>
+                        <input
+                            type="text"
+                            className="input-text"
+                            name="billing_last_name"
+                            id="billing_last_name"
+                            placeholder="Enter lastname"
+                            autoComplete="family-name"
+                            onChange={(e) => setLastname(e.target.value)}
+                        />
+                    </p>
+                    <div className="clear" />
+
+                    <p className="form-row form-row form-row-first validate-required validate-email" id="billing_email_field">
+                        <label htmlFor="billing_email">
+                            Email Address <abbr className="required" title="required">*</abbr>
+                        </label>
+                        <input
+                            type="email"
+                            className="input-text"
+                            name="billing_email"
+                            id="billing_email"
+                            placeholder="Enter email address"
+                            autoComplete="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </p>
+                    <p className="form-row form-row form-row-last validate-required validate-phone" id="billing_phone_field">
+                        <label htmlFor="billing_phone">Phone <abbr className="required" title="required">*</abbr></label>
+                        <input
+                            type="tel"
+                            className="input-text"
+                            name="billing_phone"
+                            id="billing_phone"
+                            placeholder="Enter phone number"
+                            autoComplete="tel"
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                        />
+                    </p>
+
+                    <div className="clear" />
+
+                    <p className="form-row form-row form-row-wide address-field validate-required" id="billing_address_1_field">
+                        <label htmlFor="billing_address_1">Address <abbr className="required" title="required">*</abbr></label>
+                        <input
+                            type="text"
+                            className="input-text"
+                            name="billing_address_1"
+                            id="billing_address_1"
+                            placeholder="Street address"
+                            autoComplete="address-line1"
+                            onChange={(e) => setAddress1(e.target.value)}
+                        />
+                    </p>
+                    <p className="form-row form-row form-row-wide address-field" id="billing_address_2_field">
+                        <input
+                            type="text"
+                            className="input-text"
+                            name="billing_address_2"
+                            id="billing_address_2"
+                            placeholder="Apartment, suite, unit etc. (optional)"
+                            autoComplete="address-line2"
+                            onChange={(e) => setAddress1(e.target.value)}
+                        />
+                    </p>
+                    <p className="form-row form-row address-field validate-postcode validate-required form-row-first woocommerce-invalid-required-field" id="billing_city_field">
+                        <label htmlFor="billing_city">City <abbr className="required" title="required">*</abbr></label>
+                        <input
+                            type="text"
+                            className="input-text"
+                            name="billing_city"
+                            id="billing_city"
+                            placeholder="Billing city"
+                            autoComplete="billing-city"
+                            onChange={(e) => setCity(e.target.value)}
+                        />
+                    </p>
+                    <p className="form-row form-row form-row-last address-field validate-required validate-postcode" id="billing_postcode_field">
+                        <label htmlFor="billing_postcode">Postcode / ZIP <abbr className="" title=""></abbr></label>
+                        <input
+                            type="text"
+                            className="input-text"
+                            name="billing_postcode8"
+                            id="billing_postcode"
+                            placeholder="Postal code"
+                            autoComplete="postal-code"
+                            onChange={(e) => setPostalCode(e.target.value)}
+                        />
+                    </p>
+                    <p className="form-row form-row form-row-wide address-field update_totals_on_change validate-required" id="billing_state_field">
+                        <label htmlFor="billing_state">State <abbr className="required" title="required">*</abbr></label>
+                        <select name="billing_state" id="billing_state" autoComplete="state" className="state_to_state state_select">
+                            <option>Select state </option>
+                            {/* {state.map((item, index) => (
+                                <option key={index} value={item.code}>{item.name}</option>
+                            ))} */}
+                            <option key='state' value='state'>State</option>
+                        </select>
+                    </p>
+                    <p className="form-row form-row form-row-wide address-field update_totals_on_change validate-required" id="billing_country_field">
+                        <label htmlFor="billing_country">Country <abbr className="required" title="required">*</abbr></label>
+                        <select name="billing_country" id="billing_country" autoComplete="country" className="country_to_state country_select">
+                            <option>Select country </option>
+                            {/* {countries.map((item, index) => (
+                                <option key={index} value={item.code}>{item.name}</option>
+                            ))} */}
+                            <option key='country' value='country'>Country</option>
+                        </select>
+                    </p>
+                    <div className="clear" />
+                </div>
+            </div>
+                                        {/* <BillingFields/> */}
+                                        
                                         <ShippingFields/>
                                     </div>
                                     <h3 id="order_review_heading">Your order</h3>
@@ -261,21 +484,30 @@ function Checkout({ options }) {
                                         </table>
                                         <div id="payment" className="woocommerce-checkout-payment flex flex-col items-start">
                                                
-                                            <label style={{ flex: '1', textAlign: 'center' }}>
-              <input type="radio" name="option" value="fluterwave" className='mr-2' 
-            //   checked={genType === 'qrCodeOnly'} // Check if this option is selected
-            //   onChange={handleOptionChange}
-              />
-            Flutterwave
-            </label>
+                                            
+                                        <label style={{ flex: '1', textAlign: 'center' }}>
+    <input
+        type="radio"
+        name="option"
+        value="flutterwave"
+        className='mr-2' 
+        // checked={genType === 'qrCodeOnly'} // Check if this option is selected
+       onChange={() => handlePaymentTypeChange("flutterwave")}
+    />&nbsp;&nbsp;Flutterwave
+</label>
 
-            <label style={{ flex: '1', textAlign: 'center' }}>
-              <input type="radio" name="option" value="paystack" className='mr-2' 
-            //   checked={genType === 'qrCodeOnly'} // Check if this option is selected
-            //   onChange={handleOptionChange}
-              />
-              Paystack
-            </label>
+
+<label style={{ flex: '1', textAlign: 'center' }}>
+    <input
+        type="radio"
+        name="option"
+        value="paystack"
+        className='mr-2' 
+        // checked={genType === 'qrCodeOnly'} // Check if this option is selected
+        onChange={() => handlePaymentTypeChange("paystack")}
+    />&nbsp;&nbsp;Paystack
+</label>
+
                                             
                                             <div className="form-row place-order">
 
