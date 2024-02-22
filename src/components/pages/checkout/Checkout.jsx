@@ -33,25 +33,25 @@ function Checkout({ options }) {
 
 
     
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [email, setEmail] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
+    const [firstname, setFirstname] = useState("");//rb");
+    const [lastname, setLastname] = useState("");//apps");
+    const [email, setEmail] = useState("");//rilwan.at@gmail.com");
+    const [phoneNumber, setPhoneNumber] = useState("");//09081537000");
     
-    const [address1, setAddress1] = useState("");
+    const [address1, setAddress1] = useState("");//No 31, Pope John Paul Street II");
     const [address2, setAddress2] = useState("");
 
     
-    const [postalCode, setPostalCode] = useState("");
+    const [postalCode, setPostalCode] = useState("");//900001");
     
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
+    const [city, setCity] = useState("");//Maitama");
+    const [state, setState] = useState("");//Abuja");
 
-    const [country, setCountry] = useState("");
+    const [country, setCountry] = useState("");//Nigeria");
     const [orderNotes, setOrderNotes] = useState("");
     
-    const [paymentMethod, setPaymentMethod] = useState('');
-
+    const [paymentMethod, setPaymentMethod] = useState("flutterwave");//);
+    const [isLoading, setIsLoading] = useState(false);
 
 
     /**
@@ -147,7 +147,7 @@ function Checkout({ options }) {
 
      // Validate email before proceeding
      if (!isValidEmail(email)) {
-        alert('Invalid email address');
+        alert('Please enter a valid email address');
         //setRegistrationStatus("Invalid email address");
         //setIsModalOpen(true);
         return;
@@ -166,27 +166,44 @@ function Checkout({ options }) {
         return;
     }
 
+    setIsLoading(true);
+
     try {
-        const formData = new FormData();
-
-        formData.append('firstname', firstname);
-        formData.append('lastname', lastname);
-        formData.append('email', email);
-        formData.append('address1', address1);
-        formData.append('address2', address2);
-        formData.append('postalCode', postalCode);
-        formData.append('city', city);
-        formData.append('state', "state");
-        formData.append('country', "country");
-        formData.append('taxId', 1);
-        formData.append('paymentMethod', paymentMethod);
-
-        const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/checkout", formData, {
+        
+        const requestData = {
+            customer: {
+                firstName: firstname,
+                lastName: lastname,
+                email: email,
+                phone: phoneNumber,
+                address1: address1,
+                address2: address2,
+                postalCode: postalCode,
+                city: city,
+                state: state,
+                country: country
+            },
+            orderItems: [
+                {
+                    productVariantId: "2c09c57a-d367-43a8-a118-8c4fee26824b",
+                    quantity: 2
+                },
+                {
+                    productVariantId: "398eec1a-78c5-4864-88a1-66dc4f10cec9",
+                    quantity: 1
+                }
+            ],
+            taxId: 1,
+            paymentMethod: paymentMethod
+        };
+        
+        const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/checkout", requestData, {
             headers: {
                 "Content-Type": "application/json",
             },
         });
-
+        
+        setIsLoading(false);
         if (response.data.success) {
             alert("Success");
             // Clear fields if needed
@@ -195,6 +212,7 @@ function Checkout({ options }) {
             alert("Registration Failed");
         }
     } catch (error) {
+        setIsLoading(false);
         alert("Error: " + error);
     }
 };
@@ -513,7 +531,7 @@ function Checkout({ options }) {
 
                                                 {/* <NoscriptSnippet/> */}
                                                        
-                                                       <div className="slide-btns mt-2" style={{ cursor: 'pointer' }} onClick={payNow}><div className="theme-btn-s5">Pay Now</div>
+                                                       <div className="slide-btns mt-2" style={{ cursor: 'pointer' }} onClick={payNow}><div className="theme-btn-s5">{isLoading ? 'Please wait..' : 'Pay Now'}</div>
                                                         </div>
 
                                                        
