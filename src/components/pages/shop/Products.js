@@ -67,8 +67,9 @@ function calculateDiscountPercentage(price, oldPrice) {
 
     // if (!isDragging) 
     {
-        // const productString = JSON.stringify(product);
-        // navigate(`/product-details/${encodeURIComponent(productString)}`);
+        //plain
+        //const productString = JSON.stringify(product);
+        //navigate(`/product-details/${encodeURIComponent(productString)}`);
 
 
         // Encrypt the product data
@@ -111,19 +112,26 @@ const addToCart = async (product) => {
     const existingProduct = cart.find((item) => item.id === product.id);
     
     if (existingProduct) {
-      // If the product is already in the cart, update its quantity
-      const updatedCart = cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-      //alert("found added");
+        // If the product is already in the cart, update its quantity
+        const updatedCart = cart.map((item) =>
+            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
     } else {
-      // If the product is not in the cart, add it
-      const updatedCart = [...cart, { ...product, quantity: 1 }];
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-      //alert("not found added");
+        // If the product is not in the cart, add it
+        const leastPriceProductVariant = product.productVariants.reduce((prev, current) => {
+            return (prev.price < current.price) ? prev : current;
+        });
+        const productToAdd = {
+            id: product.id,
+            name: product.name,
+            productVariant: leastPriceProductVariant,
+            quantity: 1
+        };
+        const updatedCart = [...cart, productToAdd];
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
     }
   
     // Optionally, you can show a confirmation message or trigger additional actions

@@ -33,6 +33,14 @@ function RecentSingleProducts({onQuickViewClick, relatedProducts}) {
     const navigate = useNavigate();
 
 
+    const [isPrevHovered, setPrevHovered] = useState(false);
+    const [isNextHovered, setNextHovered] = useState(false);
+
+    const [isViewHovered, setViewHovered] = useState(false);
+    const [isFavHovered, setFavHovered] = useState(false);
+    const [isBagHovered, setBagHovered] = useState(false);
+
+
     /**
      * slider settings
      * @type {{swipeToSlide: boolean, dots: boolean, infinite: boolean, responsive: *[], slidesToScroll: number, focusOnSelect: boolean, slidesToShow: number, autoplay: boolean, speed: number, autoplaySpeed: number}}
@@ -115,6 +123,7 @@ function calculateDiscountPercentage(price, oldPrice) {
 
     // if (!isDragging) 
     {
+        //plain
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
 
@@ -157,19 +166,26 @@ const addToCart = async (product) => {
     const existingProduct = cart.find((item) => item.id === product.id);
     
     if (existingProduct) {
-      // If the product is already in the cart, update its quantity
-      const updatedCart = cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-      //alert("found added");
+        // If the product is already in the cart, update its quantity
+        const updatedCart = cart.map((item) =>
+            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
     } else {
-      // If the product is not in the cart, add it
-      const updatedCart = [...cart, { ...product, quantity: 1 }];
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
-      //alert("not found added");
+        // If the product is not in the cart, add it
+        const leastPriceProductVariant = product.productVariants.reduce((prev, current) => {
+            return (prev.price < current.price) ? prev : current;
+        });
+        const productToAdd = {
+            id: product.id,
+            name: product.name,
+            productVariant: leastPriceProductVariant,
+            quantity: 1
+        };
+        const updatedCart = [...cart, productToAdd];
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart)); // Update local storage
     }
   
     // Optionally, you can show a confirmation message or trigger additional actions
@@ -200,7 +216,8 @@ const addToCart = async (product) => {
                                         }
                                         {/* <Link to="/product-details"> */}
                                             <div className='mx-2'
-                                        onClick={(e) => handleProductClick(item, e)} >
+                                        onClick={(e) => handleProductClick(item, e)} 
+                                        style={{cursor: 'pointer'}}>
                                             <img loading="lazy" 
                                             src=
                                             "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
@@ -221,12 +238,21 @@ const addToCart = async (product) => {
                                                                     
                                                                     <i className="fi flaticon-view"/>
                                                                 </a> */}
-                                                                <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                <div 
+                                                                style={{ backgroundColor: isViewHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <RemoveRedEyeOutlinedIcon 
                                                                         onClick={
                                                                             e => onQuickViewClick(e, item)
                                                                         }
-                                                                        className='w-4 h-4 p-1' />
+                                                                        onMouseEnter={()=>{
+                                                                            setViewHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setViewHovered(false)
+                                                                        }}
+                                                                        className='w-4 h-4 p-1' 
+                                                                        style={{ color: isViewHovered ? 'white' : 'black',  }}
+                                                                        />
                                                                     </div>
                                                                 </li>
                                                                 <li>
@@ -234,19 +260,43 @@ const addToCart = async (product) => {
                                                                        data-tip="Add to Wishlist!">
                                                                         <i className="fi icon-heart-shape-outline"/>
                                                                     </a> */}
-                                                                    <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
-                                                                        <FavoriteIcon className='w-4 h-4 p-1' />
+                                                                    <div style={{ backgroundColor: isFavHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <FavoriteIcon className='w-4 h-4 p-1' 
+                                                                        onClick={
+                                                                            ()=>{}
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setFavHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setFavHovered(false)
+                                                                        }}
+                                                                        style={{ color: isFavHovered ? 'white' : 'black',  }}
+
+                                                                        />
                                                                     </div>
                                                                     </li>
                                                                 <li>
                                                                     {/* <a href="#" title="Add to cart!"
                                                                        data-tip="Add to cart!">
                                                                         <i className="fi flaticon-shopping-cart"/></a> */}
-                                                                        <div style={{ backgroundColor: 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
+                                                                        <div style={{ backgroundColor: isBagHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
+                                                                        
                                                                         onClick={
+                                                                            // ()=>{ addToCart()}
+                                                                            //(e) => addToCart(e, item, 1)
                                                                             () => addToCart(item)
+                                                                            // addToCart = async (e, productVariantId, quantity)
+                                                                            // () => {alert(item.productVariantId);}
                                                                         }
+                                                                        onMouseEnter={()=>{
+                                                                            setBagHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setBagHovered(false)
+                                                                        }}
+                                                                        style={{ color: isBagHovered ? 'white' : 'black',  }}
                                                                         />
                                                                     </div>
                                                                         </li>

@@ -34,6 +34,7 @@ function Checkout({ options }) {
     const { cart } = useParams();
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
     const parsedCart = JSON.parse(decryptedData);
+    //const parsedCart = JSON.parse(decodeURIComponent(cart));
 
     /**
      * Handle state

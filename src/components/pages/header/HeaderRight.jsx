@@ -20,15 +20,24 @@ function HeaderRight({ options }) {
     const [errorMessage, setErrorMessage] = useState('');
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
-    // useEffect(() => {
-    //     // Initialize cart state from local storage when component mounts
-    //     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    //     setCart(storedCart);
-    // }, []);
+    useEffect(() => {
+        // Initialize cart state from local storage when component mounts
+        //const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        //setCart(storedCart);
+
+    }, []);
+    
+
 
 
     const navigateToCheckOut = () => {
         options.onMiniCartClick();
+
+        //plain
+        //const cartString = JSON.stringify(cart);
+        //navigate(`/checkout/${encodeURIComponent(cartString)}`);
+
+
         const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
         navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
       };
