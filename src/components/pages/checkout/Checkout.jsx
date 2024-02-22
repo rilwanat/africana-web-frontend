@@ -145,6 +145,11 @@ function Checkout({ options }) {
 
   const payNow = async () => {
 
+    if (paymentMethod == "paystack") {
+        alert("use flutterwave");
+        return;
+    }
+
      // Validate email before proceeding
      if (!isValidEmail(email)) {
         alert('Please enter a valid email address');
@@ -155,14 +160,26 @@ function Checkout({ options }) {
 
 
     // Create an array to hold the names of required fields
-    const requiredFields = ['firstname', 'lastname', 'email', 'phoneNumber', 'address1', 'postalCode', 'city', 'paymentMethod']; //'state', 'country', 
+    const requiredFields = [
+        'firstname', 
+        'lastname', 
+        'email', 
+        'phoneNumber', 
+        'address1', 
+        // 'postalCode', 
+        'city', 
+        // 'state', 
+        // 'country', 
+        'paymentMethod'
+    ]; //
 
     // Check if any of the required fields are empty
     const emptyFields = requiredFields.filter(field => !eval(field));
 
     if (emptyFields.length > 0) {
         // Show an alert indicating the empty required fields
-        alert(`Please fill in the following required fields: ${emptyFields.join(', ')}`);
+        alert(`Please fill in the remaining ${emptyFields.length} required fields: ${emptyFields.join(', ')}`);
+        // alert(`Please fill in the following required fields: ${emptyFields.join(', ')}`);
         return;
     }
 
@@ -226,7 +243,7 @@ function Checkout({ options }) {
             {/* <PageTitle name="Checkout"/> */}
 
             {/* start checkout-section */}
-            <section className="checkout-section section-padding">
+            <section className="checkout-section section-padding-medium">
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-xs-12">
@@ -298,208 +315,204 @@ function Checkout({ options }) {
                                         : ''
                                 } */}
 
-                                <form name="checkout" method="post" className="checkout woocommerce-checkout"
-                                      action="/?page_id=6" encType="multipart/form-data">
-                                    <div className="col2-set" id="customer_details">
-                                    <div className="col-1">
-                <div className="woocommerce-billing-fields">
-                    <h3>Billing Details</h3>
+                                <form name="checkout" method="post" 
+                                className="checkout woocommerce-checkout"
+                                      action="" encType="multipart/form-data">
 
-                    <p className="form-row form-row form-row-first validate-required" id="billing_first_name_field">
-                        <label htmlFor="billing_first_name">
-                            First Name <abbr className="required" title="required">*</abbr>
+
+
+<div className="col2-set" id="customer_details">
+    <div className="col-1">
+        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div className="px-4 py-5 sm:px-6">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">Billing Details</h3>
+            </div>
+            <div className="border-t border-gray-200">
+                <div className="grid grid-cols-1 gap-y-6 gap-x-4 px-4 py-5 sm:grid-cols-3 sm:px-6">
+                    <div>
+                        <label htmlFor="billing_first_name" className="block text-sm font-medium text-gray-700">
+                            First Name
                         </label>
                         <input
                             type="text"
-                            className="input-text"
-                            name="billing_first_name"
-                            id="billing_first_name"
-                            placeholder="Enter firstname"
-                            autoComplete="given-name"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Enter First Name"
                             onChange={(e) => setFirstname(e.target.value)}
                         />
-                    </p>
-                    <p className="form-row form-row form-row-last validate-required" id="billing_last_name_field">
-                        <label htmlFor="billing_last_name">
-                            Last Name <abbr className="required" title="required">*</abbr>
+                    </div>
+                    <div>
+                        <label htmlFor="billing_last_name" className="block text-sm font-medium text-gray-700">
+                            Last Name
                         </label>
                         <input
                             type="text"
-                            className="input-text"
-                            name="billing_last_name"
-                            id="billing_last_name"
-                            placeholder="Enter lastname"
-                            autoComplete="family-name"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Enter Last Name"
                             onChange={(e) => setLastname(e.target.value)}
                         />
-                    </p>
-                    <div className="clear" />
-
-                    <p className="form-row form-row form-row-first validate-required validate-email" id="billing_email_field">
-                        <label htmlFor="billing_email">
-                            Email Address <abbr className="required" title="required">*</abbr>
+                    </div>
+                    <div>
+                        <label htmlFor="billing_email" className="block text-sm font-medium text-gray-700">
+                            Email Address
                         </label>
                         <input
                             type="email"
-                            className="input-text"
-                            name="billing_email"
-                            id="billing_email"
-                            placeholder="Enter email address"
-                            autoComplete="email"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Enter Email Address"
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                    </p>
-                    <p className="form-row form-row form-row-last validate-required validate-phone" id="billing_phone_field">
-                        <label htmlFor="billing_phone">Phone <abbr className="required" title="required">*</abbr></label>
+                    </div>
+                    <div>
+                        <label htmlFor="billing_phone" className="block text-sm font-medium text-gray-700">
+                            Phone
+                        </label>
                         <input
                             type="tel"
-                            className="input-text"
-                            name="billing_phone"
-                            id="billing_phone"
-                            placeholder="Enter phone number"
-                            autoComplete="tel"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Enter Phone Number"
                             onChange={(e) => setPhoneNumber(e.target.value)}
                         />
-                    </p>
-
-                    <div className="clear" />
-
-                    <p className="form-row form-row form-row-wide address-field validate-required" id="billing_address_1_field">
-                        <label htmlFor="billing_address_1">Address <abbr className="required" title="required">*</abbr></label>
+                    </div>
+                    <div>
+                        <label htmlFor="billing_address_1" className="block text-sm font-medium text-gray-700">
+                            Address
+                        </label>
                         <input
                             type="text"
-                            className="input-text"
-                            name="billing_address_1"
-                            id="billing_address_1"
-                            placeholder="Street address"
-                            autoComplete="address-line1"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Street Address"
                             onChange={(e) => setAddress1(e.target.value)}
                         />
-                    </p>
-                    <p className="form-row form-row form-row-wide address-field" id="billing_address_2_field">
+                    </div>
+                    <div>
+                        <label htmlFor="billing_address_2" className="block text-sm font-medium text-gray-700">
+                            (optional) Address
+                        </label>
                         <input
                             type="text"
-                            className="input-text"
-                            name="billing_address_2"
-                            id="billing_address_2"
-                            placeholder="Apartment, suite, unit etc. (optional)"
-                            autoComplete="address-line2"
-                            onChange={(e) => setAddress1(e.target.value)}
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Apartment, Suite, Unit etc."
+                            onChange={(e) => setAddress2(e.target.value)}
                         />
-                    </p>
-                    <p className="form-row form-row address-field validate-postcode validate-required form-row-first woocommerce-invalid-required-field" id="billing_city_field">
-                        <label htmlFor="billing_city">City <abbr className="required" title="required">*</abbr></label>
+                    </div>
+                    <div>
+                        <label htmlFor="billing_city" className="block text-sm font-medium text-gray-700">
+                            City
+                        </label>
                         <input
                             type="text"
-                            className="input-text"
-                            name="billing_city"
-                            id="billing_city"
-                            placeholder="Billing city"
-                            autoComplete="billing-city"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="City"
                             onChange={(e) => setCity(e.target.value)}
                         />
-                    </p>
-                    <p className="form-row form-row form-row-last address-field validate-required validate-postcode" id="billing_postcode_field">
-                        <label htmlFor="billing_postcode">Postcode / ZIP <abbr className="" title=""></abbr></label>
+                    </div>
+                    <div>
+                        <label htmlFor="billing_postcode" className="block text-sm font-medium text-gray-700">
+                            Postcode / ZIP
+                        </label>
                         <input
                             type="text"
-                            className="input-text"
-                            name="billing_postcode8"
-                            id="billing_postcode"
-                            placeholder="Postal code"
-                            autoComplete="postal-code"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Postal Code"
                             onChange={(e) => setPostalCode(e.target.value)}
                         />
-                    </p>
-                    <p className="form-row form-row form-row-wide address-field update_totals_on_change validate-required" id="billing_state_field">
-                        <label htmlFor="billing_state">State <abbr className="required" title="required">*</abbr></label>
-                        <select name="billing_state" id="billing_state" autoComplete="state" className="state_to_state state_select">
-                            <option>Select state </option>
-                            {/* {state.map((item, index) => (
-                                <option key={index} value={item.code}>{item.name}</option>
-                            ))} */}
-                            <option key='state' value='state'>State</option>
-                        </select>
-                    </p>
-                    <p className="form-row form-row form-row-wide address-field update_totals_on_change validate-required" id="billing_country_field">
-                        <label htmlFor="billing_country">Country <abbr className="required" title="required">*</abbr></label>
-                        <select name="billing_country" id="billing_country" autoComplete="country" className="country_to_state country_select">
-                            <option>Select country </option>
-                            {/* {countries.map((item, index) => (
-                                <option key={index} value={item.code}>{item.name}</option>
-                            ))} */}
-                            <option key='country' value='country'>Country</option>
-                        </select>
-                    </p>
-                    <div className="clear" />
+                    </div>
+                    <div>
+                        <label htmlFor="billing_state" className="block text-sm font-medium text-gray-700">
+                            State
+                        </label>
+                        <input
+                            type="text"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="State"
+                            onChange={(e) => setState(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="billing_country" className="block text-sm font-medium text-gray-700">
+                            Country
+                        </label>
+                        <input
+                            type="text"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            placeholder="Country"
+                            onChange={(e) => setCountry(e.target.value)}
+                        />
+                    </div>
                 </div>
             </div>
-                                        {/* <BillingFields/> */}
-                                        
-                                        <ShippingFields/>
-                                    </div>
+        </div>
+    </div>
+
+
+    {/* Include ShippingFields component or code here if needed */}
+    <ShippingFields/>
+</div>
+
+
+
+
+                                    
                                     <h3 id="order_review_heading">Your order</h3>
                                     <div id="order_review" className="woocommerce-checkout-review-order">
-                                        <table className="shop_table woocommerce-checkout-review-order-table">
-                                            <thead>
-                                            <tr>
-                                                <th className="product-name">Product</th>
-                                                <th className="product-total text-right">Total</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+                                        
+                                        
+                                    <table className="min-w-full divide-y divide-gray-200">
+    <thead className="bg-gray-50">
+        <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+        </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200">
+        {parsedCart.map((item, index) => (
+            <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{item.name}</div>
+                    <div className="text-sm text-gray-500">{item.quantity}</div>
+                </td>
+                <td className="px-6 py-4 text-right whitespace-nowrap">
+                    <span className="text-sm text-gray-900">N{findLowestPrice(item)}</span>
+                </td>
+            </tr>
+        ))}
+    </tbody>
+    <tfoot className="bg-gray-50">
+        <tr className="bg-white divide-y divide-gray-200">
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
+            <td className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span className="text-sm text-gray-900">N{calculateCartSubTotal()}</span>
+            </td>
+        </tr>
+        {/* You can add more rows here for additional details */}
+        <tr className="bg-white divide-y divide-gray-200">
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tax</th>
+            <td className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span className="text-sm text-gray-900">N{calculateCartTax()}</span>
+            </td>
+        </tr>
+        <tr className="bg-gray-50">
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+            <td className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span className="text-sm text-gray-900">N{calculateGrandTotal()}</span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
 
-                                            {
-                                                parsedCart.map((item, index) => (
-                                                    <tr key={index} className="cart_item">
-                                                        <td className="product-name">
-                                                            {item.name} &nbsp; <strong className="product-quantity">x
-                                                            {item.quantity}</strong></td>
-                                                        <td className="product-total text-right">
-                                                        <span className="woocommerce-Price-amount amount"><span
-                                                            className="woocommerce-Price-currencySymbol">N</span>{findLowestPrice(item)}</span>
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
 
-                                            </tbody>
-                                            <tfoot>
-                                            <tr className="cart-subtotal">
-                                                <th>Subtotal</th>
-                                                <td className="text-right"><span className="woocommerce-Price-amount amount"><span
-                                                    className="woocommerce-Price-currencySymbol">N</span>{calculateCartSubTotal()}</span>
-                                                </td>
-                                            </tr>
-                                            {/* <tr className="shipping">
-                                                <th>Shipping</th>
-                                                <td data-title="Shipping">
-                                                    {"-"}
-                                                    <input type="hidden" name="shipping_method[0]" data-index={0}
-                                                           id="shipping_method_0" defaultValue="free_shipping:1"
-                                                           className="shipping_method"/>
-                                                </td>
-                                            </tr> */}
-                                            <tr className="cart-subtotal" 
-                    // style={{ textAlign: 'right' }}
-                    >
-                        <th>Tax</th>
-                        <td className="text-right" data-title="Subtotal">
-                            <span className="woocommerce-Price-amount amount">
-                                    <span className="woocommerce-Price-currencySymbol">
-                                        N
-                                    </span>{calculateCartTax()}
-                            </span>
-                        </td>
-                    </tr>
-                                            <tr className="order-total">
-                                                <th>Total</th>
-                                                <td className="text-right"><strong><span className="woocommerce-Price-amount amount"><span
-                                                    className="woocommerce-Price-currencySymbol">N</span>{calculateGrandTotal()}</span></strong>
-                                                </td>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
+
+
+
+
+
+
+
+
+
+
+
+
                                         <div id="payment" className="woocommerce-checkout-payment flex flex-col items-start">
                                                
                                             
@@ -538,7 +551,12 @@ function Checkout({ options }) {
                                                        </div>
                                         </div>
                                     </div>
+
+
                                 </form>
+
+
+                                
                             </div>
                         </div>
                     </div>

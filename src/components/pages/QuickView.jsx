@@ -111,7 +111,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                             <i className="fi flaticon-star"/>
                             <i className="fi flaticon-star"/>
                             <i className="fi flaticon-star-social-favorite-middle-full"/>
-                            <span className='ml-2'>({data.reviewCounts} Customer review{data.reviewCounts > 1 ? 's' : ''})</span>
+                            <span className='ml-2'>({data.reviewCounts} Customer review{data.reviewCounts > 1 ? 's ' : ' '})</span>
                         </div>
                         <p>{data.content}</p>
                         <div className="product-option">

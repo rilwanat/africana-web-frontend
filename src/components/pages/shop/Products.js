@@ -111,7 +111,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                             findLowestPrice(item) < findHighestPrice(item)
                             
                             ? (
-                              <div className="product-badge discount">
+                              <div className="product-badge discount -m-2">
                                 -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
                               </div>
                             ) : null}
