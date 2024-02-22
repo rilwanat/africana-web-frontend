@@ -143,9 +143,32 @@ function Checkout({ options }) {
   };
 
 
+  function createOrderItems(products) {
+    // Initialize an array to store order items
+    let orderItems = [];
+
+    // Iterate through each product
+    products.forEach(product => {
+        // Find the product variant with the least quantity
+        let minQuantityVariant = product.productVariants.reduce((minVariant, variant) => {
+            return variant.quantity < minVariant.quantity ? variant : minVariant;
+        });
+
+        // Push the order item to the orderItems array
+        orderItems.push({
+            productVariantId: minQuantityVariant.id,
+            // quantity: 1 // You can modify this quantity if needed
+            quantity: product.quantity
+        });
+    });
+
+    return orderItems;
+}
+
+
   const payNow = async () => {
 
-    alert(paymentMethod);
+    //alert(paymentMethod);
     if (paymentMethod == "paystack" || paymentMethod == "") {
         alert("use flutterwave");
         return;
@@ -201,20 +224,23 @@ function Checkout({ options }) {
                 state: state,
                 country: country
             },
-            orderItems: [
-                {
-                    productVariantId: "2c09c57a-d367-43a8-a118-8c4fee26824b",
-                    quantity: 2
-                },
-                {
-                    productVariantId: "398eec1a-78c5-4864-88a1-66dc4f10cec9",
-                    quantity: 1
-                }
-            ],
+            // orderItems: [
+            //     {
+            //         productVariantId: "2c09c57a-d367-43a8-a118-8c4fee26824b",
+            //         quantity: 2
+            //     },
+            //     {
+            //         productVariantId: "398eec1a-78c5-4864-88a1-66dc4f10cec9",
+            //         quantity: 1
+            //     }
+            // ],
+            orderItems: createOrderItems(parsedCart),
             taxId: 1,
             paymentMethod: paymentMethod
         };
         
+        alert(JSON.stringify(requestData));
+
         const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/checkout", requestData, {
             headers: {
                 "Content-Type": "application/json",
