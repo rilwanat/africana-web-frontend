@@ -25,17 +25,14 @@ import { AES } from 'crypto-js';
 
 import imgx from '../../assets/images/shop/img-2.jpg';
 import imgs from '../../assets/images/shop/img-2.jpg';
-/**
- * demo data
- */
-//import data from '../../data/singleProductDemo.json';
 
-/**
- * single shop page with  Slider Images
- * @param options
- * @returns {*}
- * @constructor
- */
+import StarRateIcon from '@mui/icons-material/StarRate';
+
+
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
 function ProductPage({options, addToCart, cart}) {
 
     const location = useLocation();
@@ -45,6 +42,12 @@ function ProductPage({options, addToCart, cart}) {
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
+
+    const [star, setStar] = useState(0);
+
+    const handleStarClick = (rating) => {
+        setStar(rating);
+    };
 
     //let params = useParams();
     //const { product } = useParams();
@@ -265,34 +268,59 @@ function calculateDiscountPercentage(price, oldPrice) {
                                     <span className="old">{'N'}{findHighestPrice(parsedProduct)}</span>
                                 </div>
                                 <div className="rating">
+                                    {/* <i className="fi flaticon-star"/>
                                     <i className="fi flaticon-star"/>
                                     <i className="fi flaticon-star"/>
                                     <i className="fi flaticon-star"/>
-                                    <i className="fi flaticon-star"/>
-                                    <i className="fi flaticon-star-social-favorite-middle-full"/>
+                                    <i className="fi flaticon-star-social-favorite-middle-full"/> */}
+                                    <a className="star-1" onClick={() => handleStarClick(1)} style={{ cursor: 'pointer' }}>
+                                {/* <i className="ti-star" style={{ color: star < 1 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon style={{width: '20px', height: '20px', color: star < 1 ? 'grey' : '#c25f2b' }}/>
+                            </a>
+                            <a className="star-1" onClick={() => handleStarClick(2)} style={{ cursor: 'pointer' }}>
+                                {/* <i className="ti-star" style={{ color: star < 2 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon style={{width: '20px', height: '20px',  color: star < 2 ? 'grey' : '#c25f2b' }}/>
+                            </a>
+                            <a className="star-1" onClick={() => handleStarClick(3)} style={{ cursor: 'pointer' }}>
+                                {/* <i className="ti-star" style={{ color: star < 3 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon style={{width: '20px', height: '20px',  color: star < 3 ? 'grey' : '#c25f2b' }}/>
+                            </a>
+                            <a className="star-1" onClick={() => handleStarClick(4)} style={{ cursor: 'pointer' }}>
+                                {/* <i className="ti-star" style={{ color: star < 4 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon style={{width: '20px', height: '20px',  color: star < 4 ? 'grey' : '#c25f2b' }}/>
+                            </a>
+                            <a className="star-1" onClick={() => handleStarClick(5)} style={{ cursor: 'pointer' }}>
+                                {/* <i className="ti-star" style={{ color: star < 5 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon style={{width: '20px', height: '20px',  color: star < 5 ? 'grey' : '#c25f2b' }}/>
+                            </a>
                                     {/* <span>{data.reviewCount}</span> */}
-                                    <span className='ml-2'>({parsedProduct && parsedProduct.rating} Customer review{parsedProduct && parsedProduct.rating > 1 ? 's' : ''})</span>
+                                    <span className='ml-2'>({parsedProduct && parsedProduct.rating} Customer review{parsedProduct && parsedProduct.rating > 1 ? 's ' : ' '})</span>
                                 </div>
                                 <div className="product-option">
-                            {/* <form className="form"> */}
+                            <form className="form">
                                 <div className="product-row flex items-center">
 
                                 <div className="touchspin-wrap">
+                                <input readOnly className="product-count" type="text" style={{ display: 'inline-block', verticalAlign: 'middle' }}
+                                                       value={productCount} name="product-count"/>
                                                 <button
                                                     onClick={(e) => {
                                                         HandleProductCount(e, 'plus')
                                                     }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-up"></i>
+                                                    type="button">
+                                                        <ExpandLessIcon className="glyphicon glyphicon-chevron-up" style={{ height: '11px', width: '20px' }}/>
+                                                        {/* <i className="glyphicon glyphicon-chevron-up"></i> */}
                                                 </button>
                                                 <button
                                                     onClick={(e) => {
                                                         HandleProductCount(e, 'minus')
                                                     }}
                                                     id="slider-thumbnail-touchspin-down" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-down"></i>
+                                                    type="button">
+                                                        <ExpandMoreIcon className="glyphicon glyphicon-chevron-down" style={{ height: '11px', width: '20px' }}/>
+                                                        {/* <i className="glyphicon glyphicon-chevron-down"></i> */}
                                                 </button>
-                                                <input readOnly className="product-count" type="text"
-                                                       value={productCount} name="product-count"/>
+                                                
                                             </div>
 
 
@@ -313,14 +341,14 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         >Add to cart</button>
                                     </div>
                                 </div>
-                            {/* </form> */}
+                            </form>
                         </div>
                                 <p>{parsedProduct.description}</p>
                                 
                                  
                                 <div className="thb-product-meta-before">
                                 <div className="add-to-wishlist">
-                                <a href="#" className="add_to_wishlist">
+                                <a className="add_to_wishlist">
                                     {/* <i className="pe-7s-like"/> */}
                                     <FavoriteIcon className='mr-2' style={{ cursor: "pointer" }}/>
                                     <span>Add To Wishlist</span>

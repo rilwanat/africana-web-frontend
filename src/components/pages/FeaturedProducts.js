@@ -33,7 +33,7 @@ function FeaturedProducts() {
     return (
         <Fragment>
             {/* start featured-proeducts-section-s2 */}
-            <section className="featured-proeducts-section-s2 section-padding">
+            <section className="featured-proeducts-section-s2 section-padding" >
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-xs-12">

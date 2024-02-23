@@ -2,6 +2,15 @@ import React, {useState, Fragment} from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Link, useNavigate} from "react-router-dom";
 
+import StarRateIcon from '@mui/icons-material/StarRate';
+
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+
+import CloseIcon from '@mui/icons-material/Close';
+
+
 /**
  * product Quick View component
  * @param data
@@ -84,8 +93,8 @@ function calculateDiscountPercentage(price, oldPrice) {
         <Fragment>
             <div className="quick-view-single-product activve-quick-view-single-product">
                 <div className="view-single-product-inner clearfix">
-                    <button className="btn quick-view-single-product-close-btn" onClick={onQuickViewCloseClick}><i
-                        className="pe-7s-close-circle"/></button>
+                    <button className="btn quick-view-single-product-close-btn" onClick={onQuickViewCloseClick}><CloseIcon className="pe-7s-close-circle"/></button>
+                    
                     <div className="img-holder">
                         <img loading="lazy" src=
                         // {process.env.PUBLIC_URL + data.mainImg} 
@@ -106,11 +115,46 @@ function calculateDiscountPercentage(price, oldPrice) {
                             }
                         </div>
                         <div className="rating">
+                            {/* <i className="fi flaticon-star"/>
                             <i className="fi flaticon-star"/>
                             <i className="fi flaticon-star"/>
                             <i className="fi flaticon-star"/>
-                            <i className="fi flaticon-star"/>
-                            <i className="fi flaticon-star-social-favorite-middle-full"/>
+                            <i className="fi flaticon-star-social-favorite-middle-full"/> */}
+                             <a className="star-1" 
+                                // onClick={() => handleStarClick(1)} 
+                                // style={{ cursor: 'pointer' }}
+                                >
+                                {/* <i className="ti-star" style={{ color: star < 1 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon className='-mt-2' style={{width: '20px', height: '20px', color: 'black' }}/>
+                            </a>
+                            <a className="star-1" 
+                            // onClick={() => handleStarClick(2)} 
+                            // style={{ cursor: 'pointer' }}
+                            >
+                                {/* <i className="ti-star" style={{ color: star < 2 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon className='-mt-2' style={{width: '20px', height: '20px',  color: 'black' }}/>
+                            </a>
+                            <a className="star-1" 
+                            // onClick={() => handleStarClick(3)} 
+                            // style={{ cursor: 'pointer' }}
+                            >
+                                {/* <i className="ti-star" style={{ color: star < 3 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon className='-mt-2' style={{width: '20px', height: '20px',  color: 'black' }}/>
+                            </a>
+                            <a className="star-1" 
+                            // onClick={() => handleStarClick(4)} 
+                            // style={{ cursor: 'pointer' }}
+                            >
+                                {/* <i className="ti-star" style={{ color: star < 4 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon className='-mt-2' style={{width: '20px', height: '20px',  color: 'black' }}/>
+                            </a>
+                            <a className="star-1" 
+                            // onClick={() => handleStarClick(5)} 
+                            // style={{ cursor: 'pointer' }}
+                            >
+                                {/* <i className="ti-star" style={{ color: star < 5 ? 'grey' : 'black' }}/> */}
+                                <StarRateIcon className='-mt-2' style={{width: '20px', height: '20px',  color: 'black' }}/>
+                            </a>
                             <span className='ml-2'>({data.reviewCounts} Customer review{data.reviewCounts > 1 ? 's ' : ' '})</span>
                         </div>
                         <p>{data.content}</p>
@@ -119,21 +163,26 @@ function calculateDiscountPercentage(price, oldPrice) {
                                 <div className="product-row flex items-center">
 
                                 <div className="touchspin-wrap">
-                                                <button
+                                <input readOnly className="product-count" type="text" style={{ display: 'inline-block', verticalAlign: 'middle' }}
+                                                       value={productCount} name="product-count"/>
+                                                       <button
                                                     onClick={(e) => {
                                                         HandleProductCount(e, 'plus')
                                                     }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-up"></i>
+                                                    type="button">
+                                                        <ExpandLessIcon className="glyphicon glyphicon-chevron-up" style={{ height: '11px', width: '20px' }}/>
+                                                        {/* <i className="glyphicon glyphicon-chevron-up"></i> */}
                                                 </button>
                                                 <button
                                                     onClick={(e) => {
                                                         HandleProductCount(e, 'minus')
                                                     }}
                                                     id="slider-thumbnail-touchspin-down" className="btn btn-default "
-                                                    type="button"><i className="glyphicon glyphicon-chevron-down"></i>
+                                                    type="button">
+                                                        <ExpandMoreIcon className="glyphicon glyphicon-chevron-down" style={{ height: '11px', width: '20px' }}/>
+                                                        {/* <i className="glyphicon glyphicon-chevron-down"></i> */}
                                                 </button>
-                                                <input readOnly className="product-count" type="text"
-                                                       value={productCount} name="product-count"/>
+                                                
                                             </div>
 
 
@@ -150,7 +199,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                         </div>
                         <div className="thb-product-meta-before">
                             <div className="add-to-wishlist">
-                                <a href="#" className="add_to_wishlist">
+                                <a  className="add_to_wishlist">
                                     {/* <i className="pe-7s-like"/> */}
                                     <FavoriteIcon className='mr-2' style={{ cursor: "pointer" }}/>
                                     <span>Add To Wishlist</span>

@@ -5,6 +5,9 @@ import newsLetter1 from '../../assets/images/newsletter-1.png';
 import newsLetter2 from '../../assets/images/newsletter-2.png';
 // import FramerThing from './framer/FramerThing';
 
+import CloseIcon from '@mui/icons-material/Close';
+
+
 /**
  * Newsletter Popup component
  * @returns {*}
@@ -34,8 +37,8 @@ function NewsletterPopup() {
             <section className={"newsletter-popup-area-section " + (showNewsletter ? 'active-newsletter-popup' : '')}>
                 <div className="newsletter-popup-area">
                     <div className="newsletter-popup-ineer">
-                        <button onClick={HandelNewsletterClose} className="btn newsletter-close-btn"><i
-                            className="pe-7s-close-circle"/></button>
+                        {/* <button onClick={HandelNewsletterClose} className="btn newsletter-close-btn"><i className="pe-7s-close-circle"/></button> */}
+                        <CloseIcon onClick={HandelNewsletterClose} className="mt-4 mr-4 newsletter-close-btn" style={{ cursor: 'pointer', width: '20px', height: '20px'}}/>
                         <div className="img-holder">
                             <img src={(Math.floor(Math.random() * 2)) % 2 === 0 ? newsLetter1 : newsLetter2} loading="lazy" alt=""/>
                             {/* <FramerThing /> */}

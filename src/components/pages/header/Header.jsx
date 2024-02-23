@@ -28,7 +28,7 @@ function Header({ options, cart }) {
     return (
         <Fragment>
             {/* Start header */}
-            <header id="header" className="site-header header-style-1">
+            <header id="header" className="site-header header-style-1" >
                 {/* <div className="topbar">
                     <div className="topbar-text">
                         <p>{data.content}</p>

@@ -143,7 +143,7 @@ export default function LandingPage({ options, handleDataViewData, addToCart, ca
 
            <Header options={options} cart={cart}/>
 
-           <Hero1/>
+           <Hero1 />
 
 
 <FeaturedProducts />
