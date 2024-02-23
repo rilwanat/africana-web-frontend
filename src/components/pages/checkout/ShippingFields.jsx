@@ -60,7 +60,7 @@ function ShippingFields() {
                         /> */}
                         <textarea name="order_comments" 
                         // className="input-text " 
-                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md px-3 py-2 placeholder-gray-400 text-gray-900"
+                        className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
     id="order_comments"
                                   placeholder="Notes about your order, e.g. special notes for delivery." 
                                   rows={2}

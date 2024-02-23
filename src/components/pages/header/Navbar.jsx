@@ -3,6 +3,8 @@ import {NavLink} from 'react-router-dom';
 import Logo from "./Logo";
 import './navBar.css';
 
+import CloseIcon from '@mui/icons-material/Close';
+
 /**
  * nav bar component
  * @param options
@@ -15,7 +17,13 @@ function Navbar({options}) {
         <Fragment>
             {/* <div id="navbar" className={"navbar-collapse collapse navigation-holder " + (options.mobileNav ? 'slideInn' : '')}> */}
             <div id="navbar" className={" " + (options.mobileNav ? 'slideInn' : '')}>
-                <button onClick={options.onMobileNavClick} className="close-navbar"><i className="ti-close"/></button>
+                {/* <button onClick={options.onMobileNavClick} className="close-navbar"> */}
+                    {/* <i className="ti-close"/> */}
+                    {/* <CloseIcon onClick={options.onMobileNavClick} className="mt-4 mr-4 newsletter-close-btn" style={{ cursor: 'pointer', width: '20px', height: '20px'}}/> */}
+                        
+                    {/* </button> */}
+
+                    <CloseIcon onClick={options.onMobileNavClick} className="close-navbar ti-close " style={{ cursor: 'pointer', width: '30px', height: '20px'}}/>
                 <ul className="nav navbar-nav">
                     <li className=""><NavLink to="/">Home</NavLink></li>
                     <li className=""><NavLink to="/about">About</NavLink></li>

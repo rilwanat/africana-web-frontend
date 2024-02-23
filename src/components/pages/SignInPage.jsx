@@ -1,4 +1,5 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import Footer from './Footer';
 // import Instagram from './Instagram';
@@ -15,8 +16,9 @@ import imgx from '../../assets/images/shop/img-2.jpg';
  * @returns {*}
  * @constructor
  */
-function SignInPage({ options }) {
+function SignInPage({ options, cart }) {
 
+    const navigate = useNavigate();
     
     const [loginEmailAddress, setLoginEmailAddress] = useState('');//Enter your email');
     const [loginPassword, setLoginPassword] = useState('');//Enter your password');
@@ -35,6 +37,10 @@ function SignInPage({ options }) {
 
     const loginUser = async (e) => {
         e.preventDefault();
+
+        navigate('/my-account');
+        return;
+
 
         setIsLoading(true);
         setErrorMessage({ message: '' });
@@ -107,7 +113,7 @@ function SignInPage({ options }) {
 
     return (
         <Fragment>
-            <Header options={options} />
+            <Header options={options} cart={cart}/>
 
             {/* <PageTitle name="My Account"/> */}
 

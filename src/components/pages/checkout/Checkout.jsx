@@ -33,21 +33,21 @@ function Checkout({ options }) {
 
 
     
-    const [firstname, setFirstname] = useState("");//rb");
-    const [lastname, setLastname] = useState("");//apps");
-    const [email, setEmail] = useState("");//rilwan.at@gmail.com");
-    const [phoneNumber, setPhoneNumber] = useState("");//09081537000");
+    const [firstname, setFirstname] = useState("rb");
+    const [lastname, setLastname] = useState("apps");
+    const [email, setEmail] = useState("rilwan.at@gmail.com");
+    const [phoneNumber, setPhoneNumber] = useState("09081537000");
     
-    const [address1, setAddress1] = useState("");//No 31, Pope John Paul Street II");
+    const [address1, setAddress1] = useState("No 31, Pope John Paul Street II");
     const [address2, setAddress2] = useState("");
 
     
-    const [postalCode, setPostalCode] = useState("");//900001");
+    const [postalCode, setPostalCode] = useState("900001");
     
-    const [city, setCity] = useState("");//Maitama");
-    const [state, setState] = useState("");//Abuja");
+    const [city, setCity] = useState("Maitama");
+    const [state, setState] = useState("Abuja");
 
-    const [country, setCountry] = useState("");//Nigeria");
+    const [country, setCountry] = useState("Nigeria");
     const [orderNotes, setOrderNotes] = useState("");
     
     const [paymentMethod, setPaymentMethod] = useState("flutterwave");//);
@@ -239,7 +239,7 @@ function Checkout({ options }) {
             paymentMethod: paymentMethod
         };
         
-        alert(JSON.stringify(requestData));
+        // alert(JSON.stringify(requestData));
 
         const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/checkout", requestData, {
             headers: {
@@ -358,35 +358,38 @@ function Checkout({ options }) {
                 <div className="grid grid-cols-1 gap-y-6 gap-x-4 px-4 py-5 sm:grid-cols-3 sm:px-6">
                     <div>
                         <label htmlFor="billing_first_name" className="block text-sm font-medium text-gray-700">
-                            First Name
+                            First name
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Enter First Name"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                            placeholder="Enter your first name"
                             onChange={(e) => setFirstname(e.target.value)}
+                            value={firstname}
                         />
                     </div>
                     <div>
                         <label htmlFor="billing_last_name" className="block text-sm font-medium text-gray-700">
-                            Last Name
+                            Last name
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Enter Last Name"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                            placeholder="Enter your last name"
                             onChange={(e) => setLastname(e.target.value)}
+                            value={lastname}
                         />
                     </div>
                     <div>
                         <label htmlFor="billing_email" className="block text-sm font-medium text-gray-700">
-                            Email Address
+                            Email address
                         </label>
                         <input
                             type="email"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Enter Email Address"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                            placeholder="Enter email address"
                             onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                         />
                     </div>
                     <div>
@@ -395,20 +398,22 @@ function Checkout({ options }) {
                         </label>
                         <input
                             type="tel"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Enter Phone Number"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                            placeholder="Enter phone number"
                             onChange={(e) => setPhoneNumber(e.target.value)}
+                            value={phoneNumber}
                         />
                     </div>
                     <div>
                         <label htmlFor="billing_address_1" className="block text-sm font-medium text-gray-700">
-                            Address
+                            Street address
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Street Address"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                            placeholder="Street address"
                             onChange={(e) => setAddress1(e.target.value)}
+                            value={address1}
                         />
                     </div>
                     <div>
@@ -417,9 +422,10 @@ function Checkout({ options }) {
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
                             placeholder="Apartment, Suite, Unit etc."
                             onChange={(e) => setAddress2(e.target.value)}
+                            value={address2}
                         />
                     </div>
                     <div>
@@ -428,9 +434,10 @@ function Checkout({ options }) {
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
                             placeholder="City"
                             onChange={(e) => setCity(e.target.value)}
+                            value={city}
                         />
                     </div>
                     <div>
@@ -439,9 +446,10 @@ function Checkout({ options }) {
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            placeholder="Postal Code"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                            placeholder="Postalcode"
                             onChange={(e) => setPostalCode(e.target.value)}
+                            value={postalCode}
                         />
                     </div>
                     <div>
@@ -450,9 +458,10 @@ function Checkout({ options }) {
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
                             placeholder="State"
                             onChange={(e) => setState(e.target.value)}
+                            value={state}
                         />
                     </div>
                     <div>
@@ -461,9 +470,10 @@ function Checkout({ options }) {
                         </label>
                         <input
                             type="text"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
                             placeholder="Country"
                             onChange={(e) => setCountry(e.target.value)}
+                            value={country}
                         />
                     </div>
                 </div>
@@ -571,7 +581,7 @@ function Checkout({ options }) {
 
                                                 {/* <NoscriptSnippet/> */}
                                                        
-                                                       <div className="slide-btns mt-2" style={{ cursor: 'pointer' }} onClick={payNow}><div className="theme-btn-s5">{isLoading ? 'Please wait..' : 'Pay Now'}</div>
+                                                       <div className="slide-btns mt-2" style={{ cursor: 'pointer' }} onClick={payNow}><div className="theme-btn-s5">{isLoading ? 'Please wait..' : 'Checkout'}</div>
                                                         </div>
 
                                                        

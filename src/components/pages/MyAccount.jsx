@@ -1,81 +1,252 @@
-import React, {Fragment, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, Fragment } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import Footer from './Footer';
-// import Instagram from './Instagram';
 import Header from './header/Header';
-// import PageTitle from '../../components/global/PageTitle';
 
-import axios from 'axios';
+function MyAccount({ options, cart }) {
+    const navigate = useNavigate();
 
-
-/**
- * My Account Page
- * @param options
- * @returns {*}
- * @constructor
- */
-function MyAccount({ options }) {
-
-    const [firstname, setFirstname] = useState('Enter your firstname');
-    const [lastname, setLastname] = useState('Enter your Lastname');
-    const [companyname, setCompanyname] = useState('Enter your Company name');
-    const [emailAddress, setEmailAddress] = useState('Enter your email');//rilwan.at@gmail.com');//
-    const [phone, setPhonenumber] = useState('Enter your phone number');
-    const [country, setCountry] = useState('Enter your Country *dropdown');//12345678');//
-    const [address1, setAddress1] = useState('Enter Address Line 1');
-    const [address2, setAddress2] = useState('Enter Address Line 2');
-    const [towncity, setTowncity] = useState('Enter Town / City');
-
-    
-    const [loginEmailAddress, setLoginEmailAddress] = useState('Enter your email');
-    const [loginPassword, setLoginPassword] = useState('Enter your password');
-
-    
-    const [isLoading, setIsLoading] = useState(false);
-    // const [isDefaultModalOpen, setDefaultModalOpen] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-    // const [registrationStatus, setRegistrationStatus] = useState('');
-
-
-    /**
-     * check this function
-     */
-
-
+    const [activeTab, setActiveTab] = useState(0);
 
     return (
         <Fragment>
-            <Header options={options} />
-
-            {/* <PageTitle name="My Account"/> */}
-
-            {/* start my-account-section */}
+            <Header options={options} cart={cart}/>
+            
             <section className="my-account-section">
-                <div className="container-1410">
-                    <div className="row">
-                        <div className="col-xs-12">
-                            <div className="woocommerce">
-                                <div className="woocommerce-notices-wrapper"/>
-                                <div className="u-columns col2-set" id="customer_login">
-                                    <div className="u-column1 col-1">
-                                    <h2><Link to="/signin" style={{fontWeight: 'bold'}}>Login</Link></h2>
+                <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-black">
+                    <aside className="py-4 md:w-1/3 lg:w-1/4 md:block">
+                        <div className="sticky flex flex-col gap-2 p-4 text-sm border-r border-gray-200 top-12">
+                            <h2 className="pl-3 mb-4 text-2xl font-semibold">My Settings</h2>
+                            <a style={{ cursor: "pointer" }} onClick={() => setActiveTab(0)} className={`flex items-center pl-5 py-2.5 font-bold bg-white text-gray-900 ${activeTab === 0 ? 'border  rounded-l-full' : ''} hover:border hover:rounded-l-full`}>
+                                My Profile
+                            </a>
+                            <a style={{ cursor: "pointer" }} onClick={() => setActiveTab(1)} className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 1 ? 'border  rounded-l-full' : ''} hover:border hover:rounded-l-full`}>
+                                Account Settings
+                            </a>
+                            <a style={{ cursor: "pointer" }} onClick={() => setActiveTab(2)} className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 2 ? 'border  rounded-l-full' : ''} hover:border hover:rounded-l-full`}>
+                                My Collection
+                            </a>
+                            <a  style={{ cursor: "pointer" }} onClick={() => setActiveTab(3)} className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 3 ? 'border  rounded-l-full' : ''} hover:border hover:rounded-l-full`}>
+                                History
+                            </a>
+                        </div>
+                    </aside>
+                    <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
+                        {activeTab == 0 ? 
+                        // <div className="p-2 md:p-4 bg-blue-300">
+                        //     <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg bg-red-300">
+                        //         <h2 className="pl-6 text-2xl font-bold sm:text-xl">My Profile</h2>
+                        //         <div className="grid max-w-2xl mx-auto mt-8">
+                        //             <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
+                        //                 <img className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-gray-300"
+                        //                     src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                        //                     alt="Bordered avatar" />
+                        //                 <div className="flex flex-col space-y-5 sm:ml-8">
+                        //                     <div className="view-cart-btn mb-2 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300" style={{ cursor: 'pointer' }} onClick={() => {}}>Change picture</div>
+                        //                     <div className="view-cart-btn mb-2 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300" style={{ cursor: 'pointer' }} onClick={() => {}}>Remove picture</div>
+                        //                 </div>
+                        //             </div>
+                        //             <div className="items-center mt-8 sm:mt-14 text-black">
+                        //                 <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                        //                     <div className="w-full">
+                        //                         <label htmlFor="first_name"
+                        //                             className="block mb-2 text-sm font-medium text-black">Your
+                        //                             first name</label>
+                        //                         <input type="text" id="first_name"
+                        //                             className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                        //                             placeholder="Your first name" value="" required />
+                        //                     </div>
+                        //                     <div className="w-full">
+                        //                         <label htmlFor="last_name"
+                        //                             className="block mb-2 text-sm font-medium text-black">Your
+                        //                             last name</label>
+                        //                         <input type="text" id="last_name"
+                        //                             className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                        //                             placeholder="Your last name" value="" required />
+                        //                     </div>
+                        //                 </div>
+                        //                 <div className="mb-2 sm:mb-6">
+                        //                     <label htmlFor="email"
+                        //                         className="block mb-2 text-sm font-medium text-black">Your
+                        //                         email</label>
+                        //                     <input type="email" id="email"
+                        //                         className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                        //                         placeholder="your.email@mail.com" required />
+                        //                 </div>
                                         
+                                        
+                                        
+                                        
+                        //                 <div className="flex justify-end">
+                        //                     {/* <button type="submit" className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center">Save</button> */}
+                        //                     <div className="view-cart-btn mb-2 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300"style={{ cursor: 'pointer' }} onClick={() => {}}>UPdate</div>
+                        //                 </div>
+                        //             </div>
+                        //         </div>
+                        //     </div>
+                            
+                        // </div>
+                        
+                        <div className="flex flex-col sm:flex-row">
+                    <div className="p-2 md:p-4">
+                        <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+                        <h2 className="pl-6 text-2xl font-bold sm:text-xl">My Profile</h2>
+                                <div className="grid max-w-2xl mx-auto mt-8">
+                                    <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
+                                        <img className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-gray-300"
+                                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+                                            alt="Bordered avatar" />
+                                        <div className="flex flex-col space-y-5 sm:ml-8">
+                                            <div className="view-cart-btn mb-2 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300" style={{ cursor: 'pointer' }} onClick={() => {}}>Change picture</div>
+                                            <div className="view-cart-btn mb-2 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300" style={{ cursor: 'pointer' }} onClick={() => {}}>Remove picture</div>
+                                        </div>
                                     </div>
-                                    <div className="u-column2 col-2">
-                                        <h2><Link to="/signup" style={{fontWeight: 'bold'}}>Register</Link></h2>
+                                    <div className="items-center mt-8 sm:mt-14 text-black">
+                                        <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                            <div className="w-full">
+                                                <label htmlFor="first_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    first name</label>
+                                                <input type="text" id="first_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="Your first name" value="" required />
+                                            </div>
+                                            <div className="w-full">
+                                                <label htmlFor="last_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    last name</label>
+                                                <input type="text" id="last_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="Your last name" value="" required />
+                                            </div>
+                                        </div>
+                                        <div className="mb-2 sm:mb-6">
+                                            <label htmlFor="email"
+                                                className="block mb-2 text-sm font-medium text-black">Your
+                                                email</label>
+                                            <input type="email" id="email"
+                                                className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                placeholder="your.email@mail.com" required />
+                                        </div>
                                         
                                         
+                                        
+                                        
+                                        <div className="flex justify-end">
+                                            {/* <button type="submit" className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center">Save</button> */}
+                                            <div className="view-cart-btn mb-2 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300"style={{ cursor: 'pointer' }} onClick={() => {}}>UPdate</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                        </div>
+                    </div>
+                    <div className="p-2 md:p-4 ">
+                    <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg ">
+                        <h2 className="pl-6 text-2xl font-bold sm:text-xl">Billing Details</h2>
+                                <div className="grid max-w-2xl mx-auto mt-8">
+                                    
+                                    <div className="items-center mt-4 sm:mt-4 text-black">
+                                        <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                            
+                                            <div className="w-full">
+                                                <label htmlFor="first_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    Street address</label>
+                                                <input type="text" id="first_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="Street address" value="" required />
+                                            </div>
+                                            <div className="w-full">
+                                                <label htmlFor="last_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    (optional) Address</label>
+                                                <input type="text" id="last_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="Apartment, Suite, Unit etc." value="" required />
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                            
+                                            <div className="w-full">
+                                                <label htmlFor="first_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    City</label>
+                                                <input type="text" id="first_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="City" value="" required />
+                                            </div>
+                                            <div className="w-full">
+                                                <label htmlFor="last_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    Postcode / ZIP</label>
+                                                <input type="text" id="last_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="Postalcode" value="" required />
+                                            </div>
+                                        </div>
+                                        <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                                            
+                                            <div className="w-full">
+                                                <label htmlFor="first_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    State</label>
+                                                <input type="text" id="first_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="State" value="" required />
+                                            </div>
+                                            <div className="w-full">
+                                                <label htmlFor="last_name"
+                                                    className="block mb-2 text-sm font-medium text-black">Your
+                                                    Country</label>
+                                                <input type="text" id="last_name"
+                                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
+                                                    placeholder="Country" value="" required />
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <div className="flex justify-end">
+                                            {/* <button type="submit" className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium text-sm w-full sm:w-auto px-5 py-2.5 text-center">Save</button> */}
+                                            <div className="view-cart-btn mb-2 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300"style={{ cursor: 'pointer' }} onClick={() => {}}>UPdate</div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
+                
+                
+                
+                : 
+                        activeTab == 1 ? 
+                        <div className="p-2 md:p-4">
+                        <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+                            <h2 className="pl-6 text-2xl font-bold sm:text-xl">Account</h2>
+                            
+                        </div>
+                    </div> :
+                        activeTab == 2 ? <div className="p-2 md:p-4">
+                        <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+                            <h2 className="pl-6 text-2xl font-bold sm:text-xl">Collection</h2>
+                            
+                        </div>
+                    </div> :
+                        activeTab == 3 ? <div className="p-2 md:p-4">
+                        <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+                            <h2 className="pl-6 text-2xl font-bold sm:text-xl">History</h2>
+                            
+                        </div>
+                    </div> : <></>
+                    
+                    }
+                    </main>
+                    
+                </div>
             </section>
-            {/* end my-account-section */}
-
-            {/* <Instagram/> */}
             <Footer/>
         </Fragment>
     );
