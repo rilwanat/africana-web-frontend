@@ -1029,6 +1029,22 @@ abbr[title] {
     }
 }
 
+/**/
+.section-padding-medium {
+    padding: 30px 0;
+}
+@media (max-width: 991px) {
+    .section-padding-medium {
+        padding: 100px 0;
+    }
+}
+@media (max-width: 767px) {
+    .section-padding-medium {
+        padding: 90px 0;
+    }
+}
+/**/
+
 /** for popup image ***/
 .mfp-wrap {
     background-color: rgba(0, 0, 0, 0.9);

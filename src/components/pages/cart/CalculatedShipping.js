@@ -50,7 +50,7 @@ function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
     return (
         <Fragment>
             <div className="cart_totals calculated_shipping">
-                <h2>Cart Totals</h2>
+                <h3>Cart Totals</h3>
                 <table className="shop_table shop_table_responsive">
                     <tbody>
                     <tr className="cart-subtotal" 

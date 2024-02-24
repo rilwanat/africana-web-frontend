@@ -1,94 +1,122 @@
-import React, {Fragment, useState, useEffect} from 'react';
-
+import React, { Fragment, useState, useEffect } from 'react';
 import Footer from '../Footer';
-// import Instagram from '../Instagram';
-// import PageTitle from '../../components/global/PageTitle';
 import Header from '../header/Header';
-// import CartItem from "./CartItem";
 import Coupon from "./Coupon";
 import CalculatedShipping from "./CalculatedShipping";
-
+import SimilarProducts from '../SimilarProducts';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
-
 import './cart.css';
-
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
+import axios from 'axios';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
-/**
- * Cart page
- * @param options
- * @returns {*}
- * @constructor
- */
-function Cart({ options }) {
+function Cart({ options, handleDataViewData, addToCart, updateCart }) {
     const location = useLocation();
     const cart = location.state.encryptedData;
-
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
-    const parsedCart = JSON.parse(decryptedData);
-    
-    
-// Function to find the lowest price among product variants
-function findLowestPrice(product) {
-    let lowestPrice = Infinity;
-  
-    //products.forEach(product => {
-      product.productVariants.forEach(variant => {
-        if (variant.price < lowestPrice) {
-          lowestPrice = variant.price;
+    const [parsedCart, setParsedCart] = useState(JSON.parse(decryptedData)); // State to store parsed cart
+
+    const [products, setProductsData] = useState([]);
+    const [cartItems, setCartItems] = useState(parsedCart); // Define cartItems state variable
+
+    const [isDataloading, setIsDataLoading] = useState(true);
+
+    useEffect(() => {
+        handleData();
+    }, []);
+
+    useEffect(() => {
+        // Update parsedCart when cartItems change
+        setParsedCart(cartItems);
+    }, [cartItems]);
+
+    const handleData = async () => {
+        setIsDataLoading(true);
+        try {
+            const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            setIsDataLoading(false);
+            if (response.data.success) {
+                setProductsData(response.data.products);
+            } else {
+                alert("error: " + response.data.message);
+            }
+        } catch (error) {
+            setIsDataLoading(false);
+            alert("error: " + error);
         }
-      });
-    //});
-  
-    return lowestPrice;
-  }
-  
-const calculateTotal = (item) => {
-    // var p = findLowestPrice(item);
-    // return item.price * item.quantity;
-    // return p * item.quantity;
+    };
 
-    return findLowestPrice(item) * item.quantity;
+    const handleIncreaseQuantity = (item) => {
+        const updatedCart = cartItems.map((cartItem) =>
+            cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        );
+        setCartItems(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        
+        updateCart();
+    };
 
+    const handleDecreaseQuantity = (item) => {
+        if (item.quantity > 1) {
+            const updatedCart = cartItems.map((cartItem) =>
+                cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+            );
+            setCartItems(updatedCart);
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+        } else {
+            const updatedCart = cartItems.filter((cartItem) => cartItem.id !== item.id);
+            setCartItems(updatedCart);
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+        }
+        updateCart();
+    };
 
-};
+    // Function to find the lowest price among product variants
+    function findLowestPrice(product) {
+        let lowestPrice = Infinity;
+        product.productVariants.forEach(variant => {
+            if (variant.price < lowestPrice) {
+                lowestPrice = variant.price;
+            }
+        });
+        return lowestPrice;
+    }
 
-const calculateCartSubTotal = () => {
-    let subTotal = 0;
-    parsedCart.forEach((item) => {
-        subTotal += findLowestPrice(item) * item.quantity;
-    });
+    const calculateTotal = (item) => {
+        return findLowestPrice(item) * item.quantity;
+    };
 
-    // const taxRate = 0.075; // 7.5%
-    // const calculatedTax = subTotal * taxRate;
-    // setTax(calculatedTax);
+    const calculateCartSubTotal = () => {
+        let subTotal = 0;
+        cartItems.forEach((item) => {
+            subTotal += findLowestPrice(item) * item.quantity;
+        });
+        return subTotal;
+    };
 
-    return subTotal;
-};
+    const calculateCartTax = () => {
+        let subTotal = 0;
+        cartItems.forEach((item) => {
+            subTotal += findLowestPrice(item) * item.quantity;
+        });
+        const taxRate = 0.075; // 7.5%
+        const calculatedTax = subTotal * taxRate;
+        return calculatedTax;
+    };
 
-const calculateCartTax = () => {
-    let subTotal = 0;
-    parsedCart.forEach((item) => {
-        subTotal += findLowestPrice(item) * item.quantity;
-    });
-
-    const taxRate = 0.075; // 7.5%
-    const calculatedTax = subTotal * taxRate;
-    
-    return calculatedTax;
-};
-
-    let countCartItem = 1;//indexOfFirstItem + 1;
+    let countCartItem = 1;
 
     return (
         <Fragment>
             <Header options={options} cart={parsedCart}/>
-
-            {/* <PageTitle name="Cart"/> */}
-
-            {/* start cart-section */}
-            <section className="cart-section woocommerce-cart section-padding">
+            <section className="cart-section woocommerce-cart section-padding-medium">
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-xs-12">
@@ -96,58 +124,40 @@ const calculateCartTax = () => {
                                 <form action="/" method="post">
                                     <table className="shop_table shop_table_responsive cart">
                                         <thead>
-                                        <tr>
-                                            <th className="product-remove">&nbsp;</th>
-                                            <th className="product-thumbnail">&nbsp;</th>
-                                            <th className="product-name">Product</th>
-                                            <th className="product-price">Price</th>
-                                            <th className="product-quantity">Quantity</th>
-                                            <th className="product-subtotal">Total</th>
-                                        </tr>
+                                            <tr>
+                                                <th className="product-remove">s/n</th>
+                                                <th className="product-thumbnail">Image</th>
+                                                <th className="product-name">Product</th>
+                                                <th className="product-price text-right">Price</th>
+                                                <th className="product-quantity text-center">Quantity</th>
+                                                <th className="product-subtotal text-right">Total</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-
-                                        {parsedCart.map((cartItem) => (
-                        <tr key={cartItem.id} 
-                        // onClick={(e) => handleRowClick(cartItem, e)} 
-                        style={{ cursor: "pointer" }}>
-                            <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
-                        {countCartItem++}
-                        </td>
-                        <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
-                        image{/* {countInstitutions++} */}
-                        </td>
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          {cartItem.name}
-                        </td>
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          N{findLowestPrice(cartItem)}
-                        </td>
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          {cartItem.quantity}
-                        </td>
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                        N{calculateTotal(cartItem)}
-                        </td>
-                        {/* <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                          <span className="mr-4" style={{ color: 'green' }} onClick={(e) => handleEditOnClick(institution, e)} ><EditIcon /></span>
-                          <span className="mr-4" 
-                          style={{ color:  institution.status === 'active' ? 'green' : 'red' }} onClick={(e) => handleChangeDataClick(institution, e)} >{ institution.status === 'active' ? <ToggleOnIcon /> : <ToggleOffIcon />}</span>
-                          <span className="" style={{ color: 'green' }}>More</span>
-                          
-                        </td>
-                        <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 " >
-                          <div className="text-center px-2 py-1" style={{ 
-                            borderRadius: '10px', 
-                            color: institution.status === 'active' ? 'green' : 'red',
-                            background: '#eeeeee' }}>{institution.status}
-                            </div>
-                        </td> */}
-                      </tr>
-                    ))}
-
-
-                                        {/* <Coupon/> */}
+                                            {cartItems.map((cartItem) => (
+                                                <tr key={cartItem.id} style={{ cursor: "pointer" }}>
+                                                    <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
+                                                        {countCartItem++}
+                                                    </td>
+                                                    <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
+                                                        <img src="http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"/>
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                                        {cartItem.name}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
+                                                        N{findLowestPrice(cartItem)}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center">
+                                                        <RemoveIcon className='mr-2' style={{ cursor: 'pointer' }} onClick={() => { handleDecreaseQuantity(cartItem) }}/>
+                                                        {cartItem.quantity}
+                                                        <AddIcon className='ml-2' style={{ cursor: 'pointer' }} onClick={() => { handleIncreaseQuantity(cartItem) }}/>
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
+                                                        N{calculateTotal(cartItem)}
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </form>
@@ -159,9 +169,7 @@ const calculateCartTax = () => {
                     </div>
                 </div>
             </section>
-            {/* end cart-section */}
-
-            {/* <Instagram/> */}
+            <SimilarProducts onQuickViewClick={handleDataViewData} products={products} addToCart={addToCart}/>
             <Footer/>
         </Fragment>
     );

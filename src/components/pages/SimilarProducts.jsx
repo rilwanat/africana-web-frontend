@@ -1,37 +1,44 @@
-import React, {Fragment, useState} from 'react';
+import React, {useState, Fragment} from 'react';
 import Slider from "react-slick";
 // import ReactTooltip from 'react-tooltip';
 
 import './products.css';
 
-/**
- * demo data
- */
-// import productsData from '../../data/products.json';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-
 import imgx from '../../assets/images/shop/img-2.jpg';
+// import imgx from '../../assets/images/site-products/3.jpg';
+import {Link, useNavigate} from "react-router-dom";
+
 
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+
+
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
 
+import axios from 'axios';
 
 /**
- * Recent Single Products component
+ * Recent Products component
  * @param onQuickViewClick
  * @returns {*}
  * @constructor
  */
-function RecentSingleProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
+function SimilarProducts({onQuickViewClick, products, addToCart}) {
 
-    
     const navigate = useNavigate();
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+
+    // const [isDragging, setIsDragging] = useState(false);
 
     const [isPrevHovered, setPrevHovered] = useState(false);
     const [isNextHovered, setNextHovered] = useState(false);
@@ -40,21 +47,19 @@ function RecentSingleProducts({onQuickViewClick, relatedProducts, addToCart, car
     const [isFavHovered, setFavHovered] = useState(false);
     const [isBagHovered, setBagHovered] = useState(false);
 
-
-    /**
-     * slider settings
-     * @type {{swipeToSlide: boolean, dots: boolean, infinite: boolean, responsive: *[], slidesToScroll: number, focusOnSelect: boolean, slidesToShow: number, autoplay: boolean, speed: number, autoplaySpeed: number}}
-     */
+    
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 6,
+        slidesToShow: 7,
         slidesToScroll: 1,
         autoplay: true,
-        speed: 300,
+        speed: 600,
         swipeToSlide: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 4000,
         focusOnSelect: false,
+        // prevArrow: <SamplePrevArrow />,
+        // nextArrow: <SampleNextArrow />,
         responsive: [
             {
                 breakpoint: 1024,
@@ -82,8 +87,7 @@ function RecentSingleProducts({onQuickViewClick, relatedProducts, addToCart, car
         ]
     };
 
-
-    // Function to find the lowest price among product variants
+// Function to find the lowest price among product variants
 function findLowestPrice(product) {
     let lowestPrice = Infinity;
   
@@ -119,11 +123,13 @@ function calculateDiscountPercentage(price, oldPrice) {
       : 0; // Return 0 if there's no discount
   }
 
-  const handleProductClick = (product, e) => {
+  
+  const handleProductClick = (product) => {
+
+    
 
     // if (!isDragging) 
     {
-        //plain
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
 
@@ -138,52 +144,63 @@ function calculateDiscountPercentage(price, oldPrice) {
 
   };
 
-
-  
-
-
     return (
         <Fragment>
-            <div className="realted-porduct">
-                <h3>Related products</h3>
-                <ul className="products product-row-slider">
-                    <Slider {...settings}>
-                        {
-                            relatedProducts.map((item, index) => (
-                                <li key={index} className="product" >
-                                    <div className="product-holder">
-                                        {
-                                        // parseInt(item.price) < parseInt(item.oldPrice) 
-                                        findLowestPrice(item) < findHighestPrice(item)
-                                        ?
-                                            <div className="product-badge discount">
-                                                -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
-                                                </div> : ''
-                                        }
-                                        {/* <Link to="/product-details"> */}
-                                            <div className='mx-2'
-                                        onClick={(e) => handleProductClick(item, e)} 
-                                        style={{cursor: 'pointer'}}>
-                                            <img loading="lazy" 
-                                            src=
-                                            "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
-                                            // {process.env.PUBLIC_URL + item.mainImg} 
-                                            alt=""/>
-                                        </div>
-                                        {/* </Link> */}
+            {/* start recent-product-section */}
+            <section className="trendy-product-section section-padding-medium">
 
-                                        <div className="shop-action-wrap">
-                                            <ul className="shop-action">
-                                            <li>
-                                                                    {/* <a href="#" title="Quick view!"
-                                                                       data-tip="Quick view!"
-                                                                       onClick={
-                                                                           e => onQuickViewClick(e, item)
-                                                                       }
-                                                                >
-                                                                    
-                                                                    <i className="fi flaticon-view"/>
-                                                                </a> */}
+                <div className="container-1410">
+                    <div className="row flex">
+                        <div className="col col-xs-12">
+                            <div className="section-title-s2">
+                                <h2>.</h2>
+                            </div>
+                            <Link className="more-products" to="/shop">
+                            Similar products
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col col-xs-12">
+                            <div className="products-wrapper">
+                                <ul className="products ">
+                                    <Slider {...settings}>
+                                        {
+                                            products.map((item, index) => (
+                                                <li key={index} className="product">
+                                                    <div className="product-holder">
+                                                    
+                                                    {
+                            // parseInt(item.price) < parseInt(item.oldPrice)
+                            findLowestPrice(item) < findHighestPrice(item)
+                            
+                            ? (
+                              <div className="product-badge discount">
+                                -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
+                              </div>
+                            ) : null
+                            }
+
+                            {/* <Link to="/product-details"> */}
+                            <div  className='mx-2'
+                            // onClick={isDragging ? null : (e) => handleProductClick(item, e)} 
+                            onClick={() => handleProductClick(item)} 
+                            style={{cursor: 'pointer'}}>
+
+                            
+
+                                                            <img loading="lazy" 
+                                                            src=
+                                                            "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                                                            //{item.mainImg} 
+                                                            alt=""/>
+                                                        
+                                                        {/* </Link> */}
+                                                        </div>
+
+                                                        {/* <div className="shop-action-wrap">
+                                                            <ul className="shop-action">
+                                                                <li>
                                                                 <div 
                                                                 style={{ backgroundColor: isViewHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <RemoveRedEyeOutlinedIcon 
@@ -202,10 +219,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to Wishlist!"
-                                                                       data-tip="Add to Wishlist!">
-                                                                        <i className="fi icon-heart-shape-outline"/>
-                                                                    </a> */}
                                                                     <div style={{ backgroundColor: isFavHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <FavoriteIcon className='w-4 h-4 p-1' 
                                                                         onClick={
@@ -223,9 +236,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                     </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to cart!"
-                                                                       data-tip="Add to cart!">
-                                                                        <i className="fi flaticon-shopping-cart"/></a> */}
                                                                         <div style={{ backgroundColor: isBagHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
                                                                         
@@ -246,47 +256,37 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                         />
                                                                     </div>
                                                                         </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="product-info">
-                                        <h4>
-                                            <Link to="/single-slider-images">
-                                                {item.name}
-                                            </Link>
-                                        </h4>
-                                        <span className="woocommerce-Price-amount amount">
-                                            <ins>
-                                              <span className="woocommerce-Price-amount amount">
-                                                <bdi>
-                                                    {/* <span className="woocommerce-Price-currencySymbol">{item.Symbol}</span> */}
-                                                    <span className="woocommerce-Price-currencySymbol">{'N'}</span>
-                                                    {findLowestPrice(item)}
-                                                    </bdi>
-                                              </span>
-                                            </ins>
-                                            {
-                                            // parseInt(item.price) < parseInt(item.oldPrice) 
-                                            findLowestPrice(item) < findHighestPrice(item) 
-                                            ?
-                                                                <del>
-                                              <span className="woocommerce-Price-amount amount">
-                                                <bdi><span
-                                                    className="woocommerce-Price-currencySymbol">{'N'}</span>{findHighestPrice(item)}</bdi>
-                                              </span>
-                                                </del> : ''
-                                            }
-                                        </span>
-                                    </div>
-                                </li>
-                            ))
-                        }
-                    </Slider>
-                </ul>
-            </div>
+                                                            </ul>
+                                                        </div> */}
+                                                    </div>
+                                                    <div className="product-info">
+                                                        <h4>
+                                                            <Link to="/product-details" className='text-sm'>
+                                                                {item.name}
+                                                            </Link>
+                                                        </h4>
+                                                        <h4>
+                                                            <Link to="/product-details" className='text-sm'>
+                                                            {'N'}{findLowestPrice(item)}
+                                                            </Link>
+                                                        </h4>
+                                                            
+                                                    </div>
+                                                </li>
+                                            ))
+                                        }
+                                    </Slider>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/* end container-1410 */}
+            </section>
+            {/* end recent-product-section */}
             {/* <ReactTooltip className='tool-tip' effect='solid'/> */}
         </Fragment>
     );
 }
 
-export default RecentSingleProducts;
+export default SimilarProducts;

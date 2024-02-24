@@ -129,6 +129,8 @@ const options = {
 const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
   const addToCart = (product) => {
+    //alert("adding: " + JSON.stringify(product, null, 2));
+
     const existingProduct = cart.find((item) => item.id === product.id);
     
     if (existingProduct) {
@@ -144,8 +146,23 @@ const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
     }
 
     //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
+    updateCart();
   };
 
+  
+// Update cart items function
+const updateCart = () => {
+  const updatedCart = JSON.parse(localStorage.getItem('cart')) || [];
+  setCart(updatedCart);
+};
+
+// Call updateCart function whenever cart items change
+// useEffect(() => {
+//   updateCart();
+// }, [cart]);
+useEffect(() => {
+  
+});
 
   return (
     <Router>
@@ -172,7 +189,7 @@ const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
               <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart}/>}/> 
               <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart} />}/>
               
-              <Route path='/cart' element={<CartPage options={options} />}/>
+              <Route path='/cart' element={<CartPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart}/>}/>
               {/* <Route path='/checkout/:cart' element={<CheckoutPage options={options} />}/> */}
               <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart} />}/>
 

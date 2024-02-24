@@ -297,7 +297,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                     <span className='ml-2'>({parsedProduct && parsedProduct.rating} Customer review{parsedProduct && parsedProduct.rating > 1 ? 's ' : ' '})</span>
                                 </div>
                                 <div className="product-option">
-                            <form className="form">
+                            {/* <form className="form"> */}
                                 <div className="product-row flex items-center">
 
                                 <div className="touchspin-wrap">
@@ -341,7 +341,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         >Add to cart</button>
                                     </div>
                                 </div>
-                            </form>
+                            {/* </form> */}
                         </div>
                                 <p>{parsedProduct.description}</p>
                                 

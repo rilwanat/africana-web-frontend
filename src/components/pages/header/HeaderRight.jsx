@@ -29,22 +29,34 @@ function HeaderRight({ options, cart }) {
 
     const navigateToCheckOut = () => {
         if (cart.length > 0) {
-        options.onMiniCartClick();
-        const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
-        // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
-        navigate('/checkout', { state: { encryptedData } });
-    } else  { alert("Add items to your cart");}
-      };
-
-      const navigateToCart = () => {
+            options.onMiniCartClick();
+            const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+            navigate('/checkout', { state: { encryptedData } });
+        } else {
+            alert("Add items to your cart");
+        }
+    };
+    
+    const navigateToCart = () => {
         if (cart.length > 0) {
             options.onMiniCartClick();
             const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
-            // navigate(`/checkout/${encodeURIComponent(encryptedData)}`);
             navigate('/cart', { state: { encryptedData } });
-        } else  { alert("Add items to your cart");}
-        
-      };
+        } else {
+            alert("Add items to your cart");
+        }
+    };
+    
+    // // Update cart items function
+    // const updateCart = () => {
+    //     const updatedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    //     updateCartItems(updatedCart);
+    // };
+    
+    // // Call updateCart function whenever cart items change
+    // useEffect(() => {
+    //     updateCart();
+    // }, [cart]);
 
 
     return (
