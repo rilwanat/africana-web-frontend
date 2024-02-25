@@ -1,5 +1,9 @@
 import React, {Fragment, useState, useEffect } from 'react';
 
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
+
 /**
  * Pagination component
  * @param extraClass
@@ -43,13 +47,15 @@ function Pagination({extraClass, handlePageClick, totalProducts}) {
                 <ul className="pg-pagination">
                     <li>
                         <a href="#" aria-label="Previous">
-                            <i className="fi flaticon-back"/>
+                            {/* <i className="fi flaticon-back"/> */}
+                            <NavigateBeforeIcon />
                         </a>
                     </li>
                     {pagesArray}
                     <li>
                         <a href="#" aria-label="Next">
-                            <i className="fi flaticon-next"/>
+                            {/* <i className="fi flaticon-next"/> */}
+                            <NavigateNextIcon />
                         </a>
                     </li>
                 </ul>

@@ -131,7 +131,7 @@ function calculateDiscountPercentage(price, oldPrice) {
   
   const handleProductClick = (product) => {
 
-     if (!isDragging) 
+     //if (!isDragging) 
     {
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);

@@ -6,6 +6,12 @@ import CompanyWidget from "../widget/CompanyWidget";
 import ShopWidget from "../widget/ShopWidget";
 import HelpWidget from "../widget/HelpWidget";
 
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+
+
+
 /**
  * footer component
  * @returns {*}
@@ -52,9 +58,22 @@ function Footer() {
                                     </div>
                                     <div className="social">
                                         <ul className="clearfix">
-                                            <li style={{ cursor: 'pointer' }}><a href="https://www.facebook.com/africana" target='_blank' title="Facebook">fb</a></li>
+                                        <li><a href="https://www.facebook.com/africana" target='_blank'>
+                                {/* <i className="ti-facebook" style={{ color: "#ffffff" }}/> */}
+                                <FacebookIcon style={{cursor: "pointer", color: "#ffffff" }}/>
+                                </a></li>
+                            <li><a href="https://www.twitter.com/africana" target='_blank'>
+                                {/* <i className="ti-twitter-alt" style={{ color: "#ffffff" }}/> */}
+                                <TwitterIcon style={{cursor: "pointer", color: "#ffffff" }}/>
+                                </a></li>
+                            <li><a href="https://www.instagram.com/africanacouture" target='_blank'>
+                                {/* <i className="ti-pinterest"/> */}
+                                <InstagramIcon style={{cursor: "pointer", color: "#ffffff" }}/>
+                                </a></li>
+
+                                            {/* <li style={{ cursor: 'pointer' }}><a href="https://www.facebook.com/africana" target='_blank' title="Facebook">fb</a></li>
                                             <li style={{ cursor: 'pointer' }}><a href="https://www.twitter.com/africana" target='_blank' title="Twitter">tw</a></li>
-                                            <li style={{ cursor: 'pointer' }}><a href="https://www.instagram.com/africanacouture" target='_blank' title="Instagram">ig</a></li>
+                                            <li style={{ cursor: 'pointer' }}><a href="https://www.instagram.com/africanacouture" target='_blank' title="Instagram">ig</a></li> */}
                                             
                                         </ul>
                                     </div>

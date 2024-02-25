@@ -50,7 +50,7 @@ function RecentProducts({onQuickViewClick, products, addToCart}) {
     
     
     
-    let isDragging = false;
+    const [isDragging, setIsDragging] = useState(false);
 
 
 
@@ -135,7 +135,7 @@ function calculateDiscountPercentage(price, oldPrice) {
   
   const handleProductClick = (product, e) => {
 
-     if (!isDragging) 
+     //if (!isDragging) 
     {
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
@@ -174,7 +174,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                 <ul className="products " 
                                     >
                                     <Slider {...settings}
-                                    
                                     >
                                         {
                                             products.map((item, index) => (

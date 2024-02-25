@@ -126,7 +126,7 @@ function calculateDiscountPercentage(price, oldPrice) {
 
   const handleProductClick = (product, e) => {
 
-     if (!isDragging) 
+     //if (!isDragging) 
     {
         
         //plain

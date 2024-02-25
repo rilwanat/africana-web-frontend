@@ -7,6 +7,10 @@ import slidbarlogo from '../../../assets/logos/Couture 2.png';
 
 import CloseIcon from '@mui/icons-material/Close';
 
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+
 /**
  * side info left menu component
  * @param options
@@ -37,9 +41,18 @@ function HeaderLeft({options}) {
                             <li style={{ color: "#686868" }}>Mail us: hello@shopafricana.co</li>
                         </ul>
                         <ul className="social-links">
-                            <li><a ><i className="ti-facebook" style={{ color: "#ffffff" }}/></a></li>
-                            <li><a ><i className="ti-twitter-alt" style={{ color: "#ffffff" }}/></a></li>
-                            {/* <li><a ><i className="ti-pinterest"/></a></li> */}
+                            <li><a href="https://www.facebook.com/africana" target='_blank'>
+                                {/* <i className="ti-facebook" style={{ color: "#ffffff" }}/> */}
+                                <FacebookIcon style={{cursor: "pointer", color: "#ffffff" }}/>
+                                </a></li>
+                            <li><a href="https://www.twitter.com/africana" target='_blank'>
+                                {/* <i className="ti-twitter-alt" style={{ color: "#ffffff" }}/> */}
+                                <TwitterIcon style={{cursor: "pointer", color: "#ffffff" }}/>
+                                </a></li>
+                            <li><a href="https://www.instagram.com/africanacouture" target='_blank'>
+                                {/* <i className="ti-pinterest"/> */}
+                                <InstagramIcon style={{cursor: "pointer", color: "#ffffff" }}/>
+                                </a></li>
                             {/* <li><a ><i className="ti-vimeo-alt"/></a></li> */}
                         </ul>
                     </div>
