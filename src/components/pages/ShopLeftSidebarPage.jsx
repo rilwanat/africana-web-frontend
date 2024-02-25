@@ -213,9 +213,43 @@ function ShopLeftSidebarPage({ options, addToCart, cart }) {
       const endIndex = Math.min(currentPage * productsPerPage, productsTotal);
 
 
-      const handleDataSearch = () => {
+      const handleDataSearch = async (query) => {
         //alert("a");
         //search all products
+
+        setProductsTotal("-");
+
+        setCurrentPage(1);
+        //alert("token: " + token + "\n\n" + "uid: " + uid);
+        setIsDataLoading(true);
+        try {
+    
+          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products?search=' + query, {
+            //params: { uid: uid },
+            headers: {
+              "Content-Type": "application/json",
+              //Authorization: `Bearer ${token}`,
+            },
+          });
+    
+          setIsDataLoading(false);
+          //alert(JSON.stringify(response.data, null, 2));
+    
+          if (response.data.success) {
+            //alert("dashboard-products " + JSON.stringify(response.data, null, 2));
+          
+            // Store the retrieved data in state variables
+
+            setProductsData(response.data.products);
+            setProductsTotal(response.data.total);
+          } else {
+            alert("error: " + response.data.message);
+          }
+
+        } catch (error) {
+          setIsDataLoading(false);
+          alert("error: " + error);
+        }
       }
 
     return (
