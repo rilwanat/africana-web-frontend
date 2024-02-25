@@ -140,7 +140,7 @@ function Cart({ options, handleDataViewData, addToCart, updateCart }) {
                                                         {countCartItem++}
                                                     </td>
                                                     <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
-                                                        <img src="http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"/>
+                                                        <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"/>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                         {cartItem.name}

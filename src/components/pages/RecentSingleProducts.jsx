@@ -41,6 +41,11 @@ function RecentSingleProducts({onQuickViewClick, relatedProducts, addToCart, car
     const [isBagHovered, setBagHovered] = useState(false);
 
 
+    
+  let isDragging = false;
+
+
+
     /**
      * slider settings
      * @type {{swipeToSlide: boolean, dots: boolean, infinite: boolean, responsive: *[], slidesToScroll: number, focusOnSelect: boolean, slidesToShow: number, autoplay: boolean, speed: number, autoplaySpeed: number}}
@@ -121,8 +126,9 @@ function calculateDiscountPercentage(price, oldPrice) {
 
   const handleProductClick = (product, e) => {
 
-    // if (!isDragging) 
+     if (!isDragging) 
     {
+        
         //plain
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
@@ -146,8 +152,10 @@ function calculateDiscountPercentage(price, oldPrice) {
         <Fragment>
             <div className="realted-porduct">
                 <h3>Related products</h3>
-                <ul className="products product-row-slider">
-                    <Slider {...settings}>
+                <ul className="products product-row-slider" 
+                >
+                    <Slider {...settings}
+                    >
                         {
                             relatedProducts.map((item, index) => (
                                 <li key={index} className="product" >
@@ -162,11 +170,12 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         }
                                         {/* <Link to="/product-details"> */}
                                             <div className='mx-2'
-                                        onClick={(e) => handleProductClick(item, e)} 
+                                        onClick={(e) => handleProductClick(item, e)}
+
                                         style={{cursor: 'pointer'}}>
                                             <img loading="lazy" 
                                             src=
-                                            "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                                            "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                             // {process.env.PUBLIC_URL + item.mainImg} 
                                             alt=""/>
                                         </div>

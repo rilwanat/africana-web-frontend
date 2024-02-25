@@ -33,7 +33,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-function ProductPage({options, addToCart, cart}) {
+function ProductPage({options, addToCart, cart, updateCart}) {
 
     const location = useLocation();
     const product = location.state.encryptedData;
@@ -93,6 +93,20 @@ function ProductPage({options, addToCart, cart}) {
         }
     };
 
+    // Function to handle change in product count input
+    const handleProductCountChange = (event) => {
+        // Ensure the value is a valid number
+        const newCount = parseInt(event.target.value);
+
+        // Update the productCount state if the newCount is a valid number
+        if (!isNaN(newCount)) {
+            setProductCount(newCount);
+        }
+    };
+
+
+
+
     /**
      * Handel Quick View Data
      */
@@ -121,7 +135,7 @@ function ProductPage({options, addToCart, cart}) {
                     <img 
                     src=
                     //{imgs}
-                    "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                    "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                             
                     />
                 </a>
@@ -250,7 +264,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                 // style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                                                 src=
                                                 // {item.src}
-                                                "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                                                "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                             
                                                 />
                                             </div>
@@ -302,10 +316,12 @@ function calculateDiscountPercentage(price, oldPrice) {
 
                                 <div className="touchspin-wrap">
                                 <input readOnly className="product-count" type="text" style={{ display: 'inline-block', verticalAlign: 'middle' }}
-                                                       value={productCount} name="product-count"/>
+                                                       value={productCount} 
+                                                        onChange={handleProductCountChange}
+                                                       name="product-count"/>
                                                 <button
                                                     onClick={(e) => {
-                                                        HandleProductCount(e, 'plus')
+                                                        HandleProductCount(e, 'plus', productCount)
                                                     }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
                                                     type="button">
                                                         <ExpandLessIcon className="glyphicon glyphicon-chevron-up" style={{ height: '11px', width: '20px' }}/>
@@ -313,7 +329,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                 </button>
                                                 <button
                                                     onClick={(e) => {
-                                                        HandleProductCount(e, 'minus')
+                                                        HandleProductCount(e, 'minus', productCount)
                                                     }}
                                                     id="slider-thumbnail-touchspin-down" className="btn btn-default "
                                                     type="button">
@@ -333,7 +349,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         onClick={
                                             // (e) => addToCart(e, parsedProduct, 1)
                                             // () => increaseItemToCart(parsedProduct)
-                                            () => addToCart(parsedProduct)
+                                            () => addToCart(parsedProduct, productCount)
                                             
                                         }
 

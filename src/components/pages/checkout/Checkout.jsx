@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, Fragment} from 'react';
+import {useState, Fragment, useEffect} from 'react';
 import Footer from '../Footer';
 // import Instagram from '../../components/global/Instagram';
 import Header from '../header/Header';
@@ -25,10 +25,17 @@ import axios from 'axios';
  * @returns {*}
  * @constructor
  */
-function Checkout({ options }) {
+function Checkout({ options, handleDataViewData, addToCart, updateCart }) {
 
     const location = useLocation();
     const cart = location.state.encryptedData;
+    const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
+    const [parsedCart, setParsedCart] = useState(JSON.parse(decryptedData)); // State to store parsed cart
+
+    // const [products, setProductsData] = useState([]);
+    const [cartItems, setCartItems] = useState(parsedCart); // Define cartItems state variable
+
+    const [isDataloading, setIsDataLoading] = useState(true);
 
 
 
@@ -61,13 +68,16 @@ function Checkout({ options }) {
     const [showShowCoupon, setShowShowCoupon] = useState(false);
 
 
-    // const { cart } = useParams();
-    const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
-    const parsedCart = JSON.parse(decryptedData);
-
     /**
      * Handle state
      */
+    useEffect(() => {
+        // Update parsedCart when cartItems change
+        setParsedCart(cartItems);
+    }, [cartItems]);
+
+
+
     const HandleShowLoginStatus = (e) => {
         e.preventDefault();
         HandelCloseTabs();
@@ -265,7 +275,7 @@ function Checkout({ options }) {
 
     return (
         <Fragment>
-            <Header options={options} />
+            <Header options={options} cart={parsedCart}/>
 
             {/* <PageTitle name="Checkout"/> */}
 
@@ -497,13 +507,17 @@ function Checkout({ options }) {
                                     <table className="min-w-full divide-y divide-gray-200">
     <thead className="bg-gray-50">
         <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product{parsedCart.length > 1 ? 's (' + parsedCart.length + ')' :'(' + parsedCart.length + ')'}</th>
+            {/* <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th> */}
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item{parsedCart.length > 1 ? 's (' + parsedCart.length + ')' :'(' + parsedCart.length + ')'}</th>
             <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
         </tr>
     </thead>
     <tbody className="bg-white divide-y divide-gray-200">
         {parsedCart.map((item, index) => (
             <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
+                {/* <td className="px-3 py-4 text-left whitespace-nowrap">
+                    <span className="text-sm text-gray-900">{index}</span>
+                </td> */}
                 <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">{item.name}</div>
                     <div className="text-sm text-gray-500">{item.quantity}</div>

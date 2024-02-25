@@ -47,6 +47,11 @@ function SimilarProducts({onQuickViewClick, products, addToCart}) {
     const [isFavHovered, setFavHovered] = useState(false);
     const [isBagHovered, setBagHovered] = useState(false);
 
+
+    
+    let isDragging = false;
+
+  
     
     const settings = {
         dots: false,
@@ -126,9 +131,7 @@ function calculateDiscountPercentage(price, oldPrice) {
   
   const handleProductClick = (product) => {
 
-    
-
-    // if (!isDragging) 
+     if (!isDragging) 
     {
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
@@ -163,7 +166,8 @@ function calculateDiscountPercentage(price, oldPrice) {
                     <div className="row">
                         <div className="col col-xs-12">
                             <div className="products-wrapper">
-                                <ul className="products ">
+                                <ul className="products "
+                                >
                                     <Slider {...settings}>
                                         {
                                             products.map((item, index) => (
@@ -184,14 +188,14 @@ function calculateDiscountPercentage(price, oldPrice) {
                             {/* <Link to="/product-details"> */}
                             <div  className='mx-2'
                             // onClick={isDragging ? null : (e) => handleProductClick(item, e)} 
-                            onClick={() => handleProductClick(item)} 
+                            onClick={(e) => handleProductClick(item, e)} 
                             style={{cursor: 'pointer'}}>
 
                             
 
                                                             <img loading="lazy" 
                                                             src=
-                                                            "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                                                            "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                                             //{item.mainImg} 
                                                             alt=""/>
                                                         

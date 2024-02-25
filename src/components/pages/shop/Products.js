@@ -120,7 +120,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                              {/* <Link to="/product-details"> */}
                               <img loading="lazy" 
                               src=
-                              "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                              "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                             //   {process.env.PUBLIC_URL + item.mainImg}
                                alt=""/>
                             {/* </Link> */}

@@ -98,7 +98,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                     <div className="img-holder">
                         <img loading="lazy" src=
                         // {process.env.PUBLIC_URL + data.mainImg} 
-                        "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                        "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                         alt=""/>
                     </div>
                     <div className="product-details">

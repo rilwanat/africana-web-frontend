@@ -48,71 +48,10 @@ function RecentProducts({onQuickViewClick, products, addToCart}) {
     const [isBagHovered, setBagHovered] = useState(false);
 
     
-    function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: isNextHovered ? 'black' : '',
-        zIndex: 1,
-      }}
-      onClick={onClick}
-      onMouseEnter={() => setNextHovered(true)}
-      onMouseLeave={() => setNextHovered(false)}
-    >
-      <ChevronRightIcon style={{ color: isNextHovered ? 'white' : '', }}/>
-    </div>
-  );
-}
-
-function SamplePrevArrow(props) {
-
-
-
     
+    
+    let isDragging = false;
 
-
-
-
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: isPrevHovered ? 'black' : '',
-        zIndex: 1,
-      }}
-      onClick={onClick}
-      onMouseEnter={() => setPrevHovered(true)}
-      onMouseLeave={() => setPrevHovered(false)}
-    >
-      <ChevronLeftIcon style={{ color: isPrevHovered ? 'white' : '', }}/>
-    </div>
-  );
-}
 
 
     /**
@@ -121,7 +60,7 @@ function SamplePrevArrow(props) {
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 4,
+        slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
         speed: 600,
@@ -196,9 +135,7 @@ function calculateDiscountPercentage(price, oldPrice) {
   
   const handleProductClick = (product, e) => {
 
-    
-
-    // if (!isDragging) 
+     if (!isDragging) 
     {
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
@@ -213,6 +150,7 @@ function calculateDiscountPercentage(price, oldPrice) {
     
 
   };
+
 
     return (
         <Fragment>
@@ -233,8 +171,11 @@ function calculateDiscountPercentage(price, oldPrice) {
                     <div className="row">
                         <div className="col col-xs-12">
                             <div className="products-wrapper">
-                                <ul className="products ">
-                                    <Slider {...settings}>
+                                <ul className="products " 
+                                    >
+                                    <Slider {...settings}
+                                    
+                                    >
                                         {
                                             products.map((item, index) => (
                                                 <li key={index} className="product">
@@ -254,14 +195,15 @@ function calculateDiscountPercentage(price, oldPrice) {
                             {/* <Link to="/product-details"> */}
                             <div  className='mx-2'
                             // onClick={isDragging ? null : (e) => handleProductClick(item, e)} 
-                            onClick={(e) => handleProductClick(item, e)} 
+                            onClick={(e) => handleProductClick(item, e)}
+
                             style={{cursor: 'pointer'}}>
 
                             
 
                                                             <img loading="lazy" 
                                                             src=
-                                                            "http://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-To-Wear-KaftanJuly-2023_42-900x1125.jpg"
+                                                            "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                                             //{item.mainImg} 
                                                             alt=""/>
                                                         

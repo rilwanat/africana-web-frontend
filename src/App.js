@@ -126,28 +126,57 @@ const options = {
 };
 
 // const product = '';
-const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+ const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
-  const addToCart = (product) => {
-    //alert("adding: " + JSON.stringify(product, null, 2));
+//   const addToCart = (product) => {
+//     //alert("adding: " + JSON.stringify(product, null, 2));
 
-    const existingProduct = cart.find((item) => item.id === product.id);
+//     const existingProduct = cart.find((item) => item.id === product.id);
     
-    if (existingProduct) {
-      const updatedCart = cart.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-    } else {
-      const updatedCart = [...cart, { ...product, quantity: 1 }];
-      setCart(updatedCart);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-    }
+//     if (existingProduct) {
+//       const updatedCart = cart.map((item) =>
+//         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+//       );
+//       setCart(updatedCart);
+//       localStorage.setItem('cart', JSON.stringify(updatedCart));
+//     } else {
+//       const updatedCart = [...cart, { ...product, quantity: 1 }];
+//       setCart(updatedCart);
+//       localStorage.setItem('cart', JSON.stringify(updatedCart));
+//     }
 
-    //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
-    updateCart();
-  };
+//     //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
+//     updateCart();
+//   };
+
+const addToCart = (product, count) => {
+  //console.log("Product:", product);
+  //console.log("Count:", count);
+
+  const existingProduct = cart.find((item) => item.id === product.id);
+  //console.log("Existing Product:", existingProduct);
+  
+  if (existingProduct) {
+      const updatedCart = cart.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + (count ? count : 1) } : item
+      );
+      //console.log("Updated Cart:", updatedCart);
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+  } else {
+      const updatedCart = [...cart, { ...product, quantity: count ? count : 1 }];
+      //console.log("Updated Cart:", updatedCart);
+      setCart(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+  }
+
+  //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
+  updateCart();
+};
+
+
+
+
 
   
 // Update cart items function
@@ -194,7 +223,7 @@ useEffect(() => {
               <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart} />}/>
 
               {/* <Route path='/product-details/:product' element={<ProductPage options={options} />}/> */}
-              <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart}/>} />
+              <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart}/>} />
 
               <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart}/>}/>
               {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}
