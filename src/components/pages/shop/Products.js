@@ -125,18 +125,9 @@ function calculateDiscountPercentage(price, oldPrice) {
                                alt=""/>
                             {/* </Link> */}
                             </div>
-                                <div className="shop-action-wrap">
+                                {/* <div className="shop-action-wrap">
                                     <ul className="shop-action">
                                         <li>
-                                                                    {/* <a href="#" title="Quick view!"
-                                                                       data-tip="Quick view!"
-                                                                       onClick={
-                                                                           e => onQuickViewClick(e, item)
-                                                                       }
-                                                                >
-                                                                    
-                                                                    <i className="fi flaticon-view"/>
-                                                                </a> */}
                                                                 <div style={{ backgroundColor: isViewHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <RemoveRedEyeOutlinedIcon 
                                                                         onClick={
@@ -154,10 +145,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to Wishlist!"
-                                                                       data-tip="Add to Wishlist!">
-                                                                        <i className="fi icon-heart-shape-outline"/>
-                                                                    </a> */}
                                                                     <div style={{ backgroundColor: isFavHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <FavoriteIcon className='w-4 h-4 p-1' 
                                                                          onClick={
@@ -174,9 +161,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                     </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to cart!"
-                                                                       data-tip="Add to cart!">
-                                                                        <i className="fi flaticon-shopping-cart"/></a> */}
                                                                         <div style={{ backgroundColor: isBagHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
                                                                         onClick={
@@ -193,7 +177,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                         </li>
                                     </ul>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="product-info">
                                 <h4>

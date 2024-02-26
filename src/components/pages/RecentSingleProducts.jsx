@@ -39,6 +39,9 @@ function RecentSingleProducts({onQuickViewClick, relatedProducts, addToCart, car
     const [isViewHovered, setViewHovered] = useState(false);
     const [isFavHovered, setFavHovered] = useState(false);
     const [isBagHovered, setBagHovered] = useState(false);
+    
+
+    const [showWidget, setShowWidget] = useState(false);
 
 
     
@@ -53,7 +56,7 @@ function RecentSingleProducts({onQuickViewClick, relatedProducts, addToCart, car
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 6,
+        slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: true,
         speed: 300,
@@ -139,6 +142,7 @@ function calculateDiscountPercentage(price, oldPrice) {
         // navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
         navigate('/product-details', { state: { encryptedData } });
         //
+        window.scrollTo(0, 0);
     }
     
 
@@ -181,18 +185,9 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         </div>
                                         {/* </Link> */}
 
-                                        <div className="shop-action-wrap">
+                                        {/* <div className="shop-action-wrap">
                                             <ul className="shop-action">
                                             <li>
-                                                                    {/* <a href="#" title="Quick view!"
-                                                                       data-tip="Quick view!"
-                                                                       onClick={
-                                                                           e => onQuickViewClick(e, item)
-                                                                       }
-                                                                >
-                                                                    
-                                                                    <i className="fi flaticon-view"/>
-                                                                </a> */}
                                                                 <div 
                                                                 style={{ backgroundColor: isViewHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <RemoveRedEyeOutlinedIcon 
@@ -211,10 +206,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                 </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to Wishlist!"
-                                                                       data-tip="Add to Wishlist!">
-                                                                        <i className="fi icon-heart-shape-outline"/>
-                                                                    </a> */}
                                                                     <div style={{ backgroundColor: isFavHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <FavoriteIcon className='w-4 h-4 p-1' 
                                                                         onClick={
@@ -232,9 +223,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                     </li>
                                                                 <li>
-                                                                    {/* <a href="#" title="Add to cart!"
-                                                                       data-tip="Add to cart!">
-                                                                        <i className="fi flaticon-shopping-cart"/></a> */}
                                                                         <div style={{ backgroundColor: isBagHovered ? 'black' : 'white', borderRadius: '50%', padding: '0.5rem', cursor: 'pointer', margin: '0.2em' }}>
                                                                         <ShoppingBagOutlinedIcon className='w-4 h-4 p-1' 
                                                                         
@@ -256,14 +244,15 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                         </li>
                                             </ul>
-                                        </div>
+                                        </div> */}
                                     </div>
-                                    <div className="product-info">
-                                        <h4>
+                                    <div className="product-info" >
+                                        <h4 className='text-left pl-2'>
                                             <Link to="/single-slider-images">
                                                 {item.name}
                                             </Link>
                                         </h4>
+                                        <div className='text-left pl-2'>
                                         <span className="woocommerce-Price-amount amount">
                                             <ins>
                                               <span className="woocommerce-Price-amount amount">
@@ -274,7 +263,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                     </bdi>
                                               </span>
                                             </ins>
-                                            {
+                                            {/* {
                                             // parseInt(item.price) < parseInt(item.oldPrice) 
                                             findLowestPrice(item) < findHighestPrice(item) 
                                             ?
@@ -284,8 +273,51 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                     className="woocommerce-Price-currencySymbol">{'₦'}</span>{findHighestPrice(item)}</bdi>
                                               </span>
                                                 </del> : ''
-                                            }
+                                            } */}
                                         </span>
+                                        </div>
+                                        <div className='text-left pl-2 flex items-center mt-1' >
+                                            <h4 className='h-4 py-1' style={{ cursor: 'pointer' }} >SELECT OPTIONS</h4>
+                                            {/* <div style={{ position: 'relative' }}>
+        <h4 className='h-4 py-1' onMouseEnter={() => setShowWidget(true)} onMouseLeave={() => setShowWidget(false)}>SELECT OPTIONS</h4>
+        {showWidget && (
+            <div style={{ position: 'absolute', top: 'calc(-100% - 10px)', left: '0', background: 'white', padding: '5px', border: '1px solid black' }}>
+            Widget Content
+        </div>
+        )}
+    </div> */}
+                                            <div><RemoveRedEyeOutlinedIcon 
+                                                                        onClick={
+                                                                            e => onQuickViewClick(e, item)
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setViewHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setViewHovered(false)
+                                                                        }}
+                                                                        className='w-4 h-4 p-1 ml-2' 
+                                                                        style={{ color: isViewHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        /></div>
+                                            <div><ShoppingBagOutlinedIcon className='w-4 h-4 p-1  ml-2' 
+                                                                        
+                                                                        onClick={
+                                                                            // ()=>{ addToCart()}
+                                                                            //(e) => addToCart(e, item, 1)
+                                                                            () => addToCart(item)
+                                                                            // addToCart = async (e, productVariantId, quantity)
+                                                                            // () => {alert(item.productVariantId);}
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setBagHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setBagHovered(false)
+                                                                        }}
+                                                                        style={{ color: isBagHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        /></div>
+                                        </div>
+
                                     </div>
                                 </li>
                             ))

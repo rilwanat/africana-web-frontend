@@ -6131,7 +6131,7 @@ button:active {
     float: left;
     margin: 0 15px;
     position: relative;
-    box-shadow: 0 0 15px #efefef;
+    /* box-shadow: 0 0 15px #efefef; */
     padding: 45px;
 }
 

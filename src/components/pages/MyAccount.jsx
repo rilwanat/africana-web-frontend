@@ -112,7 +112,7 @@ function MyAccount({  options, addToCart, cart  }) {
         <Fragment>
             <Header options={options} cart={cart}/>
             
-            <section className="my-account-section">
+            <section className="my-account-section section-padding">
                 <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-black">
                 <aside className="py-4 md:w-1/3 lg:w-1/4 md:block">
             <div className="sticky flex flex-col gap-2 p-4 text-sm border-r border-gray-200 top-12">

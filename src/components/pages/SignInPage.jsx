@@ -20,7 +20,7 @@ function SignInPage({ options, cart }) {
 
     const navigate = useNavigate();
     
-    const [loginEmailAddress, setLoginEmailAddress] = useState('rilwan.at@gmail.com');//Enter your email');
+    const [loginEmailAddress, setLoginEmailAddress] = useState('example@gmail.com');//Enter your email');
     const [loginPassword, setLoginPassword] = useState('12345678');//Enter your password');
 
     
@@ -34,19 +34,25 @@ function SignInPage({ options, cart }) {
      * check this function
      */
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        
+          
+    }, []);
+
 
     const loginUser = async (e) => {
         e.preventDefault();
 
-        if (loginEmailAddress === 'rilwan.at@gmail.com' && loginPassword === '12345678'
-            ) {
-                navigate('/my-account');
-            return;
-        } else {
-            alert("invalid");
-        }
+        // if (loginEmailAddress === 'rilwan.at@gmail.com' && loginPassword === '12345678'
+        //     ) {
+        //         navigate('/my-account');
+        //     return;
+        // } else {
+        //     alert("invalid");
+        // }
 
-        
+        navigate('/my-account');
         return;
 
 
@@ -132,7 +138,7 @@ function SignInPage({ options, cart }) {
                         <div className="col-xs-12" >
                             <div className="woocommerce ">
                                 <div className="woocommerce-notices-wrapper "/>
-                                <div className="u-columns col2-set bg-gray-100" id="customer_login">
+                                <div className="u-columns col2-set" id="customer_login">
                                     <div className="u-column1 col-1 justify-center">
                                         <h2>Login</h2>
                                         <form className="woocommerce-form woocommerce-form-login login" method="post">

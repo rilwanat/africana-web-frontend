@@ -38,7 +38,14 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
 
 
+import XIcon from '@mui/icons-material/X';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
+
 function ProductPage({options, addToCart, cart, updateCart}) {
+    const navigate = useNavigate();
 
     const location = useLocation();
     const product = location.state.encryptedData;
@@ -68,6 +75,8 @@ function ProductPage({options, addToCart, cart, updateCart}) {
 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
       handleData();
     //}
 }, []);
@@ -244,7 +253,19 @@ const handleDecreaseQuantity = (item) => {
 
 
 
+const handleBuyNow = () => {
+    addToCart(parsedProduct, productCount);
+    //updateCart();
 
+    // setTimeout(() => {
+    //     alert(JSON.stringify(cart, null, 2));
+
+    // }, 1000);
+
+    
+    // const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+    // navigate('/checkout', { state: { encryptedData } });
+};
 
   
 
@@ -263,7 +284,7 @@ const handleDecreaseQuantity = (item) => {
             {/* <PageTitle name="Shop single"/> */}
 
             {/* start shop-single-section */}
-            <section className="shop-single-section  shop-single-vertical-thumb section-padding-medium">
+            <section className="shop-single-section  shop-single-vertical-thumb section-padding">
                 <div className="container-1410">
                     <div className="row">
                     
@@ -331,6 +352,18 @@ const handleDecreaseQuantity = (item) => {
                                     {/* <span>{data.reviewCount}</span> */}
                                     {/* <span className='ml-2'>({parsedProduct && parsedProduct.rating} Customer review{parsedProduct && parsedProduct.rating > 1 ? 's ' : ' '})</span> */}
                                 </div>
+
+                                <span className="tagged_as">
+                                    SIZE:
+                                    {/* {
+                                        data.tags.map((item, index) =>
+                                            <a key={index}
+                                               href={item.link}>{' ' + item.name}{data.tags.length - 1 === index ? '' : ', '}</a>
+                                        )
+                                    } */}
+                                </span>
+
+
                                 <div className="product-option flex">
                             {/* <form className="form"> */}
                                 <div className="product-row flex items-center bg-black">
@@ -390,10 +423,7 @@ const handleDecreaseQuantity = (item) => {
 
                                 <div  className='bg-black ml-4'>
                                         <button className='p-4 font-bold text-white ' 
-                                        // onClick={
-                                        //     () => buyNow(parsedProduct, productCount)
-                                            
-                                        // }
+                                        onClick={handleBuyNow}
 
                                         
                                         ><FlashOnIcon /> BUY NOW</button>
@@ -432,14 +462,13 @@ const handleDecreaseQuantity = (item) => {
                                         )
                                     } */}
                                 </span>
-                                <span className="tagged_as">
-                                    SHARE:
-                                    {/* {
-                                        data.tags.map((item, index) =>
-                                            <a key={index}
-                                               href={item.link}>{' ' + item.name}{data.tags.length - 1 === index ? '' : ', '}</a>
-                                        )
-                                    } */}
+                                <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px' }}>
+                                    <div>SHARE: </div>
+                                    <XIcon className='ml-2 mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 
+                                    <FacebookIcon className='mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 
+                                    <InstagramIcon className='mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 
+                                    <ContentCopyIcon className='mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} />
+                                    
                                 </span>
                                     </div>
                                 </div>

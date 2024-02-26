@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 
 // import logo from '../../../assets/logos/Circle Icon.png';
-import logo from '../../../assets/logos/Logo Wordmark.png';
+import logo from '../../../assets/logos/Logo Wordmark 1.png';
 //import Logo from "./Logo";
 import slidbarlogo from '../../../assets/logos/Couture 2.png';
 

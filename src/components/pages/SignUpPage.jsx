@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 
 import Footer from './Footer';
 // import Instagram from './Instagram';
@@ -38,9 +38,15 @@ function SignUpPage({ options, cart }) {
     // const [registrationStatus, setRegistrationStatus] = useState('');
 
 
-    /**
-     * check this function
-     */
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        
+          
+    }, []);
+
+
+
 
     const registerUser = async (e) => {
         e.preventDefault();
@@ -139,7 +145,7 @@ function SignUpPage({ options, cart }) {
                         <div className="col-xs-12">
                             <div className="woocommerce">
                                 <div className="woocommerce-notices-wrapper"/>
-                                <div className="u-columns col1-set bg-gray-100" id="customer_login">
+                                <div className="u-columns col1-set" id="customer_login">
                                     
                                     <div className="u-column1 col-1">
                                         <h2>Register</h2>

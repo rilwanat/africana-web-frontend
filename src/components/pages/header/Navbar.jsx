@@ -16,7 +16,7 @@ function Navbar({options}) {
     return (
         <Fragment>
             {/* <div id="navbar" className={"navbar-collapse collapse navigation-holder " + (options.mobileNav ? 'slideInn' : '')}> */}
-            <div id="navbar" className={" " + (options.mobileNav ? 'slideInn' : '')}>
+            <div id="navbar" className={" " + (options.mobileNav ? 'slideInn' : '')} >
                 {/* <button onClick={options.onMobileNavClick} className="close-navbar"> */}
                     {/* <i className="ti-close"/> */}
                     {/* <CloseIcon onClick={options.onMobileNavClick} className="mt-4 mr-4 newsletter-close-btn" style={{ cursor: 'pointer', width: '20px', height: '20px'}}/> */}
@@ -25,11 +25,11 @@ function Navbar({options}) {
 
                     <CloseIcon onClick={options.onMobileNavClick} className="close-navbar ti-close " style={{ cursor: 'pointer', width: '30px', height: '20px'}}/>
                 <ul className="nav navbar-nav">
-                    <li className=""><NavLink to="/">Home</NavLink></li>
-                    <li className=""><NavLink to="/about">About</NavLink></li>
+                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/">HOME</NavLink></li>
+                    <li className=""><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/about">ABOUT</NavLink></li>
                     {/* <Logo onClick={() =>{}}/> */}
-                    <li className=""><NavLink to="/shop">Shop</NavLink></li>
-                    <li className=""><NavLink to="/sizes">Sizes</NavLink></li>
+                    <li className=""><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/shop">SHOP</NavLink></li>
+                    <li className=""><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/sizes">SIZES</NavLink></li>
                 </ul>
             </div>
             {/* end of nav-collapse */}

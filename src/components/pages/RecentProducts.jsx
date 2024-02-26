@@ -209,7 +209,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                         {/* </Link> */}
                                                         </div>
 
-                                                        <div className="shop-action-wrap">
+                                                        {/* <div className="shop-action-wrap">
                                                             <ul className="shop-action">
                                                                 <li>
                                                                 <div 
@@ -268,7 +268,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                     </div>
                                                                         </li>
                                                             </ul>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                     <div className="product-info">
                                                         <h4>

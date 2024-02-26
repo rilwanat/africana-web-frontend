@@ -116,7 +116,7 @@ function Cart({ options, handleDataViewData, addToCart, updateCart }) {
     return (
         <Fragment>
             <Header options={options} cart={parsedCart}/>
-            <section className="cart-section woocommerce-cart section-padding-medium">
+            <section className="cart-section woocommerce-cart section-padding">
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-xs-12">

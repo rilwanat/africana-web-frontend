@@ -280,7 +280,7 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart }) {
             {/* <PageTitle name="Checkout"/> */}
 
             {/* start checkout-section */}
-            <section className="checkout-section section-padding-medium">
+            <section className="checkout-section section-padding">
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-xs-12">

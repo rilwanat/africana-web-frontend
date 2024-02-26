@@ -5,7 +5,7 @@ import HeaderRight from './HeaderRight';
 import HeaderLeft from './HeaderLeft';
 import Navbar from './Navbar';
 
-import logo from '../../../assets/logos/Logo Wordmark.png';
+import logo from '../../../assets/logos/Logo Wordmark 1.png';
 import logo2 from '../../../assets/logos/Circle Icon_1.png';
 
 /**
@@ -28,14 +28,21 @@ function Header({ options, cart }) {
     return (
         <Fragment>
             {/* Start header */}
-            <header id="header" className="site-header header-style-1" >
+            <header id="header" className="site-header header-style-1" 
+             style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000, 
+             backgroundColor: 'rgba(0, 0, 0, 0.4)'
+            //  backgroundColor: 'transparent' 
+            }} 
+             >
                 {/* <div className="topbar">
                     <div className="topbar-text">
                         <p>{data.content}</p>
                     </div>
                 </div> */}
                 {/* end topbar */}
-                <nav className="navigation navbar navbar-default" >
+                <nav 
+                className="navigation navbar navbar-default" style={{ backgroundColor: 'transparent', border: 'none' }}
+                 >
                     <div className="container-fluid">
                         <div className="navbar-header">
                             <button type="button" className="open-btn"// flex items-center justify-center" 
