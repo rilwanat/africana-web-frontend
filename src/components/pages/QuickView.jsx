@@ -104,13 +104,13 @@ function calculateDiscountPercentage(price, oldPrice) {
                     <div className="product-details">
                         <h4>{data.name}</h4>
                         <div className="price">
-                            <span className="current">{'N'}{findLowestPrice(data)}</span>
+                            <span className="current">{'₦'}{findLowestPrice(data)}</span>
                             {
                             // parseInt(data.price) < parseInt(data.oldPrice)
                             findLowestPrice(data) < findHighestPrice(data)
                             ?
                                 <span className="old">
-                                    {'N'}{findHighestPrice(data)}
+                                    {'₦'}{findHighestPrice(data)}
                                     </span> : ''
                             }
                         </div>

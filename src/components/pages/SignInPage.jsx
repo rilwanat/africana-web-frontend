@@ -20,8 +20,8 @@ function SignInPage({ options, cart }) {
 
     const navigate = useNavigate();
     
-    const [loginEmailAddress, setLoginEmailAddress] = useState('');//Enter your email');
-    const [loginPassword, setLoginPassword] = useState('');//Enter your password');
+    const [loginEmailAddress, setLoginEmailAddress] = useState('rilwan.at@gmail.com');//Enter your email');
+    const [loginPassword, setLoginPassword] = useState('12345678');//Enter your password');
 
     
     const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,15 @@ function SignInPage({ options, cart }) {
     const loginUser = async (e) => {
         e.preventDefault();
 
-        navigate('/my-account');
+        if (loginEmailAddress === 'rilwan.at@gmail.com' && loginPassword === '12345678'
+            ) {
+                navigate('/my-account');
+            return;
+        } else {
+            alert("invalid");
+        }
+
+        
         return;
 
 

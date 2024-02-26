@@ -206,7 +206,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         <span className="woocommerce-Price-amount amount">
                                             <bdi>
                                                 {/* <span className="woocommerce-Price-currencySymbol">{item.Symbol}</span> */}
-                                                <span className="woocommerce-Price-currencySymbol">{'N'}</span>
+                                                <span className="woocommerce-Price-currencySymbol">{'₦'}</span>
                                                 {findLowestPrice(item)}
                                             </bdi>
                                         </span>

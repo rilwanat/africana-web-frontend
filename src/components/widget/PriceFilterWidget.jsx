@@ -47,8 +47,8 @@ function PriceFilterWidget({handleDataSort, maxMin, maxMax}) {
             />
            
           </div>
-          <div style={{ marginTop: '8px', marginBottom: '10px' }}>Price: {'N' + range[0] + ' - N' + range[1]}</div>
-          {/* <p style={{ marginBottom: '10px' }}>Price: {'N' + range[0] + ' - N' + range[1]}</p> */}
+          <div style={{ marginTop: '8px', marginBottom: '10px' }}>Price: {'₦' + range[0] + ' - N' + range[1]}</div>
+          {/* <p style={{ marginBottom: '10px' }}>Price: {'₦' + range[0] + ' - N' + range[1]}</p> */}
           <button style={{ marginTop: '30px' }} onClick={()=> handleDataSort(range[0], range[1])}>Filter</button>
         </div>
       </div>

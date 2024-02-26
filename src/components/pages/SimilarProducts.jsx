@@ -271,7 +271,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                         </h4>
                                                         <h4>
                                                             <Link to="/product-details" className='text-sm'>
-                                                            {'N'}{findLowestPrice(item)}
+                                                            {'₦'}{findLowestPrice(item)}
                                                             </Link>
                                                         </h4>
                                                             

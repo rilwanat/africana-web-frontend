@@ -72,13 +72,11 @@ function HeaderRight({ options, cart }) {
     return (
         <Fragment>
             <div className="header-right">
-                <div className="my-account-link mr-2">
-                    <NavLink to="/signin"><AccountCircleIcon style={{ cursor: "pointer" }} /></NavLink>
-                </div>
-                <div className="wishlist-box mr-2">
+                
+                {/* <div className="wishlist-box mr-2">
                     <FavoriteIcon style={{ cursor: "pointer" }} />
-                </div>
-                <div className="mini-cart mr-2">
+                </div> */}
+                <div className="mini-cart">
                 <div className="relative mr-4" onClick={() => 
                     //(location.pathname === "/checkout" || location.pathname === "/cart") ? null : 
                     options.onMiniCartClick()} style={{ cursor: "pointer" }}>
@@ -121,6 +119,12 @@ function HeaderRight({ options, cart }) {
                         </div>
                     </div>
                 </div>
+
+                <div className="my-account-link">
+                    <NavLink to="/signin"><AccountCircleIcon style={{ cursor: "pointer" }} /></NavLink>
+                </div>
+
+
             </div>
         </Fragment>
     );
