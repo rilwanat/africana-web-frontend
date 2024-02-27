@@ -255,7 +255,7 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
             paymentMethod: paymentMethod
         };
         
-        alert(JSON.stringify(requestData));
+        // alert(JSON.stringify(requestData));
 
         const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/api/v1/checkout", requestData, {
             headers: {
@@ -264,12 +264,18 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
         });
         
         setIsLoading(false);
-        if (response.data.success) {
-            alert("Success");
+
+        
+        if (response.data.status = "success") {
+            alert("Success but https: on domain is required");
+            // alert(JSON.stringify(response.data.data.link));
+
+            const paymentLink = response.data.data.link;
+            window.open(paymentLink, '_blank');
             // Clear fields if needed
             // clearFields();
         } else {
-            alert("Registration Failed");
+            alert("Payment Failed");
         }
     } catch (error) {
         setIsLoading(false);

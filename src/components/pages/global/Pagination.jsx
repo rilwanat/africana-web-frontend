@@ -23,9 +23,21 @@ function Pagination({extraClass, handlePageClick, totalProducts}) {
     }, [totalProducts]);
 
     const handleClick = (pageNumber) => {
+        // if (handlePageClick) {
+        //     setActivePage(pageNumber);
+        //     handlePageClick(pageNumber);
+        // }
+
         if (handlePageClick) {
-            setActivePage(pageNumber);
-            handlePageClick(pageNumber);
+            let newPage = pageNumber;
+            // Ensure newPage is within bounds
+            if (newPage < 1) {
+                newPage = 1;
+            } else if (newPage > totalPages) {
+                newPage = totalPages;
+            }
+            setActivePage(newPage);
+            handlePageClick(newPage);
         }
     };
 
@@ -46,16 +58,16 @@ function Pagination({extraClass, handlePageClick, totalProducts}) {
             <div className={"pagination-wrapper " + extraClass}>
                 <ul className="pg-pagination">
                     <li>
-                        <a href="#" aria-label="Previous">
+                        <a aria-label="Previous" style={{cursor: "pointer"}}>
                             {/* <i className="fi flaticon-back"/> */}
-                            <NavigateBeforeIcon />
+                            <NavigateBeforeIcon onClick={() => {handleClick(activePage-1)}}/>
                         </a>
                     </li>
                     {pagesArray}
                     <li>
-                        <a href="#" aria-label="Next">
+                        <a aria-label="Next" style={{cursor: "pointer"}}>
                             {/* <i className="fi flaticon-next"/> */}
-                            <NavigateNextIcon />
+                            <NavigateNextIcon onClick={() => {handleClick(activePage+1)}}/>
                         </a>
                     </li>
                 </ul>

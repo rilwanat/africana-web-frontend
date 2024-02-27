@@ -95,6 +95,7 @@ const HandelMobileNavStatus = () => {
 useEffect(() => {
   
 // initAuth();
+handleDataCategories();
 
     setTimeout(() => {
         setShowPreloader(false);
@@ -197,9 +198,9 @@ const updateCart = () => {
 // useEffect(() => {
 //   updateCart();
 // }, [cart]);
-useEffect(() => {
-  handleDataCategories();
-});
+// useEffect(() => {
+//   handleDataCategories();
+// }, []);
 
 
 // Remove item totally from cart

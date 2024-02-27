@@ -1,4 +1,5 @@
 import React, {useState, Fragment, useEffect} from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import axios from 'axios';
 
@@ -34,6 +35,8 @@ import './shop/shop.css';
  * @constructor
  */
 function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categories }) {
+
+  const navigate = useNavigate();
 
     /**
      * states
@@ -198,6 +201,8 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
 
             setProductsData(response.data.products);
             setProductsTotal(response.data.total);
+
+            // window.scrollTo(0, 0);
           } else {
             //alert("error: " + response.data.message);
           }
@@ -252,6 +257,11 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
         }
       }
 
+
+      const navigateTo = async (catSlug) => {
+        navigate('/categories/' + catSlug);
+      }
+
     return (
         <Fragment>
 
@@ -280,15 +290,15 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
                                     handleDataSearch={handleDataSearch} 
                                     title="" />
                                     <PriceFilterWidget handleDataSort={handleDataSort} maxMin={maxMin} maxMax={maxMax}/>
-                                    <ProductCategoriesWidget categories={categories} />
-                                    <ColorFilterWidget/>
+                                    <ProductCategoriesWidget categories={categories}  category={null} navigateTo={navigateTo} />
+                                    {/* <ColorFilterWidget/> */}
                                     <TagFilterWidget/>
                                 </div>
                                 <div className="woocommerce-content-wrap" style={{ marginTop: '14px' }}>
                                     <div className="woocommerce-content-inner" >
                                         <div className="woocommerce-toolbar-top" >
-                                            <p className="woocommerce-result-count">Showing {startIndex} – {endIndex} of {productsTotal} results</p>
-
+                                            <p className="woocommerce-result-count">Showing {productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} of {productsTotal} results</p>
+                                            {/* <p>{category}</p> */}
                                             {/* <div className="products-sizes">
                                             <p className="woocommerce-result-count">Showing 1–12 of ## results</p>
                 

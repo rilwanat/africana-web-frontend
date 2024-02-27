@@ -5,13 +5,15 @@ import React, {useState, Fragment, useEffect} from 'react';
  * @returns {*}
  * @constructor
  */
-function ProductCategoriesWidget({ categories }) {
+function ProductCategoriesWidget({ categories, category, navigateTo }) {
 
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+
+
 
 
     return (
@@ -37,13 +39,13 @@ function ProductCategoriesWidget({ categories }) {
                 <ul className="product-categories">
                 {categories.map(category => (
                     <li className="cat-item cat-parent">
-                        <a href="">{category.name}</a>
+                        <a onClick={() => {navigateTo(category.name)}}  className='' style={{ color: category === category.name ? 'black' : '', cursor: 'pointer' }}>{category.name}</a> 
                         {category.children.length > 0 && (
                                 <ul className="children">
                                     {category.children.map(childCategory => (
                                         <li key={childCategory.id} className="cat-item cat-item-213">
                                             {/* <div>ID: {childCategory.id}</div> */}
-                                            <a>{childCategory.name}</a>
+                                            <a style={{ cursor: 'pointer' }}>{childCategory.name}</a>
                                         </li>
                                     ))}
                                 </ul>
