@@ -259,6 +259,7 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem }) {
                 ? <QuickView
                     data={quickViewData}
                     onQuickViewCloseClick={HandelQuickViewClose}
+                    addToCart={addToCart}
                 />
                 : ''
             }

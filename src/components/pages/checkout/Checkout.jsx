@@ -273,7 +273,7 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
         }
     } catch (error) {
         setIsLoading(false);
-        // alert("error: " + error);
+        alert("error: " + error);
     }
 };
 

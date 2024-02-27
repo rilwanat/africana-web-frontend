@@ -164,7 +164,7 @@ function findLowestPrice(product) {
     </div>
     
 
-                    <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')}>
+                    <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} style={{ maxHeight: '600px', overflowY: 'auto' }}>
                         <div className="mini-cart-items">
                             {cart &&
                                 cart.map((item, index) => (

@@ -93,36 +93,6 @@ function ProductPage({options, addToCart, cart, updateCart, removeCartItem}) {
 
 
     /**
-     * Handle Product Count
-     */
-    const HandleProductCount = (e, data) => {
-        e.preventDefault();
-        if (data == 'plus') {
-            setProductCount(productCount + 1);
-        } else {
-            if (productCount > 1) {
-                setProductCount(productCount - 1);
-            } else {
-                setProductCount(1);
-            }
-        }
-    };
-
-    // Function to handle change in product count input
-    const handleProductCountChange = (event) => {
-        // Ensure the value is a valid number
-        const newCount = parseInt(event.target.value);
-
-        // Update the productCount state if the newCount is a valid number
-        if (!isNaN(newCount)) {
-            setProductCount(newCount);
-        }
-    };
-
-
-
-
-    /**
      * Handel Quick View Data
      */
     const HandelQuickViewData = (e, item) => {
@@ -276,6 +246,7 @@ const handleBuyNow = () => {
                 ? <QuickView
                     data={quickViewData}
                     onQuickViewCloseClick={HandelQuickViewClose}
+                    addToCart={addToCart}
                 />
                 : ''
             }
@@ -372,30 +343,12 @@ const handleBuyNow = () => {
 
 
 
-                                <div className="product-option flex">
+                                <div className="product-option flex flex-col md:flex-row">
                             {/* <form className="form"> */}
-                                <div className="product-row flex items-center bg-black">
+                                <div className="product-row flex items-center bg-black mx-2 my-1">
 
                                 <div className="touchspin-wrap" style={{ display: 'flex', alignItems: 'center' }}>
-            {/* <input readOnly className="product-count" type="text" style={{ display: 'inline-block', verticalAlign: 'middle' }}
-                                                       value={productCount} 
-                                                        onChange={handleProductCountChange}
-                                                       name="product-count"/>
-                                                <button
-                                                    onClick={(e) => {
-                                                        HandleProductCount(e, 'plus', productCount)
-                                                    }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
-                                                    type="button">
-                                                        <ExpandLessIcon className="glyphicon glyphicon-chevron-up" style={{ height: '11px', width: '20px' }}/>
-                                                </button>
-                                                <button
-                                                    onClick={(e) => {
-                                                        HandleProductCount(e, 'minus', productCount)
-                                                    }}
-                                                    id="slider-thumbnail-touchspin-down" className="btn btn-default "
-                                                    type="button">
-                                                        <ExpandMoreIcon className="glyphicon glyphicon-chevron-down" style={{ height: '11px', width: '20px' }}/>
-                                                </button> */}
+            
             <div className='flex bg-white items-center justify-center m-2' style={{ height: '80%', width: '100%' }}>
                 <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} 
                 onClick={() => { handleDecreaseQuantity(parsedProduct) }}
@@ -412,26 +365,18 @@ const handleBuyNow = () => {
 
                                     
                                     <div className='bg-black'>
-                                        <button className='p-4 font-bold text-white' 
-                                        // type="submit" 
-                                        // onClick={onQuickViewCloseClick}
-                                        // onClick={addToCart(parsedProduct)}
+                                        <button className='p-4 font-bold text-white ml-8 text-sm' 
                                         onClick={
-                                            // (e) => addToCart(e, parsedProduct, 1)
-                                            // () => increaseItemToCart(parsedProduct)
-                                            () => addToCart(parsedProduct, productCount)
-                                            
-                                        }
-
-                                        
+                                            () => addToCart(parsedProduct, productCount)                                            
+                                        }                                        
                                         >ADD TO CART</button>
                                     </div>
 
                                     
                                 </div>
 
-                                <div  className='bg-black ml-4'>
-                                        <button className='p-4 font-bold text-white ' 
+                                <div  className='flex bg-black  justify-center mx-2 my-1'>
+                                        <button className='p-4 font-bold text-white  text-sm' 
                                         onClick={handleBuyNow}
 
                                         

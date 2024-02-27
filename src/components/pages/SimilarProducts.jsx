@@ -43,9 +43,9 @@ function SimilarProducts({onQuickViewClick, products, addToCart}) {
     const [isPrevHovered, setPrevHovered] = useState(false);
     const [isNextHovered, setNextHovered] = useState(false);
 
-    const [isViewHovered, setViewHovered] = useState(false);
+    const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
     const [isFavHovered, setFavHovered] = useState(false);
-    const [isBagHovered, setBagHovered] = useState(false);
+    const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
 
 
     

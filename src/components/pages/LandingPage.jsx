@@ -11,7 +11,6 @@ import Hero1 from './Hero/Hero1';
 import Header from './header/Header';
 import FeaturedProducts from './FeaturedProducts';
 import RecentProducts from './RecentProducts';
-import QuickView from './QuickView';
 import CtaSection from './CtaSection';
 import Locations from './Locations';
 import Footer from './Footer';

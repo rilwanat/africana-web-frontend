@@ -43,9 +43,9 @@ function RecentProducts({onQuickViewClick, products, addToCart}) {
     const [isPrevHovered, setPrevHovered] = useState(false);
     const [isNextHovered, setNextHovered] = useState(false);
 
-    const [isViewHovered, setViewHovered] = useState(false);
+    const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
     const [isFavHovered, setFavHovered] = useState(false);
-    const [isBagHovered, setBagHovered] = useState(false);
+    const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
 
     
     
@@ -326,13 +326,15 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                             e => onQuickViewClick(e, item)
                                                                         }
                                                                         onMouseEnter={()=>{
-                                                                            setViewHovered(true)
+                                                                            setViewHovered(true);
+                                                                            setViewHoveredId(item.id);
                                                                         }}
                                                                         onMouseLeave={()=>{
-                                                                            setViewHovered(false)
+                                                                            setViewHovered(false);
+                                                                            setViewHoveredId(item.id);
                                                                         }}
                                                                         className='w-4 h-4 p-1 ml-2' 
-                                                                        style={{ color: isViewHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        style={{ color: isViewHovered && isViewHoveredId == item.id ? 'white' : 'black', cursor: 'pointer' }}
                                                                         /></div>
                                             <div><ShoppingBagOutlinedIcon className='w-4 h-4 p-1  ml-2' 
                                                                         
@@ -344,12 +346,14 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                             // () => {alert(item.productVariantId);}
                                                                         }
                                                                         onMouseEnter={()=>{
-                                                                            setBagHovered(true)
+                                                                            setBagHovered(true);
+                                                                            setBagHoveredId(item.id);
                                                                         }}
                                                                         onMouseLeave={()=>{
-                                                                            setBagHovered(false)
+                                                                            setBagHovered(false);
+                                                                            setBagHoveredId(item.id);
                                                                         }}
-                                                                        style={{ color: isBagHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        style={{ color: isBagHovered && isBagHoveredId == item.id ? 'white' : 'black', cursor: 'pointer' }}
                                                                         /></div>
                                         </div>
                                                             

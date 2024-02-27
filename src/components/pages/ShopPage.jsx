@@ -153,6 +153,7 @@ function ShopPage({ options }) {
                 ? <QuickView
                     data={quickViewData}
                     onQuickViewCloseClick={HandelQuickViewClose}
+                    addToCart={addToCart}
                 />
                 : ''
             }

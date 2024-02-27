@@ -27,7 +27,7 @@ import imgx from '../../assets/images/size.png';
  * @returns {*}
  * @constructor
  */
-function SizesPage({options, cart, removeCartItem}) {
+function SizesPage({options, cart, removeCartItem, addToCart}) {
 
     /**
      * states
@@ -90,6 +90,7 @@ function SizesPage({options, cart, removeCartItem}) {
                 ? <QuickView
                     data={quickViewData}
                     onQuickViewCloseClick={HandelQuickViewClose}
+                    addToCart={addToCart}
                 />
                 : ''
             }
