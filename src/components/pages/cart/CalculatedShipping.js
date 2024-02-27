@@ -37,7 +37,9 @@ function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
 
     
     const calculateGrandTotal = () => {
-        return price + tax;
+        let grandTotal = price + tax;
+    return grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+
     };
 
     const navigateToCheckOut = () => {
@@ -61,7 +63,7 @@ function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
                             <span className="woocommerce-Price-amount amount">
                                     <span className="woocommerce-Price-currencySymbol">
                                         {currencySymbol}
-                                    </span>{price}
+                                    </span>{price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </span>
                         </td>
                     </tr>
@@ -73,7 +75,7 @@ function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
                             <span className="woocommerce-Price-amount amount">
                                     <span className="woocommerce-Price-currencySymbol">
                                         {currencySymbol}
-                                    </span>{tax}
+                                    </span>{tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </span>
                         </td>
                     </tr>

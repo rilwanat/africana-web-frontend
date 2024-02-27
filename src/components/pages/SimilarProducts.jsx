@@ -104,7 +104,8 @@ function findLowestPrice(product) {
       });
     //});
   
-    return lowestPrice;
+    // return lowestPrice;
+    return lowestPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
   }
 
   function findHighestPrice(product) {

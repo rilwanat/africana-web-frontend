@@ -96,12 +96,12 @@ function MyAccount({  options, addToCart, cart, removeCartItem  }) {
             // setMaxMax(maxPrice);
 
           } else {
-            alert("error: " + response.data.message);
+            //alert("error: " + response.data.message);
           }
 
         } catch (error) {
           setIsDataLoading(false);
-          alert("error: " + error);
+          //alert("error: " + error);
         }
       };
 

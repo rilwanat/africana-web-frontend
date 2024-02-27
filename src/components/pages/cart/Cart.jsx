@@ -48,11 +48,11 @@ function Cart({ options, handleDataViewData, addToCart, updateCart, removeCartIt
             if (response.data.success) {
                 setProductsData(response.data.products);
             } else {
-                alert("error: " + response.data.message);
+                //alert("error: " + response.data.message);
             }
         } catch (error) {
             setIsDataLoading(false);
-            alert("error: " + error);
+            //alert("error: " + error);
         }
     };
 
@@ -149,7 +149,7 @@ function Cart({ options, handleDataViewData, addToCart, updateCart, removeCartIt
                                                         {cartItem.name}
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
-                                                        N{findLowestPrice(cartItem)}
+                                                    {'₦'}{findLowestPrice(cartItem).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center">
                                                         <RemoveIcon className='mr-2' style={{ cursor: 'pointer' }} onClick={() => { handleDecreaseQuantity(cartItem) }}/>
@@ -157,7 +157,7 @@ function Cart({ options, handleDataViewData, addToCart, updateCart, removeCartIt
                                                         <AddIcon className='ml-2' style={{ cursor: 'pointer' }} onClick={() => { handleIncreaseQuantity(cartItem) }}/>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
-                                                        N{calculateTotal(cartItem)}
+                                                    {'₦'}{calculateTotal(cartItem).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                     </td>
                                                 </tr>
                                             ))}
@@ -165,7 +165,7 @@ function Cart({ options, handleDataViewData, addToCart, updateCart, removeCartIt
                                     </table>
                                 </form>
                                 <div className="cart-collaterals">
-                                    <CalculatedShipping currencySymbol="N" price={calculateCartSubTotal()} tax={calculateCartTax()} options={options} cart={parsedCart}/>
+                                    <CalculatedShipping currencySymbol={'₦'} price={calculateCartSubTotal()} tax={calculateCartTax()} options={options} cart={parsedCart}/>
                                 </div>
                             </div>
                         </div>

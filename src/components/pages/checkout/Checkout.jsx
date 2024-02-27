@@ -255,9 +255,9 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
             paymentMethod: paymentMethod
         };
         
-        // alert(JSON.stringify(requestData));
+        alert(JSON.stringify(requestData));
 
-        const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/checkout", requestData, {
+        const response = await axios.post("http://144.149.167.72.host.secureserver.net:3000/api/v1/checkout", requestData, {
             headers: {
                 "Content-Type": "application/json",
             },
@@ -273,7 +273,7 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
         }
     } catch (error) {
         setIsLoading(false);
-        alert("Error: " + error);
+        // alert("error: " + error);
     }
 };
 
@@ -529,7 +529,7 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
                     <div className="text-sm text-gray-500">{item.quantity}</div>
                 </td>
                 <td className="px-6 py-4 text-right whitespace-nowrap">
-                    <span className="text-sm text-gray-900">N{findLowestPrice(item)}</span>
+                    <span className="text-sm text-gray-900">{'₦'}{findLowestPrice(item).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </td>
             </tr>
         ))}
@@ -538,20 +538,20 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
         <tr className="bg-white divide-y divide-gray-200">
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
             <td className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                <span className="text-sm text-gray-900">N{calculateCartSubTotal()}</span>
+                <span className="text-sm text-gray-900">{'₦'}{calculateCartSubTotal().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </td>
         </tr>
         {/* You can add more rows here for additional details */}
         <tr className="bg-white divide-y divide-gray-200">
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tax</th>
             <td className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                <span className="text-sm text-gray-900">N{calculateCartTax()}</span>
+                <span className="text-sm text-gray-900">{'₦'}{calculateCartTax().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </td>
         </tr>
         <tr className="bg-gray-50">
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
             <td className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                <span className="text-sm text-gray-900">N{calculateGrandTotal()}</span>
+                <span className="text-sm text-gray-900">{'₦'}{calculateGrandTotal().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </td>
         </tr>
     </tfoot>

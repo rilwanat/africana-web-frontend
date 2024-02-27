@@ -181,7 +181,8 @@ function findLowestPrice(product) {
       });
     //});
   
-    return lowestPrice;
+    // return lowestPrice;
+    return lowestPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   function findHighestPrice(product) {
@@ -230,12 +231,12 @@ function calculateDiscountPercentage(price, oldPrice) {
 
         setRelatedProductsData(response.data.products);
       } else {
-        alert("error: " + response.data.message);
+       // alert("error: " + response.data.message);
       }
 
     } catch (error) {
       setIsDataLoading(false);
-      alert("error: " + error);
+      //alert("error: " + error);
     }
   };
 

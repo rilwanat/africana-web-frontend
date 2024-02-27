@@ -35,13 +35,13 @@ function Hero1() {
     const heroData = [
         {
             "id": 1,
-            "img": "http://shopafricana.co/wp-content/uploads/2024/01/2-slider-scaled.jpg", //imgx,//"../../../assets/images/slider/slide-1.jpg",
+            "img": "http://shopafricana.co/wp-content/uploads/2024/01/art-of-life210124_40-scaled.jpg", //imgx,//"../../../assets/images/slider/slide-1.jpg",
             "title": "Art of Life",
             "text": "Collection"
         },
         {
             "id": 2,
-            "img": "http://shopafricana.co/wp-content/uploads/2024/01/1-slider-scaled.jpg", //imgx,//"../../../assets/images/slider/slide-2.jpg",
+            "img": "http://shopafricana.co/wp-content/uploads/2024/01/art-of-life210124_26-scaled.jpg", //imgx,//"../../../assets/images/slider/slide-2.jpg",
             "title": "Art of Life",
             "text": "Collection"
         },
@@ -63,15 +63,15 @@ function Hero1() {
                                 <div className="slide-inner slide-bg-image"
                                      style={{backgroundImage: `url(${item.img})`}}>
                                     <div className="container-1410">
-                                        <div className="slide-text">
+                                        {/* <div className="slide-text">
                                             <p>{item.text}</p>
-                                        </div>
+                                        </div> */}
                                         <div className="slide-title">
                                             <h2>{item.title}</h2>
                                         </div>
                                         <div className="clearfix"/>
                                         <div className="slide-btns">
-                                            <NavLink to="/shop" className="theme-btn-s7">Shop Now</NavLink>
+                                            <NavLink to="/shop" className="theme-btn-s7">Shop The Collection</NavLink>
                                         </div>
                                     </div>
                                 </div>

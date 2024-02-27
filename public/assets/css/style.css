@@ -1014,7 +1014,7 @@ abbr[title] {
 }
 
 .section-padding {
-    padding: 110px 0;
+    padding: 120px 0;
 }
 
 @media (max-width: 991px) {
@@ -1025,7 +1025,7 @@ abbr[title] {
 
 @media (max-width: 767px) {
     .section-padding {
-        padding: 90px 0;
+        padding: 120px 0;
     }
 }
 
@@ -2253,11 +2253,11 @@ button:active {
 
 .site-header #navbar {
     font-family: "futura-pt-demi", sans-serif;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    -ms-transition: all 0.5s;
-    transition: all 0.5s;
+    -webkit-transition: all 0.75s;
+    -moz-transition: all 0.75s;
+    -o-transition: all 0.75s;
+    -ms-transition: all 0.75s;
+    transition: all 0.75s;
     /*** mega-menu style ***/
 }
 
@@ -2297,7 +2297,7 @@ button:active {
     }
 
     .site-header #navbar > ul .sub-menu {
-        background-color: #fff;
+        background-color: #000;
         width: 240px;
         text-align: left;
         padding: 25px 0;
@@ -2562,6 +2562,7 @@ button:active {
 
     .site-header .navbar-header button {
         /* background-color: #000; */
+        background-color: 'transparent';
         width: 40px;
         height: 40px;
         border: 0;
@@ -2578,7 +2579,7 @@ button:active {
     .site-header .navbar-header button span {
         background-color: #fff;
         display: block;
-        height: 1px;
+        height: 2px;
         margin-bottom: 5px;
     }
 
@@ -2587,9 +2588,12 @@ button:active {
     }
 
     .site-header #navbar {
-        background: #fff;
+        /* background: #fff; */
+        background: #000;
+        /* background: 'rgba(0, 0, 0, 0.2)'; */
         display: block !important;
-        width: 280px;
+        /* width: 280px; */
+        width: 240px;
         height: 100% !important;
         margin: 0;
         padding: 0;

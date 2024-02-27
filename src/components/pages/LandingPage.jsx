@@ -112,12 +112,12 @@ export default function LandingPage({ options, handleDataViewData, addToCart, ca
 
         setProductsData(response.data.products);
       } else {
-        alert("error: " + response.data.message);
+        //alert("error: " + response.data.message);
       }
 
     } catch (error) {
       setIsDataLoading(false);
-      alert("error: " + error);
+      //alert("error: " + error);
     }
   };
 

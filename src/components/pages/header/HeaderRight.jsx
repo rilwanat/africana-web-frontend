@@ -143,21 +143,26 @@ function findLowestPrice(product) {
                     <FavoriteIcon style={{ cursor: "pointer" }} />
                 </div> */}
                 <div className="mini-cart">
-                <div className="relative" onClick={() => 
-                    //(location.pathname === "/checkout" || location.pathname === "/cart") ? null : 
-                    options.onMiniCartClick()} style={{ cursor: "pointer" }}>
-    <ShoppingBagOutlinedIcon className="mr-1 cursor-pointer" style={{ color: '#fff' }}/>
-    {cart && cart.length > 0 && (
-        <div
-            className="absolute top-0 right-0 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center font-bold"
-            style={{ fontSize: '9px', color: "#ffffff" }}
-        >
-            {
-            //(location.pathname === "/checkout" || location.pathname === "/cart") ? "" : 
-            cart.length}
-        </div>
-    )}
-</div>
+                <div className="relative" onClick={() => {
+                    if (cart.length > 0) {
+                        options.onMiniCartClick();
+                    } else {
+                        alert("add items to your cart");
+                    }
+                }} style={{ cursor: "pointer" }}>
+        <ShoppingBagOutlinedIcon className="mr-1 cursor-pointer" style={{ color: '#fff' }}/>
+        {cart && cart.length > 0 && (
+            <div
+                className="absolute top-0 right-0 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center font-bold"
+                style={{ fontSize: '9px', color: "#ffffff" }}
+            >
+                {
+                //(location.pathname === "/checkout" || location.pathname === "/cart") ? "" : 
+                cart.length}
+            </div>
+        )}
+    </div>
+    
 
                     <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')}>
                         <div className="mini-cart-items">
@@ -291,6 +296,7 @@ function findLowestPrice(product) {
                 <div className="my-account-link">
                     <NavLink to="/signin"><AccountCircleIcon style={{ cursor: "pointer", color: '#fff' }} /></NavLink>
                 </div>
+                
 
 
             </div>

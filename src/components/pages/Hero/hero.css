@@ -137,8 +137,8 @@ img:active {
     top: 0;
     z-index: 1;
     background-size: cover;
-    /* background-position: top center; */
-    background-position: center;
+    background-position: top center;
+    /* background-position: center; */
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;

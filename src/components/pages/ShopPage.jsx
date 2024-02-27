@@ -106,12 +106,12 @@ function ShopPage({ options }) {
             // Store the retrieved data in state variables
             //setTransactions(response.data.payload.transactions);
           } else {
-            alert("error: " + response.data.message);
+            //alert("error: " + response.data.message);
           }
 
         } catch (error) {
           setIsDataLoading(false);
-          alert("error: " + error);
+          //alert("error: " + error);
         }
       };
 
@@ -137,12 +137,12 @@ function ShopPage({ options }) {
             // Store the retrieved data in state variables
             //setTransactions(response.data.payload.transactions);
           } else {
-            alert("error: " + response.data.message);
+            //alert("error: " + response.data.message);
           }
 
         } catch (error) {
           setIsDataLoading(false);
-          alert("error: " + error);
+          //alert("error: " + error);
         }
       };
 

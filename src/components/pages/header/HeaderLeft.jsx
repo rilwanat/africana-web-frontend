@@ -11,6 +11,8 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
+import { NavLink, useNavigate } from 'react-router-dom';
+
 /**
  * side info left menu component
  * @param options
@@ -18,6 +20,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
  * @constructor
  */
 function HeaderLeft({options}) {
+    const navigate = useNavigate();
 
     return (
         <Fragment>
@@ -32,7 +35,12 @@ function HeaderLeft({options}) {
                     <button className="btn side-info-close-btn" onClick={options.onSideInfoClick}>< CloseIcon style={{ color: "#c8c8c8" }}/>
                     </button>
                     <div className="logo">
-                        <img src={slidbarlogo} alt=""/>
+                        <NavLink style={{ fontSize: '14px', color: '#000' }} to="/">
+                        <img src={slidbarlogo} alt="" 
+                        onClick={options.onSideInfoClick}
+                        />
+                        </NavLink>  
+                        
                     </div>
                     <div className="text">
                         <p>Africana is a fashion movement that skillfully merges African heritage with modern aesthetics.</p>

@@ -29,9 +29,12 @@ function Header({ options, cart, removeCartItem }) {
         <Fragment>
             {/* Start header */}
             <header id="header" className="site-header header-style-1" 
-             style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000, 
-            //  backgroundColor: 'rgba(0, 0, 0, 0.4)'
-             backgroundColor: 'transparent' 
+             style={{ 
+                position: 'fixed', 
+                top: 0, 
+                width: '100%', zIndex: 1000, 
+             backgroundColor: 'rgba(0, 0, 0, 0.2)'
+            //  backgroundColor: 'transparent' 
             }} 
              >
                 {/* <div className="topbar">
@@ -54,7 +57,9 @@ function Header({ options, cart, removeCartItem }) {
                                 <span className="icon-bar"/>
                                 <span className="icon-bar"/>
                             </button>
-                            <Link className="mobile-only navbar-brand" to="/">
+                            {
+                            // options.mobileNav ? '' :
+                                <Link className="mobile-only navbar-brand" to="/">
                                 <img src={logo} alt="" 
                                 className="h-10 w-52 object-scale-down" 
                                 style={{ 
@@ -63,6 +68,7 @@ function Header({ options, cart, removeCartItem }) {
                                     height: '30px'
                                     }}/>
                             </Link>
+                            }
                         </div>
 
 
