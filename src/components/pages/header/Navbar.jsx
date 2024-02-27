@@ -43,18 +43,22 @@ function Navbar({options}) {
                                     <hr className='mobile-only mt-4'/>
 </NavLink>
 
-                
+{/*                 
+const userString = JSON.stringify(user);
+    const additionalVariable = 'noEdit';
+    navigate(`/zaptrance-users/${encodeURIComponent(userString)}/${additionalVariable}`); */}
 
 
-                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/" >MEN</NavLink></li>
-                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/">WOMEN</NavLink></li>
-                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/">ESSENTIALS</NavLink></li>
-                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/">STORIES</NavLink></li>
+
+                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/about">ABOUT</NavLink></li> 
+                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/categories/men" >MEN</NavLink></li>
+                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/categories/women">WOMEN</NavLink></li>
+                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#000' }} to="">ESSENTIALS</NavLink></li>
+                    {/* <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/">STORIES</NavLink></li> */}
                     <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/shop">ON SALE</NavLink></li>
-                    <li className=""><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/sizes">SIZES</NavLink></li>
+                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/sizes">SIZES</NavLink></li>
 
-                    {/* <li className="" ><NavLink style={{ fontSize: '14px', color: '#000' }} to="/">HOME</NavLink></li>
-                    <li className=""><NavLink style={{ fontSize: '14px', color: '#000' }} to="/about">ABOUT</NavLink></li>                    
+                    {/* <li className="" ><NavLink style={{ fontSize: '14px', color: '#000' }} to="/">HOME</NavLink></li>                   
                     <li className=""><NavLink style={{ fontSize: '14px', color: '#000' }} to="/shop">SHOP</NavLink></li>
                     <li className=""><NavLink style={{ fontSize: '14px', color: '#000' }} to="/sizes">SIZES</NavLink></li> */}
                 </ul>

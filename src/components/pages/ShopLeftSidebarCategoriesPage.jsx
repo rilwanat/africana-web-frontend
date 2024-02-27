@@ -1,4 +1,5 @@
 import React, {useState, Fragment, useEffect} from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import axios from 'axios';
 
@@ -24,6 +25,7 @@ import Products from "./shop/Products";
 import QuickView from './QuickView';
 
 
+
 import './shop/shop.css';
 
 
@@ -33,7 +35,7 @@ import './shop/shop.css';
  * @returns {*}
  * @constructor
  */
-function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categories }) {
+function ShopLeftSidebarCategoriesPage({ options, addToCart, cart, removeCartItem, categories }) {
 
     /**
      * states
@@ -52,6 +54,14 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
     const [currentPage, setCurrentPage] = useState(1);
 
     const productsPerPage = 16;
+
+  
+    
+    
+    const { category } = useParams();
+    // const parsedUser = JSON.parse(decodeURIComponent(category));
+    // const parsedCategory = (decodeURIComponent(category));
+
 
     const HandleOrderingStatus = (event, data) => {
         event.preventDefault();
@@ -78,19 +88,20 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
         //} else {
           // If the user is authenticated, call the handleData function
           //alert("X");
-          handleData();
+          handleDataGetCategory(category);
+          
         //}
-    }, []);
+    }, [category]);
 
-    
-    const handleData = async () => {    
+
+    const handleDataGetCategory = async (category) => {    
         //alert("token: " + token + "\n\n" + "uid: " + uid);
         setCurrentPage(1);
         setIsDataLoading(true);
         try {
     
           // const response = await axios.get('http://localhost:3000/productssample.json');
-          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
+          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products?categorySlug=' + category, {
             //params: { uid: uid },
             headers: {
               "Content-Type": "application/json",
@@ -280,7 +291,7 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
                                     handleDataSearch={handleDataSearch} 
                                     title="" />
                                     <PriceFilterWidget handleDataSort={handleDataSort} maxMin={maxMin} maxMax={maxMax}/>
-                                    <ProductCategoriesWidget categories={categories} />
+                                    <ProductCategoriesWidget categories={categories}/>
                                     <ColorFilterWidget/>
                                     <TagFilterWidget/>
                                 </div>
@@ -334,4 +345,4 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
     );
 }
 
-export default ShopLeftSidebarPage;
+export default ShopLeftSidebarCategoriesPage;

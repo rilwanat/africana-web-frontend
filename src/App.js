@@ -9,6 +9,7 @@ import AccountPage from "./components/pages/MyAccount";
 import CartPage from "./components/pages/cart/Cart";
 import CheckoutPage from "./components/pages/checkout/Checkout";
 import ShopLeftSidebarPage from "./components/pages/ShopLeftSidebarPage";
+import ShopLeftSidebarCategoriesPage from "./components/pages/ShopLeftSidebarCategoriesPage";
 import ProductPage from "./components/pages/ProductPage";
 import SizesPage from "./components/pages/SizesPage";
 
@@ -19,6 +20,8 @@ import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage';
 
 import QuickView from './components/pages/QuickView';
 
+
+import axios from 'axios';
 // import axios from 'axios';
 
 
@@ -56,6 +59,11 @@ const [showMiniCart, setShowMiniCart] = useState(false);
 const [showSideInfo, setShowSideInfo] = useState(false);
 const [showMobileNav, setShowMobileNav] = useState(false);
 const [showPreloader, setShowPreloader] = useState(true);
+
+
+
+const [categories, setCategories] = useState([]);
+    
 
 /**
  * change mini cart state
@@ -190,7 +198,7 @@ const updateCart = () => {
 //   updateCart();
 // }, [cart]);
 useEffect(() => {
-  
+  handleDataCategories();
 });
 
 
@@ -206,6 +214,34 @@ const removeCartItem = (e, itemToRemove) => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
 };
 
+
+
+
+const handleDataCategories = async () => {    
+  setIsDataLoading(true);
+  try {
+    // const response = await axios.get('http://localhost:3000/productssample.json');
+    const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/categories', {
+      //params: { uid: uid },
+      headers: {
+        "Content-Type": "application/json",
+        //Authorization: `Bearer ${token}`,
+      },
+    });
+    setIsDataLoading(false);
+    //alert(JSON.stringify(response.data, null, 2));
+    if (response.data.success) {
+      //alert("dashboard-products " + JSON.stringify(response.data, null, 2));    
+      // Store the retrieved data in state variables
+      setCategories(response.data.categoriesOrdered);
+    } else {
+      //alert("error: " + response.data.message);
+    }
+  } catch (error) {
+    setIsDataLoading(false);
+    //alert("error: " + error);
+  }
+};
 
 
 
@@ -233,7 +269,9 @@ const removeCartItem = (e, itemToRemove) => {
               <Route path='/home' element={<HomePage />}/>    
               <Route path='/about' element={<AboutPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>    
               <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/> 
-              <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>
+              <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}  categories={categories}/>}/>
+              
+              <Route path='/categories/:category' element={<ShopLeftSidebarCategoriesPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem} categories={categories}/>}/>
               
               <Route path='/cart' element={<CartPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart}  removeCartItem={removeCartItem}/>}/>
               {/* <Route path='/checkout/:cart' element={<CheckoutPage options={options} />}/> */}
