@@ -60,7 +60,7 @@ function RecentProducts({onQuickViewClick, products, addToCart}) {
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 6,
+        slidesToShow: 3, //6,
         slidesToScroll: 1,
         autoplay: true,
         speed: 600,
@@ -270,7 +270,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                             </ul>
                                                         </div> */}
                                                     </div>
-                                                    <div className="product-info">
+                                                    {/* <div className="product-info">
                                                         <h4>
                                                             <Link to="/product-details">
                                                                 {item.name}
@@ -280,7 +280,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                               <ins>
                                                                 <span className="woocommerce-Price-amount amount">
                                                                   <bdi>
-                                                                    {/* <span className="woocommerce-Price-currencySymbol">{item.Symbol}</span> */}
                                                                     <span className="woocommerce-Price-currencySymbol">{'₦'}</span>
                                                                     {findLowestPrice(item)}
                                                                     </bdi>
@@ -298,6 +297,61 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                                 </del> : ''
                                                             }
                                                             </span>
+                                                    </div> */}
+                                                    <div className="product-info">
+                                                        <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
+                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm'>
+                                                                {item.name}
+                                                            </div>
+                                                        </h4>
+                                                        <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
+                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm'>
+                                                            {'₦'}{findLowestPrice(item)}
+                                                            </div>
+                                                        </h4>
+
+                                                        <div className='text-left pl-2 flex items-center mt-1' >
+                                            <h4 className='h-4 py-1' style={{ cursor: 'pointer' }} >SELECT OPTIONS</h4>
+                                            {/* <div style={{ position: 'relative' }}>
+        <h4 className='h-4 py-1' onMouseEnter={() => setShowWidget(true)} onMouseLeave={() => setShowWidget(false)}>SELECT OPTIONS</h4>
+        {showWidget && (
+            <div style={{ position: 'absolute', top: 'calc(-100% - 10px)', left: '0', background: 'white', padding: '5px', border: '1px solid black' }}>
+            Widget Content
+        </div>
+        )}
+    </div> */}
+                                            <div><RemoveRedEyeOutlinedIcon 
+                                                                        onClick={
+                                                                            e => onQuickViewClick(e, item)
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setViewHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setViewHovered(false)
+                                                                        }}
+                                                                        className='w-4 h-4 p-1 ml-2' 
+                                                                        style={{ color: isViewHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        /></div>
+                                            <div><ShoppingBagOutlinedIcon className='w-4 h-4 p-1  ml-2' 
+                                                                        
+                                                                        onClick={
+                                                                            // ()=>{ addToCart()}
+                                                                            //(e) => addToCart(e, item, 1)
+                                                                            () => addToCart(item)
+                                                                            // addToCart = async (e, productVariantId, quantity)
+                                                                            // () => {alert(item.productVariantId);}
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setBagHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setBagHovered(false)
+                                                                        }}
+                                                                        style={{ color: isBagHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        /></div>
+                                        </div>
+                                                            
                                                     </div>
                                                 </li>
                                             ))

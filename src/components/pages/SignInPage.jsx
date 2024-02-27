@@ -16,7 +16,7 @@ import imgx from '../../assets/images/shop/img-2.jpg';
  * @returns {*}
  * @constructor
  */
-function SignInPage({ options, cart }) {
+function SignInPage({ options, cart, removeCartItem }) {
 
     const navigate = useNavigate();
     
@@ -127,7 +127,7 @@ function SignInPage({ options, cart }) {
 
     return (
         <Fragment>
-            <Header options={options} cart={cart}/>
+            <Header options={options} cart={cart}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="My Account"/> */}
 

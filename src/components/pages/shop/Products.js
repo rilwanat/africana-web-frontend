@@ -180,37 +180,62 @@ function calculateDiscountPercentage(price, oldPrice) {
                                 </div> */}
                             </div>
                             <div className="product-info">
-                                <h4>
-                                    <Link to="/product-details">
-                                        {item.name}
-                                    </Link>
-                                </h4>
-                                <span className="woocommerce-Price-amount amount">
-                                    <ins>
-                                        <span className="woocommerce-Price-amount amount">
-                                            <bdi>
-                                                {/* <span className="woocommerce-Price-currencySymbol">{item.Symbol}</span> */}
-                                                <span className="woocommerce-Price-currencySymbol">{'₦'}</span>
-                                                {findLowestPrice(item)}
-                                            </bdi>
-                                        </span>
-                                    </ins>
-                                    {/* <p>
-                                    {findLowestPrice(item) + " " + findHighestPrice(item) }
-                                    </p> */}
-                                    {
-                                    // parseInt(item.price) < parseInt(item.oldPrice)
-                                    findLowestPrice(item) < findHighestPrice(item) 
-                                    ?
-                                        <del>
-                                            <span className="woocommerce-Price-amount amount">
-                                            <bdi><span
-                                                className="woocommerce-Price-currencySymbol">{item.Symbol}</span>{item.oldPrice}</bdi>
-                                            </span>
-                                        </del> : ''
-                                    }
-                                </span>
-                                <p className="product-description">{item.description}</p>
+                            <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
+                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm text-black'>
+                                                                {item.name}
+                                                            </div>
+                                                        </h4>
+                                                        <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
+                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm  text-black'>
+                                                            {'₦'}{findLowestPrice(item)}
+                                                            </div>
+                                                        </h4>
+
+
+
+                                <div className='text-left pl-2 flex items-center mt-1' >
+                                            <h4 className='h-4 py-1' style={{ cursor: 'pointer' }} >SELECT OPTIONS</h4>
+                                            {/* <div style={{ position: 'relative' }}>
+        <h4 className='h-4 py-1' onMouseEnter={() => setShowWidget(true)} onMouseLeave={() => setShowWidget(false)}>SELECT OPTIONS</h4>
+        {showWidget && (
+            <div style={{ position: 'absolute', top: 'calc(-100% - 10px)', left: '0', background: 'white', padding: '5px', border: '1px solid black' }}>
+            Widget Content
+        </div>
+        )}
+    </div> */}
+                                            <div><RemoveRedEyeOutlinedIcon 
+                                                                        onClick={
+                                                                            e => HandelQuickViewData(e, item)
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setViewHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setViewHovered(false)
+                                                                        }}
+                                                                        className='w-4 h-4 p-1 ml-2' 
+                                                                        style={{ color: isViewHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        /></div>
+                                            <div><ShoppingBagOutlinedIcon className='w-4 h-4 p-1  ml-2' 
+                                                                        
+                                                                        onClick={
+                                                                            // ()=>{ addToCart()}
+                                                                            //(e) => addToCart(e, item, 1)
+                                                                            () => addToCart(item)
+                                                                            // addToCart = async (e, productVariantId, quantity)
+                                                                            // () => {alert(item.productVariantId);}
+                                                                        }
+                                                                        onMouseEnter={()=>{
+                                                                            setBagHovered(true)
+                                                                        }}
+                                                                        onMouseLeave={()=>{
+                                                                            setBagHovered(false)
+                                                                        }}
+                                                                        style={{ color: isBagHovered ? 'white' : 'black', cursor: 'pointer' }}
+                                                                        /></div>
+                                        </div>
+
+                                {/* <p className="product-description">{item.description}</p> */}
                             </div>
                         </li>
                     ))

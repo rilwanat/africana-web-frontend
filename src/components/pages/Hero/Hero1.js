@@ -2,9 +2,6 @@ import React, {Fragment} from 'react';
 import Slider from "react-slick";
 import '../Hero/hero.css';
 
-/**
- * hero demo data
- */
 // import heroData from '../../data/hero1.json';
 import {NavLink} from "react-router-dom";
 

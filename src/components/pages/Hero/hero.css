@@ -90,7 +90,7 @@ img:active {
 }
 
 .slick-prev:before {
-    content: '‹';
+    /* content: '‹'; */
     color: #000;
     position: absolute;
     top: 5px;
@@ -99,7 +99,7 @@ img:active {
 }
 
 .slick-next:before {
-    content: '›';
+    /* content: '›'; */
     color: #000;
     position: absolute;
     top: 5px;
@@ -112,6 +112,22 @@ img:active {
     color: #fff;
 }
 
+@media (max-width: 768px) {
+    .hero-1 .slide-inner,
+    .hero-2 .slide-inner {
+        height: 100vh; /* Full viewport height */
+    }
+
+    .hero-1 .swiper-slide,
+    .hero-2 .swiper-slide {
+        height: 100vh; /* Full viewport height */
+        min-height: auto; /* Reset min-height */
+    }
+
+    /* Additional adjustments as needed */
+}
+
+
 .hero-1 .slide-inner,
 .hero-2 .slide-inner{
     width: 100%;
@@ -121,7 +137,8 @@ img:active {
     top: 0;
     z-index: 1;
     background-size: cover;
-    background-position: top center;
+    /* background-position: top center; */
+    background-position: center;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
@@ -131,7 +148,8 @@ img:active {
 
 .hero-1 .swiper-slide,
 .hero-2 .swiper-slide{
-    height: calc(100vh - 152px);
+    /* height: calc(100vh - 152px); */
+    height: calc(100vh);
     min-height: 600px;
 }
 
@@ -421,7 +439,8 @@ img:active {
 @media (max-width: 767px){
     .hero-1 .swiper-slide,
     .hero-2 .swiper-slide{
-        height: 400px;
+        /* height: 400px; */
+        height: calc(100vh);
     }
 
     .hero-1 .container-1410 {

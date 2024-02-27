@@ -25,7 +25,7 @@ import signature from "../../../assets/images/signature.svg";
  * @returns {*}
  * @constructor
  */
-function About({ options, cart }) {
+function About({ options, cart, removeCartItem }) {
 
     const testimonial = 'url("assets/images/testimonials-rtl.jpg") center top/cover no-repeat local';//"../../../assets/images/testimonials-rtl.jpg";
 // background: url(../src/assets/images/testimonials-rtl.jpg) center top/cover no-repeat local; */
@@ -44,7 +44,7 @@ function About({ options, cart }) {
 
     return (
         <Fragment>
-            <Header options={options} cart={cart}/>
+            <Header options={options} cart={cart}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="About us"/> */}
 

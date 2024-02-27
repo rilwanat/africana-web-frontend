@@ -14,7 +14,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import HistoryIcon from '@mui/icons-material/History';
 
-function MyAccount({  options, addToCart, cart  }) {
+function MyAccount({  options, addToCart, cart, removeCartItem  }) {
     const navigate = useNavigate();
 
     const [activeTab, setActiveTab] = useState(0);
@@ -110,7 +110,7 @@ function MyAccount({  options, addToCart, cart  }) {
 
     return (
         <Fragment>
-            <Header options={options} cart={cart}/>
+            <Header options={options} cart={cart}  removeCartItem={removeCartItem}/>
             
             <section className="my-account-section section-padding">
                 <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-black">

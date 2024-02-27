@@ -16,8 +16,9 @@ import Slider from "react-slick";
 
 import '../cartsliderproducts.css';
 
+import CloseIcon from '@mui/icons-material/Close';
 
-function HeaderRight({ options, cart }) {
+function HeaderRight({ options, cart, removeCartItem }) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -59,6 +60,7 @@ function HeaderRight({ options, cart }) {
         // navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
         navigate('/product-details', { state: { encryptedData } });
     };
+
     
     
     // // Update cart items function
@@ -141,7 +143,7 @@ function findLowestPrice(product) {
                     <FavoriteIcon style={{ cursor: "pointer" }} />
                 </div> */}
                 <div className="mini-cart">
-                <div className="relative mr-4" onClick={() => 
+                <div className="relative" onClick={() => 
                     //(location.pathname === "/checkout" || location.pathname === "/cart") ? null : 
                     options.onMiniCartClick()} style={{ cursor: "pointer" }}>
     <ShoppingBagOutlinedIcon className="mr-1 cursor-pointer" style={{ color: '#fff' }}/>
@@ -171,8 +173,15 @@ function findLowestPrice(product) {
                                             </div>
                                         <div className="mini-cart-item-des">
                                             <NavLink to={item.link}>{item.name}</NavLink>
-                                            <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
+                                            <div className='flex justify-between'>
+                                                <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
+
+                                                <CloseIcon onClick={(e) => removeCartItem(e, item)} className="mr-2" style={{ cursor: 'pointer', width: '16px', height: '16px'}}/>
+                                                
+                                            </div>
+                                           
                                         </div>
+                                        
                                     </div>
                                 ))
                             }

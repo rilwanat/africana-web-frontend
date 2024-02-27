@@ -27,7 +27,7 @@ import imgx from '../../assets/images/size.png';
  * @returns {*}
  * @constructor
  */
-function SizesPage({options, cart}) {
+function SizesPage({options, cart, removeCartItem}) {
 
     /**
      * states
@@ -94,7 +94,7 @@ function SizesPage({options, cart}) {
                 : ''
             }
 
-            <Header options={options}  cart={cart}/>
+            <Header options={options}  cart={cart}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="Shop single"/> */}
 

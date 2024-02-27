@@ -33,7 +33,7 @@ import './shop/shop.css';
  * @returns {*}
  * @constructor
  */
-function ShopLeftSidebarPage({ options, addToCart, cart }) {
+function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem }) {
 
     /**
      * states
@@ -263,7 +263,7 @@ function ShopLeftSidebarPage({ options, addToCart, cart }) {
                 : ''
             }
 
-            <Header options={options}  cart={cart}/>
+            <Header options={options}  cart={cart}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="Shop Left Sidebar"/> */}
 

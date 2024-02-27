@@ -11,6 +11,19 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 
 
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+
+
+import FlashOnIcon from '@mui/icons-material/FlashOn';
+
+
+import XIcon from '@mui/icons-material/X';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
+
 /**
  * product Quick View component
  * @param data
@@ -18,7 +31,7 @@ import CloseIcon from '@mui/icons-material/Close';
  * @returns {*}
  * @constructor
  */
-function QuickView({data, onQuickViewCloseClick}) {
+function QuickView({data, onQuickViewCloseClick, addToCart}) {
 
     const navigate = useNavigate();
 
@@ -86,6 +99,17 @@ function calculateDiscountPercentage(price, oldPrice) {
 
 //   };
 
+
+const handleIncreaseQuantity = (item) => {
+    setProductCount(productCount + 1);
+};
+
+const handleDecreaseQuantity = (item) => {
+    if (productCount > 1) {
+        setProductCount(productCount - 1);
+    }
+    
+};
 
 
 
@@ -159,11 +183,30 @@ function calculateDiscountPercentage(price, oldPrice) {
                         </div>
                         <p>{data.content}</p>
                         <div className="product-option">
-                        <form className="form">
-                                <div className="product-row flex items-center">
 
-                                <div className="touchspin-wrap">
-                                <input readOnly className="product-count" type="text" style={{ display: 'inline-block', verticalAlign: 'middle' }}
+
+                        <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px',  }}>
+                                    <div>SIZE: </div>
+        <div className='text-center ml-2 mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>S</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>M</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>L</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XL</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XXL</div>
+                                    {/* {
+                                        data.tags.map((item, index) =>
+                                            <a key={index}
+                                               href={item.link}>{' ' + item.name}{data.tags.length - 1 === index ? '' : ', '}</a>
+                                        )
+                                    } */}
+                                </span>
+
+
+                        <div className="product-option flex">
+                        {/* <form className="form"> */}
+                                <div className="product-row flex items-center bg-black">
+
+                                <div className="touchspin-wrap " style={{ display: 'flex', alignItems: 'center' }}>
+                                {/* <input readOnly className="product-count" type="text" style={{ display: 'inline-block', verticalAlign: 'middle' }}
                                                        value={productCount} name="product-count"/>
                                                        <button
                                                     onClick={(e) => {
@@ -171,7 +214,6 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                     }} id="slider-thumbnail-touchspin-up" className="btn btn-default "
                                                     type="button">
                                                         <ExpandLessIcon className="glyphicon glyphicon-chevron-up" style={{ height: '11px', width: '20px' }}/>
-                                                        {/* <i className="glyphicon glyphicon-chevron-up"></i> */}
                                                 </button>
                                                 <button
                                                     onClick={(e) => {
@@ -180,42 +222,63 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                     id="slider-thumbnail-touchspin-down" className="btn btn-default "
                                                     type="button">
                                                         <ExpandMoreIcon className="glyphicon glyphicon-chevron-down" style={{ height: '11px', width: '20px' }}/>
-                                                        {/* <i className="glyphicon glyphicon-chevron-down"></i> */}
-                                                </button>
+                                                </button> */}
                                                 
+                                                <div className='flex bg-white items-center justify-center m-2' style={{ height: '80%', width: '100%' }}>
+                <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} 
+                onClick={() => { handleDecreaseQuantity(data) }}
+                />
+                
+                <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>{productCount}</span>
+                <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }} 
+                onClick={() => { handleIncreaseQuantity(data) }}
+                />
+            </div>
+
                                             </div>
 
 
-                                    
-                                    {/* <div className='flex flex-grow'> */}
-                                        <button className='px-4 ml-2' 
-                                        style={{ height: '50px' }}
+                                            <div className='bg-black'>
+                                        <button className='p-4 font-bold text-white' 
                                         // type="submit" 
                                         // onClick={onQuickViewCloseClick}
-                                        >Add to cart</button>
-                                    {/* </div> */}
+                                        // onClick={addToCart(parsedProduct)}
+                                        onClick={
+                                            // (e) => addToCart(e, parsedProduct, 1)
+                                            // () => increaseItemToCart(parsedProduct)
+                                            () => addToCart(data, productCount)
+                                            
+                                        }
+
+                                        
+                                        >ADD TO CART</button>
+                                    </div>
                                 </div>
-                            </form>
+                                <div  className='bg-black ml-4'>
+                                        <button className='p-4 font-bold text-white ' 
+                                        // onClick={handleBuyNow}
+
+                                        
+                                        >
+                                            <FlashOnIcon /> 
+                                            BUY NOW</button>
+                                    </div>
+                            {/* </form> */}
+                            </div>
                         </div>
                         <div className="thb-product-meta-before">
-                            <div className="add-to-wishlist">
+                            {/* <div className="add-to-wishlist">
                                 <a  className="add_to_wishlist">
-                                    {/* <i className="pe-7s-like"/> */}
                                     <FavoriteIcon className='mr-2' style={{ cursor: "pointer" }}/>
                                     <span>Add To Wishlist</span>
                                 </a>
-                            </div>
+                            </div> */}
                             <div className="product_meta">
-                                <span className="sku_wrapper">SKU:<span className="sku">{' ' + data.SKU}</span></span>
-                                <span className="posted_in">
+                                {/* <span className="sku_wrapper">SKU:<span className="sku">{' ' + data.SKU}</span></span> */}
+                                {/* <span className="posted_in">
                                     Categories:
-                                    {/* {
-                                        data.Categories.map((item, index) =>
-                                            <a key={index}
-                                               href={item.link}>{' ' + item.name}{data.Categories.length - 1 === index ? '' : ', '}</a>
-                                        )
-                                    } */}
-                                </span>
+                                    
+                                </span> */}
                                 <span className="tagged_as">
                                     Tags:
                                     {/* {
@@ -224,6 +287,15 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                href={item.link}>{' ' + item.name}{data.Tags.length - 1 === index ? '' : ', '}</a>
                                         )
                                     } */}
+                                </span>
+
+                                <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px',  }}>
+                                    <div>SHARE: </div>
+                                    <XIcon className='ml-2 mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 
+                                    <FacebookIcon className='mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 
+                                    <InstagramIcon className='mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 
+                                    <ContentCopyIcon className='mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} />
+                                    
                                 </span>
                             </div>
                         </div>

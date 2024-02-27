@@ -56,7 +56,7 @@ function SimilarProducts({onQuickViewClick, products, addToCart}) {
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 7,
+        slidesToShow: 3, //7,
         slidesToScroll: 1,
         autoplay: true,
         speed: 600,
@@ -264,12 +264,12 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                         </div> */}
                                                     </div>
                                                     <div className="product-info">
-                                                        <h4>
+                                                        <h4 className='text-left pl-2 flex items-center mt-1'>
                                                             <Link to="/product-details" className='text-sm'>
                                                                 {item.name}
                                                             </Link>
                                                         </h4>
-                                                        <h4>
+                                                        <h4 className='text-left pl-2 flex items-center mt-1'>
                                                             <Link to="/product-details" className='text-sm'>
                                                             {'₦'}{findLowestPrice(item)}
                                                             </Link>

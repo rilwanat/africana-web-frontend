@@ -193,6 +193,22 @@ useEffect(() => {
   
 });
 
+
+// Remove item totally from cart
+const removeCartItem = (e, itemToRemove) => {
+  e.stopPropagation();
+
+  const updatedCart = cart.map((item) =>
+        item.id === itemToRemove.id ? { ...item, quantity: item.quantity - 1 } : item
+    ).filter((item) => item.quantity > 0);
+
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+};
+
+
+
+
   return (
     <Router>
       {/* <Navbar /> */}
@@ -204,6 +220,7 @@ useEffect(() => {
                 ? <QuickView
                     data={quickViewData}
                     onQuickViewCloseClick={HandelQuickViewClose}
+                    addToCart={addToCart}
                 />
                 : ''
             }
@@ -212,26 +229,26 @@ useEffect(() => {
             {/* <ScrollToTop/> */}
             <Routes>
               <Route path="/*" element={<div>NOT FOUND</div>} />
-              <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart}/>}/>    
+              <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>    
               <Route path='/home' element={<HomePage />}/>    
-              <Route path='/about' element={<AboutPage options={options} addToCart={addToCart} cart={cart}/>}/>    
-              <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart}/>}/> 
-              <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart} />}/>
+              <Route path='/about' element={<AboutPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>    
+              <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/> 
+              <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>
               
-              <Route path='/cart' element={<CartPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart}/>}/>
+              <Route path='/cart' element={<CartPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart}  removeCartItem={removeCartItem}/>}/>
               {/* <Route path='/checkout/:cart' element={<CheckoutPage options={options} />}/> */}
-              <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart} />}/>
+              <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>
 
               {/* <Route path='/product-details/:product' element={<ProductPage options={options} />}/> */}
-              <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart}/>} />
+              <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart}  removeCartItem={removeCartItem}/>} />
 
-              <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart}/>}/>
+              <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>
               {/* <Route path='/contact-us' element={<ContactUsPage options={options} />}/> */}
 
-              <Route path='/signup' element={<SignUpPage options={options} addToCart={addToCart} cart={cart}/>}/>
-              <Route path='/signin' element={<SignInPage options={options} addToCart={addToCart} cart={cart}/>}/>
+              <Route path='/signup' element={<SignUpPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>
+              <Route path='/signin' element={<SignInPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>
 
-              <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} addToCart={addToCart} cart={cart}/>}/>
+              <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} addToCart={addToCart} cart={cart}  removeCartItem={removeCartItem}/>}/>
 
             
           </Routes>

@@ -44,7 +44,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 
-function ProductPage({options, addToCart, cart, updateCart}) {
+function ProductPage({options, addToCart, cart, updateCart, removeCartItem}) {
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -279,7 +279,7 @@ const handleBuyNow = () => {
                 : ''
             }
 
-            <Header options={options} cart={cart}/>
+            <Header options={options} cart={cart}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="Shop single"/> */}
 
@@ -353,8 +353,14 @@ const handleBuyNow = () => {
                                     {/* <span className='ml-2'>({parsedProduct && parsedProduct.rating} Customer review{parsedProduct && parsedProduct.rating > 1 ? 's ' : ' '})</span> */}
                                 </div>
 
-                                <span className="tagged_as">
-                                    SIZE:
+
+                                <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px',  }}>
+                                    <div>SIZE: </div>
+        <div className='text-center ml-2 mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>S</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>M</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>L</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XL</div>
+        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XXL</div>
                                     {/* {
                                         data.tags.map((item, index) =>
                                             <a key={index}
@@ -362,6 +368,7 @@ const handleBuyNow = () => {
                                         )
                                     } */}
                                 </span>
+
 
 
                                 <div className="product-option flex">
@@ -398,6 +405,7 @@ const handleBuyNow = () => {
                 onClick={() => { handleIncreaseQuantity(parsedProduct) }}
                 />
             </div>
+
         </div>
 
 
@@ -462,7 +470,7 @@ const handleBuyNow = () => {
                                         )
                                     } */}
                                 </span>
-                                <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px' }}>
+                                <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px',  }}>
                                     <div>SHARE: </div>
                                     <XIcon className='ml-2 mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 
                                     <FacebookIcon className='mr-4' style={{ height: '16px', width: '16px', cursor: 'pointer' }} /> 

@@ -17,7 +17,7 @@ import imgx from '../../assets/images/shop/img-2.jpg';
  * @returns {*}
  * @constructor
  */
-function SignUpPage({ options, cart }) {
+function SignUpPage({ options, cart, removeCartItem }) {
 
     const [firstname, setFirstname] = useState('Enter your Firstname');
     const [lastname, setLastname] = useState('Enter your Lastname');
@@ -134,7 +134,7 @@ function SignUpPage({ options, cart }) {
 
     return (
         <Fragment>
-            <Header options={options}  cart={cart} />
+            <Header options={options}  cart={cart}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="My Account"/> */}
 

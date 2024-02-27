@@ -14,7 +14,7 @@ import axios from 'axios';
  * @returns {*}
  * @constructor
  */
-function PrivacyPolicyPage({ options }) {
+function PrivacyPolicyPage({ options, removeCartItem }) {
 
     
     /**
@@ -24,7 +24,7 @@ function PrivacyPolicyPage({ options }) {
 
     return (
         <Fragment>
-            <Header options={options} />
+            <Header options={options}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="My Account"/> */}
 

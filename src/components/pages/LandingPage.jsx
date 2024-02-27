@@ -17,7 +17,7 @@ import Locations from './Locations';
 import Footer from './Footer';
 
 
-export default function LandingPage({ options, handleDataViewData, addToCart, cart }) {
+export default function LandingPage({ options, handleDataViewData, addToCart, cart, removeCartItem }) {
   const [isVisible, setIsVisible] = useState(false);
   //const [transitionComplete, setTransitionComplete] = useState(false);
   let transitionComplete = localStorage.getItem('transitionCompleted');
@@ -141,7 +141,7 @@ export default function LandingPage({ options, handleDataViewData, addToCart, ca
             style={{ backgroundColor: '#eeeeee' }}
             >
 
-           <Header options={options} cart={cart}/>
+           <Header options={options} cart={cart} removeCartItem={removeCartItem}/>
 
            <Hero1 />
 

@@ -12,7 +12,7 @@ import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-function Cart({ options, handleDataViewData, addToCart, updateCart }) {
+function Cart({ options, handleDataViewData, addToCart, updateCart, removeCartItem }) {
     const location = useLocation();
     const cart = location.state.encryptedData;
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
@@ -24,6 +24,9 @@ function Cart({ options, handleDataViewData, addToCart, updateCart }) {
     const [isDataloading, setIsDataLoading] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+        
+        
         handleData();
     }, []);
 
@@ -115,7 +118,7 @@ function Cart({ options, handleDataViewData, addToCart, updateCart }) {
 
     return (
         <Fragment>
-            <Header options={options} cart={parsedCart}/>
+            <Header options={options} cart={parsedCart}  removeCartItem={removeCartItem}/>
             <section className="cart-section woocommerce-cart section-padding">
                 <div className="container-1410">
                     <div className="row">

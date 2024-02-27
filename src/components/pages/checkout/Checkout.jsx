@@ -25,7 +25,7 @@ import axios from 'axios';
  * @returns {*}
  * @constructor
  */
-function Checkout({ options, handleDataViewData, addToCart, updateCart }) {
+function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCartItem }) {
 
     const location = useLocation();
     const cart = location.state.encryptedData;
@@ -67,11 +67,17 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart }) {
     const [showLogin, setShowLogin] = useState(false);
     const [showShowCoupon, setShowShowCoupon] = useState(false);
 
+    
 
     /**
      * Handle state
      */
     useEffect(() => {
+
+        window.scrollTo(0, 0);
+        
+
+        
         // Update parsedCart when cartItems change
         setParsedCart(cartItems);
     }, [cartItems]);
@@ -275,7 +281,7 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart }) {
 
     return (
         <Fragment>
-            <Header options={options} cart={parsedCart}/>
+            <Header options={options} cart={parsedCart}  removeCartItem={removeCartItem}/>
 
             {/* <PageTitle name="Checkout"/> */}
 
