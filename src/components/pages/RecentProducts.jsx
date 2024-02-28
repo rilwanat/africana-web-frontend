@@ -322,7 +322,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                             </div>
                                                         </h4>
 
-                                                        <div className='' >
+                                                        <div className='text-left pl-2 flex items-center mt-1' >
                                             <h4 className='h-4 py-1' style={{ cursor: 'pointer' }} >SELECT OPTIONS</h4>
                                             {/* <div style={{ position: 'relative' }}>
         <h4 className='h-4 py-1' onMouseEnter={() => setShowWidget(true)} onMouseLeave={() => setShowWidget(false)}>SELECT OPTIONS</h4>

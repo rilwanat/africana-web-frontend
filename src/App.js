@@ -18,6 +18,8 @@ import SignInPage from './components/pages/SignInPage';
 import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage';
 
 import ConfirmEmailPage from './components/pages/ConfirmEmailPage';
+import PaymentStatusPage from './components/pages/PaymentStatusPage';
+// http://africanalifestyle.tv/flutterwave/payment-callback?status=successful&tx_ref=6UKeoEGP2Vaa&transaction_id=4938612
 
 
 import QuickView from './components/pages/QuickView';
@@ -250,6 +252,32 @@ const handleDataCategories = async () => {
   }
 };
 
+// const handleDataTags = async () => {    
+//   setIsDataLoading(true);
+//   try {
+//     // const response = await axios.get('http://localhost:3000/productssample.json');
+//     const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/tags', {
+//       //params: { uid: uid },
+//       headers: {
+//         "Content-Type": "application/json",
+//         //Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     setIsDataLoading(false);
+//     //alert(JSON.stringify(response.data, null, 2));
+//     if (response.data.success) {
+//       //alert("dashboard-products " + JSON.stringify(response.data, null, 2));    
+//       // Store the retrieved data in state variables
+//       setTags(response.data.categoriesOrdered);
+//     } else {
+//       //alert("error: " + response.data.message);
+//     }
+//   } catch (error) {
+//     setIsDataLoading(false);
+//     //alert("error: " + error);
+//   }
+// };
+
 const handleEmailAddress = (em) => {
   setEmailAddress(em);
 }
@@ -307,6 +335,9 @@ const handleSetCategory = (cat) => {
               <Route path='/confirm-email' element={<ConfirmEmailPage emailAddress={emailAddress}
               // options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}
               />}/>
+              
+              
+              <Route path='/flutterwave/payment-callback' element={<PaymentStatusPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
 
             
           </Routes>
