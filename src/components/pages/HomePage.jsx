@@ -40,10 +40,34 @@ const menuItemVariants = {
 };
 
 
+
+// Styled component for the sliding div
+const SlideInDiv = styled(motion.div)`
+  position: absolute;
+  top: 4rem;
+  left: 2rem;
+  right: 2rem;
+  width: calc(100% - 4rem);
+  height: 75%;
+  background-color: gray; /* Change color as needed */
+`;
+
+const slideInVariants = {
+  hidden: { height: 0 },
+  visible: { height: '75%', transition: { duration: 0.3 } }
+};
+
+const SlideInContent = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
+  height: 100%;
+`;
+
 export default function HomePage() {
   const navigate = useNavigate();
   const isLargeScreen = useMediaQuery('(min-width:960px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hoveredMenuItem, setHoveredMenuItem] = useState(null);
 
   useEffect(() => {
     // Any initialization logic can go here
@@ -55,38 +79,93 @@ export default function HomePage() {
 
   return (
     <div>
-      <nav className="bg-gray-900">
+
+      <nav className="bg-gray-900 z-50" >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-">
               {isLargeScreen ? (
                 <div className="lg:flex flex-grow justify-between items-center">
-                  <span
-                    className="text-white text-xs font-bold cursor-pointer mr-4"
+                 <motion.span
+  className="text-white text-xs font-bold cursor-pointer mr-4 z-50"
+  onClick={() => { /* Handle navigation */ }}
+  onMouseEnter={() => setHoveredMenuItem('MEN')}
+  onMouseLeave={() => setHoveredMenuItem(null)}
+>
+  MEN
+  {hoveredMenuItem === 'MEN' && (
+  <SlideInDiv variants={slideInVariants}><SlideInContent>
+  <div className="flex flex-col bg-blue-500 p-8">
+  
+  <div className="flex bg-black p-8" style={{ height: '80%' }}>
+  <div className="bg-red-500 p-4 w-full text-gray-900" >Clothing</div>
+    <div className="bg-green-500 p-4 w-full text-gray-900">Shoes</div>
+    <div className="bg-yellow-500 p-4 w-full text-gray-900" >Accessories</div>
+  </div>
+
+  <hr style={{ borderColor: 'black' }} className='my-4'/>
+
+  <a
+        className="text-gray-900 text-sm font-bold cursor-pointer block my-2"
+        onClick={() => { /* Handle navigation */ }}
+      >
+        SHOP ALL PRODUCTS
+      </a>
+  
+  </div>
+  <div className="bg-green-500 p-8">
+    <img src="http://shopafricana.co/wp-content/uploads/2023/12/ALAY4447111.jpg" className='rounded-lg'/>
+  </div>
+</SlideInContent></SlideInDiv>
+)}
+</motion.span>
+                  <motion.span
+                    className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
-                  >
-                    MEN
-                  </span>
-                  <span
-                    className="text-white text-xs font-bold cursor-pointer mr-4"
-                    onClick={() => { /* Handle navigation */ }}
+                    onMouseEnter={() => setHoveredMenuItem('WOMEN')}
+                    onMouseLeave={() => setHoveredMenuItem(null)}
                   >
                     WOMEN
-                  </span>
+                    {hoveredMenuItem === 'WOMEN' && (
+  <SlideInDiv variants={slideInVariants}><SlideInContent>
+  <div className="flex flex-col bg-blue-500 p-8">
+  
+  <div className="flex bg-black p-8" style={{ height: '80%' }}>
+  <div className="bg-red-500 p-4 w-full text-gray-900" >Clothing</div>
+    <div className="bg-green-500 p-4 w-full text-gray-900">Shoes</div>
+    <div className="bg-yellow-500 p-4 w-full text-gray-900" >Accessories</div>
+  </div>
+
+  <hr style={{ borderColor: 'black' }} className='my-4'/>
+
+  <a
+        className="text-gray-900 text-sm font-bold cursor-pointer block my-2"
+        onClick={() => { /* Handle navigation */ }}
+      >
+        SHOP ALL PRODUCTS
+      </a>
+  
+  </div>
+  <div className="bg-green-500 p-8">
+    <img src="http://shopafricana.co/wp-content/uploads/2023/12/ALAY4456111.jpg" className='rounded-lg'/>
+  </div>
+</SlideInContent></SlideInDiv>
+)}
+                  </motion.span>
                   <span
-                    className="text-white text-xs font-bold cursor-pointer mr-4"
+                    className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
                   >
                     ESSENTIALS
                   </span>
                   <span
-                    className="text-white text-xs font-bold cursor-pointer mr-4"
+                    className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
                   >
                     STORES
                   </span>
                   <span
-                    className="text-white text-xs font-bold cursor-pointer mr-4"
+                    className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
                   >
                     ON SALE
@@ -103,7 +182,7 @@ export default function HomePage() {
                 </IconButton>
               )}
             </div>
-            <div className="flex-grow flex items-center justify-center">
+            <div className="flex-grow flex items-center justify-center  z-50">
               <img
                 className="block h-8 w-auto"
                 src={logo}
@@ -238,6 +317,16 @@ export default function HomePage() {
 
     </MenuContent>
       </SlideInMenu>
+    
+      <div className="w-full mt-[-4rem]">
+  <img src=
+  {isLargeScreen ? "https://shopafricana.co/wp-content/uploads/2024/01/1-slider-scaled.jpg" : "https://shopafricana.co/wp-content/uploads/2024/01/art-of-life210124_26-scaled.jpg"
+
+  }
+   alt="" className="w-full h-screen object-cover sm:h-auto" />
+</div>
+
+
     </div>
   );
 }
