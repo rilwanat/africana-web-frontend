@@ -36,8 +36,9 @@ const MenuContent = styled.div`
 // Define variants for menu items
 const menuItemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { delay: 0.3 } },
+  visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.5 } }, // Adjust duration for slower animation
 };
+
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -146,11 +147,11 @@ export default function HomePage() {
       <SlideInMenu
         initial={{ x: '-100%' }}
         animate={{ x: isMenuOpen ? 0 : '-100%' }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4 }}
       >
         <MenuContent>
-          <div className='ml-8'>
-            <div className='flex justify-between items-center mr-8'>
+          <div className='mx-8'>
+            <div className='flex justify-between items-center'>
               <img
                 className="block h-8 w-auto my-4"
                 src={logo2}
@@ -160,7 +161,7 @@ export default function HomePage() {
               />
               <ArrowBackOutlinedIcon onClick={toggleMenu} style={{ cursor: 'pointer' }}/>
             </div>
-            <hr className='mr-8'/>
+            <hr />
             {/* Apply variants to each menu item */}
             <motion.span
               variants={menuItemVariants}
@@ -208,7 +209,34 @@ export default function HomePage() {
               ON SALE
             </motion.span>
           </div>
-        </MenuContent>
+        {/* Fixed div at the bottom */}
+        <div className="fixed bottom-0 left-0 w-full py-4">
+          
+  <div className='mx-8'>
+  <hr className='my-2'/>
+    <div className='flex justify-between items-center'>
+      <a
+        className="text-gray-900 text-sm font-bold cursor-pointer block my-2"
+        onClick={() => { /* Handle navigation */ }}
+      >
+        CONNECT TO YOUR ACCOUNT
+      </a>
+      <AccountCircleOutlinedIcon onClick={toggleMenu} style={{ cursor: 'pointer' }}/>
+    </div>
+
+    <div className='flex justify-between items-center'>
+      <span
+        className="text-gray-900 text-sm font-bold cursor-pointer block my-2"
+        onClick={() => { /* Handle navigation */ }}
+      >
+        CURRENCY: <a className='ml-2'>USD</a> <a className='ml-2'>NGN</a>
+      </span>
+      <a onClick={() => {}} style={{ cursor: 'pointer' }}>Need Help?</a>
+    </div>
+  </div>
+</div>
+
+    </MenuContent>
       </SlideInMenu>
     </div>
   );
