@@ -67,6 +67,8 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
     const [showLogin, setShowLogin] = useState(false);
     const [showShowCoupon, setShowShowCoupon] = useState(false);
 
+
+    let errorOrderItems = [];
     
 
     /**
@@ -176,6 +178,13 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
             // quantity: 1 // You can modify this quantity if needed
             quantity: product.quantity
         });
+
+        errorOrderItems.push({
+            productVariantId: minQuantityVariant.id,
+            productName: product.name,
+            // quantity: 1 // You can modify this quantity if needed
+            quantity: product.quantity
+        });
     });
 
     return orderItems;
@@ -279,9 +288,72 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
         }
     } catch (error) {
         setIsLoading(false);
-        alert("error: " + error);
+        // if (error.response) {
+        //     const errors = error.response.data.errors;
+        //     errors.forEach(err => {
+        //         alert(`Error: ${err.msg}`);
+        //     });
+        // } else {
+        //     alert("An error occurred while processing your request.");
+        // }
+
+        
+        // if (error.response) {
+        //     const errors = error.response.data.errors;
+        //     const cartItems = createOrderItems(parsedCart); // Get the cart items here
+            
+        //     errors.forEach(err => {
+        //         const productName = getProductName(cartItems, err.value); // Get the product name from the cart items
+        //         alert(`Error: ${err.msg} for product: ${productName}`);
+        //     });
+        // } else {
+        //     alert("An error occurred while processing your request.");
+        // }
+
+
+        // if (error.response) {
+        //     const errors = error.response.data.errors;
+        //     const cartItems = createOrderItems(parsedCart); // Get the cart items here
+            
+        //     let errorMessage = "Errors occurred while processing your request:\n\n";
+        
+        //     errors.forEach(err => {
+        //         const productName = getProductName(cartItems, err.value); // Get the product name from the cart items
+        //         errorMessage += `Error: ${err.msg} for product: ${productName}\n\n`;
+        //     });
+        
+        //     alert(errorMessage);
+        // } else {
+        //     alert("An error occurred while processing your request.");
+        // }
+
+
+        if (error.response && error.response.data && error.response.data.errors) {
+            const errors = error.response.data.errors;
+            const cartItems = errorOrderItems;//createOrderItems(parsedCart); // Get the cart items here
+            
+            let errorMessage = "Errors occurred while processing your request:\n\n";
+        
+            errors.forEach(err => {
+                const productName = getProductName(cartItems, err.value); // Get the product name from the cart items
+                errorMessage += `Error: ${err.msg} for product: ${productName}\n\n`;
+            });
+        
+            alert(errorMessage);
+        } else if (error.response && error.response.data && error.response.data.message) {
+            // If there's an error message in the response data, display it
+            alert(error.response.data.message);
+        } else {
+            alert("An error occurred while processing your request.");
+        }
+        
     }
 };
+
+function getProductName(cartItems, productVariantId) {
+    const cartItem = cartItems.find(item => item.productVariantId === productVariantId);
+    return cartItem ? cartItem.productName : "Unknown Product";
+}
 
           
 
@@ -549,7 +621,7 @@ function Checkout({ options, handleDataViewData, addToCart, updateCart, removeCa
         </tr>
         {/* You can add more rows here for additional details */}
         <tr className="bg-white divide-y divide-gray-200">
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tax</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tax (7.5%)</th>
             <td className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 <span className="text-sm text-gray-900">{'₦'}{calculateCartTax().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </td>

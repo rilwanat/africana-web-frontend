@@ -38,7 +38,7 @@ function ProductCategoriesWidget({ categories, category, navigateTo }) {
                 </ul> */}
                 <ul className="product-categories">
                 {categories.map(category => (
-                    <li className="cat-item cat-parent">
+                    <li key={category.id} className="cat-item cat-parent">
                         <a onClick={() => {navigateTo(category.name)}}  className='' style={{ color: category === category.name ? 'black' : '', cursor: 'pointer' }}>{category.name}</a> 
                         {category.children.length > 0 && (
                                 <ul className="children">

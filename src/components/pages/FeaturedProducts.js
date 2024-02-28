@@ -15,7 +15,8 @@ function FeaturedProducts() {
     const featuredProductsData = [
         {
             "id" : 1,
-            "img": "http://shopafricana.co/wp-content/uploads/2024/01/Phtography-project-20200178-1-copy-scaled-1.jpg", //img1, //"../../assets/images/feature-product/img-4.jpg",
+            "img": "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8453-1-copyBereal.png",
+            //"http://shopafricana.co/wp-content/uploads/2024/01/Phtography-project-20200178-1-copy-scaled-1.jpg", //img1, //"../../assets/images/feature-product/img-4.jpg",
             "title": "Clothing Collection"
         },
         {
@@ -25,7 +26,8 @@ function FeaturedProducts() {
         },
         {
             "id" : 3,
-            "img": "http://shopafricana.co/wp-content/uploads/2024/01/BRS_8382-1-copy_Bereal_Studios.png",// img3, //"../../assets/images/feature-product/img-7.jpg",
+            "img": "http://shopafricana.co/wp-content/uploads/2024/01/0023-BRS-AFRICANA-1-copy-scaled.jpg", 
+            // "http://shopafricana.co/wp-content/uploads/2024/01/BRS_8382-1-copy_Bereal_Studios.png",// img3, //"../../assets/images/feature-product/img-7.jpg",
             "title": "Essentials Collection"
         }
     ];

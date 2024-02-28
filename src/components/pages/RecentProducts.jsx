@@ -53,6 +53,7 @@ function RecentProducts({onQuickViewClick, products, addToCart}) {
     const [isDragging, setIsDragging] = useState(false);
 
 
+    const [zoomedItemId, setZoomedItemId] = useState(null);
 
     /**
      * slider settings
@@ -203,9 +204,19 @@ function calculateDiscountPercentage(price, oldPrice) {
 
                                                             <img loading="lazy" 
                                                             src=
-                                                            "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
+                                                            "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
+                                                            // "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                                             //{item.mainImg} 
-                                                            alt=""/>
+                                                            alt=""
+                                                            
+                                                            onMouseEnter={() => setZoomedItemId(item.id)}
+                               onMouseLeave={() => setZoomedItemId(null)}
+                               style={{
+                                transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+                                transition: 'transform 0.8s ease',
+                            }}
+
+                                                            />
                                                         
                                                         {/* </Link> */}
                                                         </div>
@@ -311,7 +322,7 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                             </div>
                                                         </h4>
 
-                                                        <div className='text-left pl-2 flex items-center mt-1' >
+                                                        <div className='' >
                                             <h4 className='h-4 py-1' style={{ cursor: 'pointer' }} >SELECT OPTIONS</h4>
                                             {/* <div style={{ position: 'relative' }}>
         <h4 className='h-4 py-1' onMouseEnter={() => setShowWidget(true)} onMouseLeave={() => setShowWidget(false)}>SELECT OPTIONS</h4>

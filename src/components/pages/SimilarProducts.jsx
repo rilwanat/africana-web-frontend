@@ -48,6 +48,7 @@ function SimilarProducts({onQuickViewClick, products, addToCart}) {
     const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
 
 
+    const [zoomedItemId, setZoomedItemId] = useState(null);
     
     let isDragging = false;
 
@@ -198,7 +199,16 @@ function calculateDiscountPercentage(price, oldPrice) {
                                                             src=
                                                             "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                                             //{item.mainImg} 
-                                                            alt=""/>
+                                                            alt=""
+                                                            
+                                                            onMouseEnter={() => setZoomedItemId(item.id)}
+                               onMouseLeave={() => setZoomedItemId(null)}
+                               style={{
+                                transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+                                transition: 'transform 0.8s ease',
+                            }}
+
+                                                            />
                                                         
                                                         {/* </Link> */}
                                                         </div>

@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {NavLink} from 'react-router-dom';
+import { Link, NavLink, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import logo from '../../../assets/logos/Logo Wordmark 1.png';
 import logo2 from '../../../assets/logos/Circle Icon_1.png';
@@ -15,6 +15,12 @@ import CloseIcon from '@mui/icons-material/Close';
  * @constructor
  */
 function Navbar({options}) {
+
+    const navigate = useNavigate();
+    const handleNavigateCategory = (catSlug) => {
+        navigate('/categories', { state: { catSlug } });
+    }
+    
 
     return (
         <Fragment>
@@ -43,16 +49,14 @@ function Navbar({options}) {
                                     <hr className='mobile-only mt-4'/>
 </NavLink>
 
-{/*                 
-const userString = JSON.stringify(user);
-    const additionalVariable = 'noEdit';
-    navigate(`/zaptrance-users/${encodeURIComponent(userString)}/${additionalVariable}`); */}
-
-
 
                     <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/about">ABOUT</NavLink></li> 
-                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/categories/men" >MEN</NavLink></li>
-                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/categories/women">WOMEN</NavLink></li>
+                    <li className="" ><a style={{ fontSize: '14px', color: '#fff', cursor: 'pointer' }} onClick={() => {handleNavigateCategory('men')}} 
+                    // to="/categories/men" 
+                    >MEN</a></li>
+                    <li className="" ><a style={{ fontSize: '14px', color: '#fff', cursor: 'pointer' }} onClick={() => {handleNavigateCategory('women')}} 
+                    // to="/categories/women"
+                    >WOMEN</a></li>
                     <li className="" ><NavLink style={{ fontSize: '14px', color: '#000' }} to="">ESSENTIALS</NavLink></li>
                     {/* <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/">STORIES</NavLink></li> */}
                     <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/shop">ON SALE</NavLink></li>

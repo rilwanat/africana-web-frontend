@@ -20,8 +20,8 @@ function SignInPage({ options, cart, removeCartItem }) {
 
     const navigate = useNavigate();
     
-    const [loginEmailAddress, setLoginEmailAddress] = useState('example@gmail.com');//Enter your email');
-    const [loginPassword, setLoginPassword] = useState('12345678');//Enter your password');
+    const [loginEmailAddress, setLoginEmailAddress] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
 
     
     const [isLoading, setIsLoading] = useState(false);
@@ -43,17 +43,6 @@ function SignInPage({ options, cart, removeCartItem }) {
 
     const loginUser = async (e) => {
         e.preventDefault();
-
-        // if (loginEmailAddress === 'rilwan.at@gmail.com' && loginPassword === '12345678'
-        //     ) {
-        //         navigate('/my-account');
-        //     return;
-        // } else {
-        //     alert("invalid");
-        // }
-
-        navigate('/my-account');
-        return;
 
 
         setIsLoading(true);
@@ -100,9 +89,12 @@ function SignInPage({ options, cart, removeCartItem }) {
 
     
             if (response.data.success) {
-                setErrorMessage(null);
-                
-                //alert("Success");
+                // If login is successful
+                setErrorMessage({ message: '' });
+
+                setLoginEmailAddress('');
+                setLoginPassword('');
+                alert("Login Successful: " + response.data.message);
             } else {
                 const errors = response.data.errors.map(error => error.msg);
                 setErrorMessage({ message: response.data.message, errors });
@@ -111,15 +103,18 @@ function SignInPage({ options, cart, removeCartItem }) {
         } catch (error) {
           setIsLoading(false);
             
-          if (error.response && error.response.data && error.response.data.errors) {
+          if (error.response && error.response.data && error.response.data.message) {
+            const errorMessage = error.response.data.message;
+            setErrorMessage({ message: errorMessage });
+        } else if (error.response && error.response.data && error.response.data.errors) {
             const { errors } = error.response.data;
             const errorMessages = errors.map(error => error.msg);
-            setErrorMessage({ message: error.response.data.message, errors: errorMessages });
+            const errorMessage = errorMessages.join(', '); // Join all error messages
+            setErrorMessage({ message: errorMessage });
         } else {
             setErrorMessage({ message: 'Login failed. Please check your credentials and try again.' });
         }
 
-            //alert("Failed2");
         }
     };
     
@@ -167,7 +162,7 @@ function SignInPage({ options, cart, removeCartItem }) {
                                                        autoComplete="current-password"/>
                                             </p>
                                             <p className="form-row">
-                                            <p className='mb-4 font-bold' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
+                                            <p className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
 
 
                                                 <label
@@ -180,9 +175,9 @@ function SignInPage({ options, cart, removeCartItem }) {
                                                 <input type="hidden" id="woocommerce-login-nonce"
                                                        name="woocommerce-login-nonce" defaultValue="f0e969fd27"/><input
                                                 type="hidden" name="_wp_http_referer" defaultValue="/my-account/"/>
-                                                <button onClick={(e) => {loginUser(e)}} type="submit"
+                                                <button onClick={(e) => {if (!isLoading) loginUser(e)}} type="submit"
                                                         className="woocommerce-button button woocommerce-form-login__submit"
-                                                        name="login" value="Log in">Log in
+                                                        name="login" value="Log in">{isLoading ? 'Please wait..' : 'Log in'}
                                                 </button>
                                             </p>
                                             <p className="woocommerce-LostPassword lost_password">

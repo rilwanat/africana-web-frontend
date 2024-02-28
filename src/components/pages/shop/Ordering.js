@@ -5,21 +5,28 @@ import React, {Fragment} from 'react';
  * @returns {*}
  * @constructor
  */
-function Ordering() {
+function Ordering({ handleDefaultSorting }) {
+
+    const handleChange = (event) => {
+        const selectedOption = event.target.value;
+        handleDefaultSorting(selectedOption);
+    };
 
     return (
         <Fragment>
-            <form className="woocommerce-ordering" method="get">
-                <select name="orderby" className="orderby">
-                    <option value="menu_order">Default sorting</option>
+            <form className="woocommerce-ordering">
+            {/* <div className="woocommerce-ordering"> */}
+                <select name="orderby" className="orderby" onChange={handleChange}>
+                    <option value="default">Default sorting</option>
                     <option value="popularity">Sort by popularity</option>
                     <option value="rating">Sort by average rating</option>
-                    <option value="date">Sort by newness</option>
-                    <option value="price">Sort by price: low to high</option>
-                    <option value="price-desc">Sort by price: high to low</option>
+                    <option value="newness">Sort by newness</option>
+                    <option value="lowprice">Sort by price: low to high</option>
+                    <option value="highprice">Sort by price: high to low</option>
                 </select>
-                <input type="hidden" name="post_type" defaultValue="product"/>
+                {/* <input type="hidden" name="post_type" defaultValue="product"/> */}
             </form>
+            {/* </div> */}
         </Fragment>
     );
 }

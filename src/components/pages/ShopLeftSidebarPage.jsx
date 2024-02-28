@@ -262,6 +262,13 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
         navigate('/categories/' + catSlug);
       }
 
+
+      const handleDefaultSorting = async (q) => {
+        alert(q); return;
+        
+      }
+
+
     return (
         <Fragment>
 
@@ -297,7 +304,8 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
                                 <div className="woocommerce-content-wrap" style={{ marginTop: '14px' }}>
                                     <div className="woocommerce-content-inner" >
                                         <div className="woocommerce-toolbar-top" >
-                                            <p className="woocommerce-result-count">Showing {productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} of {productsTotal} results</p>
+                                            <p className="woocommerce-result-count">{productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} / {productsTotal}</p>
+                                            {/* <p className="woocommerce-result-count">Showing {productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} of {productsTotal} results</p> */}
                                             {/* <p>{category}</p> */}
                                             {/* <div className="products-sizes">
                                             <p className="woocommerce-result-count">Showing 1–12 of ## results</p>
@@ -311,7 +319,7 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
                                                 ordering={ordering}
                                             />
                                             
-                                            <Ordering/>
+                                            <Ordering handleDefaultSorting={handleDefaultSorting}/>
                                         </div>
 
 {

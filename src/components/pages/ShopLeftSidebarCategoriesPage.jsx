@@ -1,5 +1,5 @@
 import React, {useState, Fragment, useEffect} from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import axios from 'axios';
 
@@ -58,9 +58,9 @@ function ShopLeftSidebarCategoriesPage({ options, addToCart, cart, removeCartIte
     const productsPerPage = 16;
 
   
-    
-    
-    const { category } = useParams();
+    const location = useLocation();
+    const category = location.state.catSlug;
+    //const { category } = useParams();
     // const parsedUser = JSON.parse(decodeURIComponent(category));
     // const parsedCategory = (decodeURIComponent(category));
 
@@ -273,7 +273,62 @@ function ShopLeftSidebarCategoriesPage({ options, addToCart, cart, removeCartIte
       }
 
       const navigateTo = async (catSlug) => {
-        navigate('/categories/' + catSlug);
+        navigate('/categories', { state: { catSlug } });
+      }
+
+      const handleDefaultSorting = async (q) => {
+
+        alert(q); return;
+        
+        let queryAppend = '';
+        if (q == "default") {
+          queryAppend = '';
+        } else if (q == "popularity") {
+          queryAppend = '&categorySlug=' + category;
+        } else if (q == "rating") {
+          queryAppend = '&categorySlug=' + category;
+        } else if (q == "newness") {
+          queryAppend = '&latest=' + 'true';
+        } else if (q == "lowprice") {
+          queryAppend = '&categorySlug=' + category;
+        } else if (q == "highprice") {
+          queryAppend = '&categorySlug=' + category;
+        } else {}
+
+
+        setProductsTotal("-");
+
+        setCurrentPage(1);
+        //alert("token: " + token + "\n\n" + "uid: " + uid);
+        setIsDataLoading(true);
+        try {
+    
+          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products?' + queryAppend, {
+            //params: { uid: uid },
+            headers: {
+              "Content-Type": "application/json",
+              //Authorization: `Bearer ${token}`,
+            },
+          });
+    
+          setIsDataLoading(false);
+          //alert(JSON.stringify(response.data, null, 2));
+    
+          if (response.data.success) {
+            //alert("dashboard-products " + JSON.stringify(response.data, null, 2));
+          
+            // Store the retrieved data in state variables
+
+            setProductsData(response.data.products);
+            setProductsTotal(response.data.total);
+          } else {
+            //alert("error: " + response.data.message);
+          }
+
+        } catch (error) {
+          setIsDataLoading(false);
+          //alert("error: " + error);
+        }
       }
 
     return (
@@ -311,7 +366,8 @@ function ShopLeftSidebarCategoriesPage({ options, addToCart, cart, removeCartIte
                                 <div className="woocommerce-content-wrap" style={{ marginTop: '14px' }}>
                                     <div className="woocommerce-content-inner" >
                                         <div className="woocommerce-toolbar-top" >
-                                            <p className="woocommerce-result-count">Showing {productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} of {productsTotal} results</p>
+                                            <p className="woocommerce-result-count">{productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} / {productsTotal}</p>
+                                            {/* <p className="woocommerce-result-count">Showing {productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} of {productsTotal} results</p> */}
                                             {/* <p>{category}</p> */}
                                             {/* <div className="products-sizes">
                                             <p className="woocommerce-result-count">Showing 1–12 of ## results</p>
@@ -325,7 +381,7 @@ function ShopLeftSidebarCategoriesPage({ options, addToCart, cart, removeCartIte
                                                 ordering={ordering}
                                             />
                                             
-                                            <Ordering/>
+                                            <Ordering handleDefaultSorting={handleDefaultSorting}/>
                                         </div>
 
 {

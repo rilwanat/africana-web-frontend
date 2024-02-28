@@ -26,6 +26,7 @@ function Products({HandelQuickViewData, products, ordering, addToCart, cart}) {
     const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
     
 
+    const [zoomedItemId, setZoomedItemId] = useState(null);
 
     // Function to find the lowest price among product variants
 function findLowestPrice(product) {
@@ -121,9 +122,19 @@ function calculateDiscountPercentage(price, oldPrice) {
                              {/* <Link to="/product-details"> */}
                               <img loading="lazy" 
                               src=
-                              "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
+                              "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8461-1-copyBereal.png"
+                            //   "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                             //   {process.env.PUBLIC_URL + item.mainImg}
-                               alt=""/>
+                               alt=""
+                               
+                               onMouseEnter={() => setZoomedItemId(item.id)}
+                               onMouseLeave={() => setZoomedItemId(null)}
+                               style={{
+                                transform: zoomedItemId === item.id ? 'scale(1.1)' : 'scale(1)',
+                                transition: 'transform 0.3s ease',
+                            }}
+
+                               />
                             {/* </Link> */}
                             </div>
                                 {/* <div className="shop-action-wrap">

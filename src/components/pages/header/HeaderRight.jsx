@@ -94,42 +94,16 @@ function findLowestPrice(product) {
 
 
     const settings = {
-        dots: false,
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,
-        speed: 600,
-        swipeToSlide: true,
-        autoplaySpeed: 4000,
-        focusOnSelect: false,
-        prevArrow: null,//<SamplePrevArrow />,
-        nextArrow: null,//<SampleNextArrow />,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    infinite: true
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+            dots: true,
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            vertical: true,
+            verticalSwiping: true,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            arrows: false,
+
     };
 
 
@@ -143,10 +117,12 @@ function findLowestPrice(product) {
                     <FavoriteIcon style={{ cursor: "pointer" }} />
                 </div> */}
                 <div className="mini-cart">
+
                 <div className="relative" onClick={() => {
                     if (cart.length > 0) {
                         options.onMiniCartClick();
                     } else {
+                        if (options.miniCart) {options.onMiniCartClick();}
                         alert("add items to your cart");
                     }
                 }} style={{ cursor: "pointer" }}>
@@ -161,11 +137,73 @@ function findLowestPrice(product) {
                 cart.length}
             </div>
         )}
-    </div>
-    
+        </div>    
 
-                    <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} style={{ maxHeight: '600px', overflowY: 'auto' }}>
-                        <div className="mini-cart-items">
+
+            
+            <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} 
+                     style={{ maxHeight: '600px', overflowY: 'auto' }}
+                    // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
+                    >
+                        
+                        
+                        <div className='grid grid-cols-12 gap-4'>
+                            
+                            <div className='col-span-3 bg-black ' >
+                                
+                               
+                            <div className="">
+         {/* <div className="col col-xs-12"> */}
+         <div className="">
+            <div className="" >
+                <ul className="products">
+                    <Slider {...settings}>
+                        {cart.map((item, index) => (
+                            <li key={index} className="product my-2">
+                                <div className="product-holder">
+                                    <div className='mx-2' style={{ cursor: 'pointer' }}>
+                                        <img loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
+                                    </div>
+                                </div>
+                                <div className="product-info text-center mt-1 mx-2">
+                                    <h4  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
+                                        <a className='text-xs text-gray-200' style={{  }} >{item.name}</a>
+                                    </h4>
+                                    {/* <span className="woocommerce-Price-amount amount">
+                                        <ins>
+                                            <span className="woocommerce-Price-amount amount">
+                                                <bdi>
+                                                    <span className="woocommerce-Price-currencySymbol">{'₦'}</span>
+                                                    {findLowestPrice(item)}
+                                                </bdi>
+                                            </span>
+                                        </ins>
+                                    </span> */}
+                                </div>
+                            </li>
+                        ))}
+                    </Slider>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+   
+                            </div>
+
+
+
+
+
+
+
+
+                            <div className='col-span-9'>
+
+                            <div className="mini-cart-items"
+                        style={{ maxHeight: '400px', overflowY: 'auto' }}
+                        >
                             {cart &&
                                 cart.map((item, index) => (
                                     <div key={index} className="mini-cart-item clearfix" onClick={() => {navigateToProduct(item)}}>
@@ -191,10 +229,9 @@ function findLowestPrice(product) {
                                 ))
                             }
                         </div>
-
-
-
-                        <div className="mini-cart-action clearfix">
+                        <div className="mini-cart-action clearfix" 
+                        // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
+                        >
                             {/* Subtotal logic here */}
                             <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
                             {/* <Link className="view-cart-btn" to="/cart" onClick={options.onMiniCartClick}>View Cart</Link> */}
@@ -203,86 +240,10 @@ function findLowestPrice(product) {
                             <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
                         </div>
 
-
-
-
-
-{/* 
-                        <section className="trendy-product-section section-padding">
-
-<div className="">
-
-
-<div className="row">
-                        <div className="col col-xs-12">
-                            <div className="products-wrapper">
-                                <ul className="products " 
-                                    >
-                                    <Slider {...settings}
-                                    >
-                                        {
-                                            cart.map((item, index) => (
-                                                <li key={index} className="product">
-                                                    <div className="product-holder">
-                                                    
-                                                    {
-                            // parseInt(item.price) < parseInt(item.oldPrice)
-                            // findLowestPrice(item) < findHighestPrice(item)
-                            
-                            // ? (
-                            //   <div className="product-badge discount">
-                            //     -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
-                            //   </div>
-                            // ) : null
-                            }
-
-                            <div  className='mx-2'
-                            // onClick={isDragging ? null : (e) => handleProductClick(item, e)} 
-                            // onClick={(e) => handleProductClick(item, e)}
-
-                            style={{cursor: 'pointer'}}>
-
-                            
-
-                                                            <img loading="lazy" 
-                                                            src=
-                                                            "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
-                                                            //{item.mainImg} 
-                                                            alt=""/>
-                                                        
-                                                        </div>
-
-                                                    </div>
-                                                    <div className="product-info">
-                                                        <h4>
-                                                            <Link to="/product-details">
-                                                                {item.name}
-                                                            </Link>
-                                                        </h4>
-                                                        <span className="woocommerce-Price-amount amount">
-                                                              <ins>
-                                                                <span className="woocommerce-Price-amount amount">
-                                                                  <bdi>
-                                                                    <span className="woocommerce-Price-currencySymbol">{'₦'}</span>
-                                                                    {findLowestPrice(item)}
-                                                                    </bdi>
-                                                                </span>
-                                                              </ins>
-                                                            
-                                                            </span>
-                                                    </div>
-                                                </li>
-                                            ))
-                                        }
-                                    </Slider>
-                                </ul>
                             </div>
                         </div>
-                    </div>
-    </div>
-    </section> */}
-
-
+                        
+                        
 
 
 
@@ -291,6 +252,9 @@ function findLowestPrice(product) {
 
 
                     </div>
+      
+
+                    
                 </div>
 
                 <div className="my-account-link">

@@ -1,4 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import Footer from './Footer';
 // import Instagram from './Instagram';
@@ -17,14 +18,15 @@ import imgx from '../../assets/images/shop/img-2.jpg';
  * @returns {*}
  * @constructor
  */
-function SignUpPage({ options, cart, removeCartItem }) {
+function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
+    const navigate = useNavigate();
 
-    const [firstname, setFirstname] = useState('Enter your Firstname');
-    const [lastname, setLastname] = useState('Enter your Lastname');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
     const [companyname, setCompanyname] = useState('Enter your Company name');
-    const [emailAddress, setEmailAddress] = useState('Enter your email');//rilwan.at@gmail.com');//
+    const [emailAddress, setEmailAddress] = useState('');
     const [phone, setPhonenumber] = useState('Enter your phone number');
-    const [country, setCountry] = useState('Enter your Country *dropdown');//12345678');//
+    const [country, setCountry] = useState('Enter your Country *dropdown');
     const [address1, setAddress1] = useState('Enter Address Line 1');
     const [address2, setAddress2] = useState('Enter Address Line 2');
     const [towncity, setTowncity] = useState('Enter Town / City');
@@ -73,53 +75,55 @@ function SignUpPage({ options, cart, removeCartItem }) {
 
 
         try {
-            const formData = new FormData();            
-            formData.append('firstname', firstname);
-            formData.append('lastname', lastname);
-            //formData.append('companyname', companyname);
-            formData.append('emailAddress', emailAddress);
-            //formData.append('phone', phone);
-            //formData.append('country', country);
-            //formData.append('address1', address1);
-            //formData.append('address2', address2);
-            //formData.append('towncity', towncity);
+
+            const requestData = {                
+                    firstName: firstname,
+                    lastName: lastname,
+                    email: emailAddress,          
+            };
     
-            const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/register', formData, {
+            const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/register', requestData, {
                 headers: {
                     // 'Content-Type': 'multipart/form-data',
                     'Content-Type': 'application/json',
                 },
             });
 
-            // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/register', {
-            //     emailAddress,
-            //     firstname,
-            //     lastname,
-            // });
-
-
     
             setIsLoading(false);
     
-            //const regData = response.data;
     
-    
-            //alert("reg: " + JSON.stringify(response.data.data, null, 2));
+            if (response.data.success) {
+                // If registration is successful
+                setErrorMessage({ message: '' });
 
-    
-            if (response.data.errors && response.data.errors.length > 0) {
-                const errors = response.data.errors.map(error => error.msg);
-                setErrorMessage({ message: response.data.message, errors });
-                alert("Failed1");
+                handleEmailAddress(emailAddress);
+                
+                // navigate('/confirm-email/' + emailAddress);
+                //navigate('/confirm-email');
+
+
+                setFirstname('');
+                setLastname('');
+                setEmailAddress('');
+                alert("Registration Successful: " + response.data.message);
+
+                
             } else {
-                setErrorMessage(null);
-                alert("Success");
+                // If there are errors in the response
+                const errors = response.data.errors.map(error => error.msg);
+                const errorMessage = errors.join(', ');
+                setErrorMessage({ message: errorMessage });
+                alert("Registration Failed");
             }
             
         } catch (error) {
             setIsLoading(false);
             
-            if (error.response && error.response.data && error.response.data.errors) {
+            if (error.response && error.response.data && error.response.data.message) {
+                const errorMessage = error.response.data.message;
+                setErrorMessage({ message: errorMessage });
+            } else if (error.response && error.response.data && error.response.data.errors) {
                 const { errors } = error.response.data;
                 const errorMessages = errors.map(error => error.msg);
                 const errorMessage = errorMessages.join(', '); // Join all error messages
@@ -220,7 +224,7 @@ function SignUpPage({ options, cart, removeCartItem }) {
 
 
 
-    <p className='mb-4 font-bold' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
+    <p className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
 
 
                                             <p>A password will be sent to your email address.</p>
@@ -236,11 +240,13 @@ function SignUpPage({ options, cart, removeCartItem }) {
                                                        {/* <input type="hidden"
                                                                                          name="_wp_http_referer"
                                                                                          defaultValue="/my-account/"/> */}
-                                                <button onClick={(e) => {registerUser(e)}} //type="submit"
+                                                <button onClick={(e) => {if (!isLoading) registerUser(e)}} //type="submit"
                                                         className="woocommerce-Button woocommerce-button button woocommerce-form-register__submit"
-                                                        name="register" value="Register">Register
+                                                        name="register" value="Register">{isLoading ? 'Please wait..' : 'Register'}
                                                 </button>
                                             </p>
+
+                                            <p className=""> <a href="/signin">Already have an account? Sign In</a> </p>
                                         </form>
                                     </div>
 

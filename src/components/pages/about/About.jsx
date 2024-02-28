@@ -64,7 +64,8 @@ function About({ options, cart, removeCartItem }) {
                                 <div className="img-holder">
                                     <img loading="lazy" src=
                                     // {about}
-                                    "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name22-scaled-1.jpg"
+                                    "http://shopafricana.co/wp-content/uploads/2024/01/BRS_8445-1-copyBereal.webp"
+                                    // "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name22-scaled-1.jpg"
                                     // "https://shopafricana.co/wp-content/uploads/2023/12/Africana-Oversized-Tees-www.shopafricana.co_24-scaled-1.jpg" 
                                     alt=""/>
                                 </div>

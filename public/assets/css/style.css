@@ -2922,12 +2922,14 @@ button:active {
 
 .header-style-1 .header-right {
     position: absolute;
-    right: 70px;
+    /* right: 70px; */
+    right: 50px;
 }
 
 @media (max-width: 991px) {
     .header-style-1 .header-right {
-        right: 80px;
+        /* right: 80px; */
+        right: 30px;
     }
 }
 
@@ -2987,7 +2989,8 @@ button:active {
 
 .header-style-1 .header-right .mini-cart-content {
     background: #fff;
-    width: 300px;
+    /* width: 300px; */
+    width: 500px;
     z-index: 10;
     position: absolute;
     right: 0;
@@ -3004,7 +3007,9 @@ button:active {
 
 @media (max-width: 991px) {
     .header-style-1 .header-right .mini-cart-content {
-        top: 63px;
+        top: 68px;
+
+        width: 300px; /*New*/
     }
 }
 

@@ -43,7 +43,7 @@ function RecentSingleProducts({onQuickViewClick, relatedProducts, addToCart, car
 
     const [showWidget, setShowWidget] = useState(false);
 
-
+    const [zoomedItemId, setZoomedItemId] = useState(null);
     
   let isDragging = false;
 
@@ -180,9 +180,19 @@ function calculateDiscountPercentage(price, oldPrice) {
                                         style={{cursor: 'pointer'}}>
                                             <img loading="lazy" 
                                             src=
-                                            "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
+                                            "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp"
+                                            // "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                             // {process.env.PUBLIC_URL + item.mainImg} 
-                                            alt=""/>
+                                            alt=""
+                                            
+                                            onMouseEnter={() => setZoomedItemId(item.id)}
+                               onMouseLeave={() => setZoomedItemId(null)}
+                               style={{
+                                transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+                                transition: 'transform 0.8s ease',
+                            }}
+
+                                            />
                                         </div>
                                         {/* </Link> */}
 
