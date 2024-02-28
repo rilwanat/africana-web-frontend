@@ -44,7 +44,7 @@ const menuItemVariants = {
 // Styled component for the sliding div
 const SlideInDiv = styled(motion.div)`
   position: absolute;
-  top: 4rem;
+  top: 5rem;
   left: 2rem;
   right: 2rem;
   width: calc(100% - 4rem);
@@ -82,7 +82,7 @@ export default function HomePage() {
 
       <nav className="bg-gray-900 z-50" >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             <div className="flex-shrink-">
               {isLargeScreen ? (
                 <div className="lg:flex flex-grow justify-between items-center">
@@ -184,7 +184,7 @@ export default function HomePage() {
             </div>
             <div className="flex-grow flex items-center justify-center  z-50">
               <img
-                className="block h-8 w-auto"
+                className="block h-12 w-auto"
                 src={logo}
                 alt="Logo"
                 onClick={() => {navigate('/');}}
@@ -318,7 +318,7 @@ export default function HomePage() {
     </MenuContent>
       </SlideInMenu>
     
-      <div className="w-full mt-[-4rem]">
+      <div className="w-full mt-[-5rem]">
   <img src=
   {isLargeScreen ? "https://shopafricana.co/wp-content/uploads/2024/01/1-slider-scaled.jpg" : "https://shopafricana.co/wp-content/uploads/2024/01/art-of-life210124_26-scaled.jpg"
 
