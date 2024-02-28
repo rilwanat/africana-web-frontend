@@ -323,7 +323,7 @@ export default function HomePage() {
   {isLargeScreen ? "https://shopafricana.co/wp-content/uploads/2024/01/1-slider-scaled.jpg" : "https://shopafricana.co/wp-content/uploads/2024/01/art-of-life210124_26-scaled.jpg"
 
   }
-   alt="" className="w-full h-screen object-cover sm:h-auto" />
+   alt="" className="w-full h-screen object-cover" />
 </div>
 
 
