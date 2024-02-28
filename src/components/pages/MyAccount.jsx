@@ -12,7 +12,10 @@ import { Avatar, Divider } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CollectionsIcon from '@mui/icons-material/Collections';
+import ReviewsIcon from '@mui/icons-material/Reviews';
 import HistoryIcon from '@mui/icons-material/History';
+import LocalActivityIcon from '@mui/icons-material/LocalActivity';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function MyAccount({  options, addToCart, cart, removeCartItem  }) {
     const navigate = useNavigate();
@@ -131,7 +134,7 @@ function MyAccount({  options, addToCart, cart, removeCartItem  }) {
                 <a
                     style={{ cursor: "pointer" }}
                     onClick={() => setActiveTab(1)}
-                    className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 2 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
+                    className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 1 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
                 >
                     <Avatar sx={{ width: 32, height: 32 }}>
                         <CollectionsIcon />
@@ -141,10 +144,10 @@ function MyAccount({  options, addToCart, cart, removeCartItem  }) {
                 <a
                     style={{ cursor: "pointer" }}
                     onClick={() => setActiveTab(2)}
-                    className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 3 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
+                    className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 2 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
                 >
                     <Avatar sx={{ width: 32, height: 32 }}>
-                        <HistoryIcon />
+                        <LocalActivityIcon />
                     </Avatar>
                     <span className="pl-3">Vouchers</span>
                 </a>
@@ -154,19 +157,33 @@ function MyAccount({  options, addToCart, cart, removeCartItem  }) {
                     className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 3 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
                 >
                     <Avatar sx={{ width: 32, height: 32 }}>
-                        <HistoryIcon />
+                        <ReviewsIcon />
                     </Avatar>
                     <span className="pl-3">Reviews</span>
                 </a>
                 <a
                     style={{ cursor: "pointer" }}
                     onClick={() => setActiveTab(4)}
-                    className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 1 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
+                    className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 4 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
                 >
                     <Avatar sx={{ width: 32, height: 32 }}>
                         <SettingsIcon />
                     </Avatar>
                     <span className="pl-3">Account Management</span>
+                </a>
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        setActiveTab(5);
+                        alert("Logging out..")
+                        navigate('/');
+                    }}
+                    className={`flex items-center pl-5 py-2.5 font-semibold hover:text-gray-900 ${activeTab === 5 ? 'border rounded-l-full' : ''} hover:border hover:rounded-l-full`}
+                >
+                    <Avatar sx={{ width: 32, height: 32 }}>
+                        <LogoutIcon />
+                    </Avatar>
+                    <span className="pl-3">Logout</span>
                 </a>
             </div>
         </aside>

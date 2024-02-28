@@ -259,7 +259,7 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
 
 
       const navigateTo = async (catSlug) => {
-        navigate('/categories/' + catSlug);
+        navigate('/categories', { state: { catSlug } });
       }
 
 

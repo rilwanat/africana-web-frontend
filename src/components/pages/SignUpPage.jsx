@@ -106,7 +106,8 @@ function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
                 setFirstname('');
                 setLastname('');
                 setEmailAddress('');
-                alert("Registration Successful: " + response.data.message);
+                alert("Registration Successful: " + response.data.message + "\n\n Please check your mail and login to continue");
+                navigate('/login');
 
                 
             } else {

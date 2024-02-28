@@ -57,7 +57,8 @@ function Navbar({options}) {
                     <li className="" ><a style={{ fontSize: '14px', color: '#fff', cursor: 'pointer' }} onClick={() => {handleNavigateCategory('women')}} 
                     // to="/categories/women"
                     >WOMEN</a></li>
-                    <li className="" ><NavLink style={{ fontSize: '14px', color: '#000' }} to="">ESSENTIALS</NavLink></li>
+                    <li className="" ><a style={{ fontSize: '14px', color: '#000', cursor: 'pointer' }} onClick={() => {handleNavigateCategory('essentials')}}  
+                    >ESSENTIALS</a></li>
                     {/* <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/">STORIES</NavLink></li> */}
                     <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/shop">ON SALE</NavLink></li>
                     <li className="" ><NavLink style={{ fontSize: '14px', color: '#fff' }} to="/sizes">SIZES</NavLink></li>

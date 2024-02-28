@@ -95,6 +95,9 @@ function SignInPage({ options, cart, removeCartItem }) {
                 setLoginEmailAddress('');
                 setLoginPassword('');
                 alert("Login Successful: " + response.data.message);
+
+                navigate('/my-account');
+
             } else {
                 const errors = response.data.errors.map(error => error.msg);
                 setErrorMessage({ message: response.data.message, errors });
