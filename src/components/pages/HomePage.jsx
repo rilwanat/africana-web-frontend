@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import { useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Typography, Box, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,6 +16,9 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+
+import WestIcon from '@mui/icons-material/West';
+import EastIcon from '@mui/icons-material/East';
 
 import Slider from 'react-slick';
 
@@ -130,6 +133,36 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
   const [menuWidthEssentials, setMenuWidthEssentials] = useState(0);
   const [menuWidthStores, setMenuWidthStores] = useState(0);
   const [menuWidthOnsale, setMenuWidthOnsale] = useState(0);
+
+
+  const sliderRefNewIn = useRef(null); 
+  const sliderRefBestSellers = useRef(null);
+  const sliderRefKaftans = useRef(null);
+
+
+
+  const [isHoverWestNewIn, setIsHoverWestNewIn] = useState(false);
+  const [isHoverEastNewIn, setIsHoverEastNewIn] = useState(false);
+  const handleHoverWestNewIn = () => { setIsHoverWestNewIn(true); };
+  const handleLeaveWestNewIn = () => { setIsHoverWestNewIn(false); };
+  const handleHoverEastNewIn = () => { setIsHoverEastNewIn(true); };
+  const handleLeaveEastNewIn = () => { setIsHoverEastNewIn(false); };
+
+  const [isHoverWestBestSellers, setIsHoverWestBestSellers] = useState(false);
+  const [isHoverEastBestSellers, setIsHoverEastBestSellers] = useState(false);
+  const handleHoverWestBestSellers = () => { setIsHoverWestBestSellers(true); };
+  const handleLeaveWestBestSellers = () => { setIsHoverWestBestSellers(false); };
+  const handleHoverEastBestSellers = () => { setIsHoverEastBestSellers(true); };
+  const handleLeaveEastBestSellers = () => { setIsHoverEastBestSellers(false); };
+
+  const [isHoverWestKaftans, setIsHoverWestKaftans] = useState(false);
+  const [isHoverEastKaftans, setIsHoverEastKaftans] = useState(false);
+  const handleHoverWestKaftans = () => { setIsHoverWestKaftans(true); };
+  const handleLeaveWestKaftans = () => { setIsHoverWestKaftans(false); };
+  const handleHoverEastKaftans = () => { setIsHoverEastKaftans(true); };
+  const handleLeaveEastKaftans = () => { setIsHoverEastKaftans(false); };
+
+
 
 
   useEffect(() => {
@@ -773,15 +806,21 @@ const handleProductClick = (product, e) => {
       >
         <div>
           <img src="http://shopafricana.co/wp-content/uploads/2023/12/0158-BRS-AFRICANA-1-copy-768x960.jpg" style={{ width: '60%', height: '60%' }} alt="Slide 1" />
-          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div><div className='mt-4'>SHOP NOW</div></div>
+          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div>
+          <div className='mt-4'>SHOP NOW</div>          
+          </div>
         </div>
         <div>
           <img src="http://shopafricana.co/wp-content/uploads/2023/12/Mad-2.0-Fashion-Accessoriesx-AFRICANA140-scaled-1-768x960.jpg" style={{ width: '60%', height: '60%' }} alt="Slide 2" />
-          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div><div className='mt-4'>SHOP NOW</div></div>
+          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div>
+          <div className='mt-4'>SHOP NOW</div>
+          </div>
         </div>
         <div>
           <img src="http://shopafricana.co/wp-content/uploads/2023/12/Image-7-20-23-at-4.20-PM-768x946.jpeg" style={{ width: '60%', height: '60%' }} alt="Slide 3" />
-          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div><div className='mt-4'>SHOP NOW</div></div>
+          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div>
+          <div className='mt-4'>SHOP NOW</div>
+          </div>
         </div>
       </Carousel>
       </motion.div>
@@ -803,12 +842,29 @@ const handleProductClick = (product, e) => {
 
 
 
-
-
-
-<div className='flex justify-center mt-4 mb-2'>NEW IN</div>
+<div className='flex justify-between mt-4 mb-2 mx-4'>
+<div style={{ width: '50px' }} className='flex justify-start'>
+      <WestIcon
+        className='cursor-pointer'
+        onClick={() => sliderRefNewIn.current.slickPrev()}
+        onMouseEnter={handleHoverWestNewIn}
+        onMouseLeave={handleLeaveWestNewIn}
+        style={{ width: isHoverWestNewIn ? '32px' : '44px', transition: 'width 0.3s ease' }}
+      />
+      </div>
+      NEW IN
+      <div style={{ width: '50px'}} className='flex justify-end'>
+      <EastIcon
+        className='cursor-pointer'
+        onClick={() => sliderRefNewIn.current.slickNext()}
+        onMouseEnter={handleHoverEastNewIn}
+        onMouseLeave={handleLeaveEastNewIn}
+        style={{ width: isHoverEastNewIn ? '32px' : '44px', transition: 'width 0.3s ease' }}
+      />
+      </div>
+    </div>
 <div className="w-full px-2">
-  <Slider {...settings}>
+  <Slider ref={sliderRefNewIn} {...settings}>
     {products.map((item, index) => (
       <li key={index} className="">
         <div className="">
@@ -855,9 +911,30 @@ const handleProductClick = (product, e) => {
 </div>
 
 
-<div className='flex justify-center mt-4 mb-2'>BEST SELLERS</div>
+{/* <div className='flex justify-center mt-4 mb-2'>BEST SELLERS</div> */}
+<div className='flex justify-between mt-4 mb-2 mx-4'>
+<div style={{ width: '50px' }} className='flex justify-start'>
+      <WestIcon
+        className='cursor-pointer'
+        onClick={() => sliderRefBestSellers.current.slickPrev()}
+        onMouseEnter={handleHoverWestBestSellers}
+        onMouseLeave={handleLeaveWestBestSellers}
+        style={{ width: isHoverWestBestSellers ? '32px' : '44px', transition: 'width 0.3s ease' }}
+      />
+      </div>
+      NEW IN
+      <div style={{ width: '50px'}} className='flex justify-end'>
+      <EastIcon
+        className='cursor-pointer'
+        onClick={() => sliderRefBestSellers.current.slickNext()}
+        onMouseEnter={handleHoverEastBestSellers}
+        onMouseLeave={handleLeaveEastBestSellers}
+        style={{ width: isHoverEastBestSellers ? '32px' : '44px', transition: 'width 0.3s ease' }}
+      />
+      </div>
+    </div>
 <div className="w-full px-2">
-  <Slider {...settings}>
+  <Slider ref={sliderRefBestSellers} {...settings}>
     {products.map((item, index) => (
       <li key={index} className="">
         <div className="">
@@ -904,9 +981,30 @@ const handleProductClick = (product, e) => {
 </div>
 
 
-<div className='flex justify-center mt-4 mb-2'>KAFTANS</div>
+{/* <div className='flex justify-center mt-4 mb-2'>KAFTANS</div> */}
+<div className='flex justify-between mt-4 mb-2 mx-4'>
+<div style={{ width: '50px' }} className='flex justify-start'>
+      <WestIcon
+        className='cursor-pointer'
+        onClick={() => sliderRefKaftans.current.slickPrev()}
+        onMouseEnter={handleHoverWestKaftans}
+        onMouseLeave={handleLeaveWestKaftans}
+        style={{ width: isHoverWestKaftans ? '32px' : '44px', transition: 'width 0.3s ease' }}
+      />
+      </div>
+      KAFTANS
+      <div style={{ width: '50px'}} className='flex justify-end'>
+      <EastIcon
+        className='cursor-pointer'
+        onClick={() => sliderRefKaftans.current.slickNext()}
+        onMouseEnter={handleHoverEastKaftans}
+        onMouseLeave={handleLeaveEastKaftans}
+        style={{ width: isHoverEastKaftans ? '32px' : '44px', transition: 'width 0.3s ease' }}
+      />
+      </div>
+    </div>
 <div className="w-full px-2">
-  <Slider {...settings}>
+  <Slider ref={sliderRefKaftans} {...settings}>
     {products.map((item, index) => (
       <li key={index} className="">
         <div className="">
