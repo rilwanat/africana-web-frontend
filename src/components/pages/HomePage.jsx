@@ -12,6 +12,27 @@ import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import logo from '../../assets/logos/Logo Wordmark 1.png';
 import logo2 from '../../assets/logos/Logo Wordmark.png';
 
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+
+import Slider from 'react-slick';
+
+import axios from 'axios';
+
+
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+
+import { AES } from 'crypto-js';
+
+
+
+import RecentProducts from './RecentProducts';
+import CtaSection from './CtaSection';
+import Locations from './Locations';
+import Footer from './Footer';
+
 const SlideInMenu = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -54,7 +75,7 @@ const SlideInDiv = styled(motion.div)`
 
 const slideInVariants = {
   hidden: { height: 0 },
-  visible: { height: '75%', transition: { duration: 0.3 } }
+  visible: { height: '75%', transition: { duration: 0.3, type: 'tween' } }
 };
 
 const SlideInContent = styled.div`
@@ -63,7 +84,7 @@ const SlideInContent = styled.div`
   height: 100%;
 `;
 
-export default function HomePage() {
+export default function HomePage({ options, handleDataViewData, addToCart, cart, removeCartItem }) {
   const navigate = useNavigate();
   const isLargeScreen = useMediaQuery('(min-width:960px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,6 +97,136 @@ export default function HomePage() {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 4, //6,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 600,
+    swipeToSlide: true,
+    autoplaySpeed: 4000,
+    focusOnSelect: false,
+    responsive: [
+      {
+        breakpoint: 1024, // Medium screens and above
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768, // Small screens and above
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
+  };
+
+
+
+
+  const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
+  const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
+  const [zoomedItemId, setZoomedItemId] = useState(null);
+
+  const [products, setProductsData] = useState([]);
+  const [isDataloading, setIsDataLoading] = useState(true);
+
+  // Function to find the lowest price among product variants
+function findLowestPrice(product) {
+  let lowestPrice = Infinity;
+
+  //products.forEach(product => {
+    product.productVariants.forEach(variant => {
+      if (variant.price < lowestPrice) {
+        lowestPrice = variant.price;
+      }
+    });
+  //});
+
+  // return lowestPrice;
+  return lowestPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function findHighestPrice(product) {
+  let highestPrice = 0;
+
+  //products.forEach(product => {
+    product.productVariants.forEach(variant => {
+      if (variant.price > highestPrice) {
+          highestPrice = variant.price;
+      }
+    });
+  //});
+
+  return highestPrice;
+}
+
+// Function to calculate the discount percentage
+function calculateDiscountPercentage(price, oldPrice) {
+  return parseInt(price) < parseInt(oldPrice) ?
+    Math.round(((parseInt(oldPrice) - parseInt(price)) / parseInt(oldPrice)) * 100)
+    : 0; // Return 0 if there's no discount
+}
+
+
+const handleProductClick = (product, e) => {
+  {
+      const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
+      navigate('/product-details', { state: { encryptedData } });    
+  }
+};
+
+
+  
+  useEffect(() => {
+
+    handleData();
+    
+  }, []);
+
+
+
+
+  const handleData = async () => {    
+    //alert("token: " + token + "\n\n" + "uid: " + uid);
+    setIsDataLoading(true);
+    try {
+
+      // const response = await axios.get('http://localhost:3000/productssample.json');
+      const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
+        //params: { uid: uid },
+        headers: {
+          "Content-Type": "application/json",
+          //Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setIsDataLoading(false);
+      //alert(JSON.stringify(response.data, null, 2));
+
+      if (response.data.success) {
+        //alert("dashboard-products " + JSON.stringify(response.data, null, 2));
+      
+        // Store the retrieved data in state variables
+
+        setProductsData(response.data.products);
+      } else {
+        //alert("error: " + response.data.message);
+      }
+
+    } catch (error) {
+      setIsDataLoading(false);
+      //alert("error: " + error);
+    }
+  };
+
+
+
+
 
   return (
     <div>
@@ -327,6 +478,249 @@ export default function HomePage() {
 </div>
 
 
+
+<div className='flex justify-center mt-20 mb-8'>SHOP THE LOOK</div>
+<div className="flex flex-col md:flex-row mx-8">
+<div className="relative flex-grow">
+      <Carousel
+        showArrows={false}
+        showStatus={false}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={true}
+        interval={5000}
+
+        renderIndicator={(onClickHandler, isSelected, index, label) => {
+          const defStyle = { margin: 4, color: "white", cursor: "pointer" };
+          const style = isSelected
+          ? { ...defStyle, backgroundColor: "white" } // Use solid color when isSelected is true
+          : { ...defStyle, backgroundColor: "transparent" };
+          return (
+            <span
+            className="inline-block w-2 h-2 rounded-full border-2 border-white"
+            style={style}
+              onClick={onClickHandler}
+              onKeyDown={onClickHandler}
+              value={index}
+              key={index}
+              role="button"
+              tabIndex={0}
+              aria-label={`${label} ${index + 1}`}
+            >
+              {/* {"cust " + index} */}
+            </span>
+          );
+        }}
+      >
+        <div>
+          <img src="http://shopafricana.co/wp-content/uploads/2023/12/ALAY4426111-768x961.jpg" alt="Slide 1" />
+        </div>
+        <div>
+          <img src="https://shopafricana.co/wp-content/uploads/2024/01/ALAY532700-768x959.jpg" alt="Slide 2" />
+        </div>
+        <div>
+          <img src="https://shopafricana.co/wp-content/uploads/2024/01/ALAY454900-768x960.jpg" alt="Slide 3" />
+        </div>
+      </Carousel>
+
+      {/* <div className='absolute bottom-10 left-0 right-0 flex justify-between items-center h-full'>
+        <IconButton aria-label="previous" style={{ color: 'white' }} onClick={() => {}}>
+          <NavigateBeforeIcon />
+        </IconButton>
+        <IconButton aria-label="next" style={{ color: 'white' }} onClick={() => {}}>
+          <NavigateNextIcon />
+        </IconButton>
+      </div> */}
+    </div>
+
+
+    <div className="relative flex-grow">
+      <div className='w-full p-20' style={{ backgroundColor: '#eeeeee' }}>
+      <Carousel
+        showArrows={false}
+        showStatus={false}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={true}
+        interval={7500}
+
+        renderIndicator={(onClickHandler, isSelected, index, label) => {
+          const defStyle = { margin: 4, color: "white", cursor: "pointer" };
+          const style = isSelected
+          ? { ...defStyle, backgroundColor: "white" } // Use solid color when isSelected is true
+          : { ...defStyle, backgroundColor: "transparent" };
+          return (
+            <span
+            // className="inline-block w-2 h-2 rounded-full border-2 border-white"
+            style={style}
+              onClick={onClickHandler}
+              onKeyDown={onClickHandler}
+              value={index}
+              key={index}
+              role="button"
+              tabIndex={0}
+              aria-label={`${label} ${index + 1}`}
+            >
+              {/* {"cust " + index} */}
+            </span>
+          );
+        }}
+      >
+        <div>
+          <img src="http://shopafricana.co/wp-content/uploads/2023/12/0158-BRS-AFRICANA-1-copy-768x960.jpg" alt="Slide 1" />
+          <div className='flex flex-col justify-center'><div className='mb-4'>1a</div><div>SHOP NOW</div></div>
+        </div>
+        <div>
+          <img src="http://shopafricana.co/wp-content/uploads/2023/12/Mad-2.0-Fashion-Accessoriesx-AFRICANA140-scaled-1-768x960.jpg" alt="Slide 2" />
+          <div className='flex flex-col justify-center'><div className='mb-4'>2a</div><div>SHOP NOW</div></div>
+        </div>
+        <div>
+          <img src="http://shopafricana.co/wp-content/uploads/2023/12/Image-7-20-23-at-4.20-PM-768x946.jpeg" alt="Slide 3" />
+          <div className='flex flex-col justify-center'><div className='mb-4'>3a</div><div>SHOP NOW</div></div>
+        </div>
+      </Carousel>
+      </div>
+
+      
+
+      {/* <div className='absolute bottom-10 left-0 right-0 flex justify-between items-center h-full'>
+        <IconButton aria-label="previous" style={{ color: 'white' }} onClick={() => {}}>
+          <NavigateBeforeIcon />
+        </IconButton>
+        <IconButton aria-label="next" style={{ color: 'white' }} onClick={() => {}}>
+          <NavigateNextIcon />
+        </IconButton>
+      </div> */}
+    </div>
+</div>
+
+
+
+
+
+
+
+<div className='flex justify-center mt-20 mb-8'>NEW IN</div>
+<div className="w-full px-4">
+  <Slider {...settings}>
+    {products.map((item, index) => (
+      <li key={index} className="">
+        <div className="">
+          {findLowestPrice(item) < findHighestPrice(item) ? (
+            <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
+          ) : null}
+          <div
+            className="mx-2 cursor-pointer"
+            // onClick={(e) => handleProductClick(item, e)}
+            // onMouseEnter={() => setZoomedItemId(item.id)}
+            // onMouseLeave={() => setZoomedItemId(null)}
+            style={{
+              transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+              transition: 'transform 0.8s ease',
+            }}
+          >
+            <img
+              loading="lazy"
+              src="http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="">
+          <h4 className="text-left pl-2 flex items-center mt-4 cursor-pointer">
+            <div className="text-sm uppercase">{item.name}</div>
+          </h4>
+          <h4 className="text-left pl-2 flex items-center mt-1 cursor-pointer">
+            <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
+          </h4>
+          <div className="text-left pl-2 flex items-center mt-1 mb-8">
+            <h4 className="h-4 text-xs cursor-pointer">SELECT OPTIONS</h4>
+            <div className="ml-2">
+              {/* <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" /> */}
+            </div>
+            <div className="ml-2">
+              {/* <ShoppingBagOutlinedIcon className="w-4 h-4 p-1" /> */}
+            </div>
+          </div>
+        </div>
+      </li>
+    ))}
+  </Slider>
+</div>
+
+
+
+
+
+
+
+<div className='flex justify-center mt-20 mb-8'>BEST SELLERS</div>
+<div className="w-full px-4">
+  <Slider {...settings}>
+    {products.map((item, index) => (
+      <li key={index} className="">
+        <div className="">
+          {findLowestPrice(item) < findHighestPrice(item) ? (
+            <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
+          ) : null}
+          <div
+            className="mx-2 cursor-pointer"
+            // onClick={(e) => handleProductClick(item, e)}
+            // onMouseEnter={() => setZoomedItemId(item.id)}
+            // onMouseLeave={() => setZoomedItemId(null)}
+            style={{
+              transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+              transition: 'transform 0.8s ease',
+            }}
+          >
+            <img
+              loading="lazy"
+              src="http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="">
+          <h4 className="text-left pl-2 flex items-center mt-4 cursor-pointer">
+            <div className="text-sm uppercase">{item.name}</div>
+          </h4>
+          <h4 className="text-left pl-2 flex items-center mt-1 cursor-pointer">
+            <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
+          </h4>
+          <div className="text-left pl-2 flex items-center mt-1 mb-8">
+            <h4 className="h-4 text-xs cursor-pointer">SELECT OPTIONS</h4>
+            <div className="ml-2">
+              {/* <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" /> */}
+            </div>
+            <div className="ml-2">
+              {/* <ShoppingBagOutlinedIcon className="w-4 h-4 p-1" /> */}
+            </div>
+          </div>
+        </div>
+      </li>
+    ))}
+  </Slider>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <RecentProducts onQuickViewClick={handleDataViewData} products={products} addToCart={addToCart} cart={cart}/> */}
+{/* <CtaSection /> */}
+{/* <Locations onQuickViewClick={handleDataViewData} products={products}/> */}
+
+<Footer/>
     </div>
   );
 }
