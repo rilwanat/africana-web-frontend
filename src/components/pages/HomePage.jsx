@@ -127,6 +127,9 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
 
   const [menuWidthMen, setMenuWidthMen] = useState(0);
   const [menuWidthWomen, setMenuWidthWomen] = useState(0);
+  const [menuWidthEssentials, setMenuWidthEssentials] = useState(0);
+  const [menuWidthStores, setMenuWidthStores] = useState(0);
+  const [menuWidthOnsale, setMenuWidthOnsale] = useState(0);
 
 
   useEffect(() => {
@@ -149,6 +152,27 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
       setMenuWidthWomen(womenTextWidth);
     } else {
       setMenuWidthWomen(0);
+    }
+
+    if (hoveredMenuItem === 'ESSENTIALS') {
+      const menuWidthEssentials = document.getElementById('essentials-text').offsetWidth;
+      setMenuWidthEssentials(menuWidthEssentials);
+    } else {
+      setMenuWidthEssentials(0);
+    }
+
+    if (hoveredMenuItem === 'STORES') {
+      const menuWidthStores = document.getElementById('stores-text').offsetWidth;
+      setMenuWidthStores(menuWidthStores);
+    } else {
+      setMenuWidthStores(0);
+    }
+
+    if (hoveredMenuItem === 'ONSALE') {
+      const menuWidthOnsale = document.getElementById('onsale-text').offsetWidth;
+      setMenuWidthOnsale(menuWidthOnsale);
+    } else {
+      setMenuWidthOnsale(0);
     }
 
 
@@ -368,7 +392,8 @@ const handleProductClick = (product, e) => {
 </SlideInContent></SlideInDiv>
 )}
 </motion.div>
-                  <motion.div
+
+<motion.div
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
                     onMouseEnter={() => setHoveredMenuItem('WOMEN')}
@@ -432,24 +457,55 @@ const handleProductClick = (product, e) => {
 </SlideInContent></SlideInDiv>
 )}
                   </motion.div>
-                  <span
+
+<motion.div
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
+                    onMouseEnter={() => setHoveredMenuItem('ESSENTIALS')}
+                    onMouseLeave={() => setHoveredMenuItem('ESSENTIALSX')}
                   >
-                    ESSENTIALS
-                  </span>
-                  <span
+                  <div style={{ position: 'relative' }}>
+<span id="essentials-text">ESSENTIALS</span>
+      <div className={`absolute bg-white 
+      ${hoveredMenuItem === 'ESSENTIALS' ? 'transition-all duration-300' : hoveredMenuItem === "ESSENTIALSX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthEssentials, height: '2px', 
+      left: hoveredMenuItem === 'ESSENTIALS' ? 0 : 'auto',
+      right: hoveredMenuItem === 'ESSENTIALS' ? 0 : menuWidthEssentials
+       }} />
+</div></motion.div>
+
+<motion.div
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
+                    onMouseEnter={() => setHoveredMenuItem('STORES')}
+                    onMouseLeave={() => setHoveredMenuItem('STORESX')}
                   >
-                    STORES
-                  </span>
-                  <span
+                  <div style={{ position: 'relative' }}>
+<span id="stores-text">STORES</span>
+      <div className={`absolute bg-white 
+      ${hoveredMenuItem === 'STORES' ? 'transition-all duration-300' : hoveredMenuItem === "STORESX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthStores, height: '2px', 
+      left: hoveredMenuItem === 'STORES' ? 0 : 'auto',
+      right: hoveredMenuItem === 'STORES' ? 0 : menuWidthStores
+       }} />
+</div></motion.div>
+
+<motion.div
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
+                    onMouseEnter={() => setHoveredMenuItem('ONSALE')}
+                    onMouseLeave={() => setHoveredMenuItem('ONSALEX')}
                   >
-                    ON SALE
-                  </span>
+                  <div style={{ position: 'relative' }}>
+<span id="onsale-text">ON SALE</span>
+      <div className={`absolute bg-white 
+      ${hoveredMenuItem === 'ONSALE' ? 'transition-all duration-300' : hoveredMenuItem === "ONSALEX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthOnsale, height: '2px', 
+      left: hoveredMenuItem === 'ONSALE' ? 0 : 'auto',
+      right: hoveredMenuItem === 'ONSALE' ? 0 : menuWidthOnsale
+       }} />
+</div></motion.div>
+
                 </div>
               ) : (
                 <IconButton
