@@ -125,13 +125,34 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
 
+  const [menuWidthMen, setMenuWidthMen] = useState(0);
+  const [menuWidthWomen, setMenuWidthWomen] = useState(0);
+
+
   useEffect(() => {
     // Any initialization logic can go here
 
     if (inView) {
       setAnimateCarousel(true);
     }
-  }, [inView]);
+
+
+    if (hoveredMenuItem === 'MEN') {
+      const menTextWidth = document.getElementById('men-text').offsetWidth;
+      setMenuWidthMen(menTextWidth);
+    } else {
+      setMenuWidthMen(0);
+    }
+
+    if (hoveredMenuItem === 'WOMEN') {
+      const womenTextWidth = document.getElementById('women-text').offsetWidth;
+      setMenuWidthWomen(womenTextWidth);
+    } else {
+      setMenuWidthWomen(0);
+    }
+
+
+  }, [inView, hoveredMenuItem]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -277,13 +298,22 @@ const handleProductClick = (product, e) => {
             <div className="flex-shrink-">
               {isLargeScreen ? (
                 <div className="lg:flex flex-grow justify-between items-center">
-                 <motion.span
+                 <motion.div
   className="text-white text-xs font-bold cursor-pointer mr-4 z-50"
+  // className={`text-white text-xs font-bold cursor-pointer mr-4 z-50 ${hoveredMenuItem === 'MEN' ? 'border-b-2 border-white' : ''}`}
   onClick={() => { /* Handle navigation */ }}
   onMouseEnter={() => setHoveredMenuItem('MEN')}
-  onMouseLeave={() => setHoveredMenuItem(null)}
+  onMouseLeave={() => setHoveredMenuItem('MENX')}
 >
-  MEN
+<div style={{ position: 'relative' }}>
+<span id="men-text">MEN</span>
+      <div className={`absolute bg-white 
+      ${hoveredMenuItem === 'MEN' ? 'transition-all duration-300' : hoveredMenuItem === "MENX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthMen, height: '2px', 
+      left: hoveredMenuItem === 'MEN' ? 0 : 'auto',
+      right: hoveredMenuItem === 'MEN' ? 0 : menuWidthMen
+       }} />
+</div>
   {hoveredMenuItem === 'MEN' && (
   <SlideInDiv variants={slideInVariants}><SlideInContent>
   <div className="flex flex-col  p-8">
@@ -337,14 +367,22 @@ const handleProductClick = (product, e) => {
   </div>
 </SlideInContent></SlideInDiv>
 )}
-</motion.span>
-                  <motion.span
+</motion.div>
+                  <motion.div
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
                     onMouseEnter={() => setHoveredMenuItem('WOMEN')}
-                    onMouseLeave={() => setHoveredMenuItem(null)}
+                    onMouseLeave={() => setHoveredMenuItem('WOMENX')}
                   >
-                    WOMEN
+<div style={{ position: 'relative' }}>
+<span id="women-text">WOMEN</span>
+      <div className={`absolute bg-white 
+      ${hoveredMenuItem === 'WOMEN' ? 'transition-all duration-300' : hoveredMenuItem === 'WOMENX' ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthWomen, height: '2px', 
+      left: hoveredMenuItem === 'WOMEN' ? 0 : 'auto',
+      right: hoveredMenuItem === 'WOMEN' ? 0 : menuWidthWomen
+       }} />
+</div>
                     {hoveredMenuItem === 'WOMEN' && (
   <SlideInDiv variants={slideInVariants}><SlideInContent>
   <div className="flex flex-col  p-8">
@@ -393,7 +431,7 @@ const handleProductClick = (product, e) => {
   </div>
 </SlideInContent></SlideInDiv>
 )}
-                  </motion.span>
+                  </motion.div>
                   <span
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => { /* Handle navigation */ }}
