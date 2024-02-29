@@ -33,6 +33,16 @@ import CtaSection from './CtaSection';
 import Locations from './Locations';
 import Footer from './Footer';
 
+import { useInView } from 'react-intersection-observer';
+
+
+
+
+
+
+
+
+
 const SlideInMenu = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -70,7 +80,7 @@ const SlideInDiv = styled(motion.div)`
   right: 2rem;
   width: calc(100% - 4rem);
   height: 75%;
-  background-color: gray; /* Change color as needed */
+  background-color: white; /* Change color as needed */
 `;
 
 const slideInVariants = {
@@ -84,15 +94,44 @@ const SlideInContent = styled.div`
   height: 100%;
 `;
 
+//carousel
+const carouselItemVariants = {
+  hidden: { opacity: 0, y: 200 },
+  visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.5, type: 'spring', stiffness: 20 } },
+};
+
+const carouselItemVariants2 = {
+  hidden: { opacity: 0, y: 200 },
+  visible: { opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.5, type: 'spring', stiffness: 20 } },
+};
+
+
+
+
+
+
+
+
+
+
 export default function HomePage({ options, handleDataViewData, addToCart, cart, removeCartItem }) {
   const navigate = useNavigate();
   const isLargeScreen = useMediaQuery('(min-width:960px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredMenuItem, setHoveredMenuItem] = useState(null);
 
+
+  const [animateCarousel, setAnimateCarousel] = useState(false);
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
+
+
   useEffect(() => {
     // Any initialization logic can go here
-  }, []);
+
+    if (inView) {
+      setAnimateCarousel(true);
+    }
+  }, [inView]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -101,6 +140,7 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
 
   const settings = {
     dots: false,
+    arrows: false,
     infinite: true,
     slidesToShow: 4, //6,
     slidesToScroll: 1,
@@ -231,7 +271,7 @@ const handleProductClick = (product, e) => {
   return (
     <div>
 
-      <nav className="bg-gray-900 z-50" >
+      <nav className=" z-50" >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex-shrink-">
@@ -246,12 +286,40 @@ const handleProductClick = (product, e) => {
   MEN
   {hoveredMenuItem === 'MEN' && (
   <SlideInDiv variants={slideInVariants}><SlideInContent>
-  <div className="flex flex-col bg-blue-500 p-8">
+  <div className="flex flex-col  p-8">
   
-  <div className="flex bg-black p-8" style={{ height: '80%' }}>
-  <div className="bg-red-500 p-4 w-full text-gray-900" >Clothing</div>
-    <div className="bg-green-500 p-4 w-full text-gray-900">Shoes</div>
-    <div className="bg-yellow-500 p-4 w-full text-gray-900" >Accessories</div>
+  <div className="flex p-8" style={{ height: '80%' }}>
+  <div className=" p-4 w-full text-gray-900 flex flex-col" >
+    <a className='mb-4 uppercase font-bold'>Clothing</a>
+    {/* <hr /> */}
+    <a className='uppercase my-2'>New in</a>
+    <a className='uppercase my-2'>Kaftan</a>
+    <a className='uppercase my-2'>Dashiki</a>
+    <a className='uppercase my-2'>T-shirt</a>
+    <a className='uppercase my-2'>Dress Shirt</a>
+    <a className='uppercase my-2'>Lounge Wear</a>
+    <a className='uppercase my-2'>Sweatshirts</a>
+    <a className='uppercase my-2'>Underwear</a>
+    </div>
+    <div className=" p-4 w-full text-gray-900 flex flex-col">
+    <a className='mb-4 uppercase font-bold'>Shoes</a>
+    {/* <hr /> */}
+    <a className='uppercase my-2'>Sneakers</a>
+    <a className='uppercase my-2'>Mules</a>
+    <a className='uppercase my-2'>T-shirt</a>
+    <a className='uppercase my-2'>Lounge Wear</a>
+    <a className='uppercase my-2'>Sweatshirts</a>
+    <a className='uppercase my-2'>Underwear</a>
+    </div>
+    <div className=" p-4 w-full text-gray-900 flex flex-col" >
+    <a className='mb-4 uppercase font-bold'>Accessories </a>
+    {/* <hr /> */}
+    <a className='uppercase my-2'>Scarfs</a>
+    <a className='uppercase my-2'>Wallets</a>
+    <a className='uppercase my-2'>Bags</a>
+    <a className='uppercase my-2'>Purses</a>
+    </div>
+      
   </div>
 
   <hr style={{ borderColor: 'black' }} className='my-4'/>
@@ -264,7 +332,7 @@ const handleProductClick = (product, e) => {
       </a>
   
   </div>
-  <div className="bg-green-500 p-8">
+  <div className=" p-8">
     <img src="http://shopafricana.co/wp-content/uploads/2023/12/ALAY4447111.jpg" className='rounded-lg'/>
   </div>
 </SlideInContent></SlideInDiv>
@@ -279,12 +347,35 @@ const handleProductClick = (product, e) => {
                     WOMEN
                     {hoveredMenuItem === 'WOMEN' && (
   <SlideInDiv variants={slideInVariants}><SlideInContent>
-  <div className="flex flex-col bg-blue-500 p-8">
+  <div className="flex flex-col  p-8">
   
-  <div className="flex bg-black p-8" style={{ height: '80%' }}>
-  <div className="bg-red-500 p-4 w-full text-gray-900" >Clothing</div>
-    <div className="bg-green-500 p-4 w-full text-gray-900">Shoes</div>
-    <div className="bg-yellow-500 p-4 w-full text-gray-900" >Accessories</div>
+  <div className="flex p-8" style={{ height: '80%' }}>
+  <div className=" p-4 w-full text-gray-900 flex flex-col" >
+    <a className='mb-4 uppercase font-bold'>Clothing</a>
+    {/* <hr /> */}
+    <a className='uppercase my-2'>New in</a>
+    <a className='uppercase my-2'>Dashiki</a>
+    <a className='uppercase my-2'>T-shirt</a>
+    <a className='uppercase my-2'>Lounge Wear</a>
+    <a className='uppercase my-2'>Sweatshirts</a>
+    <a className='uppercase my-2'>Underwear</a>
+    </div>
+    <div className=" p-4 w-full text-gray-900 flex flex-col">
+    <a className='mb-4 uppercase font-bold'>Shoes</a>
+    {/* <hr /> */}
+    <a className='uppercase my-2'>Sneakers</a>
+    <a className='uppercase my-2'>Mules</a>
+    <a className='uppercase my-2'>Slides</a>
+    <a className='uppercase my-2'>Slippers</a>
+    </div>
+    <div className=" p-4 w-full text-gray-900 flex flex-col" >
+    <a className='mb-4 uppercase font-bold'>Accessories </a>
+    {/* <hr /> */}
+    <a className='uppercase my-2'>Scarfs</a>
+    <a className='uppercase my-2'>Wallets</a>
+    <a className='uppercase my-2'>Bags</a>
+    <a className='uppercase my-2'>Purses</a>
+    </div>
   </div>
 
   <hr style={{ borderColor: 'black' }} className='my-4'/>
@@ -297,7 +388,7 @@ const handleProductClick = (product, e) => {
       </a>
   
   </div>
-  <div className="bg-green-500 p-8">
+  <div className=" p-8">
     <img src="http://shopafricana.co/wp-content/uploads/2023/12/ALAY4456111.jpg" className='rounded-lg'/>
   </div>
 </SlideInContent></SlideInDiv>
@@ -335,7 +426,7 @@ const handleProductClick = (product, e) => {
             </div>
             <div className="flex-grow flex items-center justify-center  z-50">
               <img
-                className="block h-12 w-auto"
+                className="block h-8 w-auto"
                 src={logo}
                 alt="Logo"
                 onClick={() => {navigate('/');}}
@@ -479,9 +570,17 @@ const handleProductClick = (product, e) => {
 
 
 
-<div className='flex justify-center mt-20 mb-8'>SHOP THE LOOK</div>
-<div className="flex flex-col md:flex-row mx-8">
+<div className='flex justify-center mt-20 mb-2'>SHOP THE LOOK</div>
+<div className="flex flex-col md:flex-row mx-16 mb-16">
 <div className="relative flex-grow">
+<motion.div
+              variants={carouselItemVariants}
+              initial="hidden"
+              animate={ animateCarousel ? "visible" : "hidden"}
+              // className="cursor-pointer"
+              ref={ref}
+              // onClick={() => { /* Handle navigation */ }}
+            >
       <Carousel
         showArrows={false}
         showStatus={false}
@@ -489,6 +588,8 @@ const handleProductClick = (product, e) => {
         infiniteLoop={true}
         autoPlay={true}
         interval={5000}
+        swipeable={true}
+        draggable={false}
 
         renderIndicator={(onClickHandler, isSelected, index, label) => {
           const defStyle = { margin: 4, color: "white", cursor: "pointer" };
@@ -522,6 +623,7 @@ const handleProductClick = (product, e) => {
           <img src="https://shopafricana.co/wp-content/uploads/2024/01/ALAY454900-768x960.jpg" alt="Slide 3" />
         </div>
       </Carousel>
+      </motion.div>
 
       {/* <div className='absolute bottom-10 left-0 right-0 flex justify-between items-center h-full'>
         <IconButton aria-label="previous" style={{ color: 'white' }} onClick={() => {}}>
@@ -534,8 +636,15 @@ const handleProductClick = (product, e) => {
     </div>
 
 
-    <div className="relative flex-grow">
-      <div className='w-full p-20' style={{ backgroundColor: '#eeeeee' }}>
+    <div className="relative flex-grow flex items-center justify-center p-8" style={{ backgroundColor: '#eeeeee' }}>     
+    <motion.div
+              variants={carouselItemVariants2}
+              initial="hidden"
+              animate={ animateCarousel ? "visible" : "hidden"}
+              className="cursor-pointer"
+              // ref={ref}
+              onClick={() => {  }}
+            > 
       <Carousel
         showArrows={false}
         showStatus={false}
@@ -543,6 +652,9 @@ const handleProductClick = (product, e) => {
         infiniteLoop={true}
         autoPlay={true}
         interval={7500}
+        swipeable={true}
+        draggable={true}
+        
 
         renderIndicator={(onClickHandler, isSelected, index, label) => {
           const defStyle = { margin: 4, color: "white", cursor: "pointer" };
@@ -561,24 +673,24 @@ const handleProductClick = (product, e) => {
               tabIndex={0}
               aria-label={`${label} ${index + 1}`}
             >
-              {/* {"cust " + index} */}
             </span>
           );
         }}
       >
         <div>
-          <img src="http://shopafricana.co/wp-content/uploads/2023/12/0158-BRS-AFRICANA-1-copy-768x960.jpg" alt="Slide 1" />
-          <div className='flex flex-col justify-center'><div className='mb-4'>1a</div><div>SHOP NOW</div></div>
+          <img src="http://shopafricana.co/wp-content/uploads/2023/12/0158-BRS-AFRICANA-1-copy-768x960.jpg" style={{ width: '60%', height: '60%' }} alt="Slide 1" />
+          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div><div className='mt-4'>SHOP NOW</div></div>
         </div>
         <div>
-          <img src="http://shopafricana.co/wp-content/uploads/2023/12/Mad-2.0-Fashion-Accessoriesx-AFRICANA140-scaled-1-768x960.jpg" alt="Slide 2" />
-          <div className='flex flex-col justify-center'><div className='mb-4'>2a</div><div>SHOP NOW</div></div>
+          <img src="http://shopafricana.co/wp-content/uploads/2023/12/Mad-2.0-Fashion-Accessoriesx-AFRICANA140-scaled-1-768x960.jpg" style={{ width: '60%', height: '60%' }} alt="Slide 2" />
+          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div><div className='mt-4'>SHOP NOW</div></div>
         </div>
         <div>
-          <img src="http://shopafricana.co/wp-content/uploads/2023/12/Image-7-20-23-at-4.20-PM-768x946.jpeg" alt="Slide 3" />
-          <div className='flex flex-col justify-center'><div className='mb-4'>3a</div><div>SHOP NOW</div></div>
+          <img src="http://shopafricana.co/wp-content/uploads/2023/12/Image-7-20-23-at-4.20-PM-768x946.jpeg" style={{ width: '60%', height: '60%' }} alt="Slide 3" />
+          <div className='flex flex-col justify-center'><div className='mt-4'>NAME</div><div className='mt-4'>SHOP NOW</div></div>
         </div>
       </Carousel>
+      </motion.div>
       </div>
 
       
@@ -591,7 +703,6 @@ const handleProductClick = (product, e) => {
           <NavigateNextIcon />
         </IconButton>
       </div> */}
-    </div>
 </div>
 
 
@@ -600,8 +711,9 @@ const handleProductClick = (product, e) => {
 
 
 
-<div className='flex justify-center mt-20 mb-8'>NEW IN</div>
-<div className="w-full px-4">
+
+<div className='flex justify-center mt-4 mb-2'>NEW IN</div>
+<div className="w-full px-2">
   <Slider {...settings}>
     {products.map((item, index) => (
       <li key={index} className="">
@@ -610,7 +722,7 @@ const handleProductClick = (product, e) => {
             <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
           ) : null}
           <div
-            className="mx-2 cursor-pointer"
+            className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`}
             // onClick={(e) => handleProductClick(item, e)}
             // onMouseEnter={() => setZoomedItemId(item.id)}
             // onMouseLeave={() => setZoomedItemId(null)}
@@ -626,20 +738,20 @@ const handleProductClick = (product, e) => {
             />
           </div>
         </div>
-        <div className="">
-          <h4 className="text-left pl-2 flex items-center mt-4 cursor-pointer">
+        <div className="pl-2 ">
+          <h4 className="text-left flex items-center mt-4 cursor-pointer">
             <div className="text-sm uppercase">{item.name}</div>
           </h4>
-          <h4 className="text-left pl-2 flex items-center mt-1 cursor-pointer">
+          <h4 className="text-left flex items-center mt-1 cursor-pointer">
             <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
           </h4>
-          <div className="text-left pl-2 flex items-center mt-1 mb-8">
+          <div className="text-left flex items-center mt-1 mb-8">
             <h4 className="h-4 text-xs cursor-pointer">SELECT OPTIONS</h4>
             <div className="ml-2">
-              {/* <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" /> */}
+              <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
             </div>
             <div className="ml-2">
-              {/* <ShoppingBagOutlinedIcon className="w-4 h-4 p-1" /> */}
+              <ShoppingBagOutlinedIcon className="w-4 h-4 p-1" />
             </div>
           </div>
         </div>
@@ -649,13 +761,8 @@ const handleProductClick = (product, e) => {
 </div>
 
 
-
-
-
-
-
-<div className='flex justify-center mt-20 mb-8'>BEST SELLERS</div>
-<div className="w-full px-4">
+<div className='flex justify-center mt-4 mb-2'>BEST SELLERS</div>
+<div className="w-full px-2">
   <Slider {...settings}>
     {products.map((item, index) => (
       <li key={index} className="">
@@ -664,7 +771,7 @@ const handleProductClick = (product, e) => {
             <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
           ) : null}
           <div
-            className="mx-2 cursor-pointer"
+            className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`}
             // onClick={(e) => handleProductClick(item, e)}
             // onMouseEnter={() => setZoomedItemId(item.id)}
             // onMouseLeave={() => setZoomedItemId(null)}
@@ -675,25 +782,74 @@ const handleProductClick = (product, e) => {
           >
             <img
               loading="lazy"
-              src="http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
+              src="http://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-600x800.webp"
               alt=""
             />
           </div>
         </div>
-        <div className="">
-          <h4 className="text-left pl-2 flex items-center mt-4 cursor-pointer">
+        <div className="pl-2 ">
+          <h4 className="text-left flex items-center mt-4 cursor-pointer">
             <div className="text-sm uppercase">{item.name}</div>
           </h4>
-          <h4 className="text-left pl-2 flex items-center mt-1 cursor-pointer">
+          <h4 className="text-left flex items-center mt-1 cursor-pointer">
             <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
           </h4>
-          <div className="text-left pl-2 flex items-center mt-1 mb-8">
+          <div className="text-left flex items-center mt-1 mb-8">
             <h4 className="h-4 text-xs cursor-pointer">SELECT OPTIONS</h4>
             <div className="ml-2">
-              {/* <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" /> */}
+              <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
             </div>
             <div className="ml-2">
-              {/* <ShoppingBagOutlinedIcon className="w-4 h-4 p-1" /> */}
+              <ShoppingBagOutlinedIcon className="w-4 h-4 p-1" />
+            </div>
+          </div>
+        </div>
+      </li>
+    ))}
+  </Slider>
+</div>
+
+
+<div className='flex justify-center mt-4 mb-2'>KAFTANS</div>
+<div className="w-full px-2">
+  <Slider {...settings}>
+    {products.map((item, index) => (
+      <li key={index} className="">
+        <div className="">
+          {findLowestPrice(item) < findHighestPrice(item) ? (
+            <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
+          ) : null}
+          <div
+            className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`}
+            // onClick={(e) => handleProductClick(item, e)}
+            // onMouseEnter={() => setZoomedItemId(item.id)}
+            // onMouseLeave={() => setZoomedItemId(null)}
+            style={{
+              transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+              transition: 'transform 0.8s ease',
+            }}
+          >
+            <img
+              loading="lazy"
+              src="https://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-to-Wear1040-scaled-1.jpg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="pl-2 ">
+          <h4 className="text-left flex items-center mt-4 cursor-pointer">
+            <div className="text-sm uppercase">{item.name}</div>
+          </h4>
+          <h4 className="text-left flex items-center mt-1 cursor-pointer">
+            <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
+          </h4>
+          <div className="text-left flex items-center mt-1 mb-8">
+            <h4 className="h-4 text-xs cursor-pointer">SELECT OPTIONS</h4>
+            <div className="ml-2">
+              <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
+            </div>
+            <div className="ml-2">
+              <ShoppingBagOutlinedIcon className="w-4 h-4 p-1" />
             </div>
           </div>
         </div>
@@ -704,12 +860,26 @@ const handleProductClick = (product, e) => {
 
 
 
-
-
-
-
-
-
+<div className='flex justify-center mt-4 mb-2'>EXPLORE MORE</div>
+<div className="flex flex-col md:flex-row mt-4 mb-2">
+  <div className="w-full relative">
+    <div className="p-2">
+    <img src="http://shopafricana.co/wp-content/uploads/2023/12/ALAY4456111.jpg" className='rounded-lg'/>
+  </div>
+  <div className="absolute bottom-20 right-10 p-2 text-white bg-black bg-opacity-50 rounded-lg cursor-pointer">
+    <p className="text-sm text-white font-bold" style={{ width: '60px' }}>WOMEN</p>
+  </div>
+  </div>
+  
+  <div className=" w-full relative">
+    <div className="p-2">
+    <img src="http://shopafricana.co/wp-content/uploads/2023/12/ALAY4447111.jpg" className='rounded-lg'/>
+  </div>
+  <div className="absolute bottom-20 right-10 p-2 text-white bg-black bg-opacity-50 rounded-lg cursor-pointer">
+    <p className="text-sm text-white font-bold"  style={{ width: '60px' }} >MEN</p>
+  </div>
+  </div>
+</div>
 
 
 
@@ -718,7 +888,8 @@ const handleProductClick = (product, e) => {
 
 {/* <RecentProducts onQuickViewClick={handleDataViewData} products={products} addToCart={addToCart} cart={cart}/> */}
 {/* <CtaSection /> */}
-{/* <Locations onQuickViewClick={handleDataViewData} products={products}/> */}
+<div className='flex justify-start mt-12 mb-2 mx-2'>OUR STORES</div>
+<Locations onQuickViewClick={handleDataViewData} products={products}/>
 
 <Footer/>
     </div>

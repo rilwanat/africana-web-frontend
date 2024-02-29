@@ -58,7 +58,7 @@ function Footer() {
                                     </div>
                                     <div className="social">
                                         <ul className="clearfix">
-                                        <li><a href="https://www.facebook.com/africana" target='_blank'>
+                                        <li><a href="https://www.facebook.com/africanacouturenigeria" target='_blank'>
                                 {/* <i className="ti-facebook" style={{ color: "#ffffff" }}/> */}
                                 <FacebookIcon style={{cursor: "pointer", color: "#ffffff" }}/>
                                 </a></li>
