@@ -355,9 +355,30 @@ function AfricanaHeader({ options, cart, removeCartItem }) {
                   <IconButton aria-label="search" sx={{ color: 'white' }}>
                     <SearchIcon />
                   </IconButton>
-                  <IconButton aria-label="search" sx={{ color: 'white' }}>
+                  <IconButton aria-label="search" sx={{ color: 'white' }} onClick={() => {
+                    if (cart.length > 0) {
+                        options.onMiniCartClick();
+                    } else {
+                        if (options.miniCart) {options.onMiniCartClick();}
+                        alert("add items to your cart");
+                    }
+                }}>
                     <ShoppingBagOutlinedIcon />
+                    {cart && cart.length > 0 && (
+            <div
+                className="absolute top-1 right-1 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center font-bold"
+                style={{ fontSize: '9px', color: "#ffffff" }}
+            >
+                <span style={{ paddingTop: '2px', paddingLeft: '2px' }}>{cart.length}</span>
+            </div>
+        )}
                   </IconButton>
+
+
+
+
+
+
                   <IconButton aria-label="shopping cart" sx={{ color: 'white' }}>
                     <AccountCircleOutlinedIcon onClick={() => {navigateToMyAccount();}}/>
                   </IconButton>

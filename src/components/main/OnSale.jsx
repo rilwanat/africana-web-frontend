@@ -4,9 +4,21 @@ import { useMediaQuery } from '@mui/material';
 import axios from 'axios';
 
 import AfricanaHeader from './AfricanaHeader';
+import AfricanaFooter from './AfricanaFooter';
 
 import Products from "./Products";
 import Pagination from "./Pagination";
+
+
+
+import SearchWidget from './widgets/SearchWidget';
+import PriceFilterWidget from './widgets/PriceFilterWidget';
+import ProductCategoriesWidget from './widgets/ProductCategoriesWidget';
+import ColorFilterWidget from './widgets/ColorFilterWidget';
+import TagFilterWidget from './widgets/TagFilterWidget';
+
+
+
 
 function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
 
@@ -108,11 +120,51 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
         }
       };
 
+      const handleDataSort = async (min, max) => {    
+
+        setProductsTotal("-");
+
+        setCurrentPage(1);
+        setIsDataLoading(true);
+        try {
+    
+          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products?minPrice=' + min + '&maxPrice=' + max, {
+            headers: {
+              "Content-Type": "application/json",
+              //Authorization: `Bearer ${token}`,
+            },
+          });
+    
+          setIsDataLoading(false);
+    
+          if (response.data.success) {
+
+            setProductsData(response.data.products);
+            setProductsTotal(response.data.total);
+          } else {
+            //alert("error: " + response.data.message);
+          }
+
+        } catch (error) {
+          setIsDataLoading(false);
+          //alert("error: " + error);
+        }
+      };
+
+      const navigateTo = async (catSlug) => {
+        //navigate('/categories', { state: { catSlug } });
+      }
+
+
+      const handleDefaultSorting = async (q) => {
+        alert(q); return;
+        
+      }
 
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} /></div>
 
             <section className="shop-section section-padding" style={{ backgroundColor: '#eeeeee' }}>
                 <div className="container-fluid">
@@ -122,9 +174,9 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
                             <div className={'shop-sidebar'} >
                                     {/* <SearchWidget 
                                     handleDataSearch={handleDataSearch} 
-                                    title="" />
+                                    title="" /> */}
                                     <PriceFilterWidget handleDataSort={handleDataSort} maxMin={maxMin} maxMax={maxMax}/>
-                                    <ProductCategoriesWidget categories={categories}  category={null} navigateTo={navigateTo} /> */}
+                                    <ProductCategoriesWidget categories={categories}  category={null} navigateTo={navigateTo} />
                                     {/* <ColorFilterWidget/> */}
                                     {/* <TagFilterWidget/> */}
                                 </div>
@@ -171,6 +223,8 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
                 {/* end container */}
             </section>
 
+
+            <AfricanaFooter/>
         </div>
     );
 }

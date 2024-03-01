@@ -1,9 +1,13 @@
 import React, {Fragment, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import Slider from "react-slick";
 
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import './products.css';
+
+import { Link, useNavigate, useParams } from 'react-router-dom';
+
+import imgx from '../../assets/images/shop/img-2.jpg';
+
+import ShoppingBagOutlinedIcon from '@mui/icons-material/LocalMallSharp';
 
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -14,24 +18,77 @@ import { AES } from 'crypto-js';
 
 
 
+/**
+ * Recent Single Products component
+ * @param onQuickViewClick
+ * @returns {*}
+ * @constructor
+ */
+function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
 
-function Products({HandelQuickViewData, products, ordering, addToCart, cart}) {
-
+    
     const navigate = useNavigate();
+
+
+    const [isPrevHovered, setPrevHovered] = useState(false);
+    const [isNextHovered, setNextHovered] = useState(false);
 
     const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
     const [isFavHovered, setFavHovered] = useState(false);
     const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
     
 
+    const [showWidget, setShowWidget] = useState(false);
+
     const [zoomedItemId, setZoomedItemId] = useState(null);
-
-
-    const [openItemIndexMyCollection, setOpenItemIndexMyCollection] = useState(null);
-  const toggleOptionsMyCollection = (index) => {
-    setOpenItemIndexMyCollection(openItemIndexMyCollection === index ? null : index);
+    
+    const [openItemIndexRelatedProduct, setOpenItemIndexRelatedProduct] = useState(null);
+  const toggleOptionsRelatedProduct = (index) => {
+    setOpenItemIndexRelatedProduct(openItemIndexRelatedProduct === index ? null : index);
   };
 
+
+
+    /**
+     * slider settings
+     * @type {{swipeToSlide: boolean, dots: boolean, infinite: boolean, responsive: *[], slidesToScroll: number, focusOnSelect: boolean, slidesToShow: number, autoplay: boolean, speed: number, autoplaySpeed: number}}
+     */
+    const settings = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 300,
+        swipeToSlide: true,
+        autoplaySpeed: 2000,
+        focusOnSelect: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: true
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
 
 
     // Function to find the lowest price among product variants
@@ -72,13 +129,13 @@ function calculateDiscountPercentage(price, oldPrice) {
   }
 
   const handleProductClick = (product, e) => {
-//alert( JSON.stringify(product));
-    // if (!isDragging) 
+
+     //if (!isDragging) 
     {
+        
         //plain
         //const productString = JSON.stringify(product);
         //navigate(`/product-details/${encodeURIComponent(productString)}`);
-
 
         // Encrypt the product data
         // Navigate to the route with the encrypted parameter
@@ -86,69 +143,73 @@ function calculateDiscountPercentage(price, oldPrice) {
         // navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
         navigate('/product-details', { state: { encryptedData } });
         //
+        window.scrollTo(0, 0);
     }
     
 
   };
 
 
+  
 
 
     return (
         <Fragment>
-            <ul className={"products " + (ordering == 1 ? 'default-column' : ordering == 2 ? 'three-column' : ordering == 3 ? 'list-view' : '')}>
-                {
-                    products.map((item, index) => (
-                        <li key={index} className="product" style={{ cursor: 'pointer' }}>
-                          <div className="product-holder">
-                            {
-                            findLowestPrice(item) < findHighestPrice(item)
-                            
-                            ? (
-                              <div className="product-badge discount -m-2">
-                                -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
-                              </div>
-                            ) : null}
-                            <div 
-                            onClick={(e) => handleProductClick(item, e)} >
-                              <img loading="lazy" 
-                              src=
-                              "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8461-1-copyBereal.png"
-                               alt=""
-                               
-                               onMouseEnter={() => setZoomedItemId(item.id)}
+            <div className="realted-porduct">
+                <h3>Related products</h3>
+                <ul className="products product-row-slider" 
+                >
+                    <Slider {...settings}
+                    >
+                        {
+                            relatedProducts.map((item, index) => (
+                                <li key={index} className="product" >
+                                    <div className="product-holder">
+                                        {
+                                        // parseInt(item.price) < parseInt(item.oldPrice) 
+                                        findLowestPrice(item) < findHighestPrice(item)
+                                        ?
+                                            <div className="product-badge discount">
+                                                -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
+                                                </div> : ''
+                                        }
+                                        {/* <Link to="/product-details"> */}
+                                            <div className='mx-2'
+                                        onClick={(e) => handleProductClick(item, e)}
+
+                                        style={{cursor: 'pointer'}}>
+                                            <img loading="lazy" 
+                                            src=
+                                            "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp"
+                                            alt=""
+                                            
+                                            onMouseEnter={() => setZoomedItemId(item.id)}
                                onMouseLeave={() => setZoomedItemId(null)}
                                style={{
-                                transform: zoomedItemId === item.id ? 'scale(1.1)' : 'scale(1)',
-                                transition: 'transform 0.3s ease',
+                                transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+                                transition: 'transform 0.8s ease',
                             }}
 
-                               />
-                            </div>
-                                
-                            </div>
-                            <div className="">
-                            <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
-                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm text-black'>
-                                                                {item.name}
-                                                            </div>
-                                                        </h4>
-                                                        <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
-                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm  text-black'>
-                                                            {'₦'}{findLowestPrice(item)}
-                                                            </div>
-                                                        </h4>
+                                            />
+                                        </div>
+                                        {/* </Link> */}
 
-
-
-
-                                        <div className="text-left flex items-center mt-1 mb-8 pl-2">
-            <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsMyCollection(index)}}>SELECT OPTIONS</h4>
-            {openItemIndexMyCollection === index && (
+                                        
+                                    </div>
+                                    <div className="pl-2" >
+                                    <h4 className="text-left flex items-center mt-4 cursor-pointer">
+            <div className="text-sm uppercase">{item.name}</div>
+          </h4>
+          <h4 className="text-left flex items-center mt-2 cursor-pointer">
+            <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
+          </h4>
+                                        <div className="text-left flex items-center mt-1 mb-8">
+            <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsRelatedProduct(index)}}>SELECT OPTIONS</h4>
+            {openItemIndexRelatedProduct === index && (
               <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
               <div className='flex justify-between items-start  mb-4 mt-1'>
                 {/* <div className='text-xs font-bold'>SIZE</div> */}
-                <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => {toggleOptionsMyCollection(index)}}/>
+                <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => {toggleOptionsRelatedProduct(index)}}/>
                 {/* <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => {toggleOptions(index);}}/> */}
               </div>
             
@@ -194,14 +255,16 @@ function calculateDiscountPercentage(price, oldPrice) {
             </div>
           </div>
 
-
-                            </div>
-                        </li>
-                    ))
-                }
-            </ul>
+                                    </div>
+                                </li>
+                            ))
+                        }
+                    </Slider>
+                </ul>
+            </div>
+            {/* <ReactTooltip className='tool-tip' effect='solid'/> */}
         </Fragment>
     );
 }
 
-export default Products;
+export default RelatedProducts;

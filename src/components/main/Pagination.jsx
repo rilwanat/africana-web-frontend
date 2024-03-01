@@ -3,13 +3,6 @@ import React, {Fragment, useState, useEffect } from 'react';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-
-/**
- * Pagination component
- * @param extraClass
- * @returns {*}
- * @constructor
- */
 function Pagination({extraClass, handlePageClick, totalProducts}) {
 
     const [activePage, setActivePage] = useState();

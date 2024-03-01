@@ -7,26 +7,27 @@ import {Fragment} from 'react';
 import HomePage from "./components/main/HomePage";
 import MyAccount from "./components/main/MyAccount";
 import OnSale from "./components/main/OnSale";
+import ProductPage from "./components/main/ProductPage";
 
 
 
-import LandingPage from "./components/pages/LandingPage";
+// import LandingPage from "./components/pages/LandingPage";
 
-import AboutPage from "./components/pages/about/About";
-import AccountPage from "./components/pages/MyAccount";
-import CartPage from "./components/pages/cart/Cart";
-import CheckoutPage from "./components/pages/checkout/Checkout";
-import ShopLeftSidebarPage from "./components/pages/ShopLeftSidebarPage";
-import ShopLeftSidebarCategoriesPage from "./components/pages/ShopLeftSidebarCategoriesPage";
-import ProductPage from "./components/pages/ProductPage";
-import SizesPage from "./components/pages/SizesPage";
+// import AboutPage from "./components/pages/about/About";
+// import AccountPage from "./components/pages/MyAccount";
+// import CartPage from "./components/pages/cart/Cart";
+// import CheckoutPage from "./components/pages/checkout/Checkout";
+// import ShopLeftSidebarPage from "./components/pages/ShopLeftSidebarPage";
+// import ShopLeftSidebarCategoriesPage from "./components/pages/ShopLeftSidebarCategoriesPage";
+// import ProductPage from "./components/pages/ProductPage";
+// import SizesPage from "./components/pages/SizesPage";
 
-import SignUpPage from './components/pages/SignUpPage';
-import SignInPage from './components/pages/SignInPage';
-import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage';
+// import SignUpPage from './components/pages/SignUpPage';
+// import SignInPage from './components/pages/SignInPage';
+// import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage';
 
-import ConfirmEmailPage from './components/pages/ConfirmEmailPage';
-import PaymentStatusPage from './components/pages/PaymentStatusPage';
+// import ConfirmEmailPage from './components/pages/ConfirmEmailPage';
+// import PaymentStatusPage from './components/pages/PaymentStatusPage';
 // http://africanalifestyle.tv/flutterwave/payment-callback?status=successful&tx_ref=6UKeoEGP2Vaa&transaction_id=4938612
 
 
@@ -319,6 +320,7 @@ const handleSetCategory = (cat) => {
               <Route path='/' element={<HomePage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>    
               <Route path='/my-account' element={<MyAccount options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/> 
               <Route path='/on-sale' element={<OnSale options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>
+              <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>} />
               
               
 {/*           <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/> 

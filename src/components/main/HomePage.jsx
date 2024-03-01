@@ -9,7 +9,7 @@ import BestSellers from './BestSellers';
 import Kaftans from './Kaftans';
 import ExploreMore from './ExploreMore';
 import Locations from '../pages/Locations';
-import Footer from '../pages/Footer';
+import AfricanaFooter from './AfricanaFooter';
 
 
 export default function HomePage({ options, handleDataViewData, addToCart, cart, removeCartItem }) {
@@ -19,7 +19,7 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
   return (
     <div>
 
-      <AfricanaHeader />
+      <AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} />
       <Hero />
       <ShopTheLook />
       <NewIn />
@@ -30,7 +30,7 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
       {/* <RecentProducts onQuickViewClick={handleDataViewData} products={products} addToCart={addToCart} cart={cart}/> */}
       {/* <CtaSection /> */}
       <Locations onQuickViewClick={handleDataViewData} />
-      <Footer/>
+      <AfricanaFooter/>
     
     </div>
   );
