@@ -1,27 +1,10 @@
 import React from 'react';
 import {useState, Fragment} from 'react';
 
-/**
- * demo date
- */
-import categories from "../../data/categories.json";
-
-/**
- * Shipping Fields section
- * @returns {*}
- * @constructor
- */
 function ShippingFields() {
 
-    /**
-     * state
-     */
     const [showShippingAddress, setShowShippingAddress] = useState(false);
 
-    /**
-     * Handle state
-     * @constructor
-     */
     const HandelShippingAddressStatus = () => {
         setShowShippingAddress(!showShippingAddress);
     };

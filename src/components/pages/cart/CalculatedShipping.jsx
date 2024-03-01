@@ -1,18 +1,10 @@
 import React, {Fragment, useState} from 'react';
-import countries from "../../data/countries";
+// import countries from "../../data/countries";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-
 
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
-/**
- * Shipping calculated component
- * @param currencySymbol
- * @param price
- * @returns {*}
- * @constructor
- */
 function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
 
     const navigate = useNavigate();
@@ -20,21 +12,6 @@ function CalculatedShipping({currencySymbol, price, tax, options, cart}) {
     const onClickSubmit = (e) => {
         e.preventDefault();
     };
-
-    /**
-     * Shipping Calculator state
-     */
-    // const [showShippingCalculator, setShowShippingCalculator] = useState(false);
-
-    /**
-     * handle Shipping Calculator state
-     * @param event
-     */
-    // const handleShippingCalculatorStatus = (event) => {
-    //     event.preventDefault();
-    //     setShowShippingCalculator(!showShippingCalculator);
-    // };
-
     
     const calculateGrandTotal = () => {
         let grandTotal = price + tax;

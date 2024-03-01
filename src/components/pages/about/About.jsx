@@ -7,31 +7,11 @@ import Header from '../header/Header';
 
 import './about.css';
 
-/**
- * demo data
- */
-import testimonialsData from '../../data/testimonial.json';
-import postsData from '../../data/posts.json';
 import {NavLink} from "react-router-dom";
-
-import about from "../../../assets/images/about.jpg";
 import signature from "../../../assets/images/signature.svg";
-// import testimonial from "../../../assets/images/testimonials-rtl.jpg";
-// background: url(../src/assets/images/testimonials-rtl.jpg) center top/cover no-repeat local; */
 
-/**
- * About page
- * @param options
- * @returns {*}
- * @constructor
- */
 function About({ options, cart, removeCartItem }) {
 
-    const testimonial = 'url("assets/images/testimonials-rtl.jpg") center top/cover no-repeat local';//"../../../assets/images/testimonials-rtl.jpg";
-// background: url(../src/assets/images/testimonials-rtl.jpg) center top/cover no-repeat local; */
-    /**
-     * slider settings
-     */
     const settings = {
         dots: true,
         infinite: true,

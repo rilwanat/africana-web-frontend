@@ -10,7 +10,7 @@ import img2 from '../../assets/images/locations/2.png';
 import img3 from '../../assets/images/locations/3.png';
 import img4 from '../../assets/images/locations/4.png';
 
-function Locations({ onQuickViewClick, products }) {
+function Locations({ onQuickViewClick }) {
     const navigate = useNavigate();
     const [isPrevHovered, setPrevHovered] = useState(false);
     const [isNextHovered, setNextHovered] = useState(false);
@@ -87,6 +87,7 @@ function Locations({ onQuickViewClick, products }) {
 
     return (
         <Fragment>
+            <div className='flex justify-start mt-12 mb-2 mx-2'>OUR STORES</div>
             <section className="mx-2 mb-8">
                 <div className="">
                     <div className="products-wrapper">
