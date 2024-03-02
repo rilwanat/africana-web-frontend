@@ -49,6 +49,11 @@ function ProductPage({options, addToCart, cart, updateCart, removeCartItem}) {
     const handleStarClick = (rating) => {
         setStar(rating);
     };
+    
+    const [selectedSize, setSelectedSize] = useState('');
+    const handleSizeSelection = (size) => {
+      setSelectedSize(size);
+    };
 
     const decryptedData = AES.decrypt(decodeURIComponent(product), 'encryptionKey').toString(CryptoJS.enc.Utf8);
     const parsedProduct = JSON.parse(decryptedData);
@@ -254,11 +259,11 @@ function calculateDiscountPercentage(price, oldPrice) {
 
                                 <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px',  }}>
                                     <div>SIZE: </div>
-        <div className='text-center ml-2 mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>S</div>
-        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>M</div>
-        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>L</div>
-        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XL</div>
-        <div className='text-center mx-1' style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XXL</div>
+        <div onClick={() => handleSizeSelection('S')} className={`text-center ${selectedSize === 'S' ? 'bg-black text-white' : 'bg-white'} ml-2 mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>S</div>
+        <div onClick={() => handleSizeSelection('M')} className={`text-center ${selectedSize === 'M' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>M</div>
+        <div onClick={() => handleSizeSelection('L')} className={`text-center ${selectedSize === 'L' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>L</div>
+        <div onClick={() => handleSizeSelection('XL')} className={`text-center ${selectedSize === 'XL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XL</div>
+        <div onClick={() => handleSizeSelection('XXL')} className={`text-center ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XXL</div>
                                     {/* {
                                         data.tags.map((item, index) =>
                                             <a key={index}

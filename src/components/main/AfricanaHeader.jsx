@@ -73,6 +73,54 @@ const SlideInContent = styled.div`
 
 
 
+// const SlideInBag = styled(motion.div)`
+//   position: fixed;
+//   top: 50;
+//   right: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: green; /* Change color as needed */
+//   z-index: 1000; /* Ensure the div is on top of other content */
+//   overflow-x: hidden;
+  
+//   @media (min-width: 960px) {
+//     width: 300px; /* Cover 300px on desktop */
+//     left: auto;
+//     right: 0;
+//   }
+// `;
+// Styled component for the sliding div
+
+const SlideInBag = styled(motion.div)`
+  position: fixed;
+  top: 5rem;
+  right: 0;
+  width: calc(100% - 2rem);
+  height: 80%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure the menu is on top of other content */
+  overflow-x: hidden;
+
+  @media (min-width: 960px) {
+    width: 40%;
+  }
+`;
+const BagContent = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+`;
+const bagItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.5 } },
+};
+
+
+
 function AfricanaHeader({ options, cart, removeCartItem }) {
 
     // const data = {
@@ -94,6 +142,14 @@ function AfricanaHeader({ options, cart, removeCartItem }) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+
+  const [isBagOpen, setIsBagOpen] = useState(false);
+
+// Function to toggle visibility of sliding div
+const toggleBag = () => {
+  setIsBagOpen(!isBagOpen);
+};
 
 
   useEffect(() => {
@@ -420,11 +476,11 @@ const settings = {
 
 
 
-                  <div className="mini-cart bg-red-500">
                   <IconButton aria-label="search" sx={{ color: 'white' }} 
                   onClick={() => {
                     if (cart.length > 0) {
-                        options.onMiniCartClick();
+                        // options.onMiniCartClick();
+                        toggleBag();
                     } else {
                         if (options.miniCart) {options.onMiniCartClick();}
                         alert("add items to your cart");
@@ -440,121 +496,6 @@ const settings = {
             </div>
         )}
                   </IconButton>
-                  <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} 
-                     style={{ maxHeight: '600px', overflowY: 'auto' }}
-                    // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
-                    >
-                        
-                        
-                        <div className='grid grid-cols-12 gap-4'>
-                            
-                            <div className='col-span-3 bg-black ' >
-                                
-                               
-                            <div className="">
-         {/* <div className="col col-xs-12"> */}
-         <div className="">
-            <div className="" >
-                <ul className="products">
-                    <Slider {...settings}>
-                        {cart.map((item, index) => (
-                            <li key={index} className="product my-2">
-                                <div className="product-holder">
-                                    <div className='mx-2' style={{ cursor: 'pointer' }}>
-                                        <img loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
-                                    </div>
-                                </div>
-                                <div className="product-info text-center mt-1 mx-2">
-                                    <h4  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
-                                        <a className='text-xs text-gray-200' style={{  }} >{item.name}</a>
-                                    </h4>
-                                    {/* <span className="woocommerce-Price-amount amount">
-                                        <ins>
-                                            <span className="woocommerce-Price-amount amount">
-                                                <bdi>
-                                                    <span className="woocommerce-Price-currencySymbol">{'₦'}</span>
-                                                    {findLowestPrice(item)}
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span> */}
-                                </div>
-                            </li>
-                        ))}
-                    </Slider>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    
-   
-                            </div>
-
-
-
-
-
-
-
-
-                            <div className='col-span-9'>
-
-                            <div className="mini-cart-items"
-                        style={{ maxHeight: '400px', overflowY: 'auto' }}
-                        >
-                            {cart &&
-                                cart.map((item, index) => (
-                                    <div key={index} className="mini-cart-item clearfix" onClick={() => {navigateToProduct(item)}}>
-                                        <div className="mini-cart-item-image">
-                                            <NavLink to={item.link}>
-                                                {/* <ShoppingBagOutlinedIcon /> */}
-                                                <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
-                                        
-                                            </NavLink>
-                                            </div>
-                                        <div className="mini-cart-item-des">
-                                            <NavLink to={item.link}>{item.name}</NavLink>
-                                            <div className='flex justify-between'>
-                                                <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
-
-                                                <CloseIcon onClick={(e) => removeCartItem(e, item)} className="mr-2" style={{ cursor: 'pointer', width: '16px', height: '16px'}}/>
-                                                
-                                            </div>
-                                           
-                                        </div>
-                                        
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <div className="mini-cart-action clearfix" 
-                        // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
-                        >
-                            {/* Subtotal logic here */}
-                            <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
-                            {/* <Link className="view-cart-btn" to="/cart" onClick={options.onMiniCartClick}>View Cart</Link> */}
-                            <div className="view-cart-btn mb-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
-                            {/* <Link className="checkout-btn" to="/checkout" onClick={options.onMiniCartClick}>Checkout</Link> */}
-                            <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
-                        </div>
-
-                            </div>
-                        </div>
-                        
-                        
-
-
-
-
-
-
-
-                    </div>
-      
-
-                    
-                </div>
 
 
 
@@ -579,124 +520,26 @@ const settings = {
 
 
 
-                  <div className="mini-cart bg-red-500">
                   <IconButton aria-label="search" sx={{ color: 'white' }}
                   onClick={() => {
                     if (cart.length > 0) {
-                        options.onMiniCartClick();
+                        // options.onMiniCartClick();
+                        toggleBag();
                     } else {
                         if (options.miniCart) {options.onMiniCartClick();}
                         alert("add items to your cart");
                     }
                 }}>
-                    <ShoppingBagOutlinedIcon />                    
-                  </IconButton>
-                  <div className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} 
-                     style={{ maxHeight: '600px', overflowY: 'auto' }}
-                    // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
-                    >
-                        
-                        
-                        <div className='grid grid-cols-12 gap-4'>
-                            
-                            <div className='col-span-3 bg-black ' >
-                                
-                               
-                            <div className="">
-         {/* <div className="col col-xs-12"> */}
-         <div className="">
-            <div className="" >
-                <ul className="products">
-                    <Slider {...settings}>
-                        {cart.map((item, index) => (
-                            <li key={index} className="product my-2">
-                                <div className="product-holder">
-                                    <div className='mx-2' style={{ cursor: 'pointer' }}>
-                                        <img loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
-                                    </div>
-                                </div>
-                                <div className="product-info text-center mt-1 mx-2">
-                                    <h4  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
-                                        <a className='text-xs text-gray-200' style={{  }} >{item.name}</a>
-                                    </h4>
-                                    {/* <span className="woocommerce-Price-amount amount">
-                                        <ins>
-                                            <span className="woocommerce-Price-amount amount">
-                                                <bdi>
-                                                    <span className="woocommerce-Price-currencySymbol">{'₦'}</span>
-                                                    {findLowestPrice(item)}
-                                                </bdi>
-                                            </span>
-                                        </ins>
-                                    </span> */}
-                                </div>
-                            </li>
-                        ))}
-                    </Slider>
-                </ul>
+                    <ShoppingBagOutlinedIcon />
+                    {cart && cart.length > 0 && (
+            <div
+                className="absolute top-1 right-1 bg-green-500 text-white rounded-full w-4 h-4 flex items-center justify-center font-bold"
+                style={{ fontSize: '8px', color: "#ffffff", paddingTop: '1px', paddingLeft: '2px' }}
+            >
+                {cart.length}
             </div>
-        </div>
-    </div>
-
-    
-   
-                            </div>
-
-
-
-
-
-
-
-
-                            <div className='col-span-9'>
-
-                            <div className="mini-cart-items"
-                        style={{ maxHeight: '400px', overflowY: 'auto' }}
-                        >
-                            {cart &&
-                                cart.map((item, index) => (
-                                    <div key={index} className="mini-cart-item clearfix" onClick={() => {navigateToProduct(item)}}>
-                                        <div className="mini-cart-item-image">
-                                            <NavLink to={item.link}>
-                                                {/* <ShoppingBagOutlinedIcon /> */}
-                                                <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
-                                        
-                                            </NavLink>
-                                            </div>
-                                        <div className="mini-cart-item-des">
-                                            <NavLink to={item.link}>{item.name}</NavLink>
-                                            <div className='flex justify-between'>
-                                                <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
-
-                                                <CloseIcon onClick={(e) => removeCartItem(e, item)} className="mr-2" style={{ cursor: 'pointer', width: '16px', height: '16px'}}/>
-                                                
-                                            </div>
-                                           
-                                        </div>
-                                        
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <div className="mini-cart-action clearfix" 
-                        // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
-                        >
-                            {/* Subtotal logic here */}
-                            <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
-                            {/* <Link className="view-cart-btn" to="/cart" onClick={options.onMiniCartClick}>View Cart</Link> */}
-                            <div className="view-cart-btn mb-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
-                            {/* <Link className="checkout-btn" to="/checkout" onClick={options.onMiniCartClick}>Checkout</Link> */}
-                            <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
-                        </div>
-
-                            </div>
-                        </div>
-                    </div>
-      
-
-                    
-                </div>
+        )}
+                  </IconButton>
 
 
 
@@ -811,6 +654,143 @@ const settings = {
 
     </MenuContent>
       </SlideInMenu>
+
+
+      {/* {isBagOpen && ( */}
+  <SlideInBag 
+  initial={{ x: '100%' }}
+        animate={{ x: isBagOpen ? 0 : '100%' }}
+        transition={{ duration: 0.2 }} 
+        // exit={{ x: '100%', transition: { type: 'spring', damping: 15, stiffness: 20 } }} // Define exit animation with spring
+  // variants={bagItemVariants}
+  >
+    <BagContent>
+    <div className='mx-8'>
+            <div className='flex justify-end items-center '>
+              {/* <img
+                className="block h-8 w-auto my-4"
+                src={logo2}
+                alt="Logo"
+                onClick={() => {navigate('/');}}
+                style={{ cursor: 'pointer' }}
+              /> */}
+              <CloseIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+            </div>
+            <hr />
+            <motion.span
+              variants={bagItemVariants}
+              initial="hidden"
+              animate={isBagOpen ? "visible" : "hidden"}
+              className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
+              onClick={() => {  }}
+            >
+              
+            <div 
+            // className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} 
+                     style={{ maxHeight: '600px', overflowY: 'hidden' }}
+                    // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
+                    >
+                        
+                        
+                        <div className='grid grid-cols-12 gap-4'>
+                            
+                            <div className='col-span-4 bg-black ' >
+                                
+                               
+                            <div className="">
+         {/* <div className="col col-xs-12"> */}
+         <div className="">
+            <div className="" >
+                <ul className="products">
+                    <Slider {...settings}>
+                        {cart.map((item, index) => (
+                            <li key={index} className="product my-2">
+                                <div className="product-holder">
+                                    <div className='mx-2' style={{ cursor: 'pointer' }}>
+                                        <img loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
+                                    </div>
+                                </div>
+                                <div className="product-info text-center mt-1 mx-2">
+                                    <h4  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
+                                        <a className='text-xs text-gray-200' style={{  }} >{item.name}</a>
+                                    </h4>
+                                </div>
+                            </li>
+                        ))}
+                    </Slider>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+   
+                            </div>
+
+
+
+
+
+
+
+
+                            <div className='col-span-8'>
+
+                            <div className="mini-cart-items"
+                        style={{ maxHeight: '400px', overflowY: 'auto' }}
+                        >
+                            {cart &&
+                                cart.map((item, index) => (
+                                    <div key={index} className="mini-cart-item clearfix" onClick={() => {navigateToProduct(item)}}>
+                                        <div className="mini-cart-item-image">
+                                            <NavLink to={item.link}>
+                                                {/* <ShoppingBagOutlinedIcon /> */}
+                                                <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
+                                        
+                                            </NavLink>
+                                            </div>
+                                        <div className="mini-cart-item-des">
+                                            <NavLink to={item.link}>{item.name}</NavLink>
+                                            <div className='flex justify-between'>
+                                                <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
+
+                                                <CloseIcon onClick={(e) => removeCartItem(e, item)} className="mr-2" style={{ cursor: 'pointer', width: '16px', height: '16px'}}/>
+                                                
+                                            </div>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div className="mini-cart-action clearfix" 
+                        // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
+                        >
+                            {/* Subtotal logic here */}
+                            <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
+                            <div className="view-cart-btn mb-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
+                            <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
+                        </div>
+
+                            </div>
+                        </div>
+                        
+                        
+
+
+
+
+
+
+
+                    </div>
+            </motion.span>
+            
+          </div>
+    </BagContent>
+  </SlideInBag>
+{/* )} */}
     
       
         </div>

@@ -236,7 +236,7 @@ function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
                                                 </button>
                                             </p>
 
-                                            <p className=""> <a href="/signin">Already have an account? Sign In</a> </p>
+                                            <p className=""> <a href="/sign-in">Already have an account? Sign In</a> </p>
                                         </form>
                                     </div>
 

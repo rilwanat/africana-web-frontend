@@ -177,7 +177,7 @@ function SignInPage({ options, cart, removeCartItem }) {
                                                 <a href="#">Lost your password?</a>
                                             </p>
 
-                                            <p className=""> <a href="/signup">Dont have an account? Sign Up</a> </p>
+                                            <p className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </p>
                                         </form>
                                     </div>
 
