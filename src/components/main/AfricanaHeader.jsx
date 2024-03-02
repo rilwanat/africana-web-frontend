@@ -20,6 +20,7 @@ import Slider from "react-slick";
 
 import './cartsliderproducts.css';
 
+
 import CloseIcon from '@mui/icons-material/Close';
 
 import { AES } from 'crypto-js';
@@ -97,7 +98,7 @@ const SlideInBag = styled(motion.div)`
   right: 0;
   width: calc(100% - 2rem);
   height: 80%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  /*background-color: rgba(0, 0, 0, 0.5);  Semi-transparent background */
   z-index: 1000; /* Ensure the menu is on top of other content */
   overflow-x: hidden;
 
@@ -111,8 +112,13 @@ const BagContent = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: white;
+  background-color: #eeeeee;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+`;
+const BagContentInner = styled.div`
+  height: 100%; /* Ensure the inner content fills the container */
+  max-height: 100%; /* Limit the height to the container's height */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
 `;
 const bagItemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -620,7 +626,7 @@ const settings = {
               initial="hidden"
               animate={isMenuOpen ? "visible" : "hidden"}
               className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
-              onClick={() => { /* Handle navigation */ }}
+              onClick={() => {navigateToOnSale();}}
             >
               ON SALE
             </motion.span>
@@ -665,62 +671,49 @@ const settings = {
   // variants={bagItemVariants}
   >
     <BagContent>
-    <div className='mx-8'>
-            <div className='flex justify-end items-center '>
-              {/* <img
-                className="block h-8 w-auto my-4"
-                src={logo2}
-                alt="Logo"
-                onClick={() => {navigate('/');}}
-                style={{ cursor: 'pointer' }}
-              /> */}
-              <CloseIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
-            </div>
-            <hr />
+      <BagContentInner>
+      <div className='mx-2 '>
+            
             <motion.span
               variants={bagItemVariants}
               initial="hidden"
               animate={isBagOpen ? "visible" : "hidden"}
-              className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
+              className="text-gray-900 text-sm font-bold cursor-pointer block "
               onClick={() => {  }}
             >
               
             <div 
             // className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} 
-                     style={{ maxHeight: '600px', overflowY: 'hidden' }}
+                     style={{ maxHeight: '100%', overflowY: 'hidden' }}
+                    //  style={{ maxHeight: '600px', overflowY: 'hidden' }}
                     // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
                     >
                         
                         
-                        <div className='grid grid-cols-12 gap-4'>
+                        <div className='grid grid-cols-12 gap-4 '>
                             
-                            <div className='col-span-4 bg-black ' >
+                            <div className='col-span-4 px-2 mt-2' >
                                 
                                
                             <div className="">
-         {/* <div className="col col-xs-12"> */}
-         <div className="">
-            <div className="" >
-                <ul className="products">
+                <ul className="">
                     <Slider {...settings}>
                         {cart.map((item, index) => (
-                            <li key={index} className="product my-2">
-                                <div className="product-holder">
+                            <li key={index} className=" my-2">
+                                <div className="">
                                     <div className='mx-2' style={{ cursor: 'pointer' }}>
                                         <img loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
                                     </div>
                                 </div>
-                                <div className="product-info text-center mt-1 mx-2">
-                                    <h4  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
-                                        <a className='text-xs text-gray-200' style={{  }} >{item.name}</a>
-                                    </h4>
+                                <div className=" text-center mt-1 mx-2">
+                                    <span  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
+                                        <a className='text-xs text-gray-900' style={{  }} >{item.name}</a>
+                                    </span>
                                 </div>
                             </li>
                         ))}
                     </Slider>
                 </ul>
-            </div>
-        </div>
     </div>
 
     
@@ -734,22 +727,40 @@ const settings = {
 
 
 
-                            <div className='col-span-8'>
+                            <div className='col-span-8 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)' }}>
+                            {/* <div className='col-span-8 shadow-xl'> */}
 
-                            <div className="mini-cart-items"
-                        style={{ maxHeight: '400px', overflowY: 'auto' }}
+                            <div className='flex justify-between items-center ml-4'>
+            <motion.span
+              variants={bagItemVariants}
+              initial="hidden"
+              animate={isBagOpen ? "visible" : "hidden"}
+              className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
+              // onClick={() => {navigateToOnSale();}}
+            >
+              CART ITEMS
+            </motion.span>
+              <CloseIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+            </div>
+            <hr style={{ borderColor: '#888888' }} className='ml-4 mb-6'/>
+
+
+
+
+                            <div className="m-2"
+                        style={{ maxHeight: '100%', overflowY: 'auto' }}
                         >
                             {cart &&
                                 cart.map((item, index) => (
-                                    <div key={index} className="mini-cart-item clearfix" onClick={() => {navigateToProduct(item)}}>
-                                        <div className="mini-cart-item-image">
+                                    <div key={index} className="px-4 " onClick={() => {navigateToProduct(item)}}>
+                                        <div className="">
                                             <NavLink to={item.link}>
                                                 {/* <ShoppingBagOutlinedIcon /> */}
                                                 <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
                                         
                                             </NavLink>
                                             </div>
-                                        <div className="mini-cart-item-des">
+                                        <div className="my-2">
                                             <NavLink to={item.link}>{item.name}</NavLink>
                                             <div className='flex justify-between'>
                                                 <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
@@ -764,12 +775,12 @@ const settings = {
                                 ))
                             }
                         </div>
-                        <div className="mini-cart-action clearfix" 
+                        <div className="px-4 my-2" 
                         // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
                         >
                             {/* Subtotal logic here */}
-                            <span className="mini-checkout-price">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
-                            <div className="view-cart-btn mb-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
+                            <span className="mb-4">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
+                            <div className="view-cart-btn mb-2 mt-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
                             <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
                         </div>
 
@@ -788,6 +799,8 @@ const settings = {
             </motion.span>
             
           </div>
+        </ BagContentInner>
+    
     </BagContent>
   </SlideInBag>
 {/* )} */}

@@ -182,6 +182,19 @@ function calculateDiscountPercentage(price, oldPrice) {
 
 
 
+
+    const [showItemAdded, setShowItemAdded] = useState(false);
+const [showIndexItemAdded, setShowIndexItemAdded] = useState(-1);
+const showAddedDialogue = (i) => {
+  setShowIndexItemAdded(i);
+  // alert("");
+  setShowItemAdded(true);
+  setTimeout(() => {
+    setShowItemAdded(false);
+  }, 1000);
+}
+
+
     return (
         <div>
             
@@ -298,10 +311,19 @@ function calculateDiscountPercentage(price, oldPrice) {
                                     <div className='bg-black'>
                                         <button className='p-4 font-bold text-white ml-8 text-sm' 
                                         onClick={
-                                            () => addToCart(parsedProduct, productCount)                                            
+                                            () => {
+                                                showAddedDialogue(0);addToCart(parsedProduct, productCount);
+                                            }                                        
                                         }                                        
                                         >ADD TO CART</button>
                                     </div>
+                                    {showItemAdded 
+                                    // && showIndexItemAdded === index 
+                                    && (
+        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
+          Item added
+        </div>
+      )}
 
                                     
                                 </div>
