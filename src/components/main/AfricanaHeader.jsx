@@ -136,6 +136,10 @@ function AfricanaHeader({ options, cart, removeCartItem }) {
     navigate('/my-account', {  });
   }
 
+  const navigateToSignIn = () => {
+    navigate('/sign-in', {  });
+  }
+
     return (
         <div>
             <nav className=" z-50" >
@@ -381,7 +385,7 @@ function AfricanaHeader({ options, cart, removeCartItem }) {
 
 
                   <IconButton aria-label="shopping cart" sx={{ color: 'white' }}
-                  onClick={() => {navigateToMyAccount();}}
+                  onClick={() => {navigateToSignIn();}}
                   >
                     <AccountCircleOutlinedIcon />
                   </IconButton>
@@ -395,7 +399,8 @@ function AfricanaHeader({ options, cart, removeCartItem }) {
                   <IconButton aria-label="search" sx={{ color: 'white' }}>
                     <ShoppingBagOutlinedIcon />
                   </IconButton>
-                  <IconButton aria-label="shopping cart" sx={{ color: 'white' }}>
+                  <IconButton aria-label="shopping cart" sx={{ color: 'white' }}
+                  onClick={() => {navigateToSignIn();}}>
                     <AccountCircleOutlinedIcon />
                   </IconButton>
                 </div>
