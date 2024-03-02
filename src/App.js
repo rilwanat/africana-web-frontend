@@ -176,8 +176,7 @@ const options = {
 //   };
 
 const addToCart = (product, count) => {
-  //console.log("Product:", product);
-  //console.log("Count:", count);
+  //alert("Product:" + product + " Count:" + count + ", added !");
 
   const existingProduct = cart.find((item) => item.id === product.id);
   //console.log("Existing Product:", existingProduct);

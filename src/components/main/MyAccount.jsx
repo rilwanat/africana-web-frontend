@@ -61,7 +61,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} /></div>
 
             <section className="my-account-section ">
                 <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-black">

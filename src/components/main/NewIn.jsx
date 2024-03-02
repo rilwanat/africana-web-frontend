@@ -14,8 +14,12 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import Slider from 'react-slick';
 
+import CryptoJS from 'crypto-js';
+import { AES } from 'crypto-js';
 
-function NewIn({  }) {
+
+
+function NewIn({ addToCart, cart }) {
 
     const navigate = useNavigate();
   const isLargeScreen = useMediaQuery('(min-width:960px)');
@@ -31,12 +35,19 @@ function NewIn({  }) {
   
   const [openItemIndexNewIn, setOpenItemIndexNewIn] = useState(null);
   const toggleOptionsNewIn = (index) => {
+    setProductCount(1);
+    setSelectedSize('');
     setOpenItemIndexNewIn(openItemIndexNewIn === index ? null : index);
   };
 
   const [zoomedItemId, setZoomedItemId] = useState(null);
   const [products, setProductsData] = useState([]);
+  const [productCount, setProductCount] = useState(1);
   const [isDataloading, setIsDataLoading] = useState(true);
+  const [selectedSize, setSelectedSize] = useState('');
+  const handleSizeSelection = (size) => {
+    setSelectedSize(size);
+  };
 
 
   // Function to find the lowest price among product variants
@@ -145,6 +156,30 @@ function findLowestPrice(product) {
     }
   };
 
+  const handleProductClick = (product, e) => {
+
+    //if (!isDragging) 
+   {
+       
+       const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
+       navigate('/product-details', { state: { encryptedData } });
+       //
+       window.scrollTo(0, 0);
+   }
+   
+
+ };
+
+ const handleIncreaseQuantity = (item) => {
+  setProductCount(productCount + 1);
+};
+
+const handleDecreaseQuantity = (item) => {
+  if (productCount > 1) {
+      setProductCount(productCount - 1);
+  }
+  
+};
 
     return (
         <div>
@@ -179,7 +214,7 @@ function findLowestPrice(product) {
           ) : null}
           <div
             className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`}
-            // onClick={(e) => handleProductClick(item, e)}
+            onClick={(e) => handleProductClick(item, e)}
             // onMouseEnter={() => setZoomedItemId(item.id)}
             // onMouseLeave={() => setZoomedItemId(null)}
             style={{
@@ -214,11 +249,11 @@ function findLowestPrice(product) {
               <div className="mx-1 mb-2 flex items-center justify-between" style={{ color: '#777777', height: '30px' }}>
                 {/* <div className='text-xs font-bold'>SIZE:</div> */}
                 <div className='flex'>
-                <div className='flex justify-center items-center mr-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>S</div>
-                <div className='flex justify-center items-center mx-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>M</div>
-                <div className='flex justify-center items-center mx-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>L</div>
-                <div className='flex justify-center items-center mx-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XL</div>
-                <div className='flex justify-center items-center ml-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XXL</div>
+                <div onClick={() => handleSizeSelection('S')} className={`flex justify-center items-center mr-1 ${selectedSize === 'S' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>S</div>
+                <div onClick={() => handleSizeSelection('M')} className={`flex justify-center items-center mx-1 ${selectedSize === 'M' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>M</div>
+                <div onClick={() => handleSizeSelection('L')}className={`flex justify-center items-center mx-1 ${selectedSize === 'L' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>L</div>
+                <div onClick={() => handleSizeSelection('XL')} className={`flex justify-center items-center mx-1 ${selectedSize === 'XL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XL</div>
+                <div onClick={() => handleSizeSelection('XXL')} className={`flex justify-center items-center ml-1 ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XXL</div>
               
                 </div>
                 </div>
@@ -228,15 +263,21 @@ function findLowestPrice(product) {
                 <div className="flex items-center bg-black mx-1 my-1">
                   <div className="" style={{ display: 'flex', alignItems: 'center' }}>
                     <div className='flex bg-white items-center justify-center m-2' style={{ height: '80%', width: '100%' }}>
-                      <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} />
-                      <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>#</span>
-                      <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }} />
+                      <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} 
+                      onClick={() => { handleDecreaseQuantity(item) }}
+                      />
+                      <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>{productCount}</span>
+                      <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }} 
+                      onClick={() => { handleIncreaseQuantity(item) }}
+                      />
                     </div>
                   </div>
             
                   <div className='flex flex-col md:flex-row bg-black '>
                     {/* <button className='p-4 font-bold text-white  text-xs'>ADD TO CART</button> */}
-                    <div className="flex ml-2 w-20 text-white items-center cursor-pointer">
+                    <div className="flex ml-2 w-20 text-white items-center cursor-pointer" 
+                    onClick={() => addToCart(item, productCount)}
+                    >
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs'>add</span>
             </div>
                   </div>
@@ -248,8 +289,11 @@ function findLowestPrice(product) {
             {/* <div className="ml-2">
               <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
             </div> */}
-            <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2">
-              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" /><span className='text-xs' style={{ paddingTop: '2px' }}>add</span>
+            <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2" 
+            onClick={() => addToCart(item, 1)}
+            >
+              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" 
+              /><span className='text-xs' style={{ paddingTop: '2px' }}>add</span>
             </div>
           </div>
         </div>

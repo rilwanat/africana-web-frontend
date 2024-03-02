@@ -16,14 +16,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
-
-
-/**
- * Recent Single Products component
- * @param onQuickViewClick
- * @returns {*}
- * @constructor
- */
 function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
 
     
@@ -41,18 +33,20 @@ function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
     const [showWidget, setShowWidget] = useState(false);
 
     const [zoomedItemId, setZoomedItemId] = useState(null);
+    const [productCount, setProductCount] = useState(1);
+    const [selectedSize, setSelectedSize] = useState('');
+    const handleSizeSelection = (size) => {
+      setSelectedSize(size);
+    };
     
     const [openItemIndexRelatedProduct, setOpenItemIndexRelatedProduct] = useState(null);
   const toggleOptionsRelatedProduct = (index) => {
+    setProductCount(1);
+    setSelectedSize('');
     setOpenItemIndexRelatedProduct(openItemIndexRelatedProduct === index ? null : index);
   };
 
 
-
-    /**
-     * slider settings
-     * @type {{swipeToSlide: boolean, dots: boolean, infinite: boolean, responsive: *[], slidesToScroll: number, focusOnSelect: boolean, slidesToShow: number, autoplay: boolean, speed: number, autoplaySpeed: number}}
-     */
     const settings = {
         dots: false,
         infinite: true,
@@ -150,7 +144,16 @@ function calculateDiscountPercentage(price, oldPrice) {
   };
 
 
-  
+  const handleIncreaseQuantity = (item) => {
+    setProductCount(productCount + 1);
+};
+
+const handleDecreaseQuantity = (item) => {
+    if (productCount > 1) {
+        setProductCount(productCount - 1);
+    }
+    
+};
 
 
     return (
@@ -216,11 +219,11 @@ function calculateDiscountPercentage(price, oldPrice) {
               <div className="mx-1 mb-2 flex items-center justify-between" style={{ color: '#777777', height: '30px' }}>
                 {/* <div className='text-xs font-bold'>SIZE:</div> */}
                 <div className='flex'>
-                <div className='flex justify-center items-center mr-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>S</div>
-                <div className='flex justify-center items-center mx-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>M</div>
-                <div className='flex justify-center items-center mx-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>L</div>
-                <div className='flex justify-center items-center mx-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XL</div>
-                <div className='flex justify-center items-center ml-1 bg-white text-xs' style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XXL</div>
+                <div onClick={() => handleSizeSelection('S')} className={`flex justify-center items-center mr-1 ${selectedSize === 'S' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>S</div>
+                <div onClick={() => handleSizeSelection('M')} className={`flex justify-center items-center mx-1 ${selectedSize === 'M' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>M</div>
+                <div onClick={() => handleSizeSelection('L')}className={`flex justify-center items-center mx-1 ${selectedSize === 'L' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>L</div>
+                <div onClick={() => handleSizeSelection('XL')} className={`flex justify-center items-center mx-1 ${selectedSize === 'XL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XL</div>
+                <div onClick={() => handleSizeSelection('XXL')} className={`flex justify-center items-center ml-1 ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XXL</div>
               
                 </div>
                 </div>
@@ -230,15 +233,20 @@ function calculateDiscountPercentage(price, oldPrice) {
                 <div className="flex items-center bg-black mx-1 my-1">
                   <div className="" style={{ display: 'flex', alignItems: 'center' }}>
                     <div className='flex bg-white items-center justify-center m-2' style={{ height: '80%', width: '100%' }}>
-                      <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} />
-                      <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>#</span>
-                      <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }} />
+                      <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} 
+                      onClick={() => { handleDecreaseQuantity(item) }}/>
+                      <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>{productCount}</span>
+                      <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }} 
+                      onClick={() => { handleIncreaseQuantity(item) }}
+                      />
                     </div>
                   </div>
             
                   <div className='flex flex-col md:flex-row bg-black '>
                     {/* <button className='p-4 font-bold text-white  text-xs'>ADD TO CART</button> */}
-                    <div className="flex ml-2 w-20 text-white items-center cursor-pointer">
+                    <div className="flex ml-2 w-20 text-white items-center cursor-pointer" 
+                    onClick={() => addToCart(item, productCount)}
+                    >
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs'>add</span>
             </div>
                   </div>

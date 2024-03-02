@@ -22,9 +22,9 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
       <AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} />
       <Hero />
       <ShopTheLook />
-      <NewIn />
-      <BestSellers />
-      <Kaftans />
+      <NewIn addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
+      <BestSellers addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
+      <Kaftans addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
       <ExploreMore />
       
       {/* <RecentProducts onQuickViewClick={handleDataViewData} products={products} addToCart={addToCart} cart={cart}/> */}
