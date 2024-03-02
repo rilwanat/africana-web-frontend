@@ -10,6 +10,8 @@ import OnSale from "./components/main/OnSale";
 import ProductPage from "./components/main/ProductPage";
 import SignInPage from "./components/main/SignInPage";
 import SignUpPage from "./components/main/SignUpPage";
+import CartPage from "./components/main/CartPage";
+import CheckoutPage from "./components/main/CheckoutPage";
 
 
 
@@ -324,6 +326,8 @@ const handleSetCategory = (cat) => {
               <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>} />
               <Route path='/sign-in' element={<SignInPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
               <Route path='/sign-up' element={<SignUpPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} handleEmailAddress={handleEmailAddress}/>}/>
+              <Route path='/cart' element={<CartPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>}/>
+              <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
               
               
 {/*           <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/> 
@@ -331,8 +335,6 @@ const handleSetCategory = (cat) => {
               <Route path='/about' element={<AboutPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>    
               <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>
               <Route path='/categories' element={<ShopLeftSidebarCategoriesPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories} />}/>
-              <Route path='/cart' element={<CartPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>}/>
-              <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
               <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>} />
               <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
               <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
