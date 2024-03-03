@@ -18,6 +18,8 @@ import ReviewsIcon from '@mui/icons-material/Reviews';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+import Loading from './widgets/Loading';
+
 function MyAccount({ options, addToCart, cart, removeCartItem }) {
 
 
@@ -286,7 +288,10 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                             <div className="shop-area clearfix" >
 
                             {
-  isDataloading ? "Loading..." : <Products
+  isDataloading ? 
+//   "Loading..." 
+< Loading />
+  : <Products
 //   HandelQuickViewData={HandelQuickViewData}
   products={products}
 //   ordering={ordering}

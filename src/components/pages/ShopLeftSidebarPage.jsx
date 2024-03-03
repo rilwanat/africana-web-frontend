@@ -323,7 +323,9 @@ function ShopLeftSidebarPage({ options, addToCart, cart, removeCartItem, categor
                                         </div>
 
 {
-  isDataloading ? "Loading..." : <Products
+  isDataloading ? 
+  "Loading..." 
+  : <Products
   HandelQuickViewData={HandelQuickViewData}
   products={products}
   ordering={ordering}

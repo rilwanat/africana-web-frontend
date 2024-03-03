@@ -126,7 +126,7 @@ const showAddedDialogue = (i) => {
 
     return (
         <Fragment>
-            <ul className={"products " + (ordering == 1 ? 'default-column' : ordering == 2 ? 'three-column' : ordering == 3 ? 'list-view' : '')}>
+            <ul className={"bg-white py-4 products " + (ordering == 1 ? 'default-column' : ordering == 2 ? 'three-column' : ordering == 3 ? 'list-view' : '')}>
                 {
                     products.map((item, index) => (
                         <li key={index} className="product" style={{ cursor: 'pointer' }}>
@@ -142,6 +142,7 @@ const showAddedDialogue = (i) => {
                             <div 
                             onClick={(e) => handleProductClick(item, e)} >
                               <img loading="lazy" 
+                              className='px-2'
                               src=
                               "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8461-1-copyBereal.png"
                                alt=""
@@ -157,7 +158,7 @@ const showAddedDialogue = (i) => {
                             </div>
                                 
                             </div>
-                            <div className="">
+                            <div className="mt-4">
                             <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
                                                             <div onClick={(e) => handleProductClick(item, e)} className='text-sm text-black'>
                                                                 {item.name}
@@ -236,7 +237,7 @@ const showAddedDialogue = (i) => {
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" 
               />
               {showItemAdded && showIndexItemAdded === index && (
-        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
+        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
           Item added
         </div>
       )}

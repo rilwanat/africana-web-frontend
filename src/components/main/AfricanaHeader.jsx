@@ -672,7 +672,10 @@ const settings = {
   >
     <BagContent>
       <BagContentInner>
-      <div className='mx-2 '>
+      <div className='fixed top-0 bg-black h-8 w-full'></div>
+
+
+      <div className='mx-2 '>      
             
             <motion.span
               variants={bagItemVariants}
@@ -689,13 +692,12 @@ const settings = {
                     // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
                     >
                         
-                        
-                        <div className='grid grid-cols-12 gap-4 '>
+                        <div className='grid grid-cols-12 gap-4 mt-8 mb-8'>
                             
                             <div className='col-span-4 px-2 mt-2' >
                                 
                                
-                            <div className="">
+                            <div className="" >
                 <ul className="">
                     <Slider {...settings}>
                         {cart.map((item, index) => (
@@ -742,12 +744,14 @@ const settings = {
             </motion.span>
               <CloseIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
             </div>
+
+            
             <hr style={{ borderColor: '#888888' }} className='ml-4 mb-6'/>
 
 
 
 
-                            <div className="m-2"
+                            <div className="m-2 mb-40"
                         style={{ maxHeight: '100%', overflowY: 'auto' }}
                         >
                             {cart &&
@@ -765,40 +769,59 @@ const settings = {
                                             <div className='flex justify-between'>
                                                 <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
 
-                                                <CloseIcon onClick={(e) => removeCartItem(e, item)} className="mr-2" style={{ cursor: 'pointer', width: '16px', height: '16px'}}/>
+                                                <CloseIcon onClick={(e) => removeCartItem(e, item)} className="mr-2 bg-black rounded-sm" style={{ cursor: 'pointer', width: '16px', height: '16px', color: "#ffffff"}}/>
                                                 
                                             </div>
                                            
                                         </div>
+
+                                        <hr style={{ borderColor: '#888888' }} className=' mb-6'/>
                                         
                                     </div>
+                                   
                                 ))
                             }
                         </div>
-                        <div className="px-4 my-2" 
-                        // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
-                        >
-                            {/* Subtotal logic here */}
-                            <span className="mb-4">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
-                            <div className="view-cart-btn mb-2 mt-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart</div>
-                            <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
-                        </div>
+
+
+
+                       
 
                             </div>
                         </div>
+
                         
                         
 
 
-
-
+                        
 
 
 
                     </div>
+
+                    
+                    
             </motion.span>
+
+            
             
           </div>
+
+          
+
+          {/* <div className='fixed bottom-0 bg-black h-8 w-full'>2</div> */}
+          <div className='fixed bottom-0 bg-white w-full'><div className="px-8 my-2 pb-4 mt-4" 
+                        // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
+                        >
+                            {/* Subtotal logic here */}
+                            <span className="flex justify-end mb-4">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
+                            <div className="view-cart-btn mb-2 mt-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart {'(' + cart.length + ')'}</div>
+                            <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
+                            {/* <div>.</div> */}
+                        </div>
+                        </div>
+          
         </ BagContentInner>
     
     </BagContent>

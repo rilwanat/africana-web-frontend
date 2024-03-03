@@ -319,7 +319,7 @@ const showAddedDialogue = (i) => {
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2"               
               />
               {showItemAdded && showIndexItemAdded === index && (
-        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
+        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
           Item added
         </div>
       )}

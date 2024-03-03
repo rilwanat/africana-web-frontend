@@ -11,6 +11,7 @@ import Pagination from "./Pagination";
 
 
 
+import Loading from './widgets/Loading';
 import SearchWidget from './widgets/SearchWidget';
 import PriceFilterWidget from './widgets/PriceFilterWidget';
 import ProductCategoriesWidget from './widgets/ProductCategoriesWidget';
@@ -176,7 +177,7 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
                                     handleDataSearch={handleDataSearch} 
                                     title="" /> */}
                                     <PriceFilterWidget handleDataSort={handleDataSort} maxMin={maxMin} maxMax={maxMax}/>
-                                    <ProductCategoriesWidget categories={categories}  category={null} navigateTo={navigateTo} />
+                                    {/* <ProductCategoriesWidget categories={categories}  category={null} navigateTo={navigateTo} /> */}
                                     {/* <ColorFilterWidget/> */}
                                     {/* <TagFilterWidget/> */}
                                 </div>
@@ -202,7 +203,10 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
                                         </div>
 
 {
-  isDataloading ? "Loading..." : <Products
+  isDataloading ? 
+  // "Loading..." 
+  < Loading />
+  : <Products
 //   HandelQuickViewData={HandelQuickViewData}
   products={products}
   ordering={ordering}

@@ -385,7 +385,9 @@ function ShopLeftSidebarCategoriesPage({ options, addToCart, cart, removeCartIte
                                         </div>
 
 {
-  isDataloading ? "Loading..." : <Products
+  isDataloading ? 
+  "Loading..." 
+  : <Products
   HandelQuickViewData={HandelQuickViewData}
   products={products}
   ordering={ordering}

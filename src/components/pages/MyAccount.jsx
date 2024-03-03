@@ -338,7 +338,9 @@ function MyAccount({  options, addToCart, cart, removeCartItem  }) {
                             <div className="shop-area clearfix" >
 
                             {
-  isDataloading ? "Loading..." : <Products
+  isDataloading ? 
+  "Loading..." 
+  : <Products
   HandelQuickViewData={HandelQuickViewData}
   products={products}
   ordering={ordering}

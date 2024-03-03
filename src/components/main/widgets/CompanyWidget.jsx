@@ -13,7 +13,7 @@ function CompanyWidget() {
                 <h3 className='text-white'>About</h3>
                 <ul>
                     <li><a >Discover us</a></li>
-                    <li><a href="/contact-us">Contact</a></li>
+                    <li><a >Contact</a></li>
                 </ul>
             </div>
         </Fragment>
