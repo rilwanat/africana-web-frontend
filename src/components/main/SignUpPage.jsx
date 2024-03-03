@@ -148,82 +148,82 @@ function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
                                         // action="/registration-endpoint" 
                                         className="woocommerce-form woocommerce-form-register register">
 
-<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+<div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_firstname">First name&nbsp;<span className="required">*</span></label>
         <input 
         value={firstname}
         placeholder="Enter your Firstname"
         onChange={(e) => setFirstname(e.target.value)}
         type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="firstname" id="reg_firstname" autoComplete="given-name" />
-    </p>
+    </div>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_lastname">Last name&nbsp;<span className="required">*</span></label>
         <input 
         value={lastname}
         placeholder="Enter your Lastname"
         onChange={(e) => setLastname(e.target.value)}
         type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="lastname" id="reg_lastname" autoComplete="family-name" />
-    </p>
+    </div>
 
-    {/* <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    {/* <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_company">Company name&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="company" id="reg_company" autoComplete="organization" />
-    </p> */}
+    </div> */}
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label>
         <input 
         value={emailAddress}
         placeholder="Enter your email"
         onChange={(e) => setEmailAddress(e.target.value)}
         type="email" className="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autoComplete="email" />
-    </p>
+    </div>
 
-    {/* <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    {/* <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_phone">Phone&nbsp;<span className=""></span></label>
         <input type="tel" className="woocommerce-Input woocommerce-Input--text input-text" name="phone" id="reg_phone" autoComplete="tel" />
-    </p>
+    </div>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_country">Country&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="country" id="reg_country" autoComplete="country" />
-    </p>
+    </div>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_address1">Address 1&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="address1" id="reg_address1" autoComplete="address-line1" />
-    </p>
+    </div>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_address2">Address 2&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="address2" id="reg_address2" autoComplete="address-line2" />
-    </p>
+    </div>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_towncity">Town / City&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="towncity" id="reg_towncity" autoComplete="town-city" />
-    </p>
+    </div>
 
-    <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
         <label htmlFor="reg_postcodezip">Postcode / ZIP&nbsp;<span className=""></span></label>
         <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="postcode-zip" id="reg_postcodezip" autoComplete="postcode-zip" />
-    </p> */}
+    </div> */}
 
 
 
 
 
-    <p className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
+    <div className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
 
 
-                                            <p>A password will be sent to your email address.</p>
+                                            <div>A password will be sent to your email address.</div>
                                             <div className="woocommerce-privacy-policy-text">
-                                                <p>Your personal data will be used to support your experience throughout
+                                                <div>Your personal data will be used to support your experience throughout
                                                     Africana site to manage access to your account, and for other
-                                                    purposes described in our <a href="/privacy-policy" className="woocommerce-privacy-policy-link" >privacy policy</a>.</p>
+                                                    purposes described in our <a href="/privacy-policy" className="woocommerce-privacy-policy-link" >privacy policy</a>.</div>
                                             </div>
-                                            <p className="woocommerce-form-row form-row">
+                                            <div className="woocommerce-form-row form-row">
                                                 {/* <input type="hidden" id="woocommerce-register-nonce"
                                                        name="woocommerce-register-nonce"
                                                        defaultValue="2361821e0b"/> */}
@@ -234,9 +234,9 @@ function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
                                                         className="woocommerce-Button woocommerce-button button woocommerce-form-register__submit"
                                                         name="register" value="Register">{isLoading ? 'Please wait..' : 'Register'}
                                                 </button>
-                                            </p>
+                                            </div>
 
-                                            <p className=""> <a href="/sign-in">Already have an account? Sign In</a> </p>
+                                            <div className=""> <a href="/sign-in">Already have an account? Sign In</a> </div>
                                         </form>
                                     </div>
 

@@ -109,11 +109,11 @@ URL:            http://themeforest.net/user/wp_studio
 /*---------------------------
 	Fonts
 ----------------------------*/
-@import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600&display=swap"); */
 
 @font-face {
-    font-family: 'futura-pt-demi';
-    src: url(../fonts/futura-pt-demi.otf) format("truetype");
+    /* font-family: 'futura-pt-demi'; */
+    /* src: url(../fonts/futura-pt-demi.otf) format("truetype"); */
     font-weight: 600;
     font-style: normal;
 }
@@ -126,7 +126,7 @@ html {
 }
 
 body {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     background-color: #fff;
     font-size: 15px;
     font-size: 1rem;
@@ -152,7 +152,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     color: #000;
     font-weight: 400;
 }
@@ -187,7 +187,7 @@ input[type="email"],
 input[type="tel"],
 form select,
 textarea {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 0;
@@ -221,7 +221,7 @@ textarea {
 }
 
 label {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     font-size: 14px;
     font-size: 0.9333333333rem;
     color: #000;
@@ -568,7 +568,7 @@ select {
 }
 
 .quick-view-single-product .price {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 20px;
     font-size: 1.3333333333rem;
     margin: 0.4em 0 0.5em;
@@ -889,7 +889,7 @@ select {
 
 .woocommerce-error, .woocommerce-info,
 .woocommerce-message {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     background-color: rgba(191, 171, 112, 0.1);
     width: auto;
     padding: 15px 20px;
@@ -947,7 +947,7 @@ select {
 .woocommerce a.button,
 .woocommerce button.button,
 .woocommerce input.button {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     font-size: 12px;
@@ -1205,7 +1205,7 @@ abbr[title] {
 
 .theme-btn, .theme-btn-s2, .theme-btn-s3, .theme-btn-s4, .theme-btn-s6, .theme-btn-s7, .theme-btn-s5,
 button {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     font-size: 12px;
@@ -1318,7 +1318,7 @@ button:active {
 }
 
 .view-cart-btn, .checkout-btn {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     background: #000;
     width: 100%;
     font-size: 12px;
@@ -1503,7 +1503,7 @@ button:active {
 }
 
 .page-title .breadcrumb > li + li:before {
-    font-family: "Themify";
+    /* font-family: "Themify"; */
     content: "\e649";
     font-size: 10px;
     font-size: 0.6666666667rem;
@@ -1856,7 +1856,7 @@ button:active {
 }
 
 .pagination-wrapper .pg-pagination li a {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     background-color: transparent;
     width: 45px;
     height: 45px;
@@ -2109,7 +2109,7 @@ button:active {
 }
 
 .shop-sidebar .widget_price_filter .filter-price button {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
     font-size: 12px;
@@ -2158,7 +2158,7 @@ button:active {
 
 .shop-sidebar .widget_product_categories,
 .shop-sidebar .woocommerce-widget-layered-nav {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
 }
 
 .shop-sidebar .widget_product_categories .product-categories a,
@@ -2255,7 +2255,7 @@ button:active {
 }
 
 .site-header #navbar {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     -webkit-transition: all 0.75s;
     -moz-transition: all 0.75s;
     -o-transition: all 0.75s;
@@ -2291,7 +2291,7 @@ button:active {
     }
 
     .site-header #navbar > ul > li.menu-item-has-children > a:before {
-        font-family: "Themify";
+        /* font-family: "Themify"; */
         content: "\e64b";
         font-size: 8px;
         font-size: 0.5333333333rem;
@@ -2324,7 +2324,7 @@ button:active {
     }
 
     .site-header #navbar > ul > li .sub-menu a {
-        font-family: "Gothic A1", sans-serif;
+        /* font-family: "Gothic A1", sans-serif; */
         display: block;
         padding: 10px 30px;
         color: #000;
@@ -2347,7 +2347,7 @@ button:active {
     }
 
     .site-header #navbar > ul > li > .sub-menu > .menu-item-has-children > a:before {
-        font-family: "themify";
+        /* font-family: "themify"; */
         content: "\e649";
         font-size: 11px;
         font-size: 0.7333333333rem;
@@ -2390,7 +2390,7 @@ button:active {
     }
 
     .site-header #navbar > ul > li > .sub-menu a {
-        font-family: "Gothic A1", sans-serif;
+        /* font-family: "Gothic A1", sans-serif; */
         padding: 8px 15px 8px 45px;
     }
 
@@ -2403,7 +2403,7 @@ button:active {
     }
 
     .site-header #navbar > ul .menu-item-has-children > a:after {
-        font-family: "themify";
+        /* font-family: "themify"; */
         content: "\e61a";
         font-size: 11px;
         font-size: 0.7333333333rem;
@@ -2468,7 +2468,7 @@ button:active {
     }
 
     .site-header #navbar .mega-menu-list-holder li a {
-        font-family: "Gothic A1", sans-serif;
+        /* font-family: "Gothic A1", sans-serif; */
         font-size: 14px;
         font-size: 0.9333333333rem;
         color: #000;
@@ -2529,7 +2529,7 @@ button:active {
 
 @media (max-width: 991px) {
     .site-header #navbar .mega-menu .mega-menu-list-holder a {
-        font-family: "Gothic A1", sans-serif;
+        /* font-family: "Gothic A1", sans-serif; */
         padding: 5px 15px 5px 40px;
     }
 
@@ -2965,7 +2965,7 @@ button:active {
 }
 
 .header-style-1 .header-right .mini-cart .cart-toggle-btn {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
 }
 
 .header-style-1 .header-right .mini-cart .fi:before {
@@ -3078,7 +3078,7 @@ button:active {
 }
 
 .header-style-1 .header-right .mini-cart-content .mini-cart-item-des .mini-cart-item-price {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 14px;
     font-size: 0.9333333333rem;
     color: #888;
@@ -3104,7 +3104,7 @@ button:active {
 }
 
 .header-style-1 .header-right .mini-cart-content .mini-cart-action .mini-checkout-price {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 18px;
     font-size: 1.2rem;
     font-weight: 500;
@@ -3401,7 +3401,7 @@ button:active {
 }
 
 .header-style-2 .header-right .mini-cart-content .mini-cart-item-des .mini-cart-item-price {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 14px;
     font-size: 0.9333333333rem;
     color: #888;
@@ -3427,7 +3427,7 @@ button:active {
 }
 
 .header-style-2 .header-right .mini-cart-content .mini-cart-action .mini-checkout-price {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 18px;
     font-size: 1.2rem;
     font-weight: 500;
@@ -3918,7 +3918,7 @@ button:active {
 }
 
 .hero-style-1 p {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 22px;
     font-size: 1.4666666667rem;
     color: #fff;
@@ -4087,7 +4087,7 @@ button:active {
 }
 
 .hero-style-2 .sell-off p {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 24px;
     font-size: 1.6rem;
     color: #fff;
@@ -4167,7 +4167,7 @@ button:active {
 
 .hero-style-2 .swiper-control .swiper-button-next,
 .hero-style-2 .swiper-control .swiper-button-prev {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     background: transparent;
     padding: 0;
     text-transform: uppercase;
@@ -4557,7 +4557,7 @@ button:active {
 }
 
 .site-footer .lower-footer {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     /* border-top: 1px solid #eaeaea; */
     border-top: 1px solid #282828;
     padding: 25px 0;
@@ -4644,7 +4644,7 @@ button:active {
 }
 
 .site-footer .lower-footer .social {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     text-align: center;
 }
 
@@ -4918,7 +4918,7 @@ button:active {
 }
 
 .trendy-product-section .product-info h4, .best-seller-section .product-info h4 {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     font-size: 15px;
     font-size: 1rem;
     font-weight: 500;
@@ -4934,7 +4934,7 @@ button:active {
 }
 
 .trendy-product-section .product-info .woocommerce-Price-amount, .best-seller-section .product-info .woocommerce-Price-amount {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 16px;
     font-size: 1.0666666667rem;
 }
@@ -4952,7 +4952,7 @@ button:active {
 }
 
 .trendy-product-section .more-products, .best-seller-section .more-products {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 13px;
     font-size: 0.8666666667rem;
     color: #000;
@@ -5105,7 +5105,7 @@ button:active {
 }
 
 .deal-section .woocommerce-Price-amount {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 40px;
     font-size: 2.6666666667rem;
 }
@@ -5130,7 +5130,7 @@ button:active {
 }
 
 .deal-section #clock {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     color: #000;
     overflow: hidden;
     max-width: 390px;
@@ -5278,7 +5278,7 @@ button:active {
 }
 
 .category-section-area .all-cat a {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 16px;
     font-size: 1.0666666667rem;
     color: #787878;
@@ -5538,7 +5538,7 @@ button:active {
 }
 
 .featured-proeducts-section-s2 .shop-btn, .featured-proeducts-section-s3 .shop-btn {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 10px;
     font-size: 0.6666666667rem;
     color: #787878;
@@ -5574,7 +5574,7 @@ button:active {
 }
 
 .home-pg-prodcut-section .tablinks ul {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     display: inline-block;
 }
 
@@ -5735,7 +5735,7 @@ button:active {
 }
 
 .home-pg-prodcut-section .product-info h4 {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     font-weight: 500;
     font-size: 15px;
     font-size: 1rem;
@@ -5752,7 +5752,7 @@ button:active {
 }
 
 .home-pg-prodcut-section .product-info .woocommerce-Price-amount {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 16px;
     font-size: 1.0666666667rem;
 }
@@ -6354,7 +6354,7 @@ button:active {
 
 .blog-pg-section .entry-details .entry-meta .date,
 .blog-pg-section .entry-details .entry-meta .tags {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 10px;
     font-size: 0.6666666667rem;
     font-weight: 500;
@@ -6383,7 +6383,7 @@ button:active {
 }
 
 .blog-pg-section .entry-details .read-more {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 13px;
     font-size: 0.8666666667rem;
     font-weight: 500;
@@ -6519,7 +6519,7 @@ button:active {
 }
 
 .blog-pg-section .format-quote:before {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     content: "Q";
     font-size: 160px;
     font-size: 10.6666666667rem;
@@ -6715,7 +6715,7 @@ button:active {
 
 .blog-single-section .entry-meta .date,
 .blog-single-section .entry-meta .tags {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 10px;
     font-size: 0.6666666667rem;
     font-weight: 500;
@@ -6791,7 +6791,7 @@ button:active {
 }
 
 .blog-single-section .post blockquote {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 20px;
     font-size: 1.3333333333rem;
     font-weight: 400;
@@ -6812,7 +6812,7 @@ button:active {
 }
 
 .blog-single-section .post blockquote:before {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     content: "Q";
     font-size: 60px;
     font-size: 4rem;
@@ -6834,7 +6834,7 @@ button:active {
     border-top: 1px solid #e2e2e2;
     padding-top: 25px;
     margin: 75px 0 0;
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
 }
 
 .blog-single-section .share i {
@@ -6895,7 +6895,7 @@ button:active {
 }
 
 .blog-single-section .author-box .author-name {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 18px;
     font-size: 1.2rem;
     font-weight: 400;
@@ -6961,7 +6961,7 @@ button:active {
 
 .blog-single-section .more-posts .previous-post > a,
 .blog-single-section .more-posts .next-post > a {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 13px;
     font-size: 0.8666666667rem;
     font-weight: 500;
@@ -6996,7 +6996,7 @@ button:active {
 }
 
 .blog-single-section .more-posts .next-post .post-control-link:before {
-    font-family: "Flaticon";
+    /* font-family: "Flaticon"; */
     content: "\f101";
     position: absolute;
     right: 0;
@@ -7027,7 +7027,7 @@ button:active {
 }
 
 .blog-single-section .more-posts .previous-post .post-control-link:before {
-    font-family: "Flaticon";
+    /* font-family: "Flaticon"; */
     content: "\f100";
     position: absolute;
     left: 0;
@@ -7128,7 +7128,7 @@ button:active {
 }
 
 .blog-single-section .comments-area .comments-meta h4 span {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     font-size: 11px;
     font-size: 0.7333333333rem;
     color: #787878;
@@ -7145,7 +7145,7 @@ button:active {
 }
 
 .blog-single-section .comments-area .comment-reply-link {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 14px;
     font-size: 0.9333333333rem;
     font-weight: 500;
@@ -7252,7 +7252,7 @@ button:active {
 }
 
 .blog-single-section .comment-respond .form-submit input {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     max-width: 180px;
     background-color: rgba(0, 0, 0, 0.8);
     font-size: 12px;
@@ -7433,7 +7433,7 @@ button:active {
 }
 
 .woocommerce-cart .woocommerce table.shop_table th {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     padding: 15px 19px 13px;
     text-transform: uppercase;
 }
@@ -8123,7 +8123,7 @@ button:active {
 }
 
 .shop-section .product-info h4 {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     font-weight: 500;
     font-size: 15px;
     font-size: 1rem;
@@ -8141,7 +8141,7 @@ button:active {
 }
 
 .shop-section .product-info .woocommerce-Price-amount {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 16px;
     font-size: 1.0666666667rem;
 }
@@ -8182,7 +8182,7 @@ button:active {
 }
 
 .ui-tooltip {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     padding: 6px 12px;
     color: white;
     border-radius: 5px;
@@ -8346,7 +8346,7 @@ button:active {
 }
 
 .shop-single-section .product-details .price {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 24px;
     font-size: 1.6rem;
     margin: 0.4em 0 0.5em;
@@ -8583,7 +8583,7 @@ button:active {
 }
 
 .shop-single-section .single-product-info .nav-tabs a {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-weight: 500;
     font-size: 16px;
     font-size: 1.0666666667rem;
@@ -8949,7 +8949,7 @@ button:active {
 }
 
 .shop-single-section .product-info h4 {
-    font-family: "Gothic A1", sans-serif;
+    /* font-family: "Gothic A1", sans-serif; */
     font-size: 14px;
     font-size: 0.9333333333rem;
     font-weight: 500;
@@ -8965,7 +8965,7 @@ button:active {
 }
 
 .shop-single-section .product-info .woocommerce-Price-amount {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 16px;
     font-size: 1.0666666667rem;
 }
@@ -9324,7 +9324,7 @@ button:active {
 }
 
 .about-section .about-area .info > span {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -9636,7 +9636,7 @@ button:active {
 
 .blog-section .entry-details .entry-meta .date,
 .blog-section .entry-details .entry-meta .tags {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 10px;
     font-size: 0.6666666667rem;
     font-weight: 500;
@@ -9665,7 +9665,7 @@ button:active {
 }
 
 .blog-section .entry-details .read-more {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 13px;
     font-size: 0.8666666667rem;
     font-weight: 500;

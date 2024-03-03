@@ -155,6 +155,17 @@ const handleDecreaseQuantity = (item) => {
     
 };
 
+const [showItemAdded, setShowItemAdded] = useState(false);
+const [showIndexItemAdded, setShowIndexItemAdded] = useState(-1);
+const showAddedDialogue = (i) => {
+  setShowIndexItemAdded(i);
+  // alert("");
+  setShowItemAdded(true);
+  setTimeout(() => {
+    setShowItemAdded(false);
+  }, 1000);
+}
+
 
     return (
         <Fragment>
@@ -245,9 +256,17 @@ const handleDecreaseQuantity = (item) => {
                   <div className='flex flex-col md:flex-row bg-black '>
                     {/* <button className='p-4 font-bold text-white  text-xs'>ADD TO CART</button> */}
                     <div className="flex ml-2 w-20 text-white items-center cursor-pointer" 
-                    onClick={() => addToCart(item, productCount)}
+                    onClick={() => {
+                      showAddedDialogue(index);addToCart(item, productCount);
+                    }}
                     >
-              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs'>add</span>
+              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" />
+              {showItemAdded && showIndexItemAdded === index && (
+        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
+          Item added
+        </div>
+      )}
+      <span className='text-xs'>add</span>
             </div>
                   </div>
                 </div>
@@ -258,8 +277,21 @@ const handleDecreaseQuantity = (item) => {
             {/* <div className="ml-2">
               <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
             </div> */}
-            <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2">
-              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" /><span className='text-xs' style={{ paddingTop: '2px' }}>add</span>
+            <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2"
+            onClick={() => {
+              showAddedDialogue(index);
+              addToCart(item, 1);
+
+            }
+          }
+            >
+              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" />
+              {showItemAdded && showIndexItemAdded === index && (
+        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
+          Item added
+        </div>
+      )}
+      <span className='text-xs' style={{ paddingTop: '2px' }}>add</span>
             </div>
           </div>
 

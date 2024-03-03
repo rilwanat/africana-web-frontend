@@ -213,7 +213,7 @@ img:active {
 }
 
 .hero-1 p {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 22px;
     font-size: 1.4666666667rem;
     color: #fff;
@@ -225,7 +225,7 @@ img:active {
 }
 
 .hero-2 p {
-    font-family: "futura-pt-demi", sans-serif;
+    /* font-family: "futura-pt-demi", sans-serif; */
     font-size: 24px;
     font-size: 1.6rem;
     color: #fff;

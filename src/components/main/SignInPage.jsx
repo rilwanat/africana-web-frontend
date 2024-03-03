@@ -130,7 +130,7 @@ function SignInPage({ options, cart, removeCartItem }) {
                                     <div className="u-column1 col-1 justify-center">
                                         <h2>Login</h2>
                                         <form className="woocommerce-form woocommerce-form-login login" method="post">
-                                            <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                            <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                 <label htmlFor="username">Username or email address&nbsp;<span
                                                     className="required">*</span></label>
                                                 <input type="text"
@@ -141,8 +141,8 @@ function SignInPage({ options, cart, removeCartItem }) {
                                                        name="username" 
                                                        id="username" 
                                                        autoComplete="username"/>
-                                            </p>
-                                            <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                            </div>
+                                            <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                 <label htmlFor="password">Password&nbsp;<span
                                                     className="required">*</span></label>
                                                 <input className="woocommerce-Input woocommerce-Input--text input-text"
@@ -153,9 +153,9 @@ function SignInPage({ options, cart, removeCartItem }) {
                                                        name="password" 
                                                        id="password"
                                                        autoComplete="current-password"/>
-                                            </p>
-                                            <p className="form-row">
-                                            <p className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</p>
+                                            </div>
+                                            <div className="form-row">
+                                            <div className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
 
 
                                                 <label
@@ -172,12 +172,12 @@ function SignInPage({ options, cart, removeCartItem }) {
                                                         className="woocommerce-button button woocommerce-form-login__submit"
                                                         name="login" value="Log in">{isLoading ? 'Please wait..' : 'Log in'}
                                                 </button>
-                                            </p>
-                                            <p className="woocommerce-LostPassword lost_password">
+                                            </div>
+                                            <div className="woocommerce-LostPassword lost_password">
                                                 <a href="#">Lost your password?</a>
-                                            </p>
+                                            </div>
 
-                                            <p className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </p>
+                                            <div className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </div>
                                         </form>
                                     </div>
 

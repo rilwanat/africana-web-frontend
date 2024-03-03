@@ -10,8 +10,8 @@
 }
 
 [class^="ti-"], [class*=" ti-"] {
-	font-family: 'themify';
-	speak: none;
+	/* font-family: 'themify'; */
+	/* speak: none; */
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;

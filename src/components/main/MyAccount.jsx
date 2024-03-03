@@ -30,6 +30,24 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
     const [isDataloading, setIsDataLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
 
+
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [companyname, setCompanyname] = useState('Enter your Company name');
+    const [emailAddress, setEmailAddress] = useState('');
+    const [phone, setPhonenumber] = useState('Enter your phone number');
+    const [country, setCountry] = useState('Enter your Country *dropdown');
+    const [address1, setAddress1] = useState('Enter Address Line 1');
+    const [address2, setAddress2] = useState('Enter Address Line 2');
+    const [towncity, setTowncity] = useState('Enter Town / City');
+
+    const [postalCode, setPostalCode] = useState("Enter Postal Code");
+    const [city, setCity] = useState("Enter City");
+    const [state, setState] = useState("Enter State");
+
+
+
+
     useEffect(() => {
           handleData();
     }, []);
@@ -162,7 +180,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     first name</label>
                                                 <input type="text" id="first_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="Your first name" value="" required />
+                                                    placeholder="Your first name" value="" 
+                                                    onChange={(e) => setFirstname(e.target.value)} 
+                                                    required />
                                             </div>
                                             <div className="w-full">
                                                 <label htmlFor="last_name"
@@ -170,7 +190,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     last name</label>
                                                 <input type="text" id="last_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="Your last name" value="" required />
+                                                    placeholder="Your last name" value="" 
+                                                    onChange={(e) => setLastname(e.target.value)}
+                                                    required />
                                             </div>
                                         </div>
                                         <div className="mb-2 sm:mb-6">
@@ -179,7 +201,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                 email</label>
                                             <input type="email" id="email"
                                                 className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                placeholder="your.email@mail.com" required />
+                                                placeholder="your.email@mail.com" 
+                                                onChange={(e) => setEmailAddress(e.target.value)}
+                                                required />
                                         </div>
                                         
                                         
@@ -207,7 +231,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     Street address</label>
                                                 <input type="text" id="first_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="Street address" value="" required />
+                                                    placeholder="Street address" value="" 
+                                                    onChange={(e) => setAddress1(e.target.value)}
+                                                    required />
                                             </div>
                                             <div className="w-full">
                                                 <label htmlFor="last_name"
@@ -215,7 +241,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     (optional) Address</label>
                                                 <input type="text" id="last_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="Apartment, Suite, Unit etc." value="" required />
+                                                    placeholder="Apartment, Suite, Unit etc." value="" 
+                                                    onChange={(e) => setAddress2(e.target.value)}
+                                                    required />
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
@@ -226,7 +254,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     City</label>
                                                 <input type="text" id="first_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="City" value="" required />
+                                                    placeholder="City" value="" 
+                                                    onChange={(e) => setCity(e.target.value)}
+                                                    required />
                                             </div>
                                             <div className="w-full">
                                                 <label htmlFor="last_name"
@@ -234,7 +264,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     Postcode / ZIP</label>
                                                 <input type="text" id="last_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="Postalcode" value="" required />
+                                                    placeholder="Postalcode" value="" 
+                                                    onChange={(e) => setPostalCode(e.target.value)}
+                                                    required />
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
@@ -245,7 +277,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     State</label>
                                                 <input type="text" id="first_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="State" value="" required />
+                                                    placeholder="State" value="" 
+                                                    onChange={(e) => setState(e.target.value)}
+                                                    required />
                                             </div>
                                             <div className="w-full">
                                                 <label htmlFor="last_name"
@@ -253,7 +287,9 @@ function MyAccount({ options, addToCart, cart, removeCartItem }) {
                                                     Country</label>
                                                 <input type="text" id="last_name"
                                                     className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 "
-                                                    placeholder="Country" value="" required />
+                                                    placeholder="Country" value="" 
+                                                    onChange={(e) => setCountry(e.target.value)}
+                                                    required />
                                             </div>
                                         </div>
                                         
