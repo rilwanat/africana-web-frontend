@@ -1,5 +1,5 @@
 import React, {useState, Fragment, useEffect} from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import axios from 'axios';
 
@@ -11,6 +11,7 @@ import Pagination from "./Pagination";
 
 
 
+import PageTitle from './widgets/PageTitle';
 import Loading from './widgets/Loading';
 import SearchWidget from './widgets/SearchWidget';
 import PriceFilterWidget from './widgets/PriceFilterWidget';
@@ -24,6 +25,9 @@ import TagFilterWidget from './widgets/TagFilterWidget';
 function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
 
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const productSlug = location.state.productSlug;
 
     const [showQuickView, setShowQuickView] = useState(false);
     const [quickViewData, setQuickViewData] = useState({});
@@ -53,32 +57,58 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
 
     useEffect(() => {
           handleData("all", 1, "min", "max");
-    }, []);
+    }, [productSlug]);
 
     
     const handleData = async (requestType, pageNumber, min, max) => { 
 
       setCurrentPage(pageNumber);
+      //alert(productSlug);
 
       let queryAppend = "";
-      switch(requestType) {
-        case("all"):        
-        queryAppend = "";
-        //alert("1");
-        break;
-        case("price-filter"):
-        queryAppend = '?minPrice=' + min + '&maxPrice=' + max;
-        //alert("2");
-        break;
-        case("page-number"):
-        if (useFilter) {
-          queryAppend = '?minPrice=' + min + '&maxPrice=' + max + '&page=' + pageNumber;
-        } else {
+      if (productSlug == "all products")
+      {
+        switch(requestType) {
+          case("all"):        
           queryAppend = "";
+          //alert("1");
+          break;
+          case("price-filter"):
+          queryAppend = '?minPrice=' + min + '&maxPrice=' + max;
+          //alert("2");
+          break;
+          case("page-number"):
+          if (useFilter) {
+            queryAppend = '?minPrice=' + min + '&maxPrice=' + max + '&page=' + pageNumber;
+          } else {
+            queryAppend = "";
+          }
+          //alert("3");
+          break;
         }
-        //alert("3");
-        break;
+      } else if (productSlug == "men" || productSlug == "women") {
+        // queryAppend = '?categorySlug=' + productSlug;
+        switch(requestType) {
+          case("all"):        
+          queryAppend = '?categorySlug=' + productSlug;
+          //alert("1");
+          break;
+          case("price-filter"):
+          queryAppend = '?categorySlug=' + productSlug + '&minPrice=' + min + '&maxPrice=' + max;
+          //alert("2");
+          break;
+          case("page-number"):
+          if (useFilter) {
+            queryAppend = '?categorySlug=' + productSlug + '&minPrice=' + min + '&maxPrice=' + max + '&page=' + pageNumber;
+          } else {
+            queryAppend = "";
+          }
+          //alert("3");
+          break;
+        }
+        
       }
+      
       
       
 
@@ -130,66 +160,6 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
         }
       };
 
-      // const handleDataPage = async (pg) => {    
-      //   setCurrentPage(pg);
-      //   setIsDataLoading(true);
-      //   try {
-    
-      //     const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products?page=' + pg, {
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         //Authorization: `Bearer ${token}`,
-      //       },
-      //     });
-    
-      //     setIsDataLoading(false);
-    
-      //     if (response.data.success) {
-      //       setProductsData(response.data.products);
-      //       setProductsTotal(response.data.total);
-
-      //       // window.scrollTo(0, 0);
-      //     } else {
-      //       //alert("error: " + response.data.message);
-      //     }
-
-      //   } catch (error) {
-      //     setIsDataLoading(false);
-      //     //alert("error: " + error);
-      //   }
-      // };
-
-      // const handleDataPriceFilter = async (min, max) => {    
-
-      //   setProductsTotal("-");
-
-      //   setCurrentPage(1);
-      //   setIsDataLoading(true);
-      //   try {
-    
-      //     const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products?minPrice=' + min + '&maxPrice=' + max, {
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         //Authorization: `Bearer ${token}`,
-      //       },
-      //     });
-    
-      //     setIsDataLoading(false);
-    
-      //     if (response.data.success) {
-
-      //       setProductsData(response.data.products);
-      //       setProductsTotal(response.data.total);
-      //     } else {
-      //       //alert("error: " + response.data.message);
-      //     }
-
-      //   } catch (error) {
-      //     setIsDataLoading(false);
-      //     //alert("error: " + error);
-      //   }
-      // };
-
       const navigateTo = async (catSlug) => {
         //navigate('/categories', { state: { catSlug } });
       }
@@ -205,6 +175,8 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
         <div>
             <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} /></div>
 
+            {/* <PageTitle name={productSlug}/> */}
+
             <section className="shop-section section-padding" style={{ backgroundColor: '#eeeeee' }}>
                 <div className="container-fluid">
                     <div className="row" >
@@ -219,9 +191,13 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
                                     {/* <ColorFilterWidget/> */}
                                     {/* <TagFilterWidget/> */}
                                 </div>
+                                
+
                                 <div className="woocommerce-content-wrap" style={{ marginTop: '14px' }}>
+                                <p>{productSlug}</p>
                                     <div className="woocommerce-content-inner" >
                                         <div className="woocommerce-toolbar-top" >
+                                          
                                             <p className="woocommerce-result-count">{productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} / {productsTotal}</p>
                                             {/* <p className="woocommerce-result-count">Showing {productsTotal > 0 ? startIndex : '0'} – {productsTotal > 0 ? endIndex : '0'} of {productsTotal} results</p> */}
                                             {/* <p>{category}</p> */}

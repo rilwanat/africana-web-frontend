@@ -200,8 +200,29 @@ const toggleBag = () => {
 
 
   const navigateToOnSale = () => {
-    navigate('/on-sale', {  });
+    setHoveredMenuItem("")
+    setIsMenuOpen(false);
+    const productSlug = "all products";
+    navigate('/on-sale', { state: { productSlug }, replace: true });
+    //window.location.reload();
   }
+
+  const navigateToMen = () => {
+    setHoveredMenuItem("")
+    setIsMenuOpen(false);
+    const productSlug = "men";
+    navigate('/on-sale', { state: { productSlug }, replace: true });
+    //window.location.reload();    
+  }
+  const navigateToWomen = () => {
+    setHoveredMenuItem("");
+    setIsMenuOpen(false);
+    const productSlug = "women";
+    navigate('/on-sale', { state: { productSlug }, replace: true });
+    //window.location.reload();
+  }
+
+
 
   const navigateToMyAccount = () => {
     navigate('/my-account', {  });
@@ -265,7 +286,7 @@ const settings = {
                  <motion.div
   className="text-white text-xs font-bold cursor-pointer mr-4 z-50"
   // className={`text-white text-xs font-bold cursor-pointer mr-4 z-50 ${hoveredMenuItem === 'MEN' ? 'border-b-2 border-white' : ''}`}
-  onClick={() => { /* Handle navigation */ }}
+  onClick={() => {navigateToMen();}}
   onMouseEnter={() => setHoveredMenuItem('MEN')}
   onMouseLeave={() => setHoveredMenuItem('MENX')}
 >
@@ -335,7 +356,7 @@ const settings = {
 
 <motion.div
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
-                    onClick={() => { /* Handle navigation */ }}
+                    onClick={() => {navigateToWomen();}}
                     onMouseEnter={() => setHoveredMenuItem('WOMEN')}
                     onMouseLeave={() => setHoveredMenuItem('WOMENX')}
                   >
@@ -590,7 +611,7 @@ const settings = {
               initial="hidden"
               animate={isMenuOpen ? "visible" : "hidden"}
               className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
-              onClick={() => { /* Handle navigation */ }}
+              onClick={() => {navigateToMen();}}
             >
               MEN
             </motion.span>
@@ -599,7 +620,7 @@ const settings = {
               initial="hidden"
               animate={isMenuOpen ? "visible" : "hidden"}
               className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
-              onClick={() => { /* Handle navigation */ }}
+              onClick={() => {navigateToWomen();}}
             >
               WOMEN
             </motion.span>
