@@ -310,7 +310,7 @@ const showAddedDialogue = (i) => {
           Item added
         </div>
       )}
-      <span className='text-xs'>add</span>
+      <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div>
                   </div>
                 </div>
@@ -335,7 +335,7 @@ const showAddedDialogue = (i) => {
           Item added
         </div>
       )}
-      <span className='text-xs' style={{ paddingTop: '2px' }}>add</span>
+      <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div>
           </div>
                                                             

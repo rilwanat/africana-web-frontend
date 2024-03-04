@@ -6,15 +6,21 @@ import Slider from "@mui/material/Slider";
  * @returns {*}
  * @constructor
  */
-function PriceFilterWidget({handleDataSort, maxMin, maxMax}) {
+function PriceFilterWidget({handleDataPriceFilter, maxMin, maxMax, updateRange, useFilter}) {
   // const rangeMaxVal = 500;
   const [pageMaxMax, setPageMaxMax] = useState(maxMax);
   const [range, setRange] = useState([0, pageMaxMax]);
 
   function handleChanges(_, newValue) {
     setRange(newValue);
+    updateRange(newValue, false);
   }
 
+  const applyFilter = async () => {
+
+    updateRange(range, true);
+    handleDataPriceFilter("price-filter", 1, range[0], range[1])
+  }
   
   useEffect(() => {
     setPageMaxMax(maxMax);
@@ -47,13 +53,19 @@ function PriceFilterWidget({handleDataSort, maxMin, maxMax}) {
             />
            
           </div>
+          <div className='flex flex-col'>
           <div style={{ marginTop: '8px', marginBottom: '10px' }}>Price: {'₦' + 
           range[0].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' - N' + 
           range[1].toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
           }
           </div>
-          {/* <p style={{ marginBottom: '10px' }}>Price: {'₦' + range[0] + ' - N' + range[1]}</p> */}
-          <button style={{ marginTop: '30px' }} onClick={()=> handleDataSort(range[0], range[1])}>Filter</button>
+
+          <span className='text-xs h-4' style={{ }}>{useFilter ? 'Price filter applied' : ""}</span>
+          
+
+          </div>
+          
+          <button style={{ marginTop: '30px' }} onClick={()=> applyFilter()}>Filter</button>
         </div>
       </div>
     </Fragment>

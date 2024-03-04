@@ -217,7 +217,7 @@ const showAddedDialogue = (i) => {
                     }
                     }
                     >
-              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs'>add</span>
+              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs'style={{ paddingTop: '0px' }}>ADD</span>
             </div>
                   </div>
                 </div>
@@ -241,7 +241,7 @@ const showAddedDialogue = (i) => {
           Item added
         </div>
       )}
-      <span className='text-xs' style={{ paddingTop: '2px' }}>add</span>
+      <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div>
           </div>
 

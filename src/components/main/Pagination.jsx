@@ -3,7 +3,7 @@ import React, {Fragment, useState, useEffect } from 'react';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-function Pagination({extraClass, handlePageClick, totalProducts}) {
+function Pagination({extraClass, handlePageClick, totalProducts, range}) {
 
     const [activePage, setActivePage] = useState();
     const [totalPages, setTotalPages] = useState(1);
@@ -30,7 +30,8 @@ function Pagination({extraClass, handlePageClick, totalProducts}) {
                 newPage = totalPages;
             }
             setActivePage(newPage);
-            handlePageClick(newPage);
+            //alert("page" + " " + newPage + " " +  range[0]  + " " + range[1]);
+            handlePageClick("page-number", newPage, range[0], range[1]);
         }
     };
 
