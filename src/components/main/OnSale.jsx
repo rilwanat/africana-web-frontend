@@ -11,6 +11,8 @@ import Pagination from "./Pagination";
 
 
 
+import Ordering from './widgets/Ordering';
+import OrderingToolbar from './widgets/OrderingToolbar';
 import PageTitle from './widgets/PageTitle';
 import Loading from './widgets/Loading';
 import SearchWidget from './widgets/SearchWidget';
@@ -45,6 +47,12 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
     const productsPerPage = 16;
     const startIndex = (currentPage - 1) * productsPerPage + 1;
     const endIndex = Math.min(currentPage * productsPerPage, productsTotal);
+
+
+    const HandleOrderingStatus = (event, data) => {
+      event.preventDefault();
+      setOrdering(data);
+  };
 
 
     const [range, setRange] = useState([0, 0]);
@@ -161,7 +169,10 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
       };
 
       const navigateTo = async (catSlug) => {
-        //navigate('/categories', { state: { catSlug } });
+
+        const productSlug = catSlug.toLowerCase();
+        navigate('/on-sale', { state: { productSlug }, replace: true });
+
       }
 
 
@@ -187,7 +198,7 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
                                     handleDataSearch={handleDataSearch} 
                                     title="" /> */}
                                     <PriceFilterWidget handleDataPriceFilter={handleData} maxMin={maxMin} maxMax={maxMax} updateRange={setFilterProps} useFilter={useFilter}/>
-                                    {/* <ProductCategoriesWidget categories={categories}  category={null} navigateTo={navigateTo} /> */}
+                                    <ProductCategoriesWidget categories={categories}  category={null} navigateTo={navigateTo} />
                                     {/* <ColorFilterWidget/> */}
                                     {/* <TagFilterWidget/> */}
                                 </div>
@@ -208,12 +219,12 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories }) {
             </div> */}
 
 
-                                            {/* <OrderingToolbar
+                                            <OrderingToolbar
                                                 HandleOrderingStatus={HandleOrderingStatus}
                                                 ordering={ordering}
                                             />
                                             
-                                            <Ordering handleDefaultSorting={handleDefaultSorting}/> */}
+                                            <Ordering handleDefaultSorting={handleDefaultSorting}/>
                                         </div>
 
 {

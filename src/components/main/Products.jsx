@@ -19,9 +19,9 @@ function Products({HandelQuickViewData, products, ordering, addToCart, cart}) {
 
     const navigate = useNavigate();
 
-    const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
-    const [isFavHovered, setFavHovered] = useState(false);
-    const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
+    // const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
+    // const [isFavHovered, setFavHovered] = useState(false);
+    // const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
     
 
     const [zoomedItemId, setZoomedItemId] = useState(null);
@@ -158,7 +158,7 @@ const showAddedDialogue = (i) => {
                             </div>
                                 
                             </div>
-                            <div className="mt-4">
+                            <div className="mt-4 w-full">
                             <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
                                                             <div onClick={(e) => handleProductClick(item, e)} className='text-sm text-black'>
                                                                 {item.name}
