@@ -19,27 +19,13 @@ import PrivacyPolicyPage from "./components/main/PrivacyPolicyPage";
 
 
 
-// import LandingPage from "./components/pages/LandingPage";
-
 // import AboutPage from "./components/pages/about/About";
-// import AccountPage from "./components/pages/MyAccount";
-// import CartPage from "./components/pages/cart/Cart";
-// import CheckoutPage from "./components/pages/checkout/Checkout";
-// import ShopLeftSidebarPage from "./components/pages/ShopLeftSidebarPage";
-// import ShopLeftSidebarCategoriesPage from "./components/pages/ShopLeftSidebarCategoriesPage";
-// import ProductPage from "./components/pages/ProductPage";
-// import SizesPage from "./components/pages/SizesPage";
-
-// import SignUpPage from './components/pages/SignUpPage';
-// import SignInPage from './components/pages/SignInPage';
-// import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage';
-
 // import ConfirmEmailPage from './components/pages/ConfirmEmailPage';
 // import PaymentStatusPage from './components/pages/PaymentStatusPage';
 // http://africanalifestyle.tv/flutterwave/payment-callback?status=successful&tx_ref=6UKeoEGP2Vaa&transaction_id=4938612
 
 
-import QuickView from './components/pages/QuickView';
+// import QuickView from './components/pages/QuickView';
 
 
 import axios from 'axios';
@@ -285,14 +271,14 @@ const handleSetCategory = (cat) => {
         <div>{/* <div className="content flex-grow"> */}
 
         <Fragment>
-            {showQuickView
+            {/* {showQuickView
                 ? <QuickView
                     data={quickViewData}
                     onQuickViewCloseClick={HandelQuickViewClose}
                     addToCart={addToCart}
                 />
                 : ''
-            }
+            } */}
 
 
             {/* <ScrollToTop/> */}

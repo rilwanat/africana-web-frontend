@@ -73,7 +73,7 @@ function AfricanaFooter() {
                                     </div>
                                     <div className="extra-link">
                                         <ul>
-                                            <li><a >Privacy </a></li>
+                                            <li><a href="/privacy-policy">Privacy </a></li>
                                             <li><a >Terms</a></li>
                                             <li><a >Promo T&amp;Cs Apply</a></li>
                                         </ul>
