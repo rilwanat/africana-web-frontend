@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef  } from 'react';
 
 import AfricanaHeader from './AfricanaHeader';
 import Hero from './Hero';
+import VideoPreview from './VideoPreview';
 import ShopTheLook from './ShopTheLook';
 import NewIn from './NewIn';
 import BestSellers from './BestSellers';
@@ -14,13 +15,14 @@ import AfricanaFooter from './AfricanaFooter';
 
 export default function HomePage({ options, handleDataViewData, addToCart, cart, removeCartItem }) {
 
-
+  
 
   return (
     <div>
 
       <AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} />
       <Hero />
+      {/* <VideoPreview /> <Hero /> */}
       <ShopTheLook />
       <NewIn addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
       <BestSellers addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>

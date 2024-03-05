@@ -76,28 +76,25 @@ const SlideInContent = styled.div`
 
 // const SlideInBag = styled(motion.div)`
 //   position: fixed;
-//   top: 50;
+//   top: 5rem;
 //   right: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-color: green; /* Change color as needed */
-//   z-index: 1000; /* Ensure the div is on top of other content */
+//   width: calc(100% - 2rem);
+//   height: 80%;
+//   /*background-color: rgba(0, 0, 0, 0.5);  Semi-transparent background */
+//   z-index: 1000; /* Ensure the menu is on top of other content */
 //   overflow-x: hidden;
-  
+
 //   @media (min-width: 960px) {
-//     width: 300px; /* Cover 300px on desktop */
-//     left: auto;
-//     right: 0;
+//     width: 40%;
 //   }
 // `;
-// Styled component for the sliding div
 
 const SlideInBag = styled(motion.div)`
   position: fixed;
-  top: 5rem;
+  top: 0rem;
   right: 0;
   width: calc(100% - 2rem);
-  height: 80%;
+  height: 100%;
   /*background-color: rgba(0, 0, 0, 0.5);  Semi-transparent background */
   z-index: 1000; /* Ensure the menu is on top of other content */
   overflow-x: hidden;
@@ -693,7 +690,7 @@ const settings = {
   >
     <BagContent>
       <BagContentInner>
-      <div className='fixed top-0 bg-black h-8 w-full'></div>
+      <div className='fixed top-0 bg-white h-8 w-full z-50'></div>
 
 
       <div className='mx-2 '>      

@@ -49,6 +49,8 @@ import axios from 'axios';
 
 function App() {
 
+  
+
   const [isDataloading, setIsDataLoading] = useState(true);
 
   
@@ -115,6 +117,8 @@ const HandelMobileNavStatus = () => {
  */
 useEffect(() => {
   
+  // alert("I've temporarily disabled default hero component");
+
 // initAuth();
 handleDataCategories();
 
@@ -156,28 +160,7 @@ const options = {
 };
 
 // const product = '';
- const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
-
-//   const addToCart = (product) => {
-//     //alert("adding: " + JSON.stringify(product, null, 2));
-
-//     const existingProduct = cart.find((item) => item.id === product.id);
-    
-//     if (existingProduct) {
-//       const updatedCart = cart.map((item) =>
-//         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-//       );
-//       setCart(updatedCart);
-//       localStorage.setItem('cart', JSON.stringify(updatedCart));
-//     } else {
-//       const updatedCart = [...cart, { ...product, quantity: 1 }];
-//       setCart(updatedCart);
-//       localStorage.setItem('cart', JSON.stringify(updatedCart));
-//     }
-
-//     //alert(JSON.stringify(localStorage.getItem('cart'), null, 2));
-//     updateCart();
-//   };
+const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
 
 const addToCart = (product, count) => {
   //alert("Product:" + product + " Count:" + count + ", added !");
@@ -213,14 +196,6 @@ const updateCart = () => {
   const updatedCart = JSON.parse(localStorage.getItem('cart')) || [];
   setCart(updatedCart);
 };
-
-// Call updateCart function whenever cart items change
-// useEffect(() => {
-//   updateCart();
-// }, [cart]);
-// useEffect(() => {
-//   handleDataCategories();
-// }, []);
 
 
 // Remove item totally from cart
