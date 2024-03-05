@@ -31,7 +31,7 @@ function ShopTheLook({  }) {
       }, [inView]);
 
     return (
-        <div>
+        <div className="container-1410">
             <div className='flex justify-center mt-20 mb-2'>SHOP THE LOOK</div>
 <div className="flex flex-col md:flex-row mx-16 mb-16">
 <div className="relative flex-grow">

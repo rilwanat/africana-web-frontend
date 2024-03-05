@@ -30,6 +30,7 @@ function Loading({  }) {
                 style={{ cursor: 'pointer' }}
               />
             </div>
+            <div className="flex justify-center">loading items</div>
             {/* </motion.div> */}
 
          </div>

@@ -19,6 +19,7 @@ function PriceFilterWidget({handleDataPriceFilter, maxMin, maxMax, updateRange, 
   const applyFilter = async () => {
 
     updateRange(range, true);
+    //alert(range[0] + " " + range[1]);
     handleDataPriceFilter("price-filter", 1, range[0], range[1])
   }
   

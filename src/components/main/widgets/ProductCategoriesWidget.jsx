@@ -65,6 +65,15 @@ function ProductCategoriesWidget({ categories, category, navigateTo }) {
             ))}
         </ul> */}
 
+<div
+                                // onClick={() => handleCategoryClick(category.id)}
+                                className="flex justify-between"
+                                style={{ cursor: 'pointer'}}
+                            >
+                                <span onClick={() => {navigateTo("all products")}}>{"All"}</span>
+                                
+                            </div>
+
 
 
 <ul className="product-categories">

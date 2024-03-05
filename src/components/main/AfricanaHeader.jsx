@@ -141,6 +141,7 @@ function AfricanaHeader({ options, cart, removeCartItem }) {
   const [menuWidthEssentials, setMenuWidthEssentials] = useState(0);
   const [menuWidthStores, setMenuWidthStores] = useState(0);
   const [menuWidthOnsale, setMenuWidthOnsale] = useState(0);
+  const [menuWidthSizes, setMenuWidthSizes] = useState(0);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -192,6 +193,13 @@ const toggleBag = () => {
       setMenuWidthOnsale(0);
     }
 
+    if (hoveredMenuItem === 'SIZES') {
+      const menuWidthSizes = document.getElementById('sizes-text').offsetWidth;
+      setMenuWidthSizes(menuWidthSizes);
+    } else {
+      setMenuWidthSizes(0);
+    }
+
 
   }, [hoveredMenuItem]);
 
@@ -216,6 +224,14 @@ const toggleBag = () => {
     setIsMenuOpen(false);
     const productSlug = "women";
     navigate('/on-sale', { state: { productSlug }, replace: true });
+    //window.location.reload();
+  }
+
+  const navigateToSizes = () => {
+    setHoveredMenuItem("")
+    setIsMenuOpen(false);
+    //const productSlug = "all products";
+    navigate('/sizes', { state: {  }, replace: true });
     //window.location.reload();
   }
 
@@ -463,6 +479,23 @@ const settings = {
       right: hoveredMenuItem === 'ONSALE' ? 0 : menuWidthOnsale
        }} />
 </div></motion.div>
+
+<motion.div
+                    className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
+                    onClick={() => {navigateToSizes();}}
+                    onMouseEnter={() => setHoveredMenuItem('SIZES')}
+                    onMouseLeave={() => setHoveredMenuItem('SIZESX')}
+                  >
+                  <div style={{ position: 'relative' }}>
+<span id="sizes-text">SIZES</span>
+      <div className={`absolute bg-white 
+      ${hoveredMenuItem === 'SIZES' ? 'transition-all duration-300' : hoveredMenuItem === "SIZESX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthSizes, height: '2px', 
+      left: hoveredMenuItem === 'SIZES' ? 0 : 'auto',
+      right: hoveredMenuItem === 'SIZES' ? 0 : menuWidthSizes
+       }} />
+</div></motion.div>
+
 
                 </div>
               ) : (

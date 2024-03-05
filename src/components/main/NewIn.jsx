@@ -193,8 +193,8 @@ const showAddedDialogue = (i) => {
 
 
     return (
-        <div>
-<div className='flex justify-between mt-4 mb-4 mx-4'>
+        <div className="container-1410">
+<div className='flex justify-between mt-12 mb-4 mx-4'>
 <div style={{ width: '50px' }} className='flex justify-start'>
       <WestIcon
         className='cursor-pointer'

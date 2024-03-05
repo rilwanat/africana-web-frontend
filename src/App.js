@@ -14,6 +14,10 @@ import CartPage from "./components/main/CartPage";
 import CheckoutPage from "./components/main/CheckoutPage";
 
 
+import SizesPage from "./components/main/SizesPage";
+import PrivacyPolicyPage from "./components/main/PrivacyPolicyPage";
+
+
 
 // import LandingPage from "./components/pages/LandingPage";
 
@@ -303,6 +307,9 @@ const handleSetCategory = (cat) => {
               <Route path='/sign-up' element={<SignUpPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} handleEmailAddress={handleEmailAddress}/>}/>
               <Route path='/cart' element={<CartPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>}/>
               <Route path='/checkout' element={<CheckoutPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
+
+              <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>
+              <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
               
               
 {/*           <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/> 
@@ -311,11 +318,9 @@ const handleSetCategory = (cat) => {
               <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>
               <Route path='/categories' element={<ShopLeftSidebarCategoriesPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories} />}/>
               <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>} />
-              <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
-              <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
-              <Route path='/confirm-email' element={<ConfirmEmailPage emailAddress={emailAddress}
-              // options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}
-              />}/>              
+              
+              
+              <Route path='/confirm-email' element={<ConfirmEmailPage emailAddress={emailAddress} />}/>              
               <Route path='/flutterwave/payment-callback' element={<PaymentStatusPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/> */}
 
             
