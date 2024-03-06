@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import Slider from "react-slick";
-import './products.css';
+import './react-css/products.css';
 import { Link, useNavigate } from "react-router-dom";
 import img1 from '../../assets/images/locations/1.png';
 import img2 from '../../assets/images/locations/2.png';

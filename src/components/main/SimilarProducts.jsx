@@ -2,7 +2,7 @@ import React, {useState, Fragment} from 'react';
 import Slider from "react-slick";
 // import ReactTooltip from 'react-tooltip';
 
-import './products.css';
+import './react-css/products.css';
 
 import imgx from '../../assets/images/shop/img-2.jpg';
 // import imgx from '../../assets/images/site-products/3.jpg';

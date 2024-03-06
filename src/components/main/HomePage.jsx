@@ -24,7 +24,7 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
       <Hero />
       {/* <VideoPreview /> <Hero /> */}       
       <ShopTheLook />
-      <VideoPreview />
+      {/* <VideoPreview /> */}
       <NewIn addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
       <BestSellers addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
       <Kaftans addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>

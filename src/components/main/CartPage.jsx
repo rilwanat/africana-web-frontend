@@ -4,7 +4,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import CalculatedShipping from "./CalculatedShipping";
 import SimilarProducts from './SimilarProducts';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
-import './cart.css';
+import './react-css/cart.css';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 import axios from 'axios';

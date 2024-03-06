@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import Slider from "react-slick";
 
-import './products.css';
+import './react-css/products.css';
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
 

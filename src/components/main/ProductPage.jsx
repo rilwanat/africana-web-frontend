@@ -27,6 +27,8 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
+import './react-css/shop.css';
+import data from './singleProductDemo.json';
 
 
 function ProductPage({options, addToCart, cart, updateCart, removeCartItem}) {
@@ -92,6 +94,8 @@ function ProductPage({options, addToCart, cart, updateCart, removeCartItem}) {
        dots: true,
        dotsClass: "slick-dots slick-thumb slider-nav",
        arrows: false,
+       //vertical: true,
+       //verticalSwiping: true,
    };
 
 
@@ -208,9 +212,9 @@ const showAddedDialogue = (i) => {
 
                         <div className="col col-md-6">
                             <div className="shop-single-slider vertical-thumbnail" 
-                            // style={{ background: '#FF0000' }}
+                            //  style={{ background: '#FF0000' }}
                             >
-                                <Slider {...settings}>
+                                {/* <Slider {...settings}>
                                     {
                                         parsedProduct && parsedProduct.productImages.map((item, index) => (
                                             <div key={index} 
@@ -229,7 +233,23 @@ const showAddedDialogue = (i) => {
                                         ))
                                     }
                                 </Slider>
-                                {/* <div className="slider-nav"></div> */}
+                                <div className="slider-nav"></div> */}
+
+                                <Slider {...settings}>
+                                    {
+                                        data.images.map((item, index) => (
+                                            <div key={index}>
+                                                <img src=
+                                                "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
+                                                // onMouseEnter={}
+                                                />
+                                            </div>
+                                        ))
+                                    }
+                                </Slider>
+                                <div className="slider-nav"></div>
+
+                                
                             </div>
                         </div>
                         <div className="col col-md-6">

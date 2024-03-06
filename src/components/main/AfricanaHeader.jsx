@@ -18,7 +18,7 @@ import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 import Slider from "react-slick";
 
-import './cartsliderproducts.css';
+import './react-css/cartsliderproducts.css';
 
 
 import CloseIcon from '@mui/icons-material/Close';
