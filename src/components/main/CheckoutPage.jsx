@@ -16,7 +16,7 @@ import ShippingFields from './ShippingFields';
 import AfricanaHeader from './AfricanaHeader';
 import AfricanaFooter from './AfricanaFooter';
 
-function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem }) {
+function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem, clearCart }) {
     const location = useLocation();
     const cart = location.state.encryptedData;
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
@@ -266,6 +266,9 @@ function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, remo
 
         
         if (response.data.status = "success") {
+
+            clearCart();
+
             alert("Success but https: on domain is required");
             // alert(JSON.stringify(response.data.data.link));
 
