@@ -94,7 +94,7 @@ function Locations({ onQuickViewClick }) {
                                 {
                                     locations.locations.map((location, index) => (
                                         <li key={index} className="product">
-                                            <div className="product-holder">
+                                            <div className="product-holder mx-1">
                                                 <div style={{ cursor: 'pointer' }}>
                                                     <img loading="lazy" src={location.url} alt="" />
                                                 </div>
