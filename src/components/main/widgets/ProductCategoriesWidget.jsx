@@ -76,7 +76,7 @@ function ProductCategoriesWidget({ categories, category, navigateTo }) {
 
 
 
-<ul className="product-categories">
+<ul className="product-categories mb-8">
                     {categories.map(category => (
                         <li key={category.id} className="cat-item cat-parent">
                             <div

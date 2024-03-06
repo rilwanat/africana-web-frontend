@@ -239,7 +239,9 @@ const showAddedDialogue = (i) => {
                                     {
                                         data.images.map((item, index) => (
                                             <div key={index}>
-                                                <img src=
+                                                <img 
+                                                className='px-1 mx-1 mt-2'
+                                                src=
                                                 "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                                 // onMouseEnter={}
                                                 />
@@ -341,7 +343,7 @@ const showAddedDialogue = (i) => {
                                     // && showIndexItemAdded === index 
                                     && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          Item added
+          {parsedProduct.name} added
         </div>
       )}
 

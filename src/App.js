@@ -17,9 +17,11 @@ import CheckoutPage from "./components/main/CheckoutPage";
 import SizesPage from "./components/main/SizesPage";
 import PrivacyPolicyPage from "./components/main/PrivacyPolicyPage";
 
+import AboutPage from "./components/main/AboutPage";
 
 
-// import AboutPage from "./components/pages/about/About";
+
+
 // import ConfirmEmailPage from './components/pages/ConfirmEmailPage';
 // import PaymentStatusPage from './components/pages/PaymentStatusPage';
 // http://africanalifestyle.tv/flutterwave/payment-callback?status=successful&tx_ref=6UKeoEGP2Vaa&transaction_id=4938612
@@ -297,10 +299,11 @@ const handleSetCategory = (cat) => {
               <Route path='/sizes' element={<SizesPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>
               <Route path='/privacy-policy' element={<PrivacyPolicyPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>
               
+              <Route path='/about-us' element={<AboutPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>    
+              
               
 {/*           <Route path='/my-account' element={<AccountPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/> 
                   
-              <Route path='/about' element={<AboutPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>    
               <Route path='/shop' element={<ShopLeftSidebarPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>
               <Route path='/categories' element={<ShopLeftSidebarCategoriesPage options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories} />}/>
               <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem}/>} />

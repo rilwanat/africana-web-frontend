@@ -218,7 +218,7 @@ const showAddedDialogue = (i) => {
             <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
           </h4>
                                         <div className="text-left flex items-center mt-1 mb-8">
-            <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsRelatedProduct(index)}}>SELECT OPTIONS</h4>
+            <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsRelatedProduct(index)}}>OPTIONS</h4>
             {openItemIndexRelatedProduct === index && (
               <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
               <div className='flex justify-between items-start  mb-4 mt-1'>
@@ -263,7 +263,7 @@ const showAddedDialogue = (i) => {
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" />
               {showItemAdded && showIndexItemAdded === index && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          Item added
+          {item.name} added
         </div>
       )}
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
@@ -288,7 +288,7 @@ const showAddedDialogue = (i) => {
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" />
               {showItemAdded && showIndexItemAdded === index && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          Item added
+          {item.name} added
         </div>
       )}
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>

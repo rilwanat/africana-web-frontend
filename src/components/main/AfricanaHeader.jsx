@@ -295,7 +295,8 @@ const settings = {
           <div className="flex items-center justify-between h-20">
             <div className="flex-shrink-">
               {isLargeScreen ? (
-                <div className="lg:flex flex-grow justify-between items-center">
+                <div >
+                  <div className="lg:flex flex-grow justify-between items-center">
                  <motion.div
   className="text-white text-xs font-bold cursor-pointer mr-4 z-50"
   // className={`text-white text-xs font-bold cursor-pointer mr-4 z-50 ${hoveredMenuItem === 'MEN' ? 'border-b-2 border-white' : ''}`}
@@ -497,6 +498,7 @@ const settings = {
 </div></motion.div>
 
 
+                </div>
                 </div>
               ) : (
                 <IconButton
@@ -748,7 +750,9 @@ const settings = {
                             <div className='col-span-4 px-2 mt-2' >
                                 
                                
-                            <div className="" >
+                            <div className="" 
+                            style={{ height: '100%', overflowY: 'auto' }}
+                            >
                 <ul className="">
                     <Slider {...settings}>
                         {cart.map((item, index) => (

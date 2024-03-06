@@ -33,7 +33,7 @@ function ShopTheLook({  }) {
     return (
         <div className="container-1410">
             <div className='flex justify-center mt-20 mb-2'>SHOP THE LOOK</div>
-<div className="flex flex-col md:flex-row mx-16 mb-16">
+<div className="flex flex-col md:flex-row mx-8 mb-16">
 <div className="relative flex-grow">
 <motion.div
               variants={carouselItemVariants}
@@ -161,16 +161,6 @@ function ShopTheLook({  }) {
       </motion.div>
       </div>
 
-      
-
-      {/* <div className='absolute bottom-10 left-0 right-0 flex justify-between items-center h-full'>
-        <IconButton aria-label="previous" style={{ color: 'white' }} onClick={() => {}}>
-          <NavigateBeforeIcon />
-        </IconButton>
-        <IconButton aria-label="next" style={{ color: 'white' }} onClick={() => {}}>
-          <NavigateNextIcon />
-        </IconButton>
-      </div> */}
 </div>
         </div>
     );

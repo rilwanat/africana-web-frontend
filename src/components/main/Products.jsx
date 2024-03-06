@@ -238,7 +238,7 @@ const showAddedDialogue = (i) => {
               />
               {showItemAdded && showIndexItemAdded === index && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          Item added
+          {item.name} added
         </div>
       )}
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>

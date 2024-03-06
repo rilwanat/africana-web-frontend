@@ -86,7 +86,7 @@ function Locations({ onQuickViewClick }) {
         <Fragment>
             <div className="container-1410">
             <div className='flex justify-start mt-12 mb-2 mx-2'>OUR STORES</div>
-            <section className="mx-2 mb-8">
+            <section className=" mb-8">
                 <div className="">
                     <div className="products-wrapper">
                         <ul>
@@ -94,13 +94,13 @@ function Locations({ onQuickViewClick }) {
                                 {
                                     locations.locations.map((location, index) => (
                                         <li key={index} className="product">
-                                            <div className="product-holder mx-1">
+                                            <div className="product-holder">
                                                 <div style={{ cursor: 'pointer' }}>
                                                     <img loading="lazy" src={location.url} alt="" />
                                                 </div>
                                             </div>
                                             
-                                                <div className="pl-2">
+                                                <div className="pl-1">
                                                     <h4 className="text-left flex items-center mt-4 cursor-pointer">
                                                         <div className="text-sm uppercase">{location.location}</div>
                                                     </h4>

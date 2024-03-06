@@ -221,7 +221,7 @@ const showAddedDialogue = (i) => {
       />
       </div>
     </div>
-<div className="w-full px-2">
+<div className="w-full">
   <Slider ref={sliderRefKaftans} {...settings}>
     {products.map((item, index) => (
       <li key={index} className="">
@@ -253,8 +253,8 @@ const showAddedDialogue = (i) => {
           <h4 className="text-left flex items-center mt-2 cursor-pointer">
             <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
           </h4>
-          <div className="text-left flex items-center mt-1 mb-8 z-50">
-            <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsKaftans(index)}}>SELECT OPTIONS</h4>
+          <div className="text-left flex items-center mt-1  z-50">
+            <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsKaftans(index)}}>OPTIONS</h4>
             {openItemIndexKaftans === index && (
               <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
               <div className='flex justify-between items-start  mb-4 mt-1'>
@@ -320,7 +320,7 @@ const showAddedDialogue = (i) => {
               />
               {showItemAdded && showIndexItemAdded === index && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          Item added
+          {item.name} added
         </div>
       )}
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
