@@ -1,15 +1,22 @@
-/* Import Antic Didone font */
-@import url('https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap');
-html {
-    font-family: 'Antic Didone', sans-serif;
-}
-
-
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* font section */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+html, body {
+    font-family: 'Outfit', sans-serif;
+}
+* {
+    font-family: 'Outfit', sans-serif;
+}
+/* font section */
+
+
+
+
 
 
 /* intro logo fade */

@@ -18,6 +18,7 @@ import SizesPage from "./components/main/SizesPage";
 import PrivacyPolicyPage from "./components/main/PrivacyPolicyPage";
 
 import AboutPage from "./components/main/AboutPage";
+import SamplePage from "./components/main/SamplePage";
 
 
 
@@ -289,7 +290,7 @@ const handleSetCategory = (cat) => {
             {/* <ScrollToTop/> */}
             <Routes>
               <Route path="/*" element={<div>NOT FOUND</div>} />
-              {/* <Route path='/' element={<LandingPage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>     */}
+              {/* <Route path='/' element={<SamplePage />}/>     */}
               <Route path='/' element={<HomePage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/>    
               <Route path='/my-account' element={<MyAccount options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>}/> 
               <Route path='/on-sale' element={<OnSale options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories}/>}/>
