@@ -16,6 +16,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
+
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Co2Sharp } from '@mui/icons-material';
+
+
+
 function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
 
     
@@ -127,12 +134,6 @@ function calculateDiscountPercentage(price, oldPrice) {
      //if (!isDragging) 
     {
         
-        //plain
-        //const productString = JSON.stringify(product);
-        //navigate(`/product-details/${encodeURIComponent(productString)}`);
-
-        // Encrypt the product data
-        // Navigate to the route with the encrypted parameter
         const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
         // navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
         navigate('/product-details', { state: { encryptedData } });
@@ -167,6 +168,31 @@ const showAddedDialogue = (i) => {
 }
 
 
+
+const [currentSlides, setCurrentSlides] = useState(Array(relatedProducts.length).fill(0)); // Separate state for each carousel
+const images = [
+  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
+  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
+  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp"
+];
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [delayTimeout, setDelayTimeout] = useState(null);
+  const handleMouseEnter = (index) => {
+    
+    clearTimeout(delayTimeout); // Clear any existing timeout
+    const timeout = setTimeout(() => {
+
+      setCurrentSlides((prevSlides) => {
+        const newSlides = [...prevSlides];
+        newSlides[index] = (prevSlides[index] + 1) % images.length;
+        return newSlides;
+      });
+    
+    }, 250); // Set a delay of 1000 milliseconds (1 second)
+    setDelayTimeout(timeout); // Save the timeout reference
+  };
+
+
     return (
         <Fragment>
             <div className="realted-porduct">
@@ -180,34 +206,85 @@ const showAddedDialogue = (i) => {
                                 <li key={index} className="product" >
                                     <div className="product-holder">
                                         {
-                                        // parseInt(item.price) < parseInt(item.oldPrice) 
                                         findLowestPrice(item) < findHighestPrice(item)
                                         ?
                                             <div className="product-badge discount">
                                                 -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
                                                 </div> : ''
                                         }
-                                        {/* <Link to="/product-details"> */}
                                             <div className='mx-2'
                                         onClick={(e) => handleProductClick(item, e)}
 
-                                        style={{cursor: 'pointer'}}>
-                                            <img loading="lazy" 
-                                            src=
-                                            "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp"
-                                            alt=""
+                                        onMouseEnter={() => setZoomedItemId(item.id)}
+                                        onMouseLeave={() => setZoomedItemId(null)}
                                             
-                                            onMouseEnter={() => setZoomedItemId(item.id)}
-                               onMouseLeave={() => setZoomedItemId(null)}
-                               style={{
-                                transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
-                                transition: 'transform 0.8s ease',
-                            }}
+                                        style={{cursor: 'pointer'}}>
 
-                                            />
-                                        </div>
-                                        {/* </Link> */}
 
+
+<Carousel
+      showIndicators={false}
+        showArrows={false}
+        showStatus={false}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={false}
+        draggable={false}
+        selectedItem={currentSlides[index]}
+        onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
+        >
+        {images.map((image, imageIndex) => (
+          <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)} >
+            <img 
+            src={image} 
+            alt={`Image ${imageIndex}`} 
+
+          style={{
+            transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+            transition: 'transform 0.8s ease',
+          }}
+
+            />
+          </div>
+        ))}
+      </Carousel>
+      <div className="ml-4" style={{ position: 'absolute', top: '16px', left: '8px', display: 'flex' }}>
+        {images.map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: '24px',
+              height: '2px',
+              margin: '0 4px',
+              background: i === currentSlides[index] ? '#000' : '#fff',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+            onClick={() => setCurrentSlide(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            title={`${i + 1}`}
+          />
+        ))}
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          </div>
+                                        
                                         
                                     </div>
                                     <div className="pl-2" >
@@ -222,9 +299,7 @@ const showAddedDialogue = (i) => {
             {openItemIndexRelatedProduct === index && (
               <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
               <div className='flex justify-between items-start  mb-4 mt-1'>
-                {/* <div className='text-xs font-bold'>SIZE</div> */}
                 <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => {toggleOptionsRelatedProduct(index)}}/>
-                {/* <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => {toggleOptions(index);}}/> */}
               </div>
             
               <div className="mx-1 mb-2 flex items-center justify-between" style={{ color: '#777777', height: '30px' }}>
@@ -254,7 +329,6 @@ const showAddedDialogue = (i) => {
                   </div>
             
                   <div className='flex flex-col md:flex-row bg-black '>
-                    {/* <button className='p-4 font-bold text-white  text-xs'>ADD TO CART</button> */}
                     <div className="flex ml-2 w-20 text-white items-center cursor-pointer" 
                     onClick={() => {
                       showAddedDialogue(index);addToCart(item, productCount);
@@ -274,9 +348,7 @@ const showAddedDialogue = (i) => {
             </div>
             
       )}
-            {/* <div className="ml-2">
-              <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
-            </div> */}
+            
             <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2"
             onClick={() => {
               showAddedDialogue(index);
