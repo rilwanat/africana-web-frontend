@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 
+// import { AnimatePresence, motion } from 'framer-motion';
+
 
 const carouselItemVariants = {
     hidden: { opacity: 0, y: 200 },
@@ -33,7 +35,7 @@ function ShopTheLook({  }) {
     return (
         <div className="container-1410">
             <div className='flex justify-center mt-20 mb-2'>SHOP THE LOOK</div>
-<div className="flex flex-col md:flex-row mx-8 mb-16">
+<div className="flex flex-col md:flex-row mx-10 mb-16">
 <div className="relative flex-grow">
 <motion.div
               variants={carouselItemVariants}
@@ -103,7 +105,7 @@ function ShopTheLook({  }) {
               variants={carouselItemVariants2}
               initial="hidden"
               animate={ animateCarousel ? "visible" : "hidden"}
-              className="cursor-pointer"
+              // className="cursor-pointer"
               // ref={ref}
               onClick={() => {  }}
             > 

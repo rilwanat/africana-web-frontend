@@ -6,6 +6,8 @@ import axios from 'axios';
 import WestIcon from '@mui/icons-material/West';
 import EastIcon from '@mui/icons-material/East';
 
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
 import ShoppingBagOutlinedIcon from '@mui/icons-material/LocalMallSharp';
 
 import AddIcon from '@mui/icons-material/Add';
@@ -19,6 +21,8 @@ import { AES } from 'crypto-js';
 
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 function NewIn({ addToCart, cart }) {
@@ -235,19 +239,19 @@ const images = [
 
     return (
         <div className="container-1410 ">
-<div className='flex justify-between mt-12 mb-4 mx-4'>
+<div className='flex justify-between mt-12 mb-4'>
 <div style={{ width: '50px' }} className='flex justify-start'>
-      <WestIcon
+      <ArrowRightAltIcon
         className='cursor-pointer'
         onClick={() => sliderRefNewIn.current.slickPrev()}
         onMouseEnter={handleHoverWestNewIn}
         onMouseLeave={handleLeaveWestNewIn}
-        style={{ width: isHoverWestNewIn ? '32px' : '44px', transition: 'width 0.3s ease' }}
+        style={{ width: isHoverWestNewIn ? '32px' : '44px', transition: 'width 0.3s ease', transform: 'scaleX(-1)' }}
       />
       </div>
-      NEW IN
+      <a style={{ cursor: 'pointer' }}>NEW IN</a>
       <div style={{ width: '50px'}} className='flex justify-end'>
-      <EastIcon
+      <ArrowRightAltIcon
         className='cursor-pointer'
         onClick={() => sliderRefNewIn.current.slickNext()}
         onMouseEnter={handleHoverEastNewIn}
@@ -265,7 +269,7 @@ const images = [
             <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
           ) : null}
 <div className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`} style={{ position: 'relative' }}>
-  <div className="ml-4 z-50" style={{ position: 'absolute', top: '16px', left: '4px', display: 'flex' }}>
+  <div className="ml-2 z-50" style={{ position: 'absolute', top: '16px', left: '4px', display: 'flex' }}>
     {images.map((_, i) => (
       <div
         key={i}
@@ -330,60 +334,67 @@ const images = [
           </h4>
           <div className="text-left flex items-center mt-1 ">
             <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsNewIn(index)}}>OPTIONS</h4>
-            {openItemIndexNewIn === index && (
-              <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2" style={{ marginTop: '-100px' }}>
-              <div className='flex justify-between items-start  mb-4 mt-1'>
-                {/* <div className='text-xs font-bold'>SIZE</div> */}
-                <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => {toggleOptionsNewIn(index)}}/>
-                {/* <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => {toggleOptions(index);}}/> */}
-              </div>
-            
-              <div className="mx-1 mb-2 flex items-center justify-between" style={{ color: '#777777', height: '30px' }}>
-                {/* <div className='text-xs font-bold'>SIZE:</div> */}
-                <div className='flex'>
-                <div onClick={() => handleSizeSelection('S')} className={`flex justify-center items-center mr-1 ${selectedSize === 'S' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>S</div>
-                <div onClick={() => handleSizeSelection('M')} className={`flex justify-center items-center mx-1 ${selectedSize === 'M' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>M</div>
-                <div onClick={() => handleSizeSelection('L')}className={`flex justify-center items-center mx-1 ${selectedSize === 'L' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>L</div>
-                <div onClick={() => handleSizeSelection('XL')} className={`flex justify-center items-center mx-1 ${selectedSize === 'XL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XL</div>
-                <div onClick={() => handleSizeSelection('XXL')} className={`flex justify-center items-center ml-1 ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XXL</div>
-              
-                </div>
-                </div>
+            <AnimatePresence>
+                                        {openItemIndexNewIn === index && (
+                                            <motion.div
+                                                // initial={{ opacity: 0 }}
+                                                // animate={{ opacity: 1 }}
+                                                // exit={{ opacity: 0 }}
+                                                
+                                                initial={{ opacity: 0, y: -20 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -20 }}
+                                                transition={{ duration: 0.3, ease: "easeInOut" }}
 
-            
-              <div className="flex flex-col md:flex-row mb-4">
-                <div className="flex items-center bg-black mx-1 my-1">
-                  <div className="" style={{ display: 'flex', alignItems: 'center' }}>
-                    <div className='flex bg-white items-center justify-center m-2' style={{ height: '80%', width: '100%' }}>
-                      <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} 
-                      onClick={() => { handleDecreaseQuantity(item) }}
-                      />
-                      <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>{productCount}</span>
-                      <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }} 
-                      onClick={() => { handleIncreaseQuantity(item) }}
-                      />
-                    </div>
-                  </div>
-            
-                  <div className='flex flex-col md:flex-row bg-black '>
-                    {/* <button className='p-4 font-bold text-white  text-xs'>ADD TO CART</button> */}
-                    <div className="flex ml-2 w-20 text-white items-center cursor-pointer" 
-                    onClick={() => 
-                      {
-                        showAddedDialogue(index);
-                        addToCart(item, productCount);
-                      }
-                      
-                    }
-                    >
-              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
-            </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-      )}
+                                                className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2"
+                                                style={{ marginTop: '-134px' }}
+                                            >
+                                                <div className='flex justify-between items-start  mb-4 mt-1'>
+                                                    <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => { toggleOptionsNewIn(index) }} />
+                                                    <div className='text-sm'>{item.name}</div>
+                                                </div>
+
+                                                <div className="mx-1 mb-2 flex items-center justify-between" style={{ color: '#777777', height: '30px' }}>
+                                                    <div className='flex'>
+                                                        <div onClick={() => handleSizeSelection('S')} className={`flex justify-center items-center mr-1 ${selectedSize === 'S' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>S</div>
+                                                        <div onClick={() => handleSizeSelection('M')} className={`flex justify-center items-center mx-1 ${selectedSize === 'M' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>M</div>
+                                                        <div onClick={() => handleSizeSelection('L')} className={`flex justify-center items-center mx-1 ${selectedSize === 'L' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>L</div>
+                                                        <div onClick={() => handleSizeSelection('XL')} className={`flex justify-center items-center mx-1 ${selectedSize === 'XL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XL</div>
+                                                        <div onClick={() => handleSizeSelection('XXL')} className={`flex justify-center items-center ml-1 ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} text-xs`} style={{ border: '1px solid #ccc', padding: '4px', width: '32px', height: '30px', cursor: 'pointer' }}>XXL</div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col md:flex-row mb-4">
+                                                    <div className="flex items-center bg-black mx-1 my-1">
+                                                        <div className="" style={{ display: 'flex', alignItems: 'center' }}>
+                                                            <div className='flex bg-white items-center justify-center m-2' style={{ height: '80%', width: '100%' }}>
+                                                                <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }}
+                                                                    onClick={() => { handleDecreaseQuantity(item) }}
+                                                                />
+                                                                <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>{productCount}</span>
+                                                                <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }}
+                                                                    onClick={() => { handleIncreaseQuantity(item) }}
+                                                                />
+                                                            </div>
+                                                        </div>
+
+                                                        <div className='flex flex-col md:flex-row bg-black '>
+                                                            <div className="flex ml-2 w-20 text-white items-center cursor-pointer"
+                                                                onClick={() => {
+                                                                    showAddedDialogue(index);
+                                                                    addToCart(item, productCount);
+                                                                }
+                                                                }
+                                                            >
+                                                                <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
             {/* <div className="ml-2">
               <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
             </div> */}
