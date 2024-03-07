@@ -17,6 +17,8 @@ import Slider from 'react-slick';
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
 
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
 function NewIn({ addToCart, cart }) {
@@ -192,6 +194,45 @@ const showAddedDialogue = (i) => {
 }
 
 
+
+
+
+
+// const [currentSlides, setCurrentSlides] = useState(products.map(() => 0)); // Initialize to an array of zeros
+const [currentSlides, setCurrentSlides] = useState(Array(products.length).fill(0)); // Separate state for each carousel
+const images = [
+  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png", 
+  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png", 
+  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
+];
+  // const [currentSlide, setCurrentSlide] = useState(0);
+  const [delayTimeout, setDelayTimeout] = useState(null);
+  const handleMouseEnter = (index) => {
+    
+    clearTimeout(delayTimeout); // Clear any existing timeout
+    const timeout = setTimeout(() => {
+
+      setCurrentSlides((prevSlides) => {
+        const newSlides = [...prevSlides];
+        newSlides[index] = (prevSlides[index] + 1) % images.length;
+        return newSlides;
+      });
+    
+    }, 500); 
+    setDelayTimeout(timeout); // Save the timeout reference
+  };
+  
+  useEffect(() => {
+    // Initialize currentSlides to an array of zeros
+    setCurrentSlides(Array(products.length).fill(0));
+  }, [products]);
+
+
+
+
+
+
+
     return (
         <div className="container-1410 ">
 <div className='flex justify-between mt-12 mb-4 mx-4'>
@@ -223,22 +264,62 @@ const showAddedDialogue = (i) => {
           {findLowestPrice(item) < findHighestPrice(item) ? (
             <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
           ) : null}
-          <div
-            className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`}
-            onClick={(e) => handleProductClick(item, e)}
-            // onMouseEnter={() => setZoomedItemId(item.id)}
-            // onMouseLeave={() => setZoomedItemId(null)}
+<div className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`} style={{ position: 'relative' }}>
+  <div className="ml-4 z-50" style={{ position: 'absolute', top: '16px', left: '4px', display: 'flex' }}>
+    {images.map((_, i) => (
+      <div
+        key={i}
+        style={{
+          width: '24px',
+          height: '2px',
+          margin: '0 4px',
+          background: i === currentSlides[index] ? '#000' : '#fff',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
+        // onClick={() => setCurrentSlide(i)}
+        aria-label={`Go to slide ${i + 1}`}
+        title={`${i + 1}`}
+      />
+    ))}
+  </div>
+  <div
+    className="cursor-pointer"
+    onClick={(e) => handleProductClick(item, e)}
+    onMouseEnter={() => setZoomedItemId(item.id)}
+    onMouseLeave={() => setZoomedItemId(null)}
+    // style={{
+    //   transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+    //   transition: 'transform 0.8s ease',
+    // }}
+  >
+    <Carousel
+      showIndicators={false}
+      showArrows={false}
+      showStatus={false}
+      showThumbs={false}
+      infiniteLoop={true}
+      autoPlay={false}
+      draggable={false}
+      selectedItem={currentSlides[index]}
+      onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
+    >
+      {images.map((image, imageIndex) => (
+        <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)}>
+          <img
+            src={image}
+            alt={`Image ${imageIndex}`}
             style={{
               transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
               transition: 'transform 0.8s ease',
             }}
-          >
-            <img
-              loading="lazy"
-              src="http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
-              alt=""
-            />
-          </div>
+          />
+        </div>
+      ))}
+    </Carousel>
+  </div>
+</div>
+
         </div>
         <div className="pl-2 ">
           <h4 className="text-left flex items-center mt-4 cursor-pointer">

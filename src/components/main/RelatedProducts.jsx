@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect, useRef } from 'react';
+import React, {Fragment, useState, useEffect } from 'react';
 import Slider from "react-slick";
 
 import './react-css/products.css';

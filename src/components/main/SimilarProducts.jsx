@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, Fragment, useEffect} from 'react';
 import Slider from "react-slick";
 // import ReactTooltip from 'react-tooltip';
 
@@ -23,6 +23,9 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
+
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
 import axios from 'axios';
@@ -187,6 +190,41 @@ const showAddedDialogue = (i) => {
 
 
 
+
+
+// const [currentSlides, setCurrentSlides] = useState(products.map(() => 0)); // Initialize to an array of zeros
+const [currentSlides, setCurrentSlides] = useState(Array(products.length).fill(0)); // Separate state for each carousel
+const images = [
+  "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg", 
+  "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg", 
+  "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
+];
+  // const [currentSlide, setCurrentSlide] = useState(0);
+  const [delayTimeout, setDelayTimeout] = useState(null);
+  const handleMouseEnter = (index) => {
+    
+    clearTimeout(delayTimeout); // Clear any existing timeout
+    const timeout = setTimeout(() => {
+
+      setCurrentSlides((prevSlides) => {
+        const newSlides = [...prevSlides];
+        newSlides[index] = (prevSlides[index] + 1) % images.length;
+        return newSlides;
+      });
+    
+    }, 500); 
+    setDelayTimeout(timeout); // Save the timeout reference
+  };
+  
+  useEffect(() => {
+    // Initialize currentSlides to an array of zeros
+    setCurrentSlides(Array(products.length).fill(0));
+  }, [products]);
+
+
+
+
+
     return (
         <Fragment>
             {/* start recent-product-section */}
@@ -231,9 +269,57 @@ const showAddedDialogue = (i) => {
                             onClick={(e) => handleProductClick(item, e)} 
                             style={{cursor: 'pointer'}}>
 
-                            
 
-                                                            <img loading="lazy" 
+
+<Carousel
+      showIndicators={false}
+        showArrows={false}
+        showStatus={false}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={false}
+        draggable={false}
+        selectedItem={currentSlides[index]}
+        onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
+        >
+        {images.map((image, imageIndex) => (
+          <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)} >
+            <img 
+            src={image} 
+            alt={`Image ${imageIndex}`} 
+
+          style={{
+            transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+            transition: 'transform 0.8s ease',
+          }}
+
+            />
+          </div>
+        ))}
+      </Carousel>
+      <div className="ml-4" style={{ position: 'absolute', top: '16px', left: '8px', display: 'flex' }}>
+        {images.map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: '24px',
+              height: '2px',
+              margin: '0 4px',
+              background: i === currentSlides[index] ? '#000' : '#fff',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+            // onClick={() => setCurrentSlide(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            title={`${i + 1}`}
+          />
+        ))}
+      </div>
+
+
+
+
+                                                            {/* <img loading="lazy" 
                                                             src=
                                                             "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
                                                             //{item.mainImg} 
@@ -246,7 +332,7 @@ const showAddedDialogue = (i) => {
                                 transition: 'transform 0.8s ease',
                             }}
 
-                                                            />
+                                                            /> */}
                                                         
                                                         {/* </Link> */}
                                                         </div>
