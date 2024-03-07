@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect, useRef } from 'react';
 import Slider from "react-slick";
 
 import './react-css/products.css';
@@ -19,7 +19,6 @@ import { AES } from 'crypto-js';
 
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Co2Sharp } from '@mui/icons-material';
 
 
 
@@ -29,15 +28,15 @@ function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
     const navigate = useNavigate();
 
 
-    const [isPrevHovered, setPrevHovered] = useState(false);
-    const [isNextHovered, setNextHovered] = useState(false);
+    // const [isPrevHovered, setPrevHovered] = useState(false);
+    // const [isNextHovered, setNextHovered] = useState(false);
 
-    const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
-    const [isFavHovered, setFavHovered] = useState(false);
-    const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
+    // const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
+    // const [isFavHovered, setFavHovered] = useState(false);
+    // const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
     
 
-    const [showWidget, setShowWidget] = useState(false);
+    // const [showWidget, setShowWidget] = useState(false);
 
     const [zoomedItemId, setZoomedItemId] = useState(null);
     const [productCount, setProductCount] = useState(1);
@@ -168,7 +167,7 @@ const showAddedDialogue = (i) => {
 }
 
 
-
+// const [currentSlides, setCurrentSlides] = useState(relatedProducts.map(() => 0)); // Initialize to an array of zeros
 const [currentSlides, setCurrentSlides] = useState(Array(relatedProducts.length).fill(0)); // Separate state for each carousel
 const images = [
   "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
@@ -188,9 +187,16 @@ const images = [
         return newSlides;
       });
     
-    }, 250); // Set a delay of 1000 milliseconds (1 second)
+    }, 500); 
     setDelayTimeout(timeout); // Save the timeout reference
   };
+  
+  useEffect(() => {
+    // Initialize currentSlides to an array of zeros
+    setCurrentSlides(Array(relatedProducts.length).fill(0));
+  }, [relatedProducts]);
+
+
 
 
     return (
