@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef  } from 'react';
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Typography, Box, useMediaQuery } from '@mui/material';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
@@ -124,7 +124,7 @@ const bagItemVariants = {
 
 
 
-function AfricanaHeader({ options, cart, removeCartItem }) {
+function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem }) {
 
     // const data = {
     //     "content": "Join our showroom and get 1 % off ! Coupon code : AFR222"
@@ -764,7 +764,7 @@ const settings = {
                                 </div>
                                 <div className=" text-center mt-1 mx-2">
                                     <span  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
-                                        <a className='text-xs text-gray-900' style={{  }} >{item.name}</a>
+                                        {/* <a className='text-xs text-gray-900' style={{  }} >{item.name}</a> */}
                                     </span>
                                 </div>
                             </li>
@@ -813,19 +813,13 @@ const settings = {
                                 cart.map((item, index) => (
                                     <div key={index} className="px-4 " onClick={() => {navigateToProduct(item)}}>
                                         <div className="">
-                                            <NavLink to={item.link}>
-                                                {/* <ShoppingBagOutlinedIcon /> */}
-                                                <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
-                                        
-                                            </NavLink>
-                                            </div>
+                                          <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
+                                        </div>
                                         <div className="my-2">
-                                            <NavLink to={item.link}>{item.name}</NavLink>
+                                            <div to={item.link}>{item.name}</div>
                                             <div className='flex justify-between'>
-                                                <span className="mini-cart-item-quantity">Qty: {item.quantity}</span>
-
-                                                <CloseIcon onClick={(e) => removeCartItem(e, item)} className="mr-2 bg-black rounded-sm" style={{ cursor: 'pointer', width: '16px', height: '16px', color: "#ffffff"}}/>
-                                                
+                                              <span className="">Qty: {item.quantity}</span>
+                                              <CloseIcon onClick={(e) => removeAllCartItem(e, item)} className="mr-2 bg-black rounded-sm" style={{ cursor: 'pointer', width: '16px', height: '16px', color: "#ffffff"}}/>
                                             </div>
                                            
                                         </div>

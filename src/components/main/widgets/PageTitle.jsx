@@ -1,7 +1,18 @@
 import React, {Fragment} from 'react';
-import {NavLink} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function PageTitle({name}) {
+
+    const navigate = useNavigate();
+
+    const navigateToHome = () => {
+        // setHoveredMenuItem("")
+        // setIsMenuOpen(false);
+        // const productSlug = "all products";
+        navigate('/', { state: {  }, replace: true });
+        //window.location.reload();
+      }
+
     return (
         <Fragment>
             {/* start page-title */}
@@ -14,7 +25,7 @@ function PageTitle({name}) {
                                     <h2>{name}</h2>
                                     <ol className="breadcrumb">
                                         <li>
-                                            <NavLink to="/">Home</NavLink>
+                                            <p onClick={() => {navigateToHome()}} >Home</p>
                                         </li>
                                         <li>{name}</li>
                                     </ol>

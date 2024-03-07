@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function CompanyWidget() {
@@ -14,6 +14,14 @@ function CompanyWidget() {
         //window.location.reload();
       }
 
+      const navigateToContact = () => {
+        // setHoveredMenuItem("")
+        // setIsMenuOpen(false);
+        //const productSlug = "all products";
+        navigate('/contact', { });
+        //window.location.reload();
+      }
+
 
     return (
         <Fragment>
@@ -21,7 +29,7 @@ function CompanyWidget() {
                 <h3 className='text-white'>About</h3>
                 <ul>
                     <li><a onClick={navigateToAbout} style={{ cursor: 'pointer' }}>Discover us</a></li>
-                    <li><a >Contact</a></li>
+                    <li><a onClick={() => {navigateToContact()}} style={{ cursor: 'pointer' }}>Contact</a></li>
                 </ul>
             </div>
         </Fragment>

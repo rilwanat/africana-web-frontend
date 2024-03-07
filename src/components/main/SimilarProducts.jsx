@@ -56,6 +56,7 @@ function SimilarProducts({onQuickViewClick, products, addToCart}) {
     
     const settings = {
         dots: false,
+        arrows: false,
         infinite: true,
         slidesToShow: 3, //7,
         slidesToScroll: 1,
@@ -236,11 +237,8 @@ const images = [
                     <div className="row flex">
                         <div className="col col-xs-12">
                             <div className="section-title-s2">
-                                <h2>.</h2>
+                                <h2 className='text-center'>Similar Products</h2>
                             </div>
-                            <Link className="more-products" to="/shop">
-                            Similar products
-                            </Link>
                         </div>
                     </div>
                     <div className="row">
@@ -401,6 +399,7 @@ const images = [
                                                                 onClick={() => {
                                                                     showAddedDialogue(index);
                                                                     addToCart(item, productCount);
+                                                                    toggleOptionsSimilarProduct(index);
                                                                 }
                                                                 }
                                                             >

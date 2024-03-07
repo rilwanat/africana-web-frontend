@@ -8,7 +8,7 @@ import AfricanaFooter from './AfricanaFooter';
 
 import imgx from '../../assets/images/shop/img-2.jpg';
 
-function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
+function SignUpPage({ options, cart, removeCartItem, handleEmailAddress, removeAllCartItem  }) {
 
     const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
                 setLastname('');
                 setEmailAddress('');
                 alert("Registration Successful: " + response.data.message + "\n\n Please check your mail and login to continue");
-                navigate('/login');
+                navigate('/sign-in');
 
                 
             } else {
@@ -130,7 +130,7 @@ function SignUpPage({ options, cart, removeCartItem, handleEmailAddress }) {
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
 
 
             <section className="my-account-section">

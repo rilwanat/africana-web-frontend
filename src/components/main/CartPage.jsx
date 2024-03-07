@@ -15,7 +15,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AfricanaHeader from './AfricanaHeader';
 import AfricanaFooter from './AfricanaFooter';
 
-function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem }) {
+function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem, removeAllCartItem  }) {
     const location = useLocation();
     const cart = location.state.encryptedData;
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
@@ -122,19 +122,19 @@ function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCa
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader options={options} cart={parsedCart} removeCartItem={removeCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={parsedCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
 
             <section className="cart-section woocommerce-cart section-padding">
                 <div className="container-1410">
                     <div className="row">
                         <div className="col col-xs-12">
                             <div className="woocommerce">
-                                <form action="/" method="post">
+                                {/* <form action="/" method="post"> */}
                                     <table className="shop_table shop_table_responsive cart">
                                         <thead>
                                             <tr>
                                                 <th className="product-remove">s/n</th>
-                                                <th className="product-thumbnail">Image</th>
+                                                <th className="product-thumbnail flex justify-center">Image</th>
                                                 <th className="product-name">Product</th>
                                                 <th className="product-price text-right">Price</th>
                                                 <th className="product-quantity text-center">Quantity</th>
@@ -148,7 +148,9 @@ function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCa
                                                         {countCartItem++}
                                                     </td>
                                                     <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
-                                                        <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"/>
+                                                        <div className='flex justify-center'>
+                                                            <img className='md:w-full' src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"/>
+                                                        </div>                                                        
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                                         {cartItem.name}
@@ -157,9 +159,17 @@ function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCa
                                                     {'₦'}{findLowestPrice(cartItem).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center">
-                                                        <RemoveIcon className='mr-2' style={{ cursor: 'pointer' }} onClick={() => { handleDecreaseQuantity(cartItem) }}/>
-                                                        {cartItem.quantity}
-                                                        <AddIcon className='ml-2' style={{ cursor: 'pointer' }} onClick={() => { handleIncreaseQuantity(cartItem) }}/>
+                                                        <div className="touchspin-wrap" style={{ display: 'flex', alignItems: 'center' }}>
+                                                            <div className='flex bg-white items-center justify-center m-2' style={{ height: '80%', width: '100%' }}>
+                                                                <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', borderRight: '1px solid #ccc' }} 
+                                                                onClick={() => { handleDecreaseQuantity(cartItem) }}
+                                                                />
+                                                                <span className='flex justify-center items-center text-center' style={{ width: '30px' }}>{cartItem.quantity}</span>
+                                                                <AddIcon className='' style={{ cursor: 'pointer', width: '30px', borderLeft: '1px solid #ccc' }} 
+                                                                onClick={() => { handleIncreaseQuantity(cartItem) }}
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-right">
                                                     {'₦'}{calculateTotal(cartItem).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -168,7 +178,7 @@ function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCa
                                             ))}
                                         </tbody>
                                     </table>
-                                </form>
+                                {/* </form> */}
                                 <div className="cart-collaterals">
                                     <CalculatedShipping currencySymbol={'₦'} price={calculateCartSubTotal()} tax={calculateCartTax()} options={options} cart={parsedCart}/>
                                 </div>

@@ -203,7 +203,7 @@ const images = [
     return (
         <Fragment>
             <div className="realted-porduct">
-                <h3>Related products</h3>
+                <h3>Related Products</h3>
                 <ul className="products product-row-slider" 
                 >
                     <Slider {...settings}
@@ -353,6 +353,7 @@ const images = [
                                                                 onClick={() => {
                                                                     showAddedDialogue(index);
                                                                     addToCart(item, productCount);
+                                                                    toggleOptionsRelatedProduct(index);
                                                                 }
                                                                 }
                                                             >

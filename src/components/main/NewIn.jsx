@@ -384,6 +384,7 @@ const images = [
                                                                 onClick={() => {
                                                                     showAddedDialogue(index);
                                                                     addToCart(item, productCount);
+                                                                    toggleOptionsNewIn(index);
                                                                 }
                                                                 }
                                                             >

@@ -31,7 +31,7 @@ import './react-css/shop.css';
 import data from './singleProductDemo.json';
 
 
-function ProductPage({options, addToCart, cart, updateCart, removeCartItem}) {
+function ProductPage({options, addToCart, cart, updateCart, removeCartItem, removeAllCartItem }) {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -202,7 +202,7 @@ const showAddedDialogue = (i) => {
     return (
         <div>
             
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
 
             <section className="shop-single-section  shop-single-vertical-thumb section-padding">
                 <div className="container-1410">

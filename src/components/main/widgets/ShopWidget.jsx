@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function ShopWidget() {

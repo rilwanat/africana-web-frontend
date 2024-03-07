@@ -312,6 +312,7 @@ const showAddedDialogue = (i) => {
                                                                 onClick={() => {
                                                                     showAddedDialogue(index);
                                                                     addToCart(item, productCount);
+                                                                    toggleOptionsBestSellers(index);
                                                                 }
                                                                 }
                                                             >

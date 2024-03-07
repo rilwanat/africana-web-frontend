@@ -9,10 +9,10 @@ import AfricanaHeader from './AfricanaHeader';
 
 import './react-css/about.css';
 
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import signature from "../../assets/images/signature.svg";
 
-function AboutPage({ options, cart, removeCartItem }) {
+function AboutPage({ options, cart, removeCartItem, removeAllCartItem  }) {
 
     const settings = {
         dots: true,
@@ -35,9 +35,17 @@ function AboutPage({ options, cart, removeCartItem }) {
         //window.location.reload();
       }
 
+      const navigateToContact = () => {
+        // setHoveredMenuItem("")
+        // setIsMenuOpen(false);
+        // const productSlug = "all products";
+        navigate('/contact', { state: {  }, replace: true });
+        //window.location.reload();
+      }
+
     return (
         <Fragment>
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
 
             {/* <PageTitle name="About us"/> */}
 
@@ -52,7 +60,7 @@ function AboutPage({ options, cart, removeCartItem }) {
                                     {/* <h2>Clothes crafted to fit</h2> */}
                                     <p>A story filled Urban clothing brand and a host of products from leather goods, female wears, sneakers and bags. And post-pandemic, we have seen growth in expansion into other west-African countries, including but not limited to Mali, Senegal, Ivory Coast, etc.</p>
                                     <img src={signature} className='mb-8'/>
-                                    <NavLink to="/contact" className="theme-btn-s3">Contact us</NavLink>
+                                    <a onClick={() => {navigateToContact()}} className="theme-btn-s3">Contact us</a>
                                 </div>
                                 <div className="img-holder">
                                     <img loading="lazy" src=
@@ -89,7 +97,7 @@ function AboutPage({ options, cart, removeCartItem }) {
                         <div className="col col-xs-12">
                             <div className="section-title-s4">
                                 <h2>Client's quote</h2>
-                                <p>Travelling salesman and above it there hung a picture</p>
+                                <p>##</p>
                             </div>
                         </div>
                     </div>

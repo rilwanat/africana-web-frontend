@@ -8,7 +8,7 @@ import AfricanaFooter from './AfricanaFooter';
 
 import imgx from '../../assets/images/shop/img-2.jpg';
 
-function SignInPage({ options, cart, removeCartItem }) {
+function SignInPage({ options, cart, removeCartItem, removeAllCartItem  }) {
 
     const navigate = useNavigate();
     
@@ -22,10 +22,6 @@ function SignInPage({ options, cart, removeCartItem }) {
     // const [registrationStatus, setRegistrationStatus] = useState('');
 
 
-    /**
-     * check this function
-     */
-
     useEffect(() => {
         window.scrollTo(0, 0);
         
@@ -36,8 +32,7 @@ function SignInPage({ options, cart, removeCartItem }) {
     const loginUser = async (e) => {
         e.preventDefault();
 
-        navigate('/my-account');
-        return;
+        
 
         setIsLoading(true);
         setErrorMessage({ message: '' });
@@ -118,7 +113,7 @@ function SignInPage({ options, cart, removeCartItem }) {
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
 
             <section className="my-account-section">
                 <div className="container-1410">
