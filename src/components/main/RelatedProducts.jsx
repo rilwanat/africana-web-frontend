@@ -175,7 +175,7 @@ const images = [
   "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
   "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp"
 ];
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // const [currentSlide, setCurrentSlide] = useState(0);
   const [delayTimeout, setDelayTimeout] = useState(null);
   const handleMouseEnter = (index) => {
     
@@ -260,7 +260,7 @@ const images = [
               borderRadius: '4px',
               cursor: 'pointer',
             }}
-            onClick={() => setCurrentSlide(i)}
+            // onClick={() => setCurrentSlide(i)}
             aria-label={`Go to slide ${i + 1}`}
             title={`${i + 1}`}
           />
