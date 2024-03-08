@@ -30,6 +30,10 @@ import { AES } from 'crypto-js';
 import './react-css/shop.css';
 import data from './singleProductDemo.json';
 
+import imgx from '../../assets/images/size.png';
+
+import CloseIcon from '@mui/icons-material/Close';
+
 
 function ProductPage({options, addToCart, cart, updateCart, removeCartItem, removeAllCartItem }) {
 
@@ -197,7 +201,18 @@ const showAddedDialogue = (i) => {
     setShowItemAdded(false);
   }, 1000);
 }
+const [addedItemName, setAddedItemName] = useState('');
 
+
+const [showSizeChart, setShowSizeChart] = useState(false);
+const showSizeChartDialogue = (i) => {
+    // setShowIndexItemAdded(i);
+    // alert("");
+    setShowSizeChart(true);
+    setTimeout(() => {
+        // setShowSizeChart(false);
+    }, 3000);
+  }
 
     return (
         <div>
@@ -257,6 +272,27 @@ const showAddedDialogue = (i) => {
                         <div className="col col-md-6">
                             <div className="product-details">
                                 <h2 className='' style={{ fontSize: '24px' }}>{parsedProduct.name}</h2>
+                                {showSizeChart && (
+  <div
+    className="fixed inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50 z-50"
+    style={{
+      width: '100vw',
+      height: '100vh',
+    }}
+  >
+    <div
+      className="flex flex-col bg-gray-100 p-2 rounded-lg border border-gray-300 text-xs"
+      style={{
+        width: '80vw',
+        height: '80vh',
+      }}
+    >
+        <div className='flex justify-end'><CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => { setShowSizeChart(false); }} /></div>
+      <img src={imgx} style={{ maxWidth: '100%', maxHeight: '95%', objectFit: 'contain' }}/>
+    </div>
+  </div>
+)}
+
                                 <div className="price" style={{ fontSize: '20px' }}>
                                     <span className="current">{'₦'}{findLowestPrice(parsedProduct)}</span>
                                     {/* <span className="old">{'₦'}{findHighestPrice(parsedProduct)}</span> */}
@@ -292,6 +328,7 @@ const showAddedDialogue = (i) => {
                                 </div>
 
 
+
                                 <span className="tagged_as" style={{ display: 'flex', alignItems: 'center', color: '#777777', height: '30px',  }}>
                                     <div>SIZE: </div>
         <div onClick={() => handleSizeSelection('S')} className={`text-center ${selectedSize === 'S' ? 'bg-black text-white' : 'bg-white'} ml-2 mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>S</div>
@@ -299,7 +336,10 @@ const showAddedDialogue = (i) => {
         <div onClick={() => handleSizeSelection('L')} className={`text-center ${selectedSize === 'L' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>L</div>
         <div onClick={() => handleSizeSelection('XL')} className={`text-center ${selectedSize === 'XL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XL</div>
         <div onClick={() => handleSizeSelection('XXL')} className={`text-center ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XXL</div>
-                                    {/* {
+        <div onClick={() => showSizeChartDialogue()} className={`text-center ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '90px', cursor: 'pointer' }}>Size Chart</div>
+        {/* <div onClick={() => showSizeChartDialogue()} className={`flex justify-center items-center ml-1 ${selectedSize === 'Show Size Chart' ? 'bg-black text-white' : 'bg-white'} `} style={{ border: '1px solid #ccc', padding: '4px', width: '80px', height: '40px', cursor: 'pointer' }}>Size Chart</div> */}
+
+                           {/* {
                                         data.tags.map((item, index) =>
                                             <a key={index}
                                                href={item.link}>{' ' + item.name}{data.tags.length - 1 === index ? '' : ', '}</a>
@@ -335,17 +375,21 @@ const showAddedDialogue = (i) => {
                                         onClick={
                                             () => {
                                                 showAddedDialogue(0);addToCart(parsedProduct, productCount);
+
+                                                setAddedItemName(parsedProduct.name);
                                             }                                        
                                         }                                        
                                         >ADD TO CART</button>
                                     </div>
-                                    {showItemAdded 
+                                    {/* {showItemAdded 
                                     // && showIndexItemAdded === index 
                                     && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
           {parsedProduct.name} added
         </div>
-      )}
+      )} */}
+
+
 
                                     
                                 </div>
@@ -401,6 +445,8 @@ const showAddedDialogue = (i) => {
                                 </span>
                                     </div>
                                 </div>
+
+                                
                             </div>
                         </div>
                         {/* end col */}
@@ -418,6 +464,25 @@ const showAddedDialogue = (i) => {
                         </div>
                     </div>
                 </div>
+
+                {showItemAdded ?
+// && showIndexItemAdded === index && 
+(
+  <div 
+    // className="flex absolute bg-white p-4 rounded-lg border border-gray-300 mt-2 text-lg z-50 items-center justify-center" 
+    className="flex absolute bg-black p-4 rounded-lg mt-2 text-lg z-50 items-center justify-center text-white" 
+    style={{ 
+      position: 'fixed',
+      bottom: '20px',
+      right: '20px',
+      width: '240px',
+      height: '100px',
+    }}
+  >
+    {addedItemName} added to your cart !!
+  </div>
+) : ''}
+
                 {/* end of container */}
             </section>
 

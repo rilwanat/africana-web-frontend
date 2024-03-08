@@ -201,6 +201,9 @@ const showAddedDialogue = (i) => {
   }, 1000);
 }
 
+const [addedItemName, setAddedItemName] = useState('');
+
+
     return (
         <div className="container-1410">
 <div className='flex justify-between mt-12 mb-4'>
@@ -309,6 +312,8 @@ const showAddedDialogue = (i) => {
                                                                     showAddedDialogue(index);
                                                                     addToCart(item, productCount);
                                                                     toggleOptionsKaftans(index);
+
+                                                                    setAddedItemName(item.name);
                                                                 }
                                                                 }
                                                             >
@@ -326,16 +331,18 @@ const showAddedDialogue = (i) => {
             <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2" 
             onClick={() => {
               showAddedDialogue(index);addToCart(item, 1);
+
+              setAddedItemName(item.name);
             }
             }
             >
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2"              
               />
-              {showItemAdded && showIndexItemAdded === index && (
+              {/* {showItemAdded && showIndexItemAdded === index && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
           {item.name} added
         </div>
-      )}
+      )} */}
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div>
           </div>
@@ -344,6 +351,24 @@ const showAddedDialogue = (i) => {
     ))}
   </Slider>
 </div>
+
+{showItemAdded ?
+// && showIndexItemAdded === index && 
+(
+  <div 
+    // className="flex absolute bg-white p-4 rounded-lg border border-gray-300 mt-2 text-lg z-50 items-center justify-center" 
+    className="flex absolute bg-black p-4 rounded-lg mt-2 text-lg z-50 items-center justify-center text-white" 
+    style={{ 
+      position: 'fixed',
+      bottom: '20px',
+      right: '20px',
+      width: '240px',
+      height: '100px',
+    }}
+  >
+    {addedItemName} added to your cart !!
+  </div>
+) : ''}
         </div>
     );
 }

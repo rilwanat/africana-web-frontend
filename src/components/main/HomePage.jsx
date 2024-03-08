@@ -22,7 +22,7 @@ export default function HomePage({ options, handleDataViewData, addToCart, cart,
 
       <AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} />
       <Hero />
-      {/* <VideoPreview /> <Hero /> */}       
+      {/* <VideoPreview /> <Hero />        */}
       <ShopTheLook />
       {/* <VideoPreview /> */}
       <NewIn addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>

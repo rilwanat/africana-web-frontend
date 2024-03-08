@@ -32,7 +32,8 @@ function SignInPage({ options, cart, removeCartItem, removeAllCartItem  }) {
     const loginUser = async (e) => {
         e.preventDefault();
 
-        
+        navigate('/my-account');
+        return;
 
         setIsLoading(true);
         setErrorMessage({ message: '' });

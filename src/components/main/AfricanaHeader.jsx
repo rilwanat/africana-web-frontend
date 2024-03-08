@@ -25,6 +25,8 @@ import CloseIcon from '@mui/icons-material/Close';
 
 import { AES } from 'crypto-js';
 
+import axios from 'axios';
+
 const SlideInMenu = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -124,6 +126,45 @@ const bagItemVariants = {
 
 
 
+
+//
+
+
+const SlideInAccount = styled(motion.div)`
+  position: fixed;
+  top: 0rem;
+  right: 0;
+  width: calc(100% - 2rem);
+  height: 50vh;
+  /*background-color: rgba(0, 0, 0, 0.5);  Semi-transparent background */
+  z-index: 1000; /* Ensure the menu is on top of other content */
+  overflow-x: hidden;
+
+  @media (min-width: 960px) {
+    width: 40%;
+  }
+`;
+const AccountContent = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #eeeeee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+`;
+const AccountContentInner = styled.div`
+  height: 100%; /* Ensure the inner content fills the container */
+  max-height: 100%; /* Limit the height to the container's height */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+`;
+const accountItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.5 } },
+};
+//
+
+
 function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem }) {
 
     // const data = {
@@ -143,16 +184,112 @@ function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem }) {
   const [menuWidthOnsale, setMenuWidthOnsale] = useState(0);
   const [menuWidthSizes, setMenuWidthSizes] = useState(0);
 
+
+  const [loginEmailAddress, setLoginEmailAddress] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  // const [isDefaultModalOpen, setDefaultModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  // const [registrationStatus, setRegistrationStatus] = useState('');
+  const loginUser = async (e) => {
+    e.preventDefault();
+
+    navigate('/my-account');
+    return;
+
+    setIsLoading(true);
+    setErrorMessage({ message: '' });
+
+    // setLoginEmailAddress();
+    // setLoginPassword();
+
+    if (loginEmailAddress === 'Enter your email' || loginEmailAddress === '' 
+    || 
+    loginPassword === 'Enter your password' || loginPassword === ''
+        ) {
+        setErrorMessage({ message: 'Login Failed: Please enter valid credentials' });
+        // setRegistrationStatus("Failed");
+        setIsLoading(false);
+        return;
+    }
+
+
+    //alert("login user: " + loginEmailAddress + " " + loginPassword);
+
+    try {
+        const formData = new FormData();
+        formData.append('email', loginEmailAddress);        
+        formData.append('password', loginPassword);
+
+        const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', formData, {
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
+            },
+        });
+
+        // const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/login', {
+        //     loginEmailAddress,
+        //     loginPassword,
+        // });
+
+
+
+        setIsLoading(false);
+
+        //alert("login: " + JSON.stringify(response.data.data, null, 2));
+
+
+        if (response.data.success) {
+            // If login is successful
+            setErrorMessage({ message: '' });
+
+            setLoginEmailAddress('');
+            setLoginPassword('');
+            alert("Login Successful: " + response.data.message);
+
+            navigate('/my-account');
+
+        } else {
+            const errors = response.data.errors.map(error => error.msg);
+            setErrorMessage({ message: response.data.message, errors });
+            //alert("Failed1");
+        }
+    } catch (error) {
+      setIsLoading(false);
+        
+      if (error.response && error.response.data && error.response.data.message) {
+        const errorMessage = error.response.data.message;
+        setErrorMessage({ message: errorMessage });
+    } else if (error.response && error.response.data && error.response.data.errors) {
+        const { errors } = error.response.data;
+        const errorMessages = errors.map(error => error.msg);
+        const errorMessage = errorMessages.join(', '); // Join all error messages
+        setErrorMessage({ message: errorMessage });
+    } else {
+        setErrorMessage({ message: 'Login failed. Please check your credentials and try again.' });
+    }
+
+    }
+};
+
+
+
+
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
 
-  const [isBagOpen, setIsBagOpen] = useState(false);
-
-// Function to toggle visibility of sliding div
+const [isBagOpen, setIsBagOpen] = useState(false);
 const toggleBag = () => {
   setIsBagOpen(!isBagOpen);
+};
+
+const [isAccountOpen, setIsAccountOpen] = useState(false);
+const toggleAccount = () => {
+  setIsAccountOpen(!isAccountOpen);
 };
 
 
@@ -241,9 +378,9 @@ const toggleBag = () => {
     navigate('/my-account', {  });
   }
 
-  const navigateToSignIn = () => {
-    navigate('/sign-in', {  });
-  }
+  // const navigateToSignIn = () => {
+  //   navigate('/sign-in', {  });
+  // }
 
   const navigateToCheckOut = () => {
     if (cart.length > 0) {
@@ -562,7 +699,10 @@ const settings = {
 
 
                   <IconButton aria-label="shopping cart" sx={{ color: 'white' }}
-                  onClick={() => {navigateToSignIn();}}
+                  onClick={() => {
+                    //navigateToSignIn();
+                    toggleAccount();
+                  }}
                   >
                     <AccountCircleOutlinedIcon />
                   </IconButton>
@@ -609,7 +749,10 @@ const settings = {
 
 
                   <IconButton aria-label="shopping cart" sx={{ color: 'white' }}
-                  onClick={() => {navigateToSignIn();}}>
+                  onClick={() => {
+                    // navigateToSignIn();
+                    toggleAccount();
+                    }}>
                     <AccountCircleOutlinedIcon />
                   </IconButton>
                 </div>
@@ -875,6 +1018,175 @@ const settings = {
     
     </BagContent>
   </SlideInBag>
+{/* )} */}
+
+
+{/* {isAccountOpen && ( */}
+<SlideInAccount 
+  initial={{ x: '100%' }}
+        animate={{ x: isAccountOpen ? 0 : '100%' }}
+        transition={{ duration: 0.2 }} 
+        // exit={{ x: '100%', transition: { type: 'spring', damping: 15, stiffness: 20 } }} // Define exit animation with spring
+  // variants={bagItemVariants}
+  >
+    <AccountContent>
+      <AccountContentInner>
+      <div className='fixed top-0 bg-white h-8 w-full z-50'></div>
+
+
+      <div className='mx-2 '>      
+            
+            <motion.span
+              variants={bagItemVariants}
+              initial="hidden"
+              animate={isAccountOpen ? "visible" : "hidden"}
+              className="text-gray-900 text-sm font-bold cursor-pointer block "
+              onClick={() => {  }}
+            >
+              
+            <div 
+            // className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} 
+                     style={{ maxHeight: '100%', overflowY: 'hidden' }}
+                    //  style={{ maxHeight: '600px', overflowY: 'hidden' }}
+                    // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
+                    >
+                        
+                        <div className='grid grid-cols-12 gap-4 mt-8 mb-8'>
+                            
+                            <div className='col-span-4 px-2 mt-2' >
+                                
+                               
+                            <div className="" 
+                            style={{ height: '100%', overflowY: 'auto' }}
+                            >
+                
+                Wishlist
+    </div>
+
+                            </div>
+
+
+                            {/* <div className='col-span-8 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)' }}> */}
+                            <div className='col-span-8 px-2' style={{  }}>
+                            {/* <div className='col-span-8 shadow-xl'> */}
+
+                            <div className='flex justify-between items-center ml-4'>
+            <motion.span
+              variants={accountItemVariants}
+              initial="hidden"
+              animate={isAccountOpen ? "visible" : "hidden"}
+              className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
+              // onClick={() => {navigateToOnSale();}}
+            >
+              LOGIN
+            </motion.span>
+              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+            </div>
+
+            
+            <hr style={{ borderColor: '#888888' }} className='ml-4 mb-6'/>
+
+
+
+
+                            <div className="m-2 mb-40"
+                        style={{ maxHeight: '100%' }}
+                        >
+                            <div className="woocommerce ">
+                                <div className="woocommerce-notices-wrapper "/>
+                                <div className="u-columns col2-set mx-4 mt-4" id="customer_login">
+                                    <div className="u-column1 col-1 justify-center">
+                                        {/* <h2>Login</h2> */}
+                                        {/* <form className="woocommerce-form woocommerce-form-login login" method="post"> */}
+                                            <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                                {/* <label htmlFor="username">Username or email address&nbsp;<span
+                                                    className="required">*</span></label> */}
+                                                <input type="text"
+                                                value={loginEmailAddress}
+                                                placeholder="Enter your email"
+                                                onChange={(e) => setLoginEmailAddress(e.target.value)}
+                                                       className="woocommerce-Input woocommerce-Input--text input-text"
+                                                       name="username" 
+                                                       id="username" 
+                                                       autoComplete="username"/>
+                                            </div>
+                                            <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-4">
+                                                {/* <label htmlFor="password">Password&nbsp;<span
+                                                    className="required">*</span></label> */}
+                                                <input className="woocommerce-Input woocommerce-Input--text input-text"
+                                                value={loginPassword}
+                                                placeholder="Enter your password"
+                                                onChange={(e) => setLoginPassword(e.target.value)}
+                                                       type="password" 
+                                                       name="password" 
+                                                       id="password"
+                                                       autoComplete="current-password"/>
+                                            </div>
+
+                                            <div className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
+
+                                            <div className='flex justify-between items-center flex-col md:flex-row'>
+                                              <div className="md:mr-4">
+                                                <input className="" name="" type="checkbox" id="" defaultValue="forever"/>
+                                                <span className='ml-2'>Remember me</span>
+                                              </div>
+                                              <button className="woocommerce-button-account mt-4 md:mt-0" style={{}}>                                                
+                                                {isLoading ? 'Please wait..' : 'Sign in'}
+                                              </button>
+                                            </div>
+
+                                            
+                                            
+                                            <div className='mt-4'>
+                                            <div className="woocommerce-LostPassword lost_password">
+                                                {/* <a href="#">Lost your password?</a> */}
+                                                <a href="#">Forgot password ?</a>
+                                            </div>
+                                            {/* <div className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </div> */}
+                                            <div className="mt-2"> <a href="/sign-up">Create Account</a> </div>
+                                            </div>
+
+
+                                        {/* </form> */}
+                                    </div>                                    
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                       
+
+                            </div>
+                        </div>
+
+                        
+                        
+
+
+                        
+
+
+
+                    </div>
+
+                    
+                    
+            </motion.span>
+
+            
+            
+          </div>
+
+          
+
+          
+        </ AccountContentInner>
+    
+    </AccountContent>
+  </SlideInAccount>
 {/* )} */}
     
       

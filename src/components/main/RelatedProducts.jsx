@@ -198,7 +198,7 @@ const images = [
   }, [relatedProducts]);
 
 
-
+  const [addedItemName, setAddedItemName] = useState('');
 
     return (
         <Fragment>
@@ -354,6 +354,8 @@ const images = [
                                                                     showAddedDialogue(index);
                                                                     addToCart(item, productCount);
                                                                     toggleOptionsRelatedProduct(index);
+
+                                                                    setAddedItemName(item.name);
                                                                 }
                                                                 }
                                                             >
@@ -371,15 +373,17 @@ const images = [
               showAddedDialogue(index);
               addToCart(item, 1);
 
+              setAddedItemName(item.name);
+
             }
           }
             >
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" />
-              {showItemAdded && showIndexItemAdded === index && (
+              {/* {showItemAdded && showIndexItemAdded === index && (
         <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
           {item.name} added
         </div>
-      )}
+      )} */}
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div>
           </div>
@@ -391,6 +395,23 @@ const images = [
                     </Slider>
                 </ul>
             </div>
+            {showItemAdded ?
+// && showIndexItemAdded === index && 
+(
+  <div 
+    // className="flex absolute bg-white p-4 rounded-lg border border-gray-300 mt-2 text-lg z-50 items-center justify-center" 
+    className="flex absolute bg-black p-4 rounded-lg mt-2 text-lg z-50 items-center justify-center text-white" 
+    style={{ 
+      position: 'fixed',
+      bottom: '20px',
+      right: '20px',
+      width: '240px',
+      height: '100px',
+    }}
+  >
+    {addedItemName} added to your cart !!
+  </div>
+) : ''}
             {/* <ReactTooltip className='tool-tip' effect='solid'/> */}
         </Fragment>
     );

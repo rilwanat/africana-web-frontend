@@ -19,7 +19,7 @@ function VideoPreview() {
             >
                 <source src=
                 "https://videos-cloudfront.jwpsrv.com/65e73a70_d6f76cddd95921a64d05c1584a4be323dd3bfaf0/content/conversions/X1fXSmBz/videos/gfeVj2bG-33591162.mp4" 
-                type="video/mp4" 
+                // type="video/mp4" 
                 />
             </video>
         </div>
