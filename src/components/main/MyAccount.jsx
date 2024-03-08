@@ -29,6 +29,18 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
     <div>
         <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
 
+
+        <div className='container-1410 mt-12'>
+            <div className="flex w-full bg-black">
+                <div className="flex flex-col flex-grow bg-green-300" style={{ flexBasis: '20%' }}>
+                    <div className='mx-2 bg-red-400'>Content for the first div (20%)</div>
+                </div>
+                <div className="flex flex-col flex-grow bg-green-500" style={{ flexBasis: '80%' }}>
+                    <div className='mx-2 bg-red-400'>Content for the second div (80%)</div>
+                </div>
+            </div>
+        </div>
+
     </div>
     );
 }
