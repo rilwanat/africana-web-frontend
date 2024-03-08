@@ -125,24 +125,24 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                             <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>
                                 <p className='my-2'>Account Details</p>
                                 <hr className='mb-4'/>
-                                <p># Details</p>
+                                <p className='mb-8'># Details</p>
                             </div>
                             <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>
                                 <p className='my-2'>Address Book</p>
                                 <hr className='mb-4'/>
-                                <p># Details</p>
+                                <p className='mb-8'># Details</p>
                             </div>
                         </div>
                         <div className='flex w-full'>
                             <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>
                                 <p className='my-2'>Africana Credit</p>
                                 <hr className='mb-4'/>
-                                <p># Details</p>
+                                <p className='mb-8'># Details</p>
                             </div>
                             <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>
                                 <p className='my-2'>Newsletters</p>
                                 <hr className='mb-4'/>
-                                <p># Details</p>
+                                <p className='mb-8'># Details</p>
                             </div>
                         </div>
 
