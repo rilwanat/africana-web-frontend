@@ -135,7 +135,7 @@ const SlideInAccount = styled(motion.div)`
   top: 0rem;
   right: 0;
   width: calc(100% - 2rem);
-  height: 50vh;
+  height: 70vh;
   /*background-color: rgba(0, 0, 0, 0.5);  Semi-transparent background */
   z-index: 1000; /* Ensure the menu is on top of other content */
   overflow-x: hidden;
@@ -184,6 +184,12 @@ function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem, hand
   const [menuWidthOnsale, setMenuWidthOnsale] = useState(0);
   const [menuWidthSizes, setMenuWidthSizes] = useState(0);
 
+  const [menuWidthSignin, setMenuWidthSignin] = useState(0);
+  const [menuWidthRegister, setMenuWidthRegister] = useState(0);
+
+  const [menuWidthDont, setMenuWidthDont] = useState(0);
+  const [menuWidthAlready, setMenuWidthAlready] = useState(0);
+
 
   const [loginEmailAddress, setLoginEmailAddress] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -193,12 +199,13 @@ function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem, hand
   // const [registrationStatus, setRegistrationStatus] = useState('');
   const loginUser = async (e) => {
     e.preventDefault();
+    setErrorMessage({ message: '' });
 
     navigate('/my-account');
     return;
 
     setIsLoading(true);
-    setErrorMessage({ message: '' });
+    
 
     // setLoginEmailAddress();
     // setLoginPassword();
@@ -286,10 +293,11 @@ const [address2, setAddress2] = useState('Enter Address Line 2');
 const [towncity, setTowncity] = useState('Enter Town / City');
 const registerUser = async (e) => {
   e.preventDefault();
+  setErrorMessage({ message: '' });
   //alert("");
 
   setIsLoading(true);
-  setErrorMessage({ message: '' });
+  
 
   if (emailAddress === 'Enter your email' || emailAddress === '' 
   || 
@@ -394,6 +402,7 @@ const toggleAccount = () => {
 
 const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 const toggleAccountForSignUp = () => {
+  setErrorMessage({ message: '' });
   setIsSignUpOpen(!isSignUpOpen);
 }
 
@@ -441,6 +450,36 @@ const toggleAccountForSignUp = () => {
     } else {
       setMenuWidthSizes(0);
     }
+
+    //
+    if (hoveredMenuItem === 'SIGNIN') {
+      const menuWidthSignin = document.getElementById('signin-text').offsetWidth;
+      setMenuWidthSignin(menuWidthSignin);
+    } else {
+      setMenuWidthSignin(0);
+    }
+    if (hoveredMenuItem === 'REGISTER') {
+      const menuWidthRegister = document.getElementById('register-text').offsetWidth;
+      setMenuWidthRegister(menuWidthRegister);
+    } else {
+      setMenuWidthRegister(0);
+    }
+
+    //
+    if (hoveredMenuItem === 'DONT') {
+      const menuWidthDont = document.getElementById('dont-text').offsetWidth;
+      setMenuWidthDont(menuWidthDont);
+    } else {
+      setMenuWidthDont(0);
+    }
+    if (hoveredMenuItem === 'ALREADY') {
+      const menuWidthAlready = document.getElementById('already-text').offsetWidth;
+      setMenuWidthAlready(menuWidthAlready);
+    } else {
+      setMenuWidthAlready(0);
+    }
+
+
 
 
   }, [hoveredMenuItem]);
@@ -534,7 +573,7 @@ const settings = {
         <div>
             <nav className=" z-50" >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-20 pt-7">
             <div className="flex-shrink-">
               {isLargeScreen ? (
                 <div >
@@ -1139,7 +1178,7 @@ const settings = {
       <div className='fixed top-0 bg-white h-8 w-full z-50'></div>
 
 
-      <div className='mx-2 '>      
+      <div className='mx-2  h-full'>      
             
             <motion.span
               variants={bagItemVariants}
@@ -1156,7 +1195,7 @@ const settings = {
                     // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
                     >
                         
-                        <div className='grid grid-cols-12 gap-4 my-8 ' style={{ height: '40vh' }}>
+                        <div className='grid grid-cols-12 gap-4 my-8 ' style={{ height: '60vh' }}>
                             
                             <div className='col-span-4 px-2 mt-2' >
                                 
@@ -1173,7 +1212,7 @@ const settings = {
 
                             {/* <div className='col-span-8 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)' }}> */}
 {isSignUpOpen ? 
-<div className='col-span-8 px-2 h-full' style={{ display: 'flex', flexDirection: 'column' }}>
+<div className='col-span-8 px-2 h-full ' style={{ display: 'flex', flexDirection: 'column' }}>
                             {/* <div className='col-span-8 shadow-xl'> */}
 
                             <div className='flex justify-between items-center ml-4'>
@@ -1186,7 +1225,7 @@ const settings = {
             >
               CREATE AN ACCOUNT
             </motion.span>
-              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
             </div>
 
             
@@ -1238,25 +1277,65 @@ const settings = {
 
                                             <div className='my-2 text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
 
-                                            <div className='flex justify-end items-center flex-col md:flex-row'>
-                                              {/* <div className="md:mr-4">
+                                            
+
+                                            <p className='ml-2 mb-2 text-xs'>A link to set a new password will be sent to your email address.</p>
+                                            <p className='ml-2 mb-2 text-xs'>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>
+                                            
+                                            <div className='flex justify-between items-center flex-col md:flex-row '>
+                                              <div className='flex flex-col justify-center invisible'>
+                                              <div className="md:mr-4">
                                                 <input className="" name="" type="checkbox" id="" defaultValue="forever"/>
                                                 <span className='ml-2'>Remember me</span>
-                                              </div> */}
-                                              <button className="woocommerce-button-account mt-4 md:mt-4" style={{}} onClick={(e) => {if (!isLoading) registerUser(e)}}>                                                
-                                                {isLoading ? 'Please wait..' : 'Create Account'}
-                                              </button>
+                                              </div>
+                                              <div className="woocommerce-LostPassword lost_password mt-1">
+                                                <a href="#">Forgot password ?</a>
                                             </div>
+                                              
+                                              </div>
+                                              <motion.div
+                    className="text-black text-xs font-bold cursor-pointer mr-4  z-50"
+                    onClick={(e) => {if (!isLoading) registerUser(e)}}
+                    onMouseEnter={() => setHoveredMenuItem('REGISTER')}
+                    onMouseLeave={() => setHoveredMenuItem('REGISTERX')}
+                  >
+                  <div style={{ position: 'relative' }} className='text-lg'>
+<span id="register-text">{isLoading ? 'Please wait..' : 'Register'}</span>
+      <div className={`absolute bg-black 
+      ${hoveredMenuItem === 'REGISTER' ? 'transition-all duration-300' : hoveredMenuItem === "REGISTERX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthRegister, height: '2px', 
+      left: hoveredMenuItem === 'REGISTER' ? 0 : 'auto',
+      right: hoveredMenuItem === 'REGISTER' ? 0 : menuWidthRegister
+       }} />
+</div></motion.div>
+                                              {/* <button className="woocommerce-button-account mt-4 md:mt-4" style={{}} onClick={(e) => {if (!isLoading) registerUser(e)}}>                                                
+                                                {isLoading ? 'Please wait..' : 'Register'}
+                                              </button> */}
+                                            </div>
+
+                                            
 
                                             
                                             
                                             <div className='mt-4'>
-                                            {/* <div className="woocommerce-LostPassword lost_password">
-                                                
-                                                <a href="#">Forgot password ?</a>
-                                            </div> */}
-                                            {/* <div className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </div> */}
-                                            <div className="mt-2"> <a onClick={() => setIsSignUpOpen(false)}>Already have an account? Sign In</a> </div>
+                                            <div className="mt-2">
+                                            {/* <motion.div
+                    className="text-black text-xs cursor-pointer mr-4  z-50"
+                    onClick={() => setIsSignUpOpen(false)}
+                    onMouseEnter={() => setHoveredMenuItem('ALREADY')}
+                    onMouseLeave={() => setHoveredMenuItem('ALREADYX')}
+                  >
+                  <div style={{ position: 'relative' }} className=''>
+<span id="already-text">Already have an account? Sign In</span>
+      <div className={`absolute bg-black 
+      ${hoveredMenuItem === 'ALREADY' ? 'transition-all duration-300' : hoveredMenuItem === "ALREADYX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthAlready, height: '2px', 
+      left: hoveredMenuItem === 'ALREADY' ? 0 : 'auto',
+      right: hoveredMenuItem === 'ALREADY' ? 0 : menuWidthAlready
+       }} />
+</div></motion.div> */}
+                                              <a onClick={() => setIsSignUpOpen(false)}>Already have an account? Sign In</a>
+                                              </div>
                                             </div>
 
 
@@ -1273,7 +1352,7 @@ const settings = {
                        
 
                             </div> : 
-<div className='col-span-8 px-2 h-full' style={{ display: 'flex', flexDirection: 'column' }}>
+<div className='col-span-8 px-2 h-full ' style={{ display: 'flex', flexDirection: 'column' }}>
                             {/* <div className='col-span-8 shadow-xl'> */}
 
                             <div className='flex justify-between items-center ml-4'>
@@ -1286,7 +1365,7 @@ const settings = {
             >
               SIGN IN
             </motion.span>
-              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
             </div>
 
             
@@ -1329,27 +1408,74 @@ const settings = {
                                                        autoComplete="current-password"/>
                                             </div>
 
+
+                                            <div className='invisible'><div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-4">
+        {/* <label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label> */}
+        <input value={emailAddress} placeholder="Enter your email" 
+        type="email" className="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autoComplete="email" />
+    </div> <div className='my-2 text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
+                                            <p className='ml-2 mb-2 text-xs'>A link to set a new password will be sent to your email address.</p>
+                                            <p className='ml-2 mb-2 text-xs'>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>
+                                            </div>
+
+
+
                                             <div className='my-2 text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
 
-                                            <div className='flex justify-between items-center flex-col md:flex-row'>
+                                            <div className='flex justify-between items-center flex-col md:flex-row '>
+                                              <div className='flex flex-col justify-center'>
                                               <div className="md:mr-4">
                                                 <input className="" name="" type="checkbox" id="" defaultValue="forever"/>
                                                 <span className='ml-2'>Remember me</span>
                                               </div>
-                                              <button className="woocommerce-button-account mt-4 md:mt-4" style={{}} onClick={(e) => {if (!isLoading) loginUser(e)}}>                                                
+                                              <div className="woocommerce-LostPassword lost_password mt-1">
+                                                <a href="#">Forgot password ?</a>
+                                            </div>
+                                              
+                                              </div>
+
+                                              <motion.div
+                    className="text-black text-xs font-bold cursor-pointer mr-4  z-50"
+                    onClick={(e) => {if (!isLoading) loginUser(e)}}
+                    onMouseEnter={() => setHoveredMenuItem('SIGNIN')}
+                    onMouseLeave={() => setHoveredMenuItem('SIGNINX')}
+                  >
+                  <div style={{ position: 'relative' }} className='text-lg'>
+<span id="signin-text">{isLoading ? 'Please wait..' : 'Sign in'}</span>
+      <div className={`absolute bg-black 
+      ${hoveredMenuItem === 'SIGNIN' ? 'transition-all duration-300' : hoveredMenuItem === "SIGNINX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthSignin, height: '2px', 
+      left: hoveredMenuItem === 'SIGNIN' ? 0 : 'auto',
+      right: hoveredMenuItem === 'SIGNIN' ? 0 : menuWidthSignin
+       }} />
+</div></motion.div>
+
+                                              {/* <button className="woocommerce-button-account mt-4 md:mt-4" style={{}} onClick={(e) => {if (!isLoading) loginUser(e)}}>                                                
                                                 {isLoading ? 'Please wait..' : 'Sign in'}
-                                              </button>
+                                              </button> */}
                                             </div>
 
                                             
                                             
                                             <div className='mt-4'>
-                                            <div className="woocommerce-LostPassword lost_password">
-                                                {/* <a href="#">Lost your password?</a> */}
-                                                <a href="#">Forgot password ?</a>
-                                            </div>
-                                            {/* <div className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </div> */}
-                                            <div className="mt-2"> <a onClick={() => toggleAccountForSignUp()}>Don't have an account? Create Account</a> </div>
+                                            <div className="mt-2">
+                                            {/* <motion.div
+                    className="text-black text-xs cursor-pointer mr-4  z-50"
+                    onClick={() => toggleAccountForSignUp()}
+                    onMouseEnter={() => setHoveredMenuItem('DONT')}
+                    onMouseLeave={() => setHoveredMenuItem('DONTX')}
+                  >
+                  <div style={{ position: 'relative' }} className=''>
+<span id="dont-text">Don't have an account? Create Account</span>
+      <div className={`absolute bg-black 
+      ${hoveredMenuItem === 'DONT' ? 'transition-all duration-300' : hoveredMenuItem === "DONTX" ? 'transition-all duration-300' : ''}`} 
+      style={{ width: menuWidthDont, height: '2px', 
+      left: hoveredMenuItem === 'DONT' ? 0 : 'auto',
+      right: hoveredMenuItem === 'DONT' ? 0 : menuWidthDont
+       }} />
+</div></motion.div> */}
+                                              <a onClick={() => toggleAccountForSignUp()}>Don't have an account? Create Account</a> 
+                                              </div>
                                             </div>
 
 
