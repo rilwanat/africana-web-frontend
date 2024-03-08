@@ -1130,7 +1130,7 @@ const settings = {
                                                 <input className="" name="" type="checkbox" id="" defaultValue="forever"/>
                                                 <span className='ml-2'>Remember me</span>
                                               </div>
-                                              <button className="woocommerce-button-account mt-4 md:mt-0" style={{}}>                                                
+                                              <button className="woocommerce-button-account mt-4 md:mt-0" style={{}} onClick={(e) => {if (!isLoading) loginUser(e)}}>                                                
                                                 {isLoading ? 'Please wait..' : 'Sign in'}
                                               </button>
                                             </div>
