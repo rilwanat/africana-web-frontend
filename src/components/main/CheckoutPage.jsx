@@ -16,7 +16,7 @@ import ShippingFields from './ShippingFields';
 import AfricanaHeader from './AfricanaHeader';
 import AfricanaFooter from './AfricanaFooter';
 
-function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem, clearCart, removeAllCartItem  }) {
+function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem, clearCart, removeAllCartItem, handleEmailAddress  }) {
     const location = useLocation();
     const cart = location.state.encryptedData;
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
@@ -351,7 +351,7 @@ function getProductName(cartItems, productVariantId) {
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader options={options} cart={parsedCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={parsedCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
 
 
             <section className="checkout-section section-padding">

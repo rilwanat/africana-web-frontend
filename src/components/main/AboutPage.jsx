@@ -12,7 +12,7 @@ import './react-css/about.css';
 import { useNavigate } from "react-router-dom";
 import signature from "../../assets/images/signature.svg";
 
-function AboutPage({ options, cart, removeCartItem, removeAllCartItem  }) {
+function AboutPage({ options, cart, removeCartItem, removeAllCartItem, handleEmailAddress  }) {
 
     const settings = {
         dots: true,
@@ -45,7 +45,7 @@ function AboutPage({ options, cart, removeCartItem, removeAllCartItem  }) {
 
     return (
         <Fragment>
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress} /></div>
 
             {/* <PageTitle name="About us"/> */}
 

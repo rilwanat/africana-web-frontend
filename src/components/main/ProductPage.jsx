@@ -35,7 +35,7 @@ import imgx from '../../assets/images/size.png';
 import CloseIcon from '@mui/icons-material/Close';
 
 
-function ProductPage({options, addToCart, cart, updateCart, removeCartItem, removeAllCartItem }) {
+function ProductPage({options, addToCart, cart, updateCart, removeCartItem, removeAllCartItem, handleEmailAddress }) {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -217,7 +217,7 @@ const showSizeChartDialogue = (i) => {
     return (
         <div>
             
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress} /></div>
 
             <section className="shop-single-section  shop-single-vertical-thumb section-padding">
                 <div className="container-1410">

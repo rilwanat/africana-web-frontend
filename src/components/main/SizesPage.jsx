@@ -8,10 +8,10 @@ import AfricanaFooter from './AfricanaFooter';
 
 import imgx from '../../assets/images/size.png';
 
-function SizesPage({ options, addToCart, cart, removeCartItem, categories, removeAllCartItem }) {
+function SizesPage({ options, addToCart, cart, removeCartItem, categories, removeAllCartItem, handleEmailAddress }) {
     return(
         <div>
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
 
             <section className="shop-single-section section-padding" style={{ backgroundColor: '#eeeeee' }}>
                 <div className="container-1410">

@@ -15,7 +15,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AfricanaHeader from './AfricanaHeader';
 import AfricanaFooter from './AfricanaFooter';
 
-function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem, removeAllCartItem  }) {
+function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem, removeAllCartItem, handleEmailAddress  }) {
     const location = useLocation();
     const cart = location.state.encryptedData;
     const decryptedData = AES.decrypt(decodeURIComponent(cart), 'encryptionKey').toString(CryptoJS.enc.Utf8);
@@ -122,7 +122,7 @@ function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCa
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader options={options} cart={parsedCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={parsedCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
 
             <section className="cart-section woocommerce-cart section-padding">
                 <div className="container-1410">

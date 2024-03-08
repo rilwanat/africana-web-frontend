@@ -20,14 +20,14 @@ import Loading from './widgets/Loading';
 
 
 
-function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem }) {
+function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem, handleEmailAddress }) {
 
     const navigate = useNavigate();
 
 
     return(
     <div>
-        <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+        <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
 
     </div>
     );

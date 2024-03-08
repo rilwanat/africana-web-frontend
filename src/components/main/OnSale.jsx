@@ -24,7 +24,7 @@ import TagFilterWidget from './widgets/TagFilterWidget';
 
 
 
-function OnSale({ options, addToCart, cart, removeCartItem, categories, removeAllCartItem  }) {
+function OnSale({ options, addToCart, cart, removeCartItem, categories, removeAllCartItem, handleEmailAddress  }) {
 
     const navigate = useNavigate();
 
@@ -184,7 +184,7 @@ function OnSale({ options, addToCart, cart, removeCartItem, categories, removeAl
 
     return (
         <div>
-            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+            <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
 
             {/* <PageTitle name={productSlug}/> */}
 

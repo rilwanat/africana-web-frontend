@@ -14,7 +14,7 @@ import Hero from './Hero';
 
 import Instagram from './widgets/Instagram';
 
-function ContactPage({ options, addToCart, cart, removeCartItem, removeAllCartItem  }) {
+function ContactPage({ options, addToCart, cart, removeCartItem, removeAllCartItem, handleEmailAddress  }) {
 
     const contactUsData = {
         address: "17 Monrovia street, Off Aminu Kano Crescent, Abuja",
@@ -28,7 +28,7 @@ function ContactPage({ options, addToCart, cart, removeCartItem, removeAllCartIt
     return(
     <div>
 
-<div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} /></div>
+<div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress} /></div>
 
 {/* <Hero /> */}
 

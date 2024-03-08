@@ -165,7 +165,7 @@ const accountItemVariants = {
 //
 
 
-function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem }) {
+function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem, handleEmailAddress }) {
 
     // const data = {
     //     "content": "Join our showroom and get 1 % off ! Coupon code : AFR222"
@@ -275,6 +275,106 @@ function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem }) {
 
 
 
+const [firstname, setFirstname] = useState('');
+const [lastname, setLastname] = useState('');
+const [companyname, setCompanyname] = useState('Enter your Company name');
+const [emailAddress, setEmailAddress] = useState('');
+const [phone, setPhonenumber] = useState('Enter your phone number');
+const [country, setCountry] = useState('Enter your Country *dropdown');
+const [address1, setAddress1] = useState('Enter Address Line 1');
+const [address2, setAddress2] = useState('Enter Address Line 2');
+const [towncity, setTowncity] = useState('Enter Town / City');
+const registerUser = async (e) => {
+  e.preventDefault();
+  //alert("");
+
+  setIsLoading(true);
+  setErrorMessage({ message: '' });
+
+  if (emailAddress === 'Enter your email' || emailAddress === '' 
+  || 
+      firstname === 'Enter your Firstname' || firstname === ''
+      || 
+      lastname === 'Enter your Lastname' || lastname === ''
+      ) {
+      setErrorMessage({ message: 'Registration Failed: Please enter valid credentials' });
+      // setRegistrationStatus("Failed");
+      setIsLoading(false);
+
+      //alert("");
+      return;
+  }
+
+  //alert("login user: " + emailAddress + " " + firstname + " " + lastname);
+
+
+  try {
+
+      const requestData = {                
+              firstName: firstname,
+              lastName: lastname,
+              email: emailAddress,          
+      };
+
+      const response = await axios.post('http://144.149.167.72.host.secureserver.net:3000/api/v1/auth/register', requestData, {
+          headers: {
+              // 'Content-Type': 'multipart/form-data',
+              'Content-Type': 'application/json',
+          },
+      });
+
+
+      setIsLoading(false);
+
+
+      if (response.data.success) {
+          // If registration is successful
+          setErrorMessage({ message: '' });
+
+          handleEmailAddress(emailAddress);
+          
+          // navigate('/confirm-email/' + emailAddress);
+          //navigate('/confirm-email');
+
+
+          setFirstname('');
+          setLastname('');
+          setEmailAddress('');
+          alert("Registration Successful: " + response.data.message + "\n\n Please check your mail and login to continue");
+          navigate('/sign-in');
+
+          
+      } else {
+          // If there are errors in the response
+          const errors = response.data.errors.map(error => error.msg);
+          const errorMessage = errors.join(', ');
+          setErrorMessage({ message: errorMessage });
+          alert("Registration Failed");
+      }
+      
+  } catch (error) {
+      setIsLoading(false);
+      
+      if (error.response && error.response.data && error.response.data.message) {
+          const errorMessage = error.response.data.message;
+          setErrorMessage({ message: errorMessage });
+      } else if (error.response && error.response.data && error.response.data.errors) {
+          const { errors } = error.response.data;
+          const errorMessages = errors.map(error => error.msg);
+          const errorMessage = errorMessages.join(', '); // Join all error messages
+          setErrorMessage({ message: errorMessage });
+      } else {
+          setErrorMessage({ message: 'Registration failed. Please check your credentials and try again.' });
+      }
+  }
+  
+};
+
+
+
+
+
+
 
 
   const toggleMenu = () => {
@@ -291,6 +391,11 @@ const [isAccountOpen, setIsAccountOpen] = useState(false);
 const toggleAccount = () => {
   setIsAccountOpen(!isAccountOpen);
 };
+
+const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+const toggleAccountForSignUp = () => {
+  setIsSignUpOpen(!isSignUpOpen);
+}
 
 
   useEffect(() => {
@@ -877,7 +982,7 @@ const settings = {
               variants={bagItemVariants}
               initial="hidden"
               animate={isBagOpen ? "visible" : "hidden"}
-              className="text-gray-900 text-sm font-bold cursor-pointer block "
+              className="text-gray-900 text-sm cursor-pointer block "
               onClick={() => {  }}
             >
               
@@ -1040,7 +1145,7 @@ const settings = {
               variants={bagItemVariants}
               initial="hidden"
               animate={isAccountOpen ? "visible" : "hidden"}
-              className="text-gray-900 text-sm font-bold cursor-pointer block "
+              className="text-gray-900 text-sm cursor-pointer block "
               onClick={() => {  }}
             >
               
@@ -1051,12 +1156,12 @@ const settings = {
                     // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
                     >
                         
-                        <div className='grid grid-cols-12 gap-4 mt-8 mb-8'>
+                        <div className='grid grid-cols-12 gap-4 my-8 ' style={{ height: '40vh' }}>
                             
                             <div className='col-span-4 px-2 mt-2' >
                                 
                                
-                            <div className="" 
+                            <div className="bg-gray-300" 
                             style={{ height: '100%', overflowY: 'auto' }}
                             >
                 
@@ -1067,7 +1172,8 @@ const settings = {
 
 
                             {/* <div className='col-span-8 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)' }}> */}
-                            <div className='col-span-8 px-2' style={{  }}>
+{isSignUpOpen ? 
+<div className='col-span-8 px-2 h-full' style={{ display: 'flex', flexDirection: 'column' }}>
                             {/* <div className='col-span-8 shadow-xl'> */}
 
                             <div className='flex justify-between items-center ml-4'>
@@ -1078,7 +1184,7 @@ const settings = {
               className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
               // onClick={() => {navigateToOnSale();}}
             >
-              LOGIN
+              CREATE AN ACCOUNT
             </motion.span>
               <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
             </div>
@@ -1089,7 +1195,107 @@ const settings = {
 
 
 
-                            <div className="m-2 mb-40"
+                            <div className="m-2 mb-10  "
+                        style={{ maxHeight: '100%' }}
+                        >
+                            <div className="woocommerce ">
+                                <div className="woocommerce-notices-wrapper "/>
+                                <div className="u-columns col2-set mx-4 mt-4" id="customer_login">
+                                    <div className="u-column1 col-1 justify-center">
+                                        {/* <h2>Login</h2> */}
+                                        {/* <form className="woocommerce-form woocommerce-form-login login" method="post"> */}
+                                        <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+        {/* <label htmlFor="reg_firstname">First name&nbsp;<span className="required">*</span></label> */}
+        <input 
+        value={firstname}
+        placeholder="Enter your Firstname"
+        onChange={(e) => setFirstname(e.target.value)}
+        type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="firstname" id="reg_firstname" autoComplete="given-name" />
+    </div>
+
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-4">
+        {/* <label htmlFor="reg_lastname">Last name&nbsp;<span className="required">*</span></label> */}
+        <input 
+        value={lastname}
+        placeholder="Enter your Lastname"
+        onChange={(e) => setLastname(e.target.value)}
+        type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="lastname" id="reg_lastname" autoComplete="family-name" />
+    </div>
+
+    {/* <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+        <label htmlFor="reg_company">Company name&nbsp;<span className=""></span></label>
+        <input type="text" className="woocommerce-Input woocommerce-Input--text input-text" name="company" id="reg_company" autoComplete="organization" />
+    </div> */}
+
+    <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-4">
+        {/* <label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label> */}
+        <input 
+        value={emailAddress}
+        placeholder="Enter your email"
+        onChange={(e) => setEmailAddress(e.target.value)}
+        type="email" className="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autoComplete="email" />
+    </div>
+
+                                            <div className='my-2 text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
+
+                                            <div className='flex justify-end items-center flex-col md:flex-row'>
+                                              {/* <div className="md:mr-4">
+                                                <input className="" name="" type="checkbox" id="" defaultValue="forever"/>
+                                                <span className='ml-2'>Remember me</span>
+                                              </div> */}
+                                              <button className="woocommerce-button-account mt-4 md:mt-4" style={{}} onClick={(e) => {if (!isLoading) registerUser(e)}}>                                                
+                                                {isLoading ? 'Please wait..' : 'Create Account'}
+                                              </button>
+                                            </div>
+
+                                            
+                                            
+                                            <div className='mt-4'>
+                                            {/* <div className="woocommerce-LostPassword lost_password">
+                                                
+                                                <a href="#">Forgot password ?</a>
+                                            </div> */}
+                                            {/* <div className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </div> */}
+                                            <div className="mt-2"> <a onClick={() => setIsSignUpOpen(false)}>Already have an account? Sign In</a> </div>
+                                            </div>
+
+
+                                        {/* </form> */}
+                                    </div>                                    
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                       
+
+                            </div> : 
+<div className='col-span-8 px-2 h-full' style={{ display: 'flex', flexDirection: 'column' }}>
+                            {/* <div className='col-span-8 shadow-xl'> */}
+
+                            <div className='flex justify-between items-center ml-4'>
+            <motion.span
+              variants={accountItemVariants}
+              initial="hidden"
+              animate={isAccountOpen ? "visible" : "hidden"}
+              className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
+              // onClick={() => {navigateToOnSale();}}
+            >
+              SIGN IN
+            </motion.span>
+              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+            </div>
+
+            
+            <hr style={{ borderColor: '#888888' }} className='ml-4 mb-6'/>
+
+
+
+
+                            <div className="m-2 mb-10  "
                         style={{ maxHeight: '100%' }}
                         >
                             <div className="woocommerce ">
@@ -1123,14 +1329,14 @@ const settings = {
                                                        autoComplete="current-password"/>
                                             </div>
 
-                                            <div className='mb-4 font-bold text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
+                                            <div className='my-2 text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
 
                                             <div className='flex justify-between items-center flex-col md:flex-row'>
                                               <div className="md:mr-4">
                                                 <input className="" name="" type="checkbox" id="" defaultValue="forever"/>
                                                 <span className='ml-2'>Remember me</span>
                                               </div>
-                                              <button className="woocommerce-button-account mt-4 md:mt-0" style={{}} onClick={(e) => {if (!isLoading) loginUser(e)}}>                                                
+                                              <button className="woocommerce-button-account mt-4 md:mt-4" style={{}} onClick={(e) => {if (!isLoading) loginUser(e)}}>                                                
                                                 {isLoading ? 'Please wait..' : 'Sign in'}
                                               </button>
                                             </div>
@@ -1143,7 +1349,7 @@ const settings = {
                                                 <a href="#">Forgot password ?</a>
                                             </div>
                                             {/* <div className=""> <a href="/sign-up">Dont have an account? Sign Up</a> </div> */}
-                                            <div className="mt-2"> <a href="/sign-up">Create Account</a> </div>
+                                            <div className="mt-2"> <a onClick={() => toggleAccountForSignUp()}>Don't have an account? Create Account</a> </div>
                                             </div>
 
 
@@ -1160,6 +1366,8 @@ const settings = {
                        
 
                             </div>
+
+                            }
                         </div>
 
                         
