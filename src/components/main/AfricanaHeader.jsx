@@ -1229,7 +1229,7 @@ const settings = {
             </div>
 
             
-            <hr style={{ borderColor: '#888888' }} className='ml-4 mb-6'/>
+            <hr style={{ borderColor: '#888888' }} className='ml-4 '/>
 
 
 
@@ -1369,7 +1369,7 @@ const settings = {
             </div>
 
             
-            <hr style={{ borderColor: '#888888' }} className='ml-4 mb-6'/>
+            <hr style={{ borderColor: '#888888' }} className='ml-4'/>
 
 
 
