@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef  } from 'react';
-import { useNavigate } from "react-router-dom";
-import { AppBar, Toolbar, IconButton, Typography, Box, useMediaQuery } from '@mui/material';
-import axios from 'axios';
+import React, {Fragment, useState, useEffect } from 'react';
+import Slider from "react-slick";
 
-import WestIcon from '@mui/icons-material/West';
-import EastIcon from '@mui/icons-material/East';
+import './react-css/products.css';
 
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+
+import imgx from '../../assets/images/shop/img-2.jpg';
 
 import ShoppingBagOutlinedIcon from '@mui/icons-material/LocalMallSharp';
 
@@ -14,10 +13,9 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';
 
-import Slider from 'react-slick';
-
 import CryptoJS from 'crypto-js';
 import { AES } from 'crypto-js';
+
 
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -25,38 +23,79 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { AnimatePresence, motion } from 'framer-motion';
 
 
-function FrequentlyBoughtTogether({ addToCart, cart }) {
+function FrequentlyBoughtTogether({onQuickViewClick, relatedProducts, addToCart, cart}) {
 
+    
     const navigate = useNavigate();
-  const isLargeScreen = useMediaQuery('(min-width:960px)');
 
-  const sliderRefNewIn = useRef(null); 
-  const [isHoverWestNewIn, setIsHoverWestNewIn] = useState(false);
-  const [isHoverEastNewIn, setIsHoverEastNewIn] = useState(false);
-  const handleHoverWestNewIn = () => { setIsHoverWestNewIn(true); };
-  const handleLeaveWestNewIn = () => { setIsHoverWestNewIn(false); };
-  const handleHoverEastNewIn = () => { setIsHoverEastNewIn(true); };
-  const handleLeaveEastNewIn = () => { setIsHoverEastNewIn(false); };
 
-  
-  const [openItemIndexNewIn, setOpenItemIndexNewIn] = useState(null);
-  const toggleOptionsNewIn = (index) => {
+    // const [isPrevHovered, setPrevHovered] = useState(false);
+    // const [isNextHovered, setNextHovered] = useState(false);
+
+    // const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
+    // const [isFavHovered, setFavHovered] = useState(false);
+    // const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
+    
+
+    // const [showWidget, setShowWidget] = useState(false);
+
+    const [zoomedItemId, setZoomedItemId] = useState(null);
+    const [productCount, setProductCount] = useState(1);
+    const [selectedSize, setSelectedSize] = useState('');
+    const handleSizeSelection = (size) => {
+      setSelectedSize(size);
+    };
+    
+    const [openItemIndexRelatedProduct, setOpenItemIndexRelatedProduct] = useState(null);
+  const toggleOptionsRelatedProduct = (index) => {
     setProductCount(1);
     setSelectedSize('');
-    setOpenItemIndexNewIn(openItemIndexNewIn === index ? null : index);
-  };
-
-  const [zoomedItemId, setZoomedItemId] = useState(null);
-  const [products, setProductsData] = useState([]);
-  const [productCount, setProductCount] = useState(1);
-  const [isDataloading, setIsDataLoading] = useState(true);
-  const [selectedSize, setSelectedSize] = useState('');
-  const handleSizeSelection = (size) => {
-    setSelectedSize(size);
+    setOpenItemIndexRelatedProduct(openItemIndexRelatedProduct === index ? null : index);
   };
 
 
-  // Function to find the lowest price among product variants
+    const settings = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        speed: 300,
+        swipeToSlide: true,
+        autoplaySpeed: 2000,
+        focusOnSelect: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: true,
+                    arrows: false,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                }
+            }
+        ]
+    };
+
+
+    // Function to find the lowest price among product variants
 function findLowestPrice(product) {
     let lowestPrice = Infinity;
   
@@ -71,7 +110,7 @@ function findLowestPrice(product) {
     // return lowestPrice;
     return lowestPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
-  
+
   function findHighestPrice(product) {
     let highestPrice = 0;
   
@@ -85,105 +124,39 @@ function findLowestPrice(product) {
   
     return highestPrice;
   }
-  
+
   // Function to calculate the discount percentage
-  function calculateDiscountPercentage(price, oldPrice) {
+function calculateDiscountPercentage(price, oldPrice) {
     return parseInt(price) < parseInt(oldPrice) ?
       Math.round(((parseInt(oldPrice) - parseInt(price)) / parseInt(oldPrice)) * 100)
       : 0; // Return 0 if there's no discount
   }
 
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    slidesToShow: 4, //6,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 600,
-    swipeToSlide: true,
-    autoplaySpeed: 4000,
-    focusOnSelect: false,
-    responsive: [
-      {
-        breakpoint: 1024, // Medium screens and above
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768, // Small screens and above
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-    ],
-  };
-
-  useEffect(() => {
-
-    handleNewInData();
-    
-  }, []);
-
-
-
-
-  const handleNewInData = async () => {    
-    //alert("token: " + token + "\n\n" + "uid: " + uid);
-    setIsDataLoading(true);
-    try {
-
-      // const response = await axios.get('http://localhost:3000/productssample.json');
-      const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
-        //params: { uid: uid },
-        headers: {
-          "Content-Type": "application/json",
-          //Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setIsDataLoading(false);
-      //alert(JSON.stringify(response.data, null, 2));
-
-      if (response.data.success) {
-        //alert("dashboard-products " + JSON.stringify(response.data, null, 2));
-      
-        // Store the retrieved data in state variables
-
-        setProductsData(response.data.products);
-      } else {
-        //alert("error: " + response.data.message);
-      }
-
-    } catch (error) {
-      setIsDataLoading(false);
-      //alert("error: " + error);
-    }
-  };
-
   const handleProductClick = (product, e) => {
 
-    //if (!isDragging) 
-   {
-       
-       const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
-       navigate('/product-details', { state: { encryptedData } });
-       //
-       window.scrollTo(0, 0);
-   }
-   
+     //if (!isDragging) 
+    {
+        
+        const encryptedData = AES.encrypt(JSON.stringify(product), 'encryptionKey').toString();
+        // navigate(`/product-details/${encodeURIComponent(encryptedData)}`);
+        navigate('/product-details', { state: { encryptedData } });
+        //
+        window.scrollTo(0, 0);
+    }
+    
 
- };
+  };
 
- const handleIncreaseQuantity = (item) => {
-  setProductCount(productCount + 1);
+
+  const handleIncreaseQuantity = (item) => {
+    setProductCount(productCount + 1);
 };
 
 const handleDecreaseQuantity = (item) => {
-  if (productCount > 1) {
-      setProductCount(productCount - 1);
-  }
+    if (productCount > 1) {
+        setProductCount(productCount - 1);
+    }
+    
 };
 
 const [showItemAdded, setShowItemAdded] = useState(false);
@@ -194,23 +167,16 @@ const showAddedDialogue = (i) => {
   setShowItemAdded(true);
   setTimeout(() => {
     setShowItemAdded(false);
-  }, 2000);
+  }, 1000);
 }
 
 
-
-const [addedItemName, setAddedItemName] = useState('');
-
-
-
-
-
-// const [currentSlides, setCurrentSlides] = useState(products.map(() => 0)); // Initialize to an array of zeros
-const [currentSlides, setCurrentSlides] = useState(Array(products.length).fill(0)); // Separate state for each carousel
+// const [currentSlides, setCurrentSlides] = useState(relatedProducts.map(() => 0)); // Initialize to an array of zeros
+const [currentSlides, setCurrentSlides] = useState(Array(relatedProducts.length).fill(0)); // Separate state for each carousel
 const images = [
-  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png", 
-  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png", 
-  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
+  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
+  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
+  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp"
 ];
   // const [currentSlide, setCurrentSlide] = useState(0);
   const [delayTimeout, setDelayTimeout] = useState(null);
@@ -231,114 +197,117 @@ const images = [
   
   useEffect(() => {
     // Initialize currentSlides to an array of zeros
-    setCurrentSlides(Array(products.length).fill(0));
-  }, [products]);
+    setCurrentSlides(Array(relatedProducts.length).fill(0));
+  }, [relatedProducts]);
 
 
-
-
-
-
+  const [addedItemName, setAddedItemName] = useState('');
 
     return (
-        <div className="container-1410">
-<div className='flex justify-between mt-12 mb-4'>
-<div style={{ width: '50px' }} className='flex justify-start'>
-      <ArrowRightAltIcon
-        className='cursor-pointer'
-        onClick={() => sliderRefNewIn.current.slickPrev()}
-        onMouseEnter={handleHoverWestNewIn}
-        onMouseLeave={handleLeaveWestNewIn}
-        style={{ width: isHoverWestNewIn ? '32px' : '44px', transition: 'width 0.3s ease', transform: 'scaleX(-1)' }}
-      />
-      </div>
-      <a style={{ cursor: 'pointer' }} className='text-center'>Frequently Bought Together</a>
-      <div style={{ width: '50px'}} className='flex justify-end'>
-      <ArrowRightAltIcon
-        className='cursor-pointer'
-        onClick={() => sliderRefNewIn.current.slickNext()}
-        onMouseEnter={handleHoverEastNewIn}
-        onMouseLeave={handleLeaveEastNewIn}
-        style={{ width: isHoverEastNewIn ? '32px' : '44px', transition: 'width 0.3s ease' }}
-      />
-      </div>
-    </div>
-<div className="w-full">
-  <Slider ref={sliderRefNewIn} {...settings}>
-    {products.map((item, index) => (
-      <li key={index} className="">
-        <div className="">
-          {findLowestPrice(item) < findHighestPrice(item) ? (
-            <div className="absolute top-0 right-0 m-2 p-1 bg-red-500 text-white text-xs font-bold">-{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%</div>
-          ) : null}
-<div className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`} style={{ position: 'relative' }}>
-  <div className="ml-2 z-50" style={{ position: 'absolute', top: '16px', left: '4px', display: 'flex' }}>
-    {images.map((_, i) => (
-      <div
-        key={i}
-        style={{
-          width: '24px',
-          height: '2px',
-          margin: '0 4px',
-          background: i === currentSlides[index] ? '#000' : '#fff',
-          borderRadius: '4px',
-          cursor: 'pointer',
-        }}
-        // onClick={() => setCurrentSlide(i)}
-        aria-label={`Go to slide ${i + 1}`}
-        title={`${i + 1}`}
-      />
-    ))}
-  </div>
-  <div
-    className="cursor-pointer"
-    onClick={(e) => handleProductClick(item, e)}
-    onMouseEnter={() => setZoomedItemId(item.id)}
-    onMouseLeave={() => setZoomedItemId(null)}
-    // style={{
-    //   transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
-    //   transition: 'transform 0.8s ease',
-    // }}
-  >
-    <Carousel
-      showIndicators={false}
-      showArrows={false}
-      showStatus={false}
-      showThumbs={false}
-      infiniteLoop={true}
-      autoPlay={false}
-      draggable={false}
-      selectedItem={currentSlides[index]}
-      onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
-    >
-      {images.map((image, imageIndex) => (
-        <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)}>
-          <img
-            src={image}
-            alt={`Image ${imageIndex}`}
-            style={{
-              transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
-              transition: 'transform 0.8s ease',
-            }}
-          />
-        </div>
-      ))}
-    </Carousel>
-  </div>
-</div>
+        <Fragment>
+            <div className="realted-porduct">
+                <h3>Frequently Bought Together</h3>
+                <ul className="products product-row-slider" 
+                >
+                    <Slider {...settings}
+                    >
+                        {
+                            relatedProducts.map((item, index) => (
+                                <li key={index} className="product" >
+                                    <div className="product-holder">
+                                        {
+                                        findLowestPrice(item) < findHighestPrice(item)
+                                        ?
+                                            <div className="product-badge discount">
+                                                -{calculateDiscountPercentage(findLowestPrice(item), findHighestPrice(item))}%
+                                                </div> : ''
+                                        }
+                                            <div className='mx-2'
+                                        onClick={(e) => handleProductClick(item, e)}
 
-        </div>
-        <div className="pl-2 ">
-          <h4 className="text-left flex items-center mt-4 cursor-pointer">
+                                        onMouseEnter={() => setZoomedItemId(item.id)}
+                                        onMouseLeave={() => setZoomedItemId(null)}
+                                            
+                                        style={{cursor: 'pointer'}}>
+
+
+
+<Carousel
+      showIndicators={false}
+        showArrows={false}
+        showStatus={false}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={false}
+        draggable={false}
+        selectedItem={currentSlides[index]}
+        onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
+        >
+        {images.map((image, imageIndex) => (
+          <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)} >
+            <img 
+            src={image} 
+            alt={`Image ${imageIndex}`} 
+
+          style={{
+            transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
+            transition: 'transform 0.8s ease',
+          }}
+
+            />
+          </div>
+        ))}
+      </Carousel>
+      <div className="ml-4" style={{ position: 'absolute', top: '16px', left: '8px', display: 'flex' }}>
+        {images.map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: '24px',
+              height: '2px',
+              margin: '0 4px',
+              background: i === currentSlides[index] ? '#000' : '#fff',
+              borderRadius: '4px',
+              cursor: 'pointer',
+            }}
+            // onClick={() => setCurrentSlide(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            title={`${i + 1}`}
+          />
+        ))}
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          </div>
+                                        
+                                        
+                                    </div>
+                                    <div className="pl-2" >
+                                    <h4 className="text-left flex items-center mt-4 cursor-pointer">
             <div className="text-sm uppercase">{item.name}</div>
           </h4>
           <h4 className="text-left flex items-center mt-2 cursor-pointer">
             <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
           </h4>
-          <div className="text-left flex items-center mt-1 ">
-            {/* <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsNewIn(index)}}>OPTIONS</h4> */}
+                                        <div className="text-left flex items-center mt-1 mb-8">
+            {/* <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsRelatedProduct(index)}}>OPTIONS</h4> */}
             <AnimatePresence>
-                                        {openItemIndexNewIn === index && (
+                                        {openItemIndexRelatedProduct === index && (
                                             <motion.div
                                                 // initial={{ opacity: 0 }}
                                                 // animate={{ opacity: 1 }}
@@ -353,7 +322,7 @@ const images = [
                                                 style={{ marginTop: '-134px' }}
                                             >
                                                 <div className='flex justify-between items-start  mb-4 mt-1'>
-                                                    <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => { toggleOptionsNewIn(index) }} />
+                                                    <CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => { toggleOptionsRelatedProduct(index) }} />
                                                     <div className='text-sm'>{item.name}</div>
                                                 </div>
 
@@ -382,12 +351,12 @@ const images = [
                                                             </div>
                                                         </div>
 
-                                                        <div className='flex flex-col md:flex-row bg-black '>
+                                                        {/* <div className='flex flex-col md:flex-row bg-black '>
                                                             <div className="flex ml-2 w-20 text-white items-center cursor-pointer"
                                                                 onClick={() => {
                                                                     showAddedDialogue(index);
                                                                     addToCart(item, productCount);
-                                                                    toggleOptionsNewIn(index);
+                                                                    toggleOptionsRelatedProduct(index);
 
                                                                     setAddedItemName(item.name);
                                                                 }
@@ -395,40 +364,36 @@ const images = [
                                                             >
                                                                 <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
-            {/* <div className="ml-2">
-              <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
-            </div> */}
             
-
-            {/* <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2" 
+            {/* <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2"
             onClick={() => {
               showAddedDialogue(index);
               addToCart(item, 1);
 
               setAddedItemName(item.name);
+
             }
           }
             >
-              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" 
-              />
-              
-
-              <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
+              <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" />
+      <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div> */}
           </div>
-        </div>
-      </li>
-    ))}
-  </Slider>
-</div>
 
-{showItemAdded ?
+                                    </div>
+                                </li>
+                            ))
+                        }
+                    </Slider>
+                </ul>
+            </div>
+            {showItemAdded ?
 // && showIndexItemAdded === index && 
 (
   <div 
@@ -445,7 +410,8 @@ const images = [
     {addedItemName} added to your cart !!
   </div>
 ) : ''}
-        </div>
+            {/* <ReactTooltip className='tool-tip' effect='solid'/> */}
+        </Fragment>
     );
 }
 

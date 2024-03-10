@@ -714,11 +714,13 @@ function getProductName(cartItems, productVariantId) {
 
 
 
-                                        <div className="row mt-4">
+                                        {/* <div className="row mt-4">
                         <div className="col col-xs-12">
                             <FrequentlyBoughtTogether onQuickViewClick={null} relatedProducts={relatedProducts} addToCart={addToCart} cart={cart}/>
+                            <FrequentlyBoughtTogether addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
+                            
                         </div>
-                    </div>
+                    </div> */}
 
 
                                     </div>
@@ -733,6 +735,15 @@ function getProductName(cartItems, productVariantId) {
                     </div>
                 </div>
             </section>
+
+            <div className="row -mt-40 mb-8">
+                        <div className="col col-xs-12">
+                            {/* <FrequentlyBoughtTogether onQuickViewClick={null} relatedProducts={relatedProducts} addToCart={addToCart} cart={cart}/> */}
+                            <FrequentlyBoughtTogether addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
+                            
+                        </div>
+                    </div>
+
 
             
             <AfricanaFooter />
