@@ -404,6 +404,11 @@ const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 const toggleAccountForSignUp = () => {
   setErrorMessage({ message: '' });
   setIsSignUpOpen(!isSignUpOpen);
+}  
+
+const toggleAccountForSignIn = () => {
+  setErrorMessage({ message: '' });
+  setIsSignUpOpen(false);
 }
 
 
@@ -1234,10 +1239,10 @@ const settings = {
 
 
 
-                            <div className="m-2 mb-10  "
-                        style={{ maxHeight: '100%' }}
+                            <div className="m-2 mb-10 "
+                        style={{ maxHeight: '50vh', overflowY: 'auto' }}
                         >
-                            <div className="woocommerce ">
+                            <div className="woocommerce mb-8">
                                 <div className="woocommerce-notices-wrapper "/>
                                 <div className="u-columns col2-set mx-4 mt-4" id="customer_login">
                                     <div className="u-column1 col-1 justify-center">
@@ -1280,7 +1285,7 @@ const settings = {
                                             
 
                                             <p className='ml-2 mb-2 text-xs'>A link to set a new password will be sent to your email address.</p>
-                                            <p className='ml-2 mb-2 text-xs'>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</p>
+                                            <p className='ml-2 mb-2 text-xs'>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <a href="">privacy policy</a>.</p>
                                             
                                             <div className='flex justify-between items-center flex-col md:flex-row '>
                                               <div className='flex flex-col justify-center invisible'>
@@ -1334,7 +1339,7 @@ const settings = {
       right: hoveredMenuItem === 'ALREADY' ? 0 : menuWidthAlready
        }} />
 </div></motion.div> */}
-                                              <a onClick={() => setIsSignUpOpen(false)}>Already have an account? Sign In</a>
+                                              <a onClick={() => toggleAccountForSignIn()}>Already have an account? Sign In</a>
                                               </div>
                                             </div>
 
@@ -1375,12 +1380,12 @@ const settings = {
 
 
                             <div className="m-2 mb-10  "
-                        style={{ maxHeight: '100%' }}
+                        style={{ maxHeight: '50vh', overflowY: 'auto' }}
                         >
-                            <div className="woocommerce ">
+                            <div className="woocommerce mb-8">
                                 <div className="woocommerce-notices-wrapper "/>
                                 <div className="u-columns col2-set mx-4 mt-4" id="customer_login">
-                                    <div className="u-column1 col-1 justify-center">
+                                    <div className="u-column1 col-1 justify-center"  style={{ overflowY: 'auto' }}>
                                         {/* <h2>Login</h2> */}
                                         {/* <form className="woocommerce-form woocommerce-form-login login" method="post"> */}
                                             <div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -1411,7 +1416,9 @@ const settings = {
 
                                             <div className='invisible'><div className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide mt-4">
         {/* <label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label> */}
-        <input value={emailAddress} placeholder="Enter your email" 
+        <input value={emailAddress} 
+        onChange={(e) => setLoginEmailAddress(e.target.value)}
+        placeholder="Enter your email" 
         type="email" className="woocommerce-Input woocommerce-Input--text input-text" name="email" id="reg_email" autoComplete="email" />
     </div> <div className='my-2 text-sm' style={{ color: '#c2572b' }}>{errorMessage.message}</div>
                                             <p className='ml-2 mb-2 text-xs'>A link to set a new password will be sent to your email address.</p>

@@ -168,7 +168,7 @@ const [addedItemName, setAddedItemName] = useState('');
                                                             </div>
                                                         </h4>
                                                         <h4 className='text-left pl-2 flex items-center mt-1' style={{ cursor: 'pointer' }}>
-                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm  text-black'>
+                                                            <div onClick={(e) => handleProductClick(item, e)} className='text-sm font-bold text-black'>
                                                             {'₦'}{findLowestPrice(item)}
                                                             </div>
                                                         </h4>
