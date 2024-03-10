@@ -376,3 +376,96 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
 }
 
 export default MyAccount;
+
+
+
+
+<div className="flex flex-col flex-grow bg-white mx-4 mb-4" style={{ flexBasis: '20%', height: '500px' }}>
+                    {/* <div className='mx-2 bg-red-400'>Content for the first div (20%)</div> */}
+
+                    <div className="sticky flex flex-col gap-2 p-4 text-sm top-12">
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setActiveTab(0)}
+                    className={`flex items-center justify-between pl-4 py-2 hover:text-black ${activeTab === 0 ? 'bg-gray-200' : ''}`}
+                >
+                    <div className='flex items-center '>
+                        <AccountCircleIcon />
+                        <span className="pl-4">Account</span>
+                    </div>
+                    {activeTab === 0 ? <KeyboardArrowRightIcon className='p-1'/> : ''}
+                </a>
+                
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setActiveTab(1)}
+                    className={`flex items-center justify-between pl-4 py-2 hover:text-black ${activeTab === 1 ? 'bg-gray-200' : ''}`}
+                >
+                    {/* <CollectionsIcon />
+                    <span className="pl-4">My Collection</span> */}
+                    <div className='flex items-center '>
+                        <CollectionsIcon />
+                        <span className="pl-4">Collections</span>
+                    </div>
+                    {activeTab === 1 ? <KeyboardArrowRightIcon className='p-1'/> : ''}
+                </a>
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setActiveTab(2)}
+                    className={`flex items-center justify-between pl-4 py-2  hover:text-black ${activeTab === 2 ? 'bg-gray-200' : ''}`}
+                >
+                    {/* <LocalActivityIcon />
+                    <span className="pl-4">Vouchers</span> */}
+                    <div className='flex items-center '>
+                        <LocalActivityIcon />
+                        <span className="pl-4">Vouchers</span>
+                    </div>
+                    {activeTab === 2 ? <KeyboardArrowRightIcon className='p-1'/> : ''}
+                </a>
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setActiveTab(3)}
+                    className={`flex items-center justify-between pl-4 py-2  hover:text-black ${activeTab === 3 ? 'bg-gray-200' : ''}`}
+                >
+                    {/* <ReviewsIcon />
+                    <span className="pl-4">Reviews</span> */}
+                    <div className='flex items-center '>
+                        <ReviewsIcon />
+                        <span className="pl-4">Reviews</span>
+                    </div>
+                    {activeTab === 3 ? <KeyboardArrowRightIcon className='p-1'/> : ''}
+                </a>
+                <hr />
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setActiveTab(4)}
+                    className={`flex items-center justify-between pl-4 py-2  hover:text-black ${activeTab === 4 ? 'bg-gray-200' : ''}`}
+                >
+                    {/* <ReviewsIcon /> */}
+                    <span className="">Account Management</span>
+                    
+                </a>
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setActiveTab(5)}
+                    className={`flex items-center justify-between pl-4 py-2  hover:text-black ${activeTab === 5 ? 'bg-gray-200' : ''}`}
+                >
+                    {/* <ReviewsIcon /> */}
+                    <span className="">Address Book</span>
+                    
+                </a>
+                <hr className='mb-4'/>
+                <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                        // setActiveTab(6);
+                        // alert("Logging out..")
+                        navigate('/');
+                    }}
+                    className={`flex justify-center items-center pl-4 py-2  hover:text-black ${activeTab === 6 ? 'bg-gray-200' : ''}`}
+                >
+                    {/* <LogoutIcon /> */}
+                    <span className="text-red-900">Logout</span>
+                </a>
+            </div>
+                </div>

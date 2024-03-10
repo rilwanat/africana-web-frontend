@@ -151,13 +151,13 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
 
     return(
     // <div className='bg-gray-100'>
-    <div className='bg-black' style={{ height: '100vh' }}>
+    <div className='bg-black ' style={{  }}>
         <div className='bg-black'><AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
 
 
         <div className='container-1410 mt-12 ' style={{  }}>
-            <div className="flex w-full ">
-                <div className="flex flex-col flex-grow bg-white mx-4 mb-4" style={{ flexBasis: '20%', height: '500px' }}>
+            <div className="flex w-full md:flex-row flex-col">
+                <div className="flex flex-col flex-grow bg-white md:mx-4 mb-4" style={{ flexBasis: '20%', height: '500px' }}>
                     {/* <div className='mx-2 bg-red-400'>Content for the first div (20%)</div> */}
 
                     <div className="sticky flex flex-col gap-2 p-4 text-sm top-12">
@@ -246,7 +246,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                 </a>
             </div>
                 </div>
-                <div className="flex flex-col flex-grow bg-white mx-4 pt-6 mb-12" style={{ flexBasis: '80%' }}>
+                <div className="flex flex-col flex-grow bg-white md:mx-4 pt-6 mb-12" style={{ flexBasis: '80%', }}>
                 {activeTab == 0 ? 
                     <div className='mx-2 '>
                         
@@ -284,7 +284,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
 
                         
 
-                        <div className='flex w-full'>
+                        <div className='flex w-full md:flex-row flex-col'>
                             <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>
                                 <p className='my-2'>Account Details</p>
                                 <hr className='mb-4'/>
@@ -306,7 +306,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                                 <p className='mb-8'>Your default shipping address:</p>
                             </div>
                         </div>
-                        <div className='flex w-full'>
+                        <div className='flex w-full md:flex-row flex-col'>
                             <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>
                                 <p className='my-2'>Africana Credit</p>
                                 <hr className='mb-4'/>
@@ -331,7 +331,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                         <div className="w-full mt-4" >
                                     
                                     <div className='flex justify-center w-100'>
-                                    <div className='flex' style={{ width: '500px'  }}>
+                                    <div className='flex' style={{ width: '100%'  }}>
                                         <div className="carousel-body carousel-content">
                                             {/* <h1 className="">#</h1> */}
                                             <div className=" " style={{  }}>
@@ -368,7 +368,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                                                     })()}
                                                 </Slider> */}
 
-<div style={{ position: 'relative' }}>
+<div style={{ position: 'relative' }} className="md:w-1/2 md:h-1/2">
 <Carousel
       showIndicators={false}
         showArrows={false}
@@ -387,7 +387,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
         //   onClick={handleMouseEnter}
         //   onMouseEnter={handleMouseEnter}
           >
-            <img src={image} alt={`Image ${index}`} />
+            <img src={image} alt={`Image ${index}`}  />
           </div>
         ))}
       </Carousel>
@@ -460,7 +460,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                        <div className='mb-4'>Account Management</div>
                        <hr className='mb-4'/>
 
-                       <div className='flex w-full'>
+                       <div className='flex w-full md:flex-row flex-col'>
                             <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>
                                 <div className='flex justify-between items-center'>
                                     <p className='my-2'>Profile Details</p>
@@ -511,7 +511,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                         <hr className='mb-4'/>
                      
  
-                         <div className='flex w-full'>
+                         <div className='flex w-full md:flex-row flex-col'>
                              <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>                                 
                                  <div className='flex flex-col my-2'>
                                  <p className='mb-2'>Firstname Lastname</p>
@@ -539,7 +539,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                                  </div>                                 
                              </div>
                          </div>
-                         <div className='flex w-full'>
+                         <div className='flex w-full md:flex-row flex-col'>
                              <div className="flex flex-col flex-grow border border:bg-black mx-4 mt-2 mb-12 pl-4" style={{ flexBasis: '50%' }}>                                 
                                  <div className='flex flex-col my-2'>
                                  <p className='mb-2'>Firstname Lastname</p>
