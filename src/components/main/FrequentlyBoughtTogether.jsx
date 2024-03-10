@@ -23,7 +23,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { AnimatePresence, motion } from 'framer-motion';
 
 
-function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
+function FrequentlyBoughtTogether({onQuickViewClick, relatedProducts, addToCart, cart}) {
 
     
     const navigate = useNavigate();
@@ -70,7 +70,8 @@ function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
-                    infinite: true
+                    infinite: true,
+                    arrows: false,
                 }
             },
             {
@@ -78,7 +79,8 @@ function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    infinite: true
+                    infinite: true,
+                    arrows: false,
                 }
             },
             {
@@ -86,6 +88,7 @@ function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    arrows: false,
                 }
             }
         ]
@@ -203,7 +206,7 @@ const images = [
     return (
         <Fragment>
             <div className="realted-porduct">
-                <h3>Related Products</h3>
+                <h3>Frequently Bought Together</h3>
                 <ul className="products product-row-slider" 
                 >
                     <Slider {...settings}
@@ -302,7 +305,7 @@ const images = [
             <div className="text-sm font-bold">{'₦'}{findLowestPrice(item)}</div>
           </h4>
                                         <div className="text-left flex items-center mt-1 mb-8">
-            <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsRelatedProduct(index)}}>OPTIONS</h4>
+            {/* <h4 className="h-4 text-xs cursor-pointer" onClick={() => {toggleOptionsRelatedProduct(index)}}>OPTIONS</h4> */}
             <AnimatePresence>
                                         {openItemIndexRelatedProduct === index && (
                                             <motion.div
@@ -348,7 +351,7 @@ const images = [
                                                             </div>
                                                         </div>
 
-                                                        <div className='flex flex-col md:flex-row bg-black '>
+                                                        {/* <div className='flex flex-col md:flex-row bg-black '>
                                                             <div className="flex ml-2 w-20 text-white items-center cursor-pointer"
                                                                 onClick={() => {
                                                                     showAddedDialogue(index);
@@ -361,14 +364,14 @@ const images = [
                                                             >
                                                                 <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2" /><span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
                                                             </div>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </div>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
             
-            <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2"
+            {/* <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2"
             onClick={() => {
               showAddedDialogue(index);
               addToCart(item, 1);
@@ -379,13 +382,8 @@ const images = [
           }
             >
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" />
-              {/* {showItemAdded && showIndexItemAdded === index && (
-        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          {item.name} added
-        </div>
-      )} */}
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
-            </div>
+            </div> */}
           </div>
 
                                     </div>
@@ -417,4 +415,4 @@ const images = [
     );
 }
 
-export default RelatedProducts;
+export default FrequentlyBoughtTogether;

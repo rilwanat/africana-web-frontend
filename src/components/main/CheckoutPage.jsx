@@ -16,6 +16,8 @@ import ShippingFields from './ShippingFields';
 import AfricanaHeader from './AfricanaHeader';
 import AfricanaFooter from './AfricanaFooter';
 
+import FrequentlyBoughtTogether from './FrequentlyBoughtTogether';
+
 function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, removeCartItem, clearCart, removeAllCartItem, handleEmailAddress  }) {
     const location = useLocation();
     const cart = location.state.encryptedData;
@@ -59,6 +61,9 @@ function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, remo
 
 
     let errorOrderItems = [];
+
+
+    const [relatedProducts, setRelatedProductsData] = useState([]);
     
 
     /**
@@ -69,12 +74,38 @@ function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, remo
         window.scrollTo(0, 0);
         
 
+        handleData();
         
         // Update parsedCart when cartItems change
         setParsedCart(cartItems);
     }, [cartItems]);
 
 
+    const handleData = async () => {    
+        setIsDataLoading(true);
+        try {
+    
+          const response = await axios.get('http://144.149.167.72.host.secureserver.net:3000/api/v1/products', {
+            headers: {
+              "Content-Type": "application/json",
+              //Authorization: `Bearer ${token}`,
+            },
+          });
+    
+          setIsDataLoading(false);
+    
+          if (response.data.success) {
+    
+            setRelatedProductsData(response.data.products);
+          } else {
+           // alert("error: " + response.data.message);
+          }
+    
+        } catch (error) {
+          setIsDataLoading(false);
+          //alert("error: " + error);
+        }
+      };
 
     const HandleShowLoginStatus = (e) => {
         e.preventDefault();
@@ -349,6 +380,9 @@ function getProductName(cartItems, productVariantId) {
 }
 
 
+
+
+
     return (
         <div>
             <div className='bg-black'><AfricanaHeader options={options} cart={parsedCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem}  handleEmailAddress={handleEmailAddress}/></div>
@@ -426,9 +460,11 @@ function getProductName(cartItems, productVariantId) {
                                         : ''
                                 } */}
 
-                                <form name="checkout" method="post" 
+                                <form name="checkout" 
+                                // method="post" 
                                 className="checkout woocommerce-checkout"
-                                      action="" encType="multipart/form-data">
+                                    //   action="" encType="multipart/form-data"
+                                      >
 
 
 
@@ -675,6 +711,16 @@ function getProductName(cartItems, productVariantId) {
                                                        
                                                        </div>
                                         </div>
+
+
+
+                                        <div className="row mt-4">
+                        <div className="col col-xs-12">
+                            <FrequentlyBoughtTogether onQuickViewClick={null} relatedProducts={relatedProducts} addToCart={addToCart} cart={cart}/>
+                        </div>
+                    </div>
+
+
                                     </div>
 
 

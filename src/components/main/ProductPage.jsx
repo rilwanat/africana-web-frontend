@@ -184,7 +184,13 @@ function calculateDiscountPercentage(price, oldPrice) {
     };
 
     const handleBuyNow = () => {
-        addToCart(parsedProduct, productCount);
+        // addToCart(parsedProduct, productCount);
+
+        showAddedDialogue(0);addToCart(parsedProduct, productCount);
+
+        setAddedItemName(parsedProduct.name);
+
+        navigateToCheckOut();
     
     };
 
@@ -213,6 +219,19 @@ const showSizeChartDialogue = (i) => {
         // setShowSizeChart(false);
     }, 3000);
   }
+
+
+  const navigateToCheckOut = () => {
+    if (cart.length > 0) {
+        options.onMiniCartClick();
+        const encryptedData = AES.encrypt(JSON.stringify(cart), 'encryptionKey').toString();
+        navigate('/checkout', { state: { encryptedData } });
+    } else {
+        alert("Add items to your cart");
+    }
+};
+
+
 
     return (
         <div>
