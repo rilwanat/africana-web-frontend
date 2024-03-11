@@ -588,7 +588,7 @@ const settings = {
   // className={`text-white text-xs font-bold cursor-pointer mr-4 z-50 ${hoveredMenuItem === 'MEN' ? 'border-b-2 border-white' : ''}`}
   onClick={() => {navigateToMen();}}
   onMouseEnter={() => setHoveredMenuItem('MEN')}
-  onMouseLeave={() => setHoveredMenuItem('MENX')}
+  // onMouseLeave={() => setHoveredMenuItem('MENX')}
 >
 <div style={{ position: 'relative' }}>
 <span id="men-text">MEN</span>
@@ -601,7 +601,12 @@ const settings = {
 </div>
   {hoveredMenuItem === 'MEN' && (
   <SlideInDiv variants={slideInVariants}><SlideInContent>
-  <div className="flex flex-col  p-8">
+  <div className="flex flex-col  p-8" 
+
+  onMouseEnter={() => setHoveredMenuItem('MEN')}
+  onMouseLeave={() => setHoveredMenuItem('MENX')}
+  
+  >
   
   <div className="flex p-8" style={{ height: '80%' }}>
   <div className=" p-4 w-full text-gray-900 flex flex-col" >
@@ -641,7 +646,7 @@ const settings = {
 
   <a
         className="text-gray-900 text-sm font-bold cursor-pointer block my-2"
-        onClick={() => { /* Handle navigation */ }}
+        onClick={() => {navigateToOnSale();}}
       >
         SHOP ALL PRODUCTS
       </a>
@@ -658,7 +663,7 @@ const settings = {
                     className="text-white text-xs font-bold cursor-pointer mr-4  z-50"
                     onClick={() => {navigateToWomen();}}
                     onMouseEnter={() => setHoveredMenuItem('WOMEN')}
-                    onMouseLeave={() => setHoveredMenuItem('WOMENX')}
+                    // onMouseLeave={() => setHoveredMenuItem('WOMENX')}
                   >
 <div style={{ position: 'relative' }}>
 <span id="women-text">WOMEN</span>
@@ -671,7 +676,10 @@ const settings = {
 </div>
                     {hoveredMenuItem === 'WOMEN' && (
   <SlideInDiv variants={slideInVariants}><SlideInContent>
-  <div className="flex flex-col  p-8">
+  <div className="flex flex-col  p-8" 
+  onMouseEnter={() => setHoveredMenuItem('WOMEN')}
+  onMouseLeave={() => setHoveredMenuItem('WOMENX')}
+  >
   
   <div className="flex p-8" style={{ height: '80%' }}>
   <div className=" p-4 w-full text-gray-900 flex flex-col" >
@@ -706,7 +714,9 @@ const settings = {
 
   <a
         className="text-gray-900 text-sm font-bold cursor-pointer block my-2"
-        onClick={() => { /* Handle navigation */ }}
+        onClick={() => {
+          navigateToOnSale();
+        }}
       >
         SHOP ALL PRODUCTS
       </a>

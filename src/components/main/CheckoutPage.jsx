@@ -32,24 +32,24 @@ function CheckoutPage({ options, handleDataViewData, addToCart, updateCart, remo
 
 
     
-    const [firstname, setFirstname] = useState("rb");
-    const [lastname, setLastname] = useState("apps");
-    const [email, setEmail] = useState("rilwan.at@gmail.com");
-    const [phoneNumber, setPhoneNumber] = useState("09081537000");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     
-    const [address1, setAddress1] = useState("No 31, Pope John Paul Street II");
+    const [address1, setAddress1] = useState("");
     const [address2, setAddress2] = useState("");
 
     
-    const [postalCode, setPostalCode] = useState("900001");
+    const [postalCode, setPostalCode] = useState("");
     
-    const [city, setCity] = useState("Maitama");
-    const [state, setState] = useState("Abuja");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
 
-    const [country, setCountry] = useState("Nigeria");
+    const [country, setCountry] = useState("");
     const [orderNotes, setOrderNotes] = useState("");
     
-    const [paymentMethod, setPaymentMethod] = useState("flutterwave");//);
+    const [paymentMethod, setPaymentMethod] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -674,27 +674,27 @@ function getProductName(cartItems, productVariantId) {
 
 
 
-                                        <div id="payment" className="woocommerce-checkout-payment flex flex-col items-start">
+                                        <div id="payment" className="flex flex-col items-start justify-center">
                                                
                                             
-                                        <label style={{ flex: '1', textAlign: 'center' }}>
+<label className='flex items-center cursor-pointer' style={{ height: '32px', textAlign: 'center' }}>
     <input
         type="radio"
-        name="option"
+        name="flutterwaveOption"
         value="flutterwave"
-        className='mr-2' 
+        className='mr-2 flex items-center' 
         checked={paymentMethod === 'flutterwave'} // Check if this option is selected
        onChange={() => handlePaymentTypeChange("flutterwave")}
     />&nbsp;&nbsp;Flutterwave
 </label>
 
 
-<label style={{ flex: '1', textAlign: 'center' }}>
+<label className='flex items-center cursor-pointer' style={{ height: '32px', textAlign: 'center' }}>
     <input
         type="radio"
-        name="option"
+        name="paystackOption"
         value="paystack"
-        className='mr-2' 
+        className='mr-2 flex items-center' 
         checked={paymentMethod === 'paystack'} // Check if this option is selected
         onChange={() => handlePaymentTypeChange("paystack")}
     />&nbsp;&nbsp;Paystack
@@ -736,7 +736,7 @@ function getProductName(cartItems, productVariantId) {
                 </div>
             </section>
 
-            <div className="row -mt-40 mb-8">
+            <div className="row -mt-44 mb-8">
                         <div className="col col-xs-12">
                             {/* <FrequentlyBoughtTogether onQuickViewClick={null} relatedProducts={relatedProducts} addToCart={addToCart} cart={cart}/> */}
                             <FrequentlyBoughtTogether addToCart={addToCart} cart={cart} removeCartItem={removeCartItem}/>
