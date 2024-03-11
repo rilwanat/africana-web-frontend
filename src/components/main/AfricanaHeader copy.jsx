@@ -1106,7 +1106,7 @@ const settings = {
     <hr style={{ borderColor: '#888888' }} className='ml-4 mb-8'/>
     <p className='flex justify-center mb-2 text-black '>Free shipping!</p>
     <div className='bg-black mx-4 mb-6' style={{ height: '8px' }}></div>
-    <div className="my-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100" style={{ maxHeight: '70%', }}>
+    <div className="my-2" style={{ maxHeight: '70%', overflowY: 'auto' }}>
       {cart && cart.map((item, index) => (
         <div key={index} className="px-4" onClick={() => { /* navigateToProduct(item) */ }}>
           <div className="flex">

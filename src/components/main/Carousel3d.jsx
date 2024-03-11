@@ -76,7 +76,7 @@ function Carousel3d() {
 
   return (
     <div className='mt-8 mb-24'>
-      <div style={{ width: "80%", height: "500px", margin: "0 auto" }}>
+      <div style={{ width: "80%", height: "400px", margin: "0 auto" }}>
         <Carousel
           slides={slides}
           goToSlide={state.goToSlide}
