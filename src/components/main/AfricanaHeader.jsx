@@ -20,7 +20,8 @@ import Slider from "react-slick";
 
 import './react-css/cartsliderproducts.css';
 
-
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { AES } from 'crypto-js';
@@ -95,7 +96,7 @@ const SlideInBag = styled(motion.div)`
   position: fixed;
   top: 0rem;
   right: 0;
-  width: calc(100% - 2rem);
+  width: calc(80% - 2rem);
   height: 100%;
   /*background-color: rgba(0, 0, 0, 0.5);  Semi-transparent background */
   z-index: 1000; /* Ensure the menu is on top of other content */
@@ -104,15 +105,25 @@ const SlideInBag = styled(motion.div)`
   @media (min-width: 960px) {
     width: 40%;
   }
+
+  @media (max-width: 959px) {
+    width: 100%; /* Full width on mobile screens */
+    left: 0;
+  }
 `;
 const BagContent = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 100%;
+  width: 80%;
   height: 100%;
   background-color: #eeeeee;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 959px) {
+    width: 100%; /* Full width on mobile screens */
+    left: 0;
+  }
 `;
 const BagContentInner = styled.div`
   height: 100%; /* Ensure the inner content fills the container */
@@ -1017,17 +1028,13 @@ const settings = {
       </SlideInMenu>
 
 
-      {/* {isBagOpen && ( */}
-  <SlideInBag 
+
+<SlideInBag 
   initial={{ x: '100%' }}
         animate={{ x: isBagOpen ? 0 : '100%' }}
-        transition={{ duration: 0.2 }} 
-        // exit={{ x: '100%', transition: { type: 'spring', damping: 15, stiffness: 20 } }} // Define exit animation with spring
-  // variants={bagItemVariants}
-  >
+        transition={{ duration: 0.2 }}>
     <BagContent>
       <BagContentInner>
-      <div className='fixed top-0 bg-white h-8 w-full z-50'></div>
 
 
       <div className='mx-2 '>      
@@ -1041,98 +1048,148 @@ const settings = {
             >
               
             <div 
-            // className={"mini-cart-content " + (options.miniCart ? 'mini-cart-content-toggle' : '')} 
-                     style={{ maxHeight: '100%', overflowY: 'hidden' }}
-                    //  style={{ maxHeight: '600px', overflowY: 'hidden' }}
-                    // style={{ maxHeight: '600px', overflowY: 'hidden', position: 'relative' }}
-                    >
+            style={{ maxHeight: '100vh', overflowY: 'hidden' }}>
                         
-                        <div className='grid grid-cols-12 gap-4 mt-8 mb-8'>
-                            
-                            <div className='col-span-4 px-2 mt-2' >
-                                
+                        <div className='grid grid-cols-12 gap-4 mb-8'>
+                            <div className='col-span-3 px-2 mt-2' >
                                
-                            <div className="" 
-                            style={{ height: '100%', overflowY: 'auto' }}
+                            <div className="mt-4" 
+                            style={{ height: '100%' }}
                             >
-                <ul className="">
+                              <div className='ml-2 mb-4'>Bestsellers:</div>
+                              
+                              <div className='bg-black' style={{ height: '100vh', overflowY: 'auto' }}>
+                              <ul className="">
                     <Slider {...settings}>
                         {cart.map((item, index) => (
                             <li key={index} className=" my-2">
                                 <div className="">
                                     <div className='mx-2' style={{ cursor: 'pointer' }}>
-                                        <img loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
+                                        <img style={{ width: '100px' }} loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
                                     </div>
                                 </div>
-                                <div className=" text-center mt-1 mx-2">
+                                <div className="flex flex-col mt-1 mx-2">
                                     <span  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
-                                        {/* <a className='text-xs text-gray-900' style={{  }} >{item.name}</a> */}
+                                        <a className='text-xs text-gray-900' style={{  }} >{item.name}</a>
+                                    </span>
+                                    <span  style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
+                                        <a className='text-xs text-gray-900' style={{  }} >{item.name}</a>
                                     </span>
                                 </div>
                             </li>
                         ))}
                     </Slider>
                 </ul>
+                              </div>
+                
+    </div>
     </div>
 
-    
-   
-                            </div>
 
 
+                            <div className='relative col-span-9 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)', }}>
 
+                            <div className='relative ' style={{ height: '100vh' }} >
 
-
-
-
-
-                            <div className='col-span-8 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)' }}>
-                            {/* <div className='col-span-8 shadow-xl'> */}
-
-                            <div className='flex justify-between items-center ml-4'>
+                            <div className='flex justify-between items-center mx-4'>
             <motion.span
               variants={bagItemVariants}
               initial="hidden"
               animate={isBagOpen ? "visible" : "hidden"}
-              className="text-gray-900 text-sm font-bold cursor-pointer block my-4"
+              className="text-gray-900 text-sm cursor-pointer block my-4"
               // onClick={() => {navigateToOnSale();}}
             >
-              CART ITEMS
+              SHOPPING BAG {'(' + cart.length + ')'}
             </motion.span>
               <CloseIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
-            </div>
-
-            
-            <hr style={{ borderColor: '#888888' }} className='ml-4 mb-6'/>
+            </div>            
+            <hr style={{ borderColor: '#888888' }} className='ml-4 mb-8'/>
 
 
+            <p className='flex justify-center mb-2 text-black '>Free shipping!</p>
+            <div className='bg-black mx-4 mb-6' style={{ height: '8px' }}></div>
 
 
-                            <div className="m-2 mb-40"
+
+
+                            <div className="my-2 "
                         style={{ maxHeight: '100%', overflowY: 'auto' }}
                         >
                             {cart &&
                                 cart.map((item, index) => (
-                                    <div key={index} className="px-4 " onClick={() => {navigateToProduct(item)}}>
-                                        <div className="">
-                                          <img src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
-                                        </div>
-                                        <div className="my-2">
-                                            <div to={item.link}>{item.name}</div>
-                                            <div className='flex justify-between'>
-                                              <span className="">Qty: {item.quantity}</span>
-                                              <CloseIcon onClick={(e) => removeAllCartItem(e, item)} className="mr-2 bg-black rounded-sm" style={{ cursor: 'pointer', width: '16px', height: '16px', color: "#ffffff"}}/>
+                                    <div key={index} className="px-4 " onClick={() => {
+                                      // navigateToProduct(item)
+                                      }}>
+                                        <div className="flex ">
+                                          <img style={{ width: '80px' }} src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
+                                        
+                                          <div className="ml-4  w-full">
+                                            <div className='flex justify-between '>
+                                              <div className='' to={item.link}>{item.name}</div>
+                                              <CloseIcon onClick={(e) => removeAllCartItem(e, item)} className=" bg-white rounded-md border border-gray-300 hover:border-black" style={{ cursor: 'pointer', width: '22px', height: '22px', color: "#cccccc"}}/>
                                             </div>
-                                           
-                                        </div>
+                                            
+                                            <div className='flex items-center justify-between'>
+                                              <div className="flex " style={{ display: 'flex', alignItems: 'center' }}>
+                                                <div className='flex bg-white items-center justify-center my-2 py-1 rounded-md' style={{ height: '70%', width: '100%' }}>
+                                                  <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', height: '16px', borderRight: '1px solid #ccc' }}
+                                                                    onClick={() => { 
+                                                                      // handleDecreaseQuantity(item) 
+                                                                    }}
+                                                                />
+                                                  <span className='flex justify-center items-center text-center text-sm' style={{ width: '30px' }}>
+                                                                  {item.quantity}{/* {productCount} */}
+                                                                  </span>
+                                                  <AddIcon className='' style={{ cursor: 'pointer', width: '30px', height: '16px', borderLeft: '1px solid #ccc' }}
+                                                                    onClick={() => { 
+                                                                      // handleIncreaseQuantity(item) 
+                                                                    }}
+                                                                />
+                                                </div>
+                                                <span className="ml-4">#{item.price}</span>
+                                              </div>
 
-                                        <hr style={{ borderColor: '#888888' }} className=' mb-6'/>
+
+                                              
+                                              <span className="ml-4">#{item.price}</span>
+                                              
+                                              </div>                                           
+                                        </div>                                        
+                                        </div>
+                                        
+
+                                        <hr style={{ borderColor: '#cccccc' }} className='my-6'/>
                                         
                                     </div>
                                    
                                 ))
                             }
                         </div>
+
+
+
+
+
+                        <div id='thisDiv' className='absolute bottom-0 bg-white pb-8 w-full' >
+
+                          {/* <hr className='my-2'/> */}
+
+                        <div className='flex flex-col  mx-4 '>
+                          <div className='flex justify-between mb-4'>
+                          <span className="flex">Subtotal:</span>
+                          <span className="flex">#000000</span>
+                          </div>
+
+                          <span className="flex mb-4">Have a coupon?</span>
+
+                          <div className='flex justify-between'>
+                              <div className="view-cart-btn mr-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart {'(' + cart.length + ')'}</div>
+                              <div className="checkout-btn ml-2"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>  
+                            </div>
+                        </div>
+                        </div>
+
+                            </div>
 
 
 
@@ -1160,24 +1217,22 @@ const settings = {
           </div>
 
           
-
-          {/* <div className='fixed bottom-0 bg-black h-8 w-full'>2</div> */}
-          <div className='fixed bottom-0 bg-white w-full'><div className="px-8 my-2 pb-4 mt-4" 
+{/* Uncomment this */}
+          {/* <div className='fixed bottom-0 bg-white w-full'><div className="px-8 my-2 pb-4 mt-4" 
                         // style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
                         >
-                            {/* Subtotal logic here */}
-                            <span className="flex justify-end mb-4">Subtotal: {/* cart.symbol */}{/* cart.subtotal */}</span>
+                            <span className="flex justify-end mb-4">Subtotal: </span>
                             <div className="view-cart-btn mb-2 mt-2"style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart {'(' + cart.length + ')'}</div>
                             <div className="checkout-btn"style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>
-                            {/* <div>.</div> */}
+                            
                         </div>
-                        </div>
+                        </div> */}
           
         </ BagContentInner>
     
     </BagContent>
-  </SlideInBag>
-{/* )} */}
+</SlideInBag>
+
 
 
 {/* {isAccountOpen && ( */}
