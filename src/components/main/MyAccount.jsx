@@ -36,6 +36,9 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
+//
+import Carousel3d from './Carousel3d'; 
+
 
 function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem, handleEmailAddress }) {
 
@@ -147,6 +150,66 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
         }
     };
     
+    //    
+      const goToPrevSlide = () => {
+        this.setState(prevState => ({
+          goToSlide: prevState.goToSlide - 1
+        }));
+      };
+    
+      const goToNextSlide = () => {
+        this.setState(prevState => ({
+          goToSlide: prevState.goToSlide + 1
+        }));
+      };
+    
+      const slides = [
+        {
+          key: 0,
+          content: <img src="https://via.placeholder.com/600" alt="1" />
+        },
+        {
+          key: 1,
+          content: <img src="https://via.placeholder.com/600" alt="2" />
+        },
+        {
+          key: 2,
+          content: <img src="https://via.placeholder.com/600" alt="3" />
+        },
+        {
+          key: 3,
+          content: <img src="https://via.placeholder.com/600" alt="4" />
+        },
+        {
+          key: 4,
+          content: <img src="https://via.placeholder.com/600" alt="5" />
+        },
+        {
+          key: 5,
+          content: <img src="https://via.placeholder.com/600" alt="6" />
+        },
+        {
+          key: 6,
+          content: <img src="https://via.placeholder.com/600" alt="7" />
+        },
+        {
+          key: 7,
+          content: <img src="https://via.placeholder.com/600" alt="8" />
+        },
+        {
+          key: 8,
+          content: <img src="https://via.placeholder.com/600" alt="9" />
+        },
+        {
+          key: 9,
+          content: <img src="https://via.placeholder.com/600" alt="10" />
+        },
+        {
+          key: 10,
+          content: <img src="https://via.placeholder.com/600" alt="11" />
+        }
+      ];
+    //
 
 
     return(
@@ -368,7 +431,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
                                                     })()}
                                                 </Slider> */}
 
-<div style={{ position: 'relative' }} className="md:w-1/2 md:h-1/2">
+{/* <div style={{ position: 'relative' }} className="md:w-1/2 md:h-1/2">
 <Carousel
       showIndicators={false}
         showArrows={false}
@@ -391,7 +454,7 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
           </div>
         ))}
       </Carousel>
-      {/* <div style={{ position: 'absolute', top: '8px', left: '8px', display: 'flex' }}>
+      <div style={{ position: 'absolute', top: '8px', left: '8px', display: 'flex' }}>
         {images.map((_, index) => (
           <div
             key={index}
@@ -408,8 +471,17 @@ function MyAccount({ options, addToCart, cart, removeCartItem, removeAllCartItem
             title={`${index + 1}`}
           />
         ))}
-      </div> */}
-</div>
+      </div>
+</div> */}
+
+
+
+
+
+<Carousel3d />
+
+
+
                                                 
 
                                             </div>
