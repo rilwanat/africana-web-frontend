@@ -120,7 +120,7 @@ const BagContent = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 80%;
+  width: 83%;
   height: 100%;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -600,6 +600,7 @@ const handleIncreaseQuantity = (item) => {
   localStorage.setItem('cart', JSON.stringify(updatedCart));
   
   updateCart();
+  calculateCartSubTotal();
 };
 
 const handleDecreaseQuantity = (item) => {
@@ -615,6 +616,7 @@ const handleDecreaseQuantity = (item) => {
       localStorage.setItem('cart', JSON.stringify(updatedCart));
   }
   updateCart();
+  calculateCartSubTotal();
 };
 
 
@@ -636,6 +638,40 @@ const iconVariants = {
   initial: { opacity: 0, scale: 0 },
   animate: { opacity: 1, scale: 1 },
 };
+
+
+const calculateCartSubTotal = () => {
+  let subTotal = 0;
+  cartItems.forEach((item) => {
+      subTotal += findLowestPrice(item) * item.quantity;
+  });
+  return subTotal;
+};
+
+
+
+//
+const [isHoverCheckout, setIsHoverCheckout] = useState(false);
+const handleHoverCheckout = () => { setIsHoverCheckout(true); };
+const handleLeaveCheckout = () => { setIsHoverCheckout(false); };
+
+const [isHoverMenu, setIsHoverMenu] = useState(false);
+const handleHoverMenu = () => { setIsHoverMenu(true); };
+const handleLeaveMenu = () => { setIsHoverMenu(false); };
+
+const [isHoverCreateAccount, setIsHoverCreateAccount] = useState(false);
+const handleHoverCreateAccount = () => { setIsHoverCreateAccount(true); };
+const handleLeaveCreateAccount = () => { setIsHoverCreateAccount(false); };
+
+const [isHoverSignIn, setIsHoverSignIn] = useState(false);
+const handleHoverSignIn = () => { setIsHoverSignIn(true); };
+const handleLeaveSignIn = () => { setIsHoverSignIn(false); };
+
+// const [isHoverShoppingBag, setIsHoverShoppingBag] = useState(false);
+// const handleHoverShoppingBag = () => { setIsHoverShoppingBag(true); };
+// const handleLeaveShoppingBag = () => { setIsHoverShoppingBag(false); };
+//
+ 
 
     return (
         <div>
@@ -1107,10 +1143,10 @@ const iconVariants = {
   isLargeScreen ? 
   
   <div className='md:col-span-3 md:px-2 md:mt-2' style={{  }}>
-  <div className="mt-4">
+  <div className="mt-4 ">
     <div className='ml-2 mb-4'>Bestsellers:</div>
 
-    <div className='' style={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+    <div className='scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100' style={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
       {/* <ul id='bestSellersList'>
         {[...Array(100)].map((_, index) => (
           <li key={index}>
@@ -1123,7 +1159,10 @@ const iconVariants = {
             <li key={index} className="my-2 mb-6">
               <div className="">
                 <div className='mx-2' style={{ cursor: 'pointer' }}>
-                  <img style={{ width: '120px' }} loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
+                  <img style={{ width: '120px' }} loading="lazy" src=
+                  // "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
+                  "http://shopafricana.co/wp-content/uploads/2024/03/BRS_9612-1-copyBereal.png"
+                   alt=""/>
                 </div>
               </div>
               <div className="flex flex-col mt-1 mx-2">
@@ -1166,7 +1205,14 @@ const iconVariants = {
       >
         SHOPPING BAG {'(' + cart.length + ')'}
       </motion.span>
-      <ArrowRightAltIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+      <ArrowRightAltIcon 
+      onClick={toggleBag} 
+      style={{ cursor: 'pointer', width: isHoverMenu ? '32px' : '44px', transition: 'width 0.3s ease' }} 
+      className="block h-8 w-auto my-4"
+      
+            onMouseEnter={handleHoverMenu}
+            onMouseLeave={handleLeaveMenu}
+      />
       
       {/* <motion.div
         onHoverStart={() => setIsHovered(true)}
@@ -1201,7 +1247,7 @@ const iconVariants = {
           </li>
         ))}
       </ul> */}
-      <div className="my-2" style={{ maxHeight: '95%', overflowY: 'auto' }}>
+      <div className="my-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100" style={{ maxHeight: '95%', overflowY: 'auto' }}>
       {cart && cart.map((item, index) => (
         <div key={index} className="px-4" onClick={() => { /* navigateToProduct(item) */ }}>
           <div className="flex">
@@ -1210,7 +1256,11 @@ const iconVariants = {
               <div className='flex justify-between'>
                 <div className='uppercase' to={item.link}>{item.name}</div>
                 
-                <CloseIcon onClick={(e) => removeAllCartItem(e, item)} className=" bg-white rounded-md border border-gray-300 hover:border-black" style={{ cursor: 'pointer', width: '22px', height: '22px', color: "#cccccc"}}/>
+                <CloseIcon 
+                onClick={(e) => removeAllCartItem(e, item)} 
+                className=" bg-white rounded-md border border-gray-300 hover:border-black hover:text-black" 
+                style={{ cursor: 'pointer', width: '22px', height: '22px', color: "#cccccc"}}
+                />
               </div>
               <div className='uppercase' to={item.link}>Size: {}</div>
               <div className='flex items-center justify-between'>
@@ -1243,13 +1293,26 @@ const iconVariants = {
     <div id='thisDiv' className='absolute bottom-0 bg-white pb-8 w-full'>
       <div className='flex flex-col mx-4'>
         <div className='flex justify-between mt-4 mb-4'>
-          <span className="flex">Subtotal:</span>
-          <span className="flex">#000000</span>
+          <span className="flex uppercase">Subtotal:</span>
+          <span className="flex font-bold">
+          {'₦'}{calculateCartSubTotal().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </span>
         </div>
         <span className="flex mb-4">Have a coupon?</span>
         <div className='flex justify-between'>
-          <div className="view-cart-btn mr-2" style={{ cursor: 'pointer' }} onClick={navigateToCart}>View Cart {'(' + cart.length + ')'}</div>
-          <div className="checkout-btn ml-2" style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>Checkout</div>  
+          <div className="view-cart-btn mr-2 flex items-center" style={{ cursor: 'pointer' }} onClick={navigateToCart}>
+            View Cart {'(' + cart.length + ')'}
+          </div>
+          <div className="checkout-btn ml-2 flex items-center" style={{ cursor: 'pointer' }} onClick={navigateToCheckOut}>
+            Checkout 
+            <ArrowRightAltIcon 
+            onClick={toggleAccount} 
+            style={{ cursor: 'pointer', width: isHoverCheckout ? '32px' : '44px', transition: 'width 0.3s ease' }} 
+            className="ml-2"
+            onMouseEnter={handleHoverCheckout}
+            onMouseLeave={handleLeaveCheckout}
+            />
+          </div>  
         </div>
       </div>
     </div>
@@ -1349,7 +1412,14 @@ const iconVariants = {
               CREATE AN ACCOUNT
             </motion.span>
               {/* <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/> */}
-              <ArrowRightAltIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
+              <ArrowRightAltIcon 
+              onClick={toggleAccount} 
+              className="block h-8 w-auto my-4 mr-5"
+              
+              style={{ cursor: 'pointer', width: isHoverCreateAccount ? '32px' : '44px', transition: 'width 0.3s ease' }} 
+            onMouseEnter={handleHoverCreateAccount}
+            onMouseLeave={handleLeaveCreateAccount}
+              />
             </div>
 
             
@@ -1490,7 +1560,14 @@ const iconVariants = {
               SIGN IN
             </motion.span>
               {/* <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/> */}
-              <ArrowRightAltIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
+              <ArrowRightAltIcon 
+              onClick={toggleAccount} 
+              className="block h-8 w-auto my-4 mr-5"
+              
+              style={{ cursor: 'pointer', width: isHoverSignIn ? '32px' : '44px', transition: 'width 0.3s ease' }} 
+            onMouseEnter={handleHoverSignIn}
+            onMouseLeave={handleLeaveSignIn}
+            />
               
             </div>
 

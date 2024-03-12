@@ -1355,17 +1355,31 @@ button:active {
     border-color: #000;
 }
 
-.view-cart-btn, .checkout-btn {
+.view-cart-btn {
+    /* font-family: "futura-pt-demi", sans-serif; */
+    background: #ddd;
+    width: 100%;
+    font-size: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 12px 20px;
+    color: #000;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.checkout-btn {
     /* font-family: "futura-pt-demi", sans-serif; */
     background: #000;
     width: 100%;
     font-size: 12px;
     font-size: 0.8rem;
     font-weight: 500;
-    font-weight: 500;
     padding: 12px 20px;
     color: #fff;
-    color: white;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -1374,16 +1388,14 @@ button:active {
 }
 
 .view-cart-btn:hover, .checkout-btn:hover {
-    background-color: #c2572b;
+    background-color: #777777;
+    /* background-color: #c2572b; */
     color: #fff;
 }
 
-.checkout-btn {
-    background-color: #545454;
-}
 
 .checkout-btn:hover {
-    background-color: #c2572b;
+    /* background-color: #c2572b; */
     color: #fff;
 }
 
