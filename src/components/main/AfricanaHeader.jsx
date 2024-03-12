@@ -24,6 +24,11 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';
 
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+
+
+
+
 import { AES } from 'crypto-js';
 
 import axios from 'axios';
@@ -117,7 +122,7 @@ const BagContent = styled.div`
   right: 0;
   width: 80%;
   height: 100%;
-  background-color: #eeeeee;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   @media (max-width: 959px) {
@@ -176,7 +181,7 @@ const accountItemVariants = {
 //
 
 
-function AfricanaHeader({ options, cart, removeCartItem, removeAllCartItem, handleEmailAddress }) {
+function AfricanaHeader({ options, cart, addToCart, updateCart, removeCartItem, removeAllCartItem, handleEmailAddress }) {
 
     // const data = {
     //     "content": "Join our showroom and get 1 % off ! Coupon code : AFR222"
@@ -584,6 +589,53 @@ const settings = {
 
 };
 
+
+const [cartItems, setCartItems] = useState(cart);
+
+const handleIncreaseQuantity = (item) => {
+  const updatedCart = cartItems.map((cartItem) =>
+      cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+  );
+  setCartItems(updatedCart);
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
+  
+  updateCart();
+};
+
+const handleDecreaseQuantity = (item) => {
+  if (item.quantity > 1) {
+      const updatedCart = cartItems.map((cartItem) =>
+          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
+      );
+      setCartItems(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+  } else {
+      const updatedCart = cartItems.filter((cartItem) => cartItem.id !== item.id);
+      setCartItems(updatedCart);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+  }
+  updateCart();
+};
+
+
+function findLowestPrice(product) {
+  let lowestPrice = Infinity;
+  product.productVariants.forEach(variant => {
+      if (variant.price < lowestPrice) {
+          lowestPrice = variant.price;
+      }
+  });
+  return lowestPrice;
+}
+const calculateTotal = (item) => {
+  return findLowestPrice(item) * item.quantity;
+};
+
+const [isHovered, setIsHovered] = useState(false);
+const iconVariants = {
+  initial: { opacity: 0, scale: 0 },
+  animate: { opacity: 1, scale: 1 },
+};
 
     return (
         <div>
@@ -1054,15 +1106,21 @@ const settings = {
 {
   isLargeScreen ? 
   
-  <div className='md:col-span-3 md:px-2 md:mt-2'>
+  <div className='md:col-span-3 md:px-2 md:mt-2' style={{  }}>
   <div className="mt-4">
     <div className='ml-2 mb-4'>Bestsellers:</div>
 
-    <ul className="" style={{}}>
-      <div style={{ height: '100%', overflowY: 'auto' }}>
-        <Slider {...settings}>
+    <div className='' style={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+      {/* <ul id='bestSellersList'>
+        {[...Array(100)].map((_, index) => (
+          <li key={index}>
+            {index} {String.fromCharCode(65 + Math.floor(Math.random() * 26))}
+          </li>
+        ))}
+      </ul> */}
+      {/* <Slider {...settings}> */}
           {cart.map((item, index) => (
-            <li key={index} className="my-2">
+            <li key={index} className="my-2 mb-6">
               <div className="">
                 <div className='mx-2' style={{ cursor: 'pointer' }}>
                   <img style={{ width: '120px' }} loading="lazy" src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" alt=""/>
@@ -1070,27 +1128,34 @@ const settings = {
               </div>
               <div className="flex flex-col mt-1 mx-2">
                 <span style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
-                  <a className='text-xs text-gray-900'>{item.name}</a>
+                  <a className='text-xs text-gray-900 '>{item.name}</a>
                 </span>
                 <span style={{ cursor: 'pointer' }} onClick={() => {navigateToProduct(item)}}>
-                  <a className='text-xs text-gray-900'>{item.name}</a>
+                  <a className='text-xs text-gray-900'>
+                  {'₦'}{findLowestPrice(item).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </a>
                 </span>
               </div>
             </li>
           ))}
-        </Slider>
-      </div>
-    </ul>
+        {/* </Slider> */}
+
+    </div>
+    
   </div>
 </div>
+
+
+
+
 
 
 : ''
 }
                             
 
-<div className='relative col-span-12 md:col-span-9 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)' }}>
-  <div className='relative' style={{ height: '100vh' }}>
+<div className='relative col-span-12 md:col-span-9 px-2' style={{ boxShadow: '0px 0px 20px 0px rgba(0,0,0,1)', height: '100vh', overflowY: 'auto' }}>
+  <div className='relative' style={{ minHeight: '100%', paddingBottom: '100px' }}>
     <div className='flex justify-between items-center mx-4 '>
       <motion.span
         variants={bagItemVariants}
@@ -1101,31 +1166,69 @@ const settings = {
       >
         SHOPPING BAG {'(' + cart.length + ')'}
       </motion.span>
-      <CloseIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+      <ArrowRightAltIcon onClick={toggleBag} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4"/>
+      
+      {/* <motion.div
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        style={{ cursor: "pointer" }}
+      >
+        <motion.div
+          variants={iconVariants}
+          initial="initial"
+          animate={isHovered ? "animate" : "initial"}
+          transition={{ duration: 0.2 }}
+        >
+          {isHovered ? (
+            <CloseIcon onClick={toggleBag} className="block h-8 w-auto my-4" />
+          ) : (
+            <ArrowRightAltIcon onClick={toggleBag} className="block h-8 w-auto my-4" />
+          )}
+        </motion.div>
+      </motion.div> */}
+      
     </div>
     <hr style={{ borderColor: '#888888' }} className='ml-4 mb-8'/>
     <p className='flex justify-center mb-2 text-black '>Free shipping!</p>
     <div className='bg-black mx-4 mb-6' style={{ height: '8px' }}></div>
-    <div className="my-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100" style={{ maxHeight: '70%', }}>
+    
+    
+    <div className='' style={{ height: 'calc(100vh - 320px)', overflowY: 'auto' }}>
+      {/* <ul id='bestSellersList'>
+        {[...Array(100)].map((_, index) => (
+          <li key={index}>
+            {index} {String.fromCharCode(65 + Math.floor(Math.random() * 26))}
+          </li>
+        ))}
+      </ul> */}
+      <div className="my-2" style={{ maxHeight: '95%', overflowY: 'auto' }}>
       {cart && cart.map((item, index) => (
         <div key={index} className="px-4" onClick={() => { /* navigateToProduct(item) */ }}>
           <div className="flex">
             <img style={{ width: '80px' }} src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
             <div className="ml-4 w-full">
               <div className='flex justify-between'>
-                <div className='' to={item.link}>{item.name}</div>
+                <div className='uppercase' to={item.link}>{item.name}</div>
+                
                 <CloseIcon onClick={(e) => removeAllCartItem(e, item)} className=" bg-white rounded-md border border-gray-300 hover:border-black" style={{ cursor: 'pointer', width: '22px', height: '22px', color: "#cccccc"}}/>
               </div>
+              <div className='uppercase' to={item.link}>Size: {}</div>
               <div className='flex items-center justify-between'>
                 <div className="flex" style={{ display: 'flex', alignItems: 'center' }}>
                   <div className='flex bg-white items-center justify-center my-2 py-1 rounded-md' style={{ height: '70%', width: '100%' }}>
-                    <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', height: '16px', borderRight: '1px solid #ccc' }} onClick={() => { /* handleDecreaseQuantity(item) */ }} />
+                    <RemoveIcon className='' style={{ cursor: 'pointer', width: '30px', height: '16px', borderRight: '1px solid #ccc' }} 
+                    onClick={() => { handleDecreaseQuantity(item) }} />
                     <span className='flex justify-center items-center text-center text-sm' style={{ width: '30px' }}>{item.quantity}</span>
-                    <AddIcon className='' style={{ cursor: 'pointer', width: '30px', height: '16px', borderLeft: '1px solid #ccc' }} onClick={() => { /* handleIncreaseQuantity(item) */ }} />
+                    <AddIcon className='' style={{ cursor: 'pointer', width: '30px', height: '16px', borderLeft: '1px solid #ccc' }} 
+                    onClick={() => { handleIncreaseQuantity(item) }} />
                   </div>
-                  <span className="ml-4">#{item.price}</span>
+                  <span className="ml-4">
+                    {'₦'}{findLowestPrice(item).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </span>
                 </div>
-                <span className="ml-4">#{item.price}</span>
+                <span className="ml-4">
+                {'₦'}{calculateTotal(item).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </span>
               </div>
             </div>
           </div>
@@ -1133,6 +1236,10 @@ const settings = {
         </div>
       ))}
     </div>
+
+    </div>
+
+
     <div id='thisDiv' className='absolute bottom-0 bg-white pb-8 w-full'>
       <div className='flex flex-col mx-4'>
         <div className='flex justify-between mt-4 mb-4'>
@@ -1148,6 +1255,7 @@ const settings = {
     </div>
   </div>
 </div>
+
 
                         </div>                        
 
@@ -1240,7 +1348,8 @@ const settings = {
             >
               CREATE AN ACCOUNT
             </motion.span>
-              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
+              {/* <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/> */}
+              <ArrowRightAltIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
             </div>
 
             
@@ -1380,7 +1489,9 @@ const settings = {
             >
               SIGN IN
             </motion.span>
-              <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
+              {/* <CloseIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/> */}
+              <ArrowRightAltIcon onClick={toggleAccount} style={{ cursor: 'pointer' }} className="block h-8 w-auto my-4 mr-5"/>
+              
             </div>
 
             

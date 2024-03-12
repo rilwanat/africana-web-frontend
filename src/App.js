@@ -310,7 +310,7 @@ const handleSetCategory = (cat) => {
             <Routes>
               <Route path="/*" element={<div>NOT FOUND</div>} />
               {/* <Route path='/' element={<SamplePage />}/>     */}
-              <Route path='/' element={<HomePage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} handleEmailAddress={handleEmailAddress}/>}/>    
+              <Route path='/' element={<HomePage options={options} handleDataViewData={HandelQuickViewData} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} handleEmailAddress={handleEmailAddress}/>}/>    
               <Route path='/my-account' element={<MyAccount options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} handleEmailAddress={handleEmailAddress}/>}/> 
               <Route path='/on-sale' element={<OnSale options={options} addToCart={addToCart} cart={cart} removeCartItem={removeCartItem} categories={categories} removeAllCartItem={removeAllCartItem} handleEmailAddress={handleEmailAddress}/>}/>
               <Route path="/product-details" element={<ProductPage options={options} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} handleEmailAddress={handleEmailAddress}/>} />

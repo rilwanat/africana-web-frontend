@@ -13,14 +13,14 @@ import Locations from './Locations';
 import AfricanaFooter from './AfricanaFooter';
 
 
-export default function HomePage({ options, handleDataViewData, addToCart, cart, removeCartItem, removeAllCartItem, handleEmailAddress  }) {
+export default function HomePage({ options, handleDataViewData, addToCart, cart, removeCartItem, removeAllCartItem, handleEmailAddress, updateCart  }) {
 
   
 
   return (
     <div>
-
-      <AfricanaHeader options={options} cart={cart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} handleEmailAddress={handleEmailAddress} />
+      
+      <AfricanaHeader options={options} addToCart={addToCart} cart={cart} updateCart={updateCart} removeCartItem={removeCartItem} removeAllCartItem={removeAllCartItem} handleEmailAddress={handleEmailAddress} />
       <Hero />
       {/* <VideoPreview /> <Hero />        */}
       <ShopTheLook />
