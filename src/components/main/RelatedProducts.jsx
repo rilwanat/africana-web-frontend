@@ -29,16 +29,6 @@ function RelatedProducts({onQuickViewClick, relatedProducts, addToCart, cart}) {
     const navigate = useNavigate();
 
 
-    // const [isPrevHovered, setPrevHovered] = useState(false);
-    // const [isNextHovered, setNextHovered] = useState(false);
-
-    // const [isViewHovered, setViewHovered] = useState(false); const [isViewHoveredId, setViewHoveredId] = useState(null);
-    // const [isFavHovered, setFavHovered] = useState(false);
-    // const [isBagHovered, setBagHovered] = useState(false); const [isBagHoveredId, setBagHoveredId] = useState(null);
-    
-
-    // const [showWidget, setShowWidget] = useState(false);
-
     const [zoomedItemId, setZoomedItemId] = useState(null);
     const [productCount, setProductCount] = useState(1);
     const [selectedSize, setSelectedSize] = useState('');
@@ -240,10 +230,10 @@ const images = [
         selectedItem={currentSlides[index]}
         onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
         >
-        {images.map((image, imageIndex) => (
+        {item.productImages.map((image, imageIndex) => (
           <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)} >
             <img 
-            src={image} 
+            src={image.url} 
             alt={`Image ${imageIndex}`} 
 
           style={{

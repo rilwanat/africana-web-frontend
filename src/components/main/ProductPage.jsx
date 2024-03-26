@@ -79,14 +79,13 @@ function ProductPage({options, addToCart, cart, updateCart, removeCartItem, remo
     const settings = {
         customPaging: function (i) {
            return (
-               <a>
-                   <img 
-                   src=
-                   //{imgs}
-                   "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
-                           
-                   />
-               </a>
+               <a key={i}>
+               <img
+                 src={parsedProduct.productImages[i].url}
+                 alt={`Thumbnail ${i}`}
+                 style={{ width: '100px', height: 'auto' }}
+               />
+             </a>
            );
        },
        infinite: true,
@@ -231,6 +230,10 @@ const showSizeChartDialogue = (i) => {
     }
 };
 
+function mainProductImage(product) { 
+  return product.productImages.find(img => img.isDefault).url;
+}
+
 
 
     return (
@@ -248,36 +251,13 @@ const showSizeChartDialogue = (i) => {
                             <div className="shop-single-slider vertical-thumbnail" 
                             //  style={{ background: '#FF0000' }}
                             >
-                                {/* <Slider {...settings}>
-                                    {
-                                        parsedProduct && parsedProduct.productImages.map((item, index) => (
-                                            <div key={index} 
-                                            // style={{ background: '#000000' }}
-                                            >
-                                                <img 
-                                                className='px-1 mx-1 mt-2'
-                                                // style={{ maxHeight: '100%', width: 'auto' }}
-                                                // style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                                                src=
-                                                // {item.src}
-                                                "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
-                            
-                                                />
-                                            </div>
-                                        ))
-                                    }
-                                </Slider>
-                                <div className="slider-nav"></div> */}
-
                                 <Slider {...settings}>
                                     {
-                                        data.images.map((item, index) => (
+                                        parsedProduct.productImages.map((item, index) => (
                                             <div key={index}>
                                                 <img 
                                                 className='px-1 mx-1 mt-2'
-                                                src=
-                                                "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
-                                                // onMouseEnter={}
+                                                src={item.url}
                                                 />
                                             </div>
                                         ))
@@ -307,7 +287,9 @@ const showSizeChartDialogue = (i) => {
       }}
     >
         <div className='flex justify-end'><CloseIcon style={{ color: '#777777' }} className='cursor-pointer p-1' onClick={() => { setShowSizeChart(false); }} /></div>
-      <img src={imgx} style={{ maxWidth: '100%', maxHeight: '95%', objectFit: 'contain' }}/>
+      <img 
+      src={imgx} 
+      style={{ maxWidth: '100%', maxHeight: '95%', objectFit: 'contain' }}/>
     </div>
   </div>
 )}
@@ -317,34 +299,22 @@ const showSizeChartDialogue = (i) => {
                                     {/* <span className="old">{'₦'}{findHighestPrice(parsedProduct)}</span> */}
                                 </div>
                                 <div className="rating">
-                                    {/* <i className="fi flaticon-star"/>
-                                    <i className="fi flaticon-star"/>
-                                    <i className="fi flaticon-star"/>
-                                    <i className="fi flaticon-star"/>
-                                    <i className="fi flaticon-star-social-favorite-middle-full"/> */}
                                     <a className="star-1" onClick={() => handleStarClick(1)} style={{ cursor: 'pointer' }}>
-                                {/* <i className="ti-star" style={{ color: star < 1 ? 'grey' : 'black' }}/> */}
                                 <StarRateIcon style={{width: '20px', height: '20px', color: star < 1 ? 'grey' : '#c25f2b' }}/>
                             </a>
                             <a className="star-1" onClick={() => handleStarClick(2)} style={{ cursor: 'pointer' }}>
-                                {/* <i className="ti-star" style={{ color: star < 2 ? 'grey' : 'black' }}/> */}
                                 <StarRateIcon style={{width: '20px', height: '20px',  color: star < 2 ? 'grey' : '#c25f2b' }}/>
                             </a>
                             <a className="star-1" onClick={() => handleStarClick(3)} style={{ cursor: 'pointer' }}>
-                                {/* <i className="ti-star" style={{ color: star < 3 ? 'grey' : 'black' }}/> */}
                                 <StarRateIcon style={{width: '20px', height: '20px',  color: star < 3 ? 'grey' : '#c25f2b' }}/>
                             </a>
                             <a className="star-1" onClick={() => handleStarClick(4)} style={{ cursor: 'pointer' }}>
-                                {/* <i className="ti-star" style={{ color: star < 4 ? 'grey' : 'black' }}/> */}
                                 <StarRateIcon style={{width: '20px', height: '20px',  color: star < 4 ? 'grey' : '#c25f2b' }}/>
                             </a>
                             <a className="star-1" onClick={() => handleStarClick(5)} style={{ cursor: 'pointer' }}>
-                                {/* <i className="ti-star" style={{ color: star < 5 ? 'grey' : 'black' }}/> */}
                                 <StarRateIcon style={{width: '20px', height: '20px',  color: star < 5 ? 'grey' : '#c25f2b' }}/>
                             </a>
-                                    {/* <span>{data.reviewCount}</span> */}
-                                    {/* <span className='ml-2'>({parsedProduct && parsedProduct.rating} Customer review{parsedProduct && parsedProduct.rating > 1 ? 's ' : ' '})</span> */}
-                                </div>
+                            </div>
 
 
 
@@ -356,14 +326,7 @@ const showSizeChartDialogue = (i) => {
         <div onClick={() => handleSizeSelection('XL')} className={`text-center ${selectedSize === 'XL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XL</div>
         <div onClick={() => handleSizeSelection('XXL')} className={`text-center ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '40px', cursor: 'pointer' }}>XXL</div>
         <div onClick={() => showSizeChartDialogue()} className={`text-center ${selectedSize === 'XXL' ? 'bg-black text-white' : 'bg-white'} mx-1`} style={{ border: '1px solid #ccc', padding: '5px', width: '90px', cursor: 'pointer' }}>Size Chart</div>
-        {/* <div onClick={() => showSizeChartDialogue()} className={`flex justify-center items-center ml-1 ${selectedSize === 'Show Size Chart' ? 'bg-black text-white' : 'bg-white'} `} style={{ border: '1px solid #ccc', padding: '4px', width: '80px', height: '40px', cursor: 'pointer' }}>Size Chart</div> */}
-
-                           {/* {
-                                        data.tags.map((item, index) =>
-                                            <a key={index}
-                                               href={item.link}>{' ' + item.name}{data.tags.length - 1 === index ? '' : ', '}</a>
-                                        )
-                                    } */}
+        
                                 </span>
 
 
@@ -400,15 +363,7 @@ const showSizeChartDialogue = (i) => {
                                         }                                        
                                         >ADD TO CART</button>
                                     </div>
-                                    {/* {showItemAdded 
-                                    // && showIndexItemAdded === index 
-                                    && (
-        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          {parsedProduct.name} added
-        </div>
-      )} */}
-
-
+                                    
 
                                     
                                 </div>
@@ -428,23 +383,10 @@ const showSizeChartDialogue = (i) => {
                                 
                                  
                                 <div className="thb-product-meta-before">
-                                {/* <div className="add-to-wishlist">
-                                <a className="add_to_wishlist">
-                                    <FavoriteIcon className='mr-2' style={{ cursor: "pointer" }}/>
-                                    <span>Add To Wishlist</span>
-                                </a>
-                            </div> */}
+                                
                                     <div className="product_meta">
-                                    {/* <span className="sku_wrapper">SKU:<span className="sku">{' ' + parsedProduct.sku}</span></span> */}
-                                        {/* <span className="posted_in">
-                                    Categories:
-                                    {
-                                        data.categories.map((item, index) =>
-                                            <a key={index}
-                                               href={item.link}>{' ' + item.name}{data.categories.length - 1 === index ? '' : ', '}</a>
-                                        )
-                                    }
-                                </span> */}
+                                    
+                                        
                                 <span className="tagged_as">
                                     Tags:
                                     {/* {
@@ -485,11 +427,11 @@ const showSizeChartDialogue = (i) => {
                 </div>
 
                 {showItemAdded ?
-// && showIndexItemAdded === index && 
+
 (
   <div 
-    // className="flex absolute bg-white p-4 rounded-lg border border-gray-300 mt-2 text-lg z-50 items-center justify-center" 
-    className="flex absolute bg-black p-4 rounded-lg mt-2 text-lg z-50 items-center justify-center text-white" 
+    
+  className="flex absolute bg-black p-4 rounded-lg mt-2 text-lg z-50 items-center justify-center text-white" 
     style={{ 
       position: 'fixed',
       bottom: '20px',

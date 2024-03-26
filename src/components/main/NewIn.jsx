@@ -407,9 +407,7 @@ const images = [
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
-            {/* <div className="ml-2">
-              <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
-            </div> */}
+
             
 
             <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2" 
@@ -424,15 +422,7 @@ const images = [
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" 
               />
               
-              {/* {showItemAdded && showIndexItemAdded === index && (
-        <div 
-        className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" 
-        style={{ 
-          marginTop: '-100px'
-          }}>
-          {item.name} added
-        </div>
-      )} */}
+
 
               <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div>
