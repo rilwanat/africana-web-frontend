@@ -160,21 +160,18 @@ const showAddedDialogue = (i) => {
 
 // const [currentSlides, setCurrentSlides] = useState(relatedProducts.map(() => 0)); // Initialize to an array of zeros
 const [currentSlides, setCurrentSlides] = useState(Array(relatedProducts.length).fill(0)); // Separate state for each carousel
-const images = [
-  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
-  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp", 
-  "https://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-900x1125.webp"
-];
+
   // const [currentSlide, setCurrentSlide] = useState(0);
   const [delayTimeout, setDelayTimeout] = useState(null);
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (index, item) => {
     
     clearTimeout(delayTimeout); // Clear any existing timeout
     const timeout = setTimeout(() => {
 
       setCurrentSlides((prevSlides) => {
         const newSlides = [...prevSlides];
-        newSlides[index] = (prevSlides[index] + 1) % images.length;
+        // newSlides[index] = (prevSlides[index] + 1) % images.length;
+        newSlides[index] = (prevSlides[index] + 1) % item.productImages.length;
         return newSlides;
       });
     
@@ -231,7 +228,7 @@ const images = [
         onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
         >
         {item.productImages.map((image, imageIndex) => (
-          <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)} >
+          <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index, item)} >
             <img 
             src={image.url} 
             alt={`Image ${imageIndex}`} 
@@ -246,7 +243,7 @@ const images = [
         ))}
       </Carousel>
       <div className="ml-4" style={{ position: 'absolute', top: '16px', left: '8px', display: 'flex' }}>
-        {images.map((_, i) => (
+        {item.productImages.map((_, i) => (
           <div
             key={i}
             style={{

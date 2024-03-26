@@ -207,21 +207,18 @@ const [addedItemName, setAddedItemName] = useState('');
 
 // const [currentSlides, setCurrentSlides] = useState(products.map(() => 0)); // Initialize to an array of zeros
 const [currentSlides, setCurrentSlides] = useState(Array(products.length).fill(0)); // Separate state for each carousel
-const images = [
-  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png", 
-  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png", 
-  "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
-];
+
   // const [currentSlide, setCurrentSlide] = useState(0);
   const [delayTimeout, setDelayTimeout] = useState(null);
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (index, item) => {
     
     clearTimeout(delayTimeout); // Clear any existing timeout
     const timeout = setTimeout(() => {
 
       setCurrentSlides((prevSlides) => {
         const newSlides = [...prevSlides];
-        newSlides[index] = (prevSlides[index] + 1) % images.length;
+        // newSlides[index] = (prevSlides[index] + 1) % images.length;
+        newSlides[index] = (prevSlides[index] + 1) % item.productImages.length;
         return newSlides;
       });
     
@@ -273,7 +270,7 @@ const images = [
           ) : null}
 <div className={`${ isLargeScreen ? 'mx-1' : 'mx-2'} cursor-pointer`} style={{ position: 'relative' }}>
   <div className="ml-2 z-50" style={{ position: 'absolute', top: '16px', left: '4px', display: 'flex' }}>
-    {images.map((_, i) => (
+    {item.productImages.map((_, i) => (
       <div
         key={i}
         style={{
@@ -311,10 +308,10 @@ const images = [
       selectedItem={currentSlides[index]}
       onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
     >
-      {images.map((image, imageIndex) => (
-        <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)}>
+      {item.productImages.map((image, imageIndex) => (
+        <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index, item)}>
           <img
-            src={image}
+            src={image.url}
             alt={`Image ${imageIndex}`}
             style={{
               transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',

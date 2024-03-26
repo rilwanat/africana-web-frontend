@@ -197,21 +197,18 @@ const showAddedDialogue = (i) => {
 
 // const [currentSlides, setCurrentSlides] = useState(products.map(() => 0)); // Initialize to an array of zeros
 const [currentSlides, setCurrentSlides] = useState(Array(products.length).fill(0)); // Separate state for each carousel
-const images = [
-  "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg", 
-  "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg", 
-  "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
-];
+
   // const [currentSlide, setCurrentSlide] = useState(0);
   const [delayTimeout, setDelayTimeout] = useState(null);
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (index, item) => {
     
     clearTimeout(delayTimeout); // Clear any existing timeout
     const timeout = setTimeout(() => {
 
       setCurrentSlides((prevSlides) => {
         const newSlides = [...prevSlides];
-        newSlides[index] = (prevSlides[index] + 1) % images.length;
+        // newSlides[index] = (prevSlides[index] + 1) % images.length;
+        newSlides[index] = (prevSlides[index] + 1) % item.productImages.length;
         return newSlides;
       });
     
@@ -282,10 +279,10 @@ const images = [
         selectedItem={currentSlides[index]}
         onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
         >
-        {images.map((image, imageIndex) => (
-          <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)} >
+        {item.productImages.map((image, imageIndex) => (
+          <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index, item)} >
             <img 
-            src={image} 
+            src={image.url} 
             alt={`Image ${imageIndex}`} 
 
           style={{
@@ -298,7 +295,7 @@ const images = [
         ))}
       </Carousel>
       <div className="ml-4" style={{ position: 'absolute', top: '16px', left: '8px', display: 'flex' }}>
-        {images.map((_, i) => (
+        {item.productImages.map((_, i) => (
           <div
             key={i}
             style={{
@@ -319,20 +316,7 @@ const images = [
 
 
 
-                                                            {/* <img loading="lazy" 
-                                                            src=
-                                                            "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
-                                                            //{item.mainImg} 
-                                                            alt=""
                                                             
-                                                            onMouseEnter={() => setZoomedItemId(item.id)}
-                               onMouseLeave={() => setZoomedItemId(null)}
-                               style={{
-                                transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',
-                                transition: 'transform 0.8s ease',
-                            }}
-
-                                                            /> */}
                                                         
                                                         {/* </Link> */}
                                                         </div>
@@ -413,9 +397,7 @@ const images = [
                                             </motion.div>
                                         )}
                                     </AnimatePresence>
-            {/* <div className="ml-2">
-              <RemoveRedEyeOutlinedIcon className="w-4 h-4 p-1" />
-            </div> */}
+            
             <div className="flex ml-4 bg-gray-300 rounded-lg w-20 text-black items-center cursor-pointer mr-2"
             onClick={() => {
               showAddedDialogue(index);
@@ -427,11 +409,7 @@ const images = [
           }
             >
               <ShoppingBagOutlinedIcon className="p-1 w-4 h-4 mx-2 flex" />
-              {/* {showItemAdded && showIndexItemAdded === index && (
-        <div className="absolute bg-gray-100 p-2 rounded-lg border border-gray-300 mt-2 text-xs" style={{ marginTop: '-100px' }}>
-          {item.name} added
-        </div>
-      )} */}
+              
       <span className='text-xs' style={{ paddingTop: '0px' }}>ADD</span>
             </div>
           </div>

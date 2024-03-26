@@ -119,6 +119,9 @@ function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCa
 
     let countCartItem = 1;
 
+    function mainProductImage(product) { 
+        return product.productImages.find(img => img.isDefault).url;
+      }
 
     return (
         <div>
@@ -149,7 +152,9 @@ function CartPage({ options, handleDataViewData, addToCart, updateCart, removeCa
                                                     </td>
                                                     <td className='px-6 py-4 whitespace-no-wrap border-b border-gray-200'>
                                                         <div className='flex justify-center'>
-                                                            <img className='md:w-full' src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"/>
+                                                            <img className='md:w-full' 
+                                                            src={mainProductImage(cartItem)}
+                                                            />
                                                         </div>                                                        
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
