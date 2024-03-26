@@ -78,6 +78,10 @@ function calculateDiscountPercentage(price, oldPrice) {
       : 0; // Return 0 if there's no discount
   }
 
+  function mainProductImage(product) { 
+    return product.productImages.find(img => img.isDefault).url;
+  }
+
   const handleProductClick = (product, e) => {
 //alert( JSON.stringify(product));
     // if (!isDragging) 
@@ -146,8 +150,8 @@ const [addedItemName, setAddedItemName] = useState('');
                             onClick={(e) => handleProductClick(item, e)} >
                               <img loading="lazy" 
                               className='px-2'
-                              src=
-                              "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8461-1-copyBereal.png"
+                              src={mainProductImage(item)}
+                              //"http://shopafricana.co/wp-content/uploads/2024/02/BRS_8461-1-copyBereal.png"
                                alt=""
                                
                               //  onMouseEnter={() => setZoomedItemId(item.id)}

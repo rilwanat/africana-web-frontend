@@ -203,6 +203,9 @@ const showAddedDialogue = (i) => {
 
 const [addedItemName, setAddedItemName] = useState('');
 
+function mainProductImage(product) { 
+  return product.productImages.find(img => img.isDefault).url;
+}
 
     return (
         <div className="container-1410">
@@ -247,7 +250,8 @@ const [addedItemName, setAddedItemName] = useState('');
           >
             <img
               loading="lazy"
-              src="https://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-to-Wear1040-scaled-1.jpg"
+              src={mainProductImage(item)}
+              //"https://shopafricana.co/wp-content/uploads/2024/01/Africana-Ready-to-Wear1040-scaled-1.jpg"
               alt=""
             />
           </div>

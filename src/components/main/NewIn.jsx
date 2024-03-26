@@ -212,6 +212,12 @@ const images = [
   "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png", 
   "http://shopafricana.co/wp-content/uploads/2024/02/BRS_8340-1-copyBereal-900x1125.png"
 ];
+// const images = productImages.map(image => image.url);
+// function mainProductImage(product) { 
+//   return product.productImages.find(img => img.isDefault).url;
+// }
+
+
   // const [currentSlide, setCurrentSlide] = useState(0);
   const [delayTimeout, setDelayTimeout] = useState(null);
   const handleMouseEnter = (index) => {
@@ -311,10 +317,10 @@ const images = [
       selectedItem={currentSlides[index]}
       onChange={(slide) => setCurrentSlides((prevSlides) => prevSlides.map((prevSlide, i) => (i === index ? slide : prevSlide)))}
     >
-      {images.map((image, imageIndex) => (
+      {item.productImages.map((image, imageIndex) => (
         <div key={imageIndex} onMouseEnter={() => handleMouseEnter(index)}>
           <img
-            src={image}
+            src={image.url}
             alt={`Image ${imageIndex}`}
             style={{
               transform: zoomedItemId === item.id ? 'scale(1.05)' : 'scale(1)',

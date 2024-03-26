@@ -206,6 +206,9 @@ const showAddedDialogue = (i) => {
 
 const [addedItemName, setAddedItemName] = useState('');
 
+function mainProductImage(product) { 
+  return product.productImages.find(img => img.isDefault).url;
+}
 
     return (
         <div className="container-1410">
@@ -250,7 +253,8 @@ const [addedItemName, setAddedItemName] = useState('');
           >
             <img
               loading="lazy"
-              src="http://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-600x800.webp"
+              src={mainProductImage(item)}
+              //"http://shopafricana.co/wp-content/uploads/2024/01/BRS_8479-1-copyBereal-600x800.webp"
               alt=""
             />
           </div>
