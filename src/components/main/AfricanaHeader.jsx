@@ -1152,14 +1152,7 @@ function mainProductImage(product) {
     <div className='ml-2 mb-4'>Bestsellers:</div>
 
     <div className='scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100' style={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
-      {/* <ul id='bestSellersList'>
-        {[...Array(100)].map((_, index) => (
-          <li key={index}>
-            {index} {String.fromCharCode(65 + Math.floor(Math.random() * 26))}
-          </li>
-        ))}
-      </ul> */}
-      {/* <Slider {...settings}> */}
+      
           {cart.map((item, index) => (
             <li key={index} className="my-2 mb-6">
               <div className="">

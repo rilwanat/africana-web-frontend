@@ -247,6 +247,9 @@ function mainProductImage(product) {
                     
 
 
+                    {/* <div className='scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100' style={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}> */}
+      
+
                         <div className="col col-md-6">
                             <div className="shop-single-slider vertical-thumbnail" 
                             //  style={{ background: '#FF0000' }}
@@ -296,7 +299,6 @@ function mainProductImage(product) {
 
                                 <div className="price" style={{ fontSize: '20px' }}>
                                     <span className="current">{'₦'}{findLowestPrice(parsedProduct)}</span>
-                                    {/* <span className="old">{'₦'}{findHighestPrice(parsedProduct)}</span> */}
                                 </div>
                                 <div className="rating">
                                     <a className="star-1" onClick={() => handleStarClick(1)} style={{ cursor: 'pointer' }}>
@@ -332,7 +334,7 @@ function mainProductImage(product) {
 
 
                                 <div className="product-option flex flex-col md:flex-row">
-                            {/* <form className="form"> */}
+                                  
                                 <div className="product-row flex items-center bg-black mx-2 my-1">
 
                                 <div className="touchspin-wrap" style={{ display: 'flex', alignItems: 'center' }}>
