@@ -640,9 +640,9 @@ const iconVariants = {
 };
 
 
-const calculateCartSubTotal = () => {
+const calculateCartSubTotal = (cart) => {
   let subTotal = 0;
-  cartItems.forEach((item) => {
+  cart.forEach((item) => {
       subTotal += findLowestPrice(item) * item.quantity;
   });
   return subTotal;
@@ -671,6 +671,11 @@ const handleLeaveSignIn = () => { setIsHoverSignIn(false); };
 // const handleHoverShoppingBag = () => { setIsHoverShoppingBag(true); };
 // const handleLeaveShoppingBag = () => { setIsHoverShoppingBag(false); };
 //
+
+
+function mainProductImage(product) { 
+  return product.productImages.find(img => img.isDefault).url;
+}
  
 
     return (
@@ -1159,9 +1164,8 @@ const handleLeaveSignIn = () => { setIsHoverSignIn(false); };
             <li key={index} className="my-2 mb-6">
               <div className="">
                 <div className='mx-2' style={{ cursor: 'pointer' }}>
-                  <img style={{ width: '120px' }} loading="lazy" src=
-                  // "http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg"
-                  "http://shopafricana.co/wp-content/uploads/2024/03/BRS_9612-1-copyBereal.png"
+                  <img style={{ width: '120px' }} loading="lazy" 
+                  src={mainProductImage(item)}
                    alt=""/>
                 </div>
               </div>
@@ -1251,7 +1255,9 @@ const handleLeaveSignIn = () => { setIsHoverSignIn(false); };
       {cart && cart.map((item, index) => (
         <div key={index} className="px-4" onClick={() => { /* navigateToProduct(item) */ }}>
           <div className="flex">
-            <img style={{ width: '80px' }} src="http://shopafricana.co/wp-content/uploads/2024/01/March-23-Document-Name12-scaled-1-900x1125.jpg" />
+            <img style={{ width: '80px' }} 
+            src={mainProductImage(item)}
+            />
             <div className="ml-4 w-full">
               <div className='flex justify-between'>
                 <div className='uppercase' to={item.link}>{item.name}</div>
@@ -1295,7 +1301,7 @@ const handleLeaveSignIn = () => { setIsHoverSignIn(false); };
         <div className='flex justify-between mt-4 mb-4'>
           <span className="flex uppercase">Subtotal:</span>
           <span className="flex font-bold">
-          {'₦'}{calculateCartSubTotal().toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          {'₦'}{calculateCartSubTotal(cart).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </span>
         </div>
         <span className="flex mb-4">Have a coupon?</span>
